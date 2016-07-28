@@ -1,0 +1,278 @@
+﻿@{
+    ViewBag.Title = "Profile";
+}
+
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<link href="~/Content/DatePicker/bootstrap-datepicker3.css" rel="stylesheet" />
+<link href="~/Content/Timeline.css" rel="stylesheet" />
+<link href="~/StyleSheets/Profile.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-3  ">
+                <div data-bind="css: { 'panel-success': userVm.User.IsTrainer, 'panel-info': userVm.User.IsTrainee, 'panel-danger': userVm.User.IsManager}"
+                    class="panel">
+                    <div class="panel-heading">
+                        <img data-bind="attr: {src: userVm.User.PhotoUrl}"
+                            class="img-responsive img-circle profile-img">
+                        <div data-bind="text: userVm.User.FullName"
+                            class="username">
+                        </div>
+                        <div data-bind="text: userVm.User.Designation"
+                            class="designation">
+                        </div>
+                        <div data-bind="text: userVm.User.Email"
+                            class="designation">
+                        </div>
+                        <div class="designation"
+                            data-bind="css: { 'rating-slow': userVm.User.UserRating == 1,
+                                                    'rating-Average': userVm.User.UserRating == 2,
+                                                    'rating-Fast': userVm.User.UserRating == 3,
+                                                    'rating-Exceptional': userVm.User.UserRating == 4}">
+                            <!-- ko foreach: new Array(userVm.User.UserRating)  -->
+                            <span class="glyphicon glyphicon-star"
+                                style="display: inline-block;"></span>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="list-group" data-bind="visible: userVm.User.IsTrainee">
+                        <div class="list-group-item active">
+                            <label>Skills</label>
+                            <span class="pull-right">
+                                <i class="glyphicon glyphicon-chevron-down"></i>
+                            </span> 
+                        </div>
+                        <div data-bind="foreach: userVm.Skills">
+                            <div class="list-group-item">
+                                <div data-bind="text: Name" style="display: inline-block;"></div>
+                                <div class="pull-right" style="display: inline-block;">
+                                    <div data-bind="css: {
+                                                           'rating-slow': Rating == 1,
+                                                               'rating-Average': Rating == 2,
+                                                               'rating-Fast': Rating == 3,
+                                                               'rating-Exceptional': Rating == 4
+                                                           }">
+                                        <!-- ko foreach: new Array(Rating)  -->
+                                        <span class="glyphicon glyphicon-star"
+                                            style="display: inline-block;"></span>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="list-group" data-bind="visible: userVm.User.IsTrainee">
+                        <div class="list-group-item active">
+                            <label>Projects</label> 
+                            <span class="pull-right">
+                                <i class="glyphicon glyphicon-chevron-down"></i>
+                            </span> 
+                        </div>
+                        <div data-bind="foreach: userVm.Projects">
+                            <div data-bind="text: Title"
+                                class="list-group-item">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-group" data-bind="visible: userVm.User.IsTrainee">
+                        <div class="list-group-item active">
+                            <label>  Sessions attended</label> 
+                                <span class="pull-right">
+                                <i class="glyphicon  glyphicon-chevron-down"></i>
+                            </span> 
+                        </div>
+                        <div data-bind="foreach: userVm.Sessions">
+                            <div data-bind="text: Title"
+                                class="list-group-item">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9" data-bind="visible: userVm.User.IsTrainee">
+                @*<ul class="nav nav-tabs">
+                        <li class="active"><a href="#">Recent</a></li>
+                        <li><a href="#">Timeline</a></li>
+                    </ul>
+                    <br />*@
+                <div class="panel panel-white post panel-shadow">
+                    <div class="post-heading">
+                        <div class="pull-left image">
+                            <img data-bind="attr: { src: currentUser.avatarUrl }"
+                                 class="img-circle avatar" alt="user profile image">
+                        </div>
+                        <div class=" pull-left feedback-input meta">
+                            <label>Feedback Type:</label>
+                            <select class="input-sm form-control" data-bind="options: userVm.FeedbackTypes,
+    optionsText: 'Description',
+    value: feedbackPost.FeedbackType"></select>
+                        </div>
+                        <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 2 " class=" pull-left feedback-input meta">
+                            <label>Skill:</label>
+                            <label class="radio-inline"><input value="1" data-bind="checked: controls.skillOption" type="radio" name="optradio">Select existing</label>
+                            <label class="radio-inline"><input value="2" data-bind="checked: controls.skillOption" type="radio" name="optradio">Other</label>
+                            <select class="input-sm form-control" data-bind="visible: controls.skillOption() == 1, options: userVm.AllSkills,
+    optionsText: 'Name',
+    value: selectedSkill"></select>
+                            <input type="text"
+                                   data-bind="visible: controls.skillOption() == 2, value: feedbackPost.Title"
+                                   class="input-sm form-control"
+                                   placeholder="Enter skill title" />
+                        </div>
+                        <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 3 " class=" pull-left feedback-input meta">
+                            <label>Assignment:</label>
+                            <input type="text"
+                                   data-bind="value: feedbackPost.Title"
+                                   class="input-sm form-control"
+                                   placeholder="enter assignment title" />
+                            @*TO BE ENABLED AFTER ADD PROJECT IMPLEMENTATION*@
+                            @*<label class="radio-inline"><input value="1" data-bind="checked: controls.assignmentOption" type="radio" name="optradio">Select existing</label>
+                            <label class="radio-inline"><input value="2" data-bind="checked: controls.assignmentOption" type="radio" name="optradio">Other</label>
+                            <select class="input-sm form-control" data-bind="visible: controls.assignmentOption() == 1, options: userVm.Projects,
+    optionsText: 'Title',
+    value: selectedProject"></select>
+                            <input type="text"
+                                   data-bind="visible: controls.assignmentOption() == 2, value: feedbackPost.Title"
+                                   class="input-sm form-control"
+                                   placeholder="Enter assignment title" />*@
+                        </div>
+                        <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 4 " class=" pull-left feedback-input meta">
+                            <label>Project:</label>
+                            <input type="text"
+                                   data-bind="value: feedbackPost.Title"
+                                   class="input-sm form-control"
+                                   placeholder="Enter project title" />
+                            @*TO BE ENABLED AFTER ADD PROJECT IMPLEMENTATION*@
+                            @*<label class="radio-inline"><input value="1" data-bind="checked: controls.crOption" type="radio" name="optradio">Select existing</label>
+                            <label class="radio-inline"><input value="2" data-bind="checked: controls.crOption" type="radio" name="optradio">Other</label>
+                            <select class="input-sm form-control" data-bind="visible: controls.crOption() == 1, options: userVm.Projects,
+    optionsText: 'Title',
+    value: selectedProject"></select>
+                            <input type="text"
+                                   data-bind="visible: controls.crOption() == 2, value: feedbackPost.Title"
+                                   class="input-sm form-control"
+                                   placeholder="Enter project title" />*@
+                        </div>
+                        <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 5 " class=" pull-left feedback-input meta">
+                            <label>Select date range:</label>
+                            <div class="input-daterange input-group" id="datepicker">
+                                <input type="text" data-bind="datepicker: feedbackPost.StartDate, value: feedbackPost.StartDate" class="date-picker input-sm form-control" name="start" />
+                                <span class="input-group-addon">to</span>
+                                <input type="text" data-bind="datepicker: feedbackPost.EndDate, value: feedbackPost.EndDate" class="date-picker input-sm form-control" name="end" />
+                            </div>
+                        </div>
+                        <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId != 1 " class="pull-right feedback-input meta">
+                            <label>Rating:</label>
+                            <br />
+                            <div class="btn-group">
+                                <button data-bind="click: setRating(1)"
+                                        type="button"
+                                        class="btn btn-sm btn-danger">
+                                    Slow <i data-bind="visible: feedbackPost.Rating() == 1" class="glyphicon glyphicon-ok"></i>
+                                </button>
+                                <button data-bind="click: setRating(2)"
+                                        type="button"
+                                        class="btn btn-sm  btn-warning">
+                                    Average <i data-bind="visible: feedbackPost.Rating() == 2" class="glyphicon glyphicon-ok"></i>
+                                </button>
+                                <button data-bind="click: setRating(3)"
+                                        type="button"
+                                        class="btn btn-sm  btn-primary">
+                                    Fast <i data-bind="visible: feedbackPost.Rating() == 3" class="glyphicon glyphicon-ok"></i>
+                                </button>
+                                <button data-bind="click: setRating(4)"
+                                        type="button"
+                                        class="btn btn-sm  btn-success">
+                                    Exceptional <i data-bind="visible: feedbackPost.Rating() == 4" class="glyphicon glyphicon-ok"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-description comment-div">
+                        <div>
+                            <textarea data-bind="value: feedbackPost.FeedbackText"
+                                      class="form-control comment-input-control" rows="3" type="text" placeholder="Enter feedback"></textarea>
+                        </div>
+                        <label data-bind="text: validationMessage" class="validation-error"></label>
+                        <div class="pull-right comment-send">
+                            <button data-bind="click: addFeedback" type="button" class="btn btn-info">Add <i class="glyphicon glyphicon-send"></i></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+       
+            <div class="panel panel-white post panel-shadow">
+                <div class="post-heading">
+                    <div class="pull-left feedback-input meta">
+                        <label class="">Feedback Count:</label> 
+                        <select class=" input-sm form-control" data-bind="options: filter.pageSize, value: filter.selectedPageSize"></select>
+                    </div>
+                    <div class="pull-left feedback-input meta">
+                        <label class="">Feedback Type:</label> 
+                        <select class=" input-sm form-control" data-bind="options: userVm.FeedbackTypes,
+                                                                                  optionsText: 'Description',
+                                                                                  value: filter.filterFeedback"></select>
+                    </div>
+                     <div class="pull-left feedback-input meta">
+                        
+                    </div>
+                    <div class="pull-right feedback-input meta">
+                          <label style="visibility:hidden ">Apply Filter</label> 
+                        <button data-bind=" click:applyFilter " style="margin-top: -5px;height: 34px;" type="button" class="form-control btn btn-info  input-sm ">Apply Filter <i class="glyphicon glyphicon-filter"></i></button>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div id="feedbackSection" data-bind="foreach: userVm.Feedbacks">
+                    <div class="panel panel-white post panel-shadow">
+                        <div class="post-heading">
+                            <div class="pull-left image">
+                                <img data-bind="attr: { src: AddedBy.UserImageUrl }"
+                                     class="img-circle avatar" alt="user profile image">
+                            </div>
+                            <div class="pull-left meta">
+                                <div class="title h5" style="display: inline-block;">
+                                    <strong>  <a data-bind="text: AddedBy.FullName, attr: { href: '/Profile/UserProfile?userId=' + AddedBy.UserId }"></a></strong>
+                                </div>
+                                <div data-bind="text: 'Added ' + FeedbackType.Description + ' Feedback'" class="text-muted time" style="display: inline-block;"></div>
+                                <div style="display: inline-block; padding-left: 10px"
+                                     data-bind="css: {
+'rating-slow': Rating == 1,
+    'rating-Average': Rating == 2,
+    'rating-Fast': Rating == 3,
+    'rating-Exceptional': Rating == 4
+}">
+                                    <!-- ko foreach: new Array(Rating)  -->
+                                    <span class="glyphicon glyphicon-star"
+                                          style="display: inline-block;"></span>
+                                    <!-- /ko -->
+                                </div>
+
+                                <h6 data-bind="text: moment(AddedOn).format('MMMM Do YYYY, h:mm a')" class="text-muted time"></h6>
+                                <h6 data-bind="text: Title" class="text-muted time"></h6>
+                            </div>
+                        </div>
+                        <div class="post-description">
+                            <p data-bind="text: FeedbackText"></p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/knockout-3.4.0.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/typehead.js"></script>
+<script src="~/Scripts/Custom/BindingHandlers.js"></script>
+<script src="~/Scripts/Custom/App.js"></script>
+<script src="~/Scripts/Custom/AjaxService.js"></script>
+<script src="~/Scripts/Custom/UserService.js"></script>
+<script src="~/Scripts/Custom/UserProfile.js"></script>

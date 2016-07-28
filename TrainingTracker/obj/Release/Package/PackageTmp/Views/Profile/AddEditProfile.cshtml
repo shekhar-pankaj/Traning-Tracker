@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "AddEditProfile";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+            <img src="/Uploads/ProfilePicture/Dummy.jpg"
+                 class="img-responsive img-circle profile-img">
+        </div>
+        <div class="col-lg-9">
+            <form class="form-horizontal">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Name</label>
+                        <div class="col-lg-3">
+                            <input data-bind="value: user.FirstName"
+                                   type="text" class="form-control" placeholder="First Name">
+                        </div>
+                        <div class="col-lg-3">
+                            <input data-bind="value: user.LastName"
+                                   type="text" class="form-control" placeholder="Last Name">
+                        </div>
+                        <label class="col-lg-4"></label>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Username</label>
+                        <div class="col-lg-6">
+                            <input data-bind="value: user.UserName"
+                                   type="text" class="form-control" placeholder="">
+                        </div>
+                        <label class="col-lg-4"></label>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Gender</label>
+                        <div class="col-lg-4">
+                            <label class="radio-inline">
+                                <input data-bind="checked:genderSelection"
+                                       type="radio" value="false" name="genderRadio">Male
+                            </label>
+                            <label class="radio-inline">
+                                <input data-bind="checked:genderSelection"
+                                       type="radio" value="true" name="genderRadio">Female
+                            </label>
+                        </div>
+                        <label class="col-lg-4"></label>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Email</label>
+                        <div class="col-lg-6">
+                            <input data-bind="value: user.Email"
+                                   type="email" class="form-control" placeholder="">
+                        </div>
+                        <label class="col-lg-4"></label>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Profile Image</label>
+                        <div class="col-lg-6">
+                            <input data-bind="value: user.ProfilePictureName"
+                                   type="text" class="form-control" placeholder="">
+                        </div>
+                        <label class="col-lg-4"></label>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Designation</label>
+                        <div class="col-lg-6">
+                            <select data-bind="value: user.Designation"
+                                    class="form-control">
+                                <option>Sr. Software Engineer</option>
+                                <option>Associate Lead</option>
+                                <option>Delivery Manager</option>
+                                <option>Trainee Software Engineer</option>
+                            </select>
+                        </div>
+                        <label class="col-lg-4"></label>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Role</label>
+                        <div class="col-lg-10">
+                            <label class="checkbox-inline">
+                                <input data-bind="checked: user.IsAdministrator"
+                                       type="checkbox" value="">Administrator
+                            </label>
+                            <label class="checkbox-inline">
+                                <input data-bind="checked: user.IsTrainer"
+                                       type="checkbox" value="">Trainer
+                            </label>
+                            <label class="checkbox-inline">
+                                <input data-bind="checked: user.IsTrainee"
+                                       type="checkbox" value="">Trainee
+                            </label>
+                            <label class="checkbox-inline">
+                                <input data-bind="checked: user.IsManager"
+                                       type="checkbox" value="">Manager
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Password</label>
+                        <div class="col-lg-6">
+                            <input data-bind="value: user.Password"
+                                   type="password" class="form-control" placeholder="">
+                        </div>
+                        <label class="col-lg-4"></label>
+                    </div>
+                </div>
+            </form>
+            <div class="col-lg-8">
+                <button data-bind="click: createNewUser"
+                        type="button" class="btn btn-sm btn-primary pull-right">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/knockout-3.4.0.js"></script>
+<script src="~/Scripts/Custom/App.js"></script>
+<script src="~/Scripts/Custom/AjaxService.js"></script>
+<script src="~/Scripts/Custom/UserService.js"></script>
+<script src="~/Scripts/Custom/AddEditProfile.js"></script>

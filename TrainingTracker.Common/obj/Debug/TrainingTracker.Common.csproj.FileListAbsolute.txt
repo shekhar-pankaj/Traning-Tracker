@@ -1,0 +1,5 @@
+D:\Projects\TraningTracker\TrainingTracker.Common\bin\Debug\TrainingTracker.Common.dll
+D:\Projects\TraningTracker\TrainingTracker.Common\bin\Debug\TrainingTracker.Common.pdb
+D:\Projects\TraningTracker\TrainingTracker.Common\obj\Debug\TrainingTracker.Common.csprojResolveAssemblyReference.cache
+D:\Projects\TraningTracker\TrainingTracker.Common\obj\Debug\TrainingTracker.Common.dll
+D:\Projects\TraningTracker\TrainingTracker.Common\obj\Debug\TrainingTracker.Common.pdb

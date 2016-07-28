@@ -1,0 +1,54 @@
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 9:10:48 PM
+Time        : 7/15/2016
+Computer    : harshw7
+Error        : Procedure or function 'ADD_USER_PROJECT_FEEDBACK' expects parameter '@Feedback', which was not supplied.
+Stack Trace    : at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at TrainingTracker.Utility.SqlUtility.ExecuteNonQuery(String sql, CommandType commandType, List`1 sqlParams) in e:\Proj\TrainingTracker\TrainingTracker\Utility\SqlUtility.cs:line 104
+   at TrainingTracker.DAL.ProjectDal.AddUserProjectFeedback(Feedback feedbackData) in e:\Proj\TrainingTracker\TrainingTracker\DAL\ProjectDal.cs:line 58
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 9:14:34 PM
+Time        : 7/15/2016
+Computer    : harshw7
+Error        : Procedure or function 'ADD_USER_PROJECT_FEEDBACK' expects parameter '@Feedback', which was not supplied.
+Stack Trace    : at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at TrainingTracker.Utility.SqlUtility.ExecuteNonQuery(String sql, CommandType commandType, List`1 sqlParams) in e:\Proj\TrainingTracker\TrainingTracker\Utility\SqlUtility.cs:line 104
+   at TrainingTracker.DAL.ProjectDal.AddUserProjectFeedback(Feedback feedbackData) in e:\Proj\TrainingTracker\TrainingTracker\DAL\ProjectDal.cs:line 58
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 9:16:33 PM
+Time        : 7/15/2016
+Computer    : harshw7
+Error        : Procedure or function 'ADD_SKILL_FEEDBACK' expects parameter '@Feedback', which was not supplied.
+Stack Trace    : at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at TrainingTracker.Utility.SqlUtility.ExecuteNonQuery(String sql, CommandType commandType, List`1 sqlParams) in e:\Proj\TrainingTracker\TrainingTracker\Utility\SqlUtility.cs:line 104
+   at TrainingTracker.DAL.SkillDal.AddSkillFeedback(Feedback feedbackData) in e:\Proj\TrainingTracker\TrainingTracker\DAL\SkillDal.cs:line 60
+^^-----------------------------------------------------^^

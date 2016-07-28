@@ -1,0 +1,19 @@
+﻿.profile-img {
+    height: 50px;
+    width: 50px;
+    display: block;
+    margin: auto;
+}
+
+.feedback-td {
+    text-align: center;
+    vertical-align: middle;
+    }
+
+.feedback-pending {
+    color: red;
+}
+
+.feedback-success {
+    color: forestgreen;
+}
