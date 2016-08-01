@@ -142,6 +142,7 @@
                 if (my.profileVm.validatePost()) {
                     my.profileVm.feedbackPost.AddedFor = { UserId: my.profileVm.userId };
                     my.profileVm.feedbackPost.AddedBy = { UserId: my.profileVm.currentUser.UserId };
+                    my.profileVm.feedbackPost.Skill = selectedSkill;
                     my.userService.addUserFeedback(my.profileVm.feedbackPost, my.profileVm.addFeedbackCallback);
                 }
             },

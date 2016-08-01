@@ -44,6 +44,5 @@ namespace TrainingTracker.BLL.Base
                 return new FeedbackDal();
             }
         }
-
     }
 }

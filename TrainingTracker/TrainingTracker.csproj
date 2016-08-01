@@ -4687,6 +4687,7 @@
     <Content Include="Content\AdminTemplate\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Content\AdminTemplate\README.md" />
     <Content Include="Scripts\Custom\AllProfile.js" />
+    <Content Include="Scripts\Custom\Dashboard.js" />
     <Content Include="Scripts\Custom\Layout.js" />
     <Content Include="Scripts\Custom\Login.js" />
     <Content Include="Scripts\Custom\UserProfile.js" />
@@ -4711,6 +4712,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="StyleSheets\AllProfiles.css" />
+    <Content Include="StyleSheets\Dashboard.css" />
     <Content Include="StyleSheets\Layout.css" />
     <Content Include="StyleSheets\Login.css" />
     <Content Include="StyleSheets\Profile.css" />

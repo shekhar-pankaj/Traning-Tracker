@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TrainingTracker.Common.Entity
 {
@@ -16,5 +17,6 @@ namespace TrainingTracker.Common.Entity
         public DateTime AddedOn { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public string WeekForFeedbackPresent { get; set; } 
     }
 }

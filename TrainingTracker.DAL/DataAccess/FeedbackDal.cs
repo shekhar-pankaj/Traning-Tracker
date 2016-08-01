@@ -15,7 +15,10 @@ namespace TrainingTracker.DAL.DataAccess
 
         public bool AddFeedback(Feedback feedbackData)
         {
-            var prms = new List<SqlParameter>
+            
+            try
+            {
+                var prms = new List<SqlParameter>
             {
                 SqlUtility.CreateParameter(SPAddFeedback.PARAM_FEEDBACK_TEXT, 
                 SqlDbType.VarChar,feedbackData.FeedbackText),
@@ -38,8 +41,6 @@ namespace TrainingTracker.DAL.DataAccess
                 SqlUtility.CreateParameter(SPAddFeedback.PARAM_END_DATE, 
                 SqlDbType.Date,feedbackData.EndDate)
             };
-            try
-            {
                 var rowsAffected = SqlUtility.ExecuteNonQuery(SPAddFeedback.NAME,
                     CommandType.StoredProcedure, prms);
                 return (rowsAffected > 0);

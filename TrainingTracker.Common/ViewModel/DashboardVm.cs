@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TrainingTracker.Common.Entity;
 
 namespace TrainingTracker.Common.ViewModel
@@ -12,12 +11,26 @@ namespace TrainingTracker.Common.ViewModel
     public class UserData
     {
         public User User { get; set; }
-        public int PoorRating { get; set; }
-        public int AverageRating { get; set; }
-        public int FastRating { get; set; }
-        public int ExceptionalRating { get; set; }
-        public DateTime LastWeeklyFeedback { get; set; }
-        public string Skills { get; set; }
-        public bool IsFeedbackPending { get; set; }
+
+        /// <summary>
+        /// List of all Weekly feedbacks
+        /// </summary>
+        public List<Feedback> WeeklyFeedback { get; set; }
+
+        /// <summary>
+        /// List of All skills and other feedback
+        /// </summary>
+        public List<Feedback> SkillsFeedback { get; set; }
+
+        /// <summary>
+        /// List of All Remaining Feedbacks
+        /// </summary>
+        public List<Feedback> RemainingFeedbacks { get; set; }
+
+        /// <summary>
+        /// Lastweek feedback
+        /// </summary>
+        public bool LastWeekFeedbackAdded { get; set; }
+ 
     }
 }

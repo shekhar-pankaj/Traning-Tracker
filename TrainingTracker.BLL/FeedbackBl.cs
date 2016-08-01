@@ -12,13 +12,18 @@ namespace TrainingTracker.BLL
             //feedback.Skill = (feedback.Skill == null) ? new Skill() : feedback.Skill;
 
             feedback.Title = string.IsNullOrEmpty(feedback.Title) ? feedback.FeedbackType.Description : feedback.Title;
-            if (feedback.Skill == null)
+          
+            if(feedback.FeedbackType.FeedbackTypeId == 2)
+            {
+                feedback.Title = feedback.Skill.Name;
+                feedback.Skill = new Skill
+                {
+                    SkillId = feedback.Skill.SkillId
+                };
+            }
+            else
             {
                 feedback.Skill = new Skill();
-            }
-            else if(feedback.FeedbackType.FeedbackTypeId == 2)
-            {
-                feedback.Title = feedback.Skill.Description;
             }
 
             return FeedbackDataAccesor.AddFeedback(feedback);

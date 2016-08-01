@@ -1,4 +1,17 @@
-﻿.profile-img {
+﻿.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+/*.clearfix {
+    // display: inline-block;
+}*/
+
+.profile-img {
     height: 50px;
     width: 50px;
     display: block;
@@ -11,9 +24,61 @@
     }
 
 .feedback-pending {
-    color: red;
+        position: relative;
+    display: block;
+    width: 20px;
+    height: 20px;  
+    background-color: red;
+    border-radius: 10px;
 }
 
 .feedback-success {
-    color: forestgreen;
+     position: relative;
+    display: block;
+    width: 20px;
+    height: 20px; 
+    background-color: forestgreen;
+    border-radius: 10px;
+
+}
+
+.no-left-margin {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.no-right-margin {
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.dashboard-user-row {
+    padding: 10px 0 10px 0;
+}
+
+.dashboard-user-row:nth-child(odd) {
+    background-color: #ccc;
+}
+.dashboard-user-row:nth-child(even) {
+    
+}
+
+i.glyphicon {
+    cursor: pointer;
+}
+
+.rating-slow {
+    color: red;
+}
+
+.rating-Average {
+    color: orange;
+}
+
+.rating-Fast {
+    color: blue;
+}
+
+.rating-Exceptional {
+    color: green;
 }

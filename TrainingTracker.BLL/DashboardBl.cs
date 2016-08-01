@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TrainingTracker.BLL.Base;
 using TrainingTracker.Common.ViewModel;
 using TrainingTracker.DAL.DataAccess;
@@ -18,11 +20,20 @@ namespace TrainingTracker.BLL
             var lastFriday = DateTime.Now;
             while (lastFriday.DayOfWeek != DayOfWeek.Friday) lastFriday = lastFriday.AddDays(-1);
 
-            var checkLowerDate = new DateTime(1900, 1, 1);
-
             foreach (var trainee in dashboardVm.Trainees)
             {
-                trainee.IsFeedbackPending = !(trainee.LastWeeklyFeedback > checkLowerDate && trainee.LastWeeklyFeedback <= lastFriday);
+                bool feedbackAdded = false;
+                foreach (var feedback in trainee.WeeklyFeedback)
+                {
+                    feedback.WeekForFeedbackPresent =string.Empty;
+
+                    if (feedback.StartDate >= lastFriday.AddDays(-5)) feedbackAdded = true;
+
+                    feedback.WeekForFeedbackPresent= feedback.StartDate.ToString("dd/MM/yyyy") + "-" + feedback.EndDate.ToString("dd/MM/yyyy");
+                }
+                trainee.LastWeekFeedbackAdded = feedbackAdded;
+               
+                // trainee.IsFeedbackPending = !(trainee.LastWeeklyFeedback > checkLowerDate && trainee.LastWeeklyFeedback <= lastFriday);
             }
 
             return dashboardVm;
