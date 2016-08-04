@@ -44,6 +44,5 @@ namespace TrainingTracker.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index");
         }
-
     }
 }

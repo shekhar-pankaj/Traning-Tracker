@@ -82,6 +82,33 @@
     }
 
     /// <summary>
+    /// Constant class for Stored procedure GET_SESSIONS_BY_USER_ID.
+    /// </summary>
+    public static class SPAddEditSession
+    {
+        public const string NAME = "ADD_UPDATE_SESSION_DETAILS";
+        public const string PARAM_PRESENTER = "@Presenter";
+        public const string PARAM_TITLE = "@Title";
+        public const string PARAM_DESCRIPTION = "@Description";
+        public const string PARAM_DATE = "@Date";
+        public const string PARAM_ID = "@SessionId";
+        public const string PARAM_ATTENDEES ="@AttendeeCsv";
+        public const string TABLE_NAME = "Result";
+    }
+
+    /// <summary>
+    /// Constant class for Stored procedure GET_SESSIONS_BY_USER_ID.
+    /// </summary>
+    public static class SPGetSessionsOnFilter
+    {
+        public const string NAME = "GET_SESSIONS_ON_FILTERS";
+        public const string PARAM_PAGESIZE = "@PageSize";
+        public const string PARAM_KEYWORD = "@KeyWord";
+        public const string PARAM_SESSIONTYPE = "@SessionType";
+        public const string TABLE_NAME = "Result";
+    }
+
+    /// <summary>
     /// Constant class for Stored procedure GET_SKILLS_BY_USER_ID.
     /// </summary>
     public static class SPGetSkillsByUserID

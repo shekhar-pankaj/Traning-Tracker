@@ -50,6 +50,7 @@
     <Compile Include="Utility\LogUtility.cs" />
     <Compile Include="Utility\SqlUtility.cs" />
     <Compile Include="ViewModel\DashboardVm.cs" />
+    <Compile Include="ViewModel\SessionVm.cs" />
     <Compile Include="ViewModel\UserProfileVm.cs" />
   </ItemGroup>
   <ItemGroup />

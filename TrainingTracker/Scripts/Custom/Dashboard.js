@@ -20,7 +20,7 @@
             {
                // var  allData = [],
               var  allData  = $.grep(users(), function(value) {
-                    console.log("I was here");
+                    //console.log("I was here");
                     return value.User.UserId == userId;
                 });
                 
@@ -45,15 +45,14 @@
                        
                     }
                     my.dashboardVm.feedback = [];
+                    
                     if (temp.length > 1 || parseInt(size) > 1)
-                    {
-                        
+                    {                       
                         my.dashboardVm.feedback = temp;
                     } else {
                        
                         my.dashboardVm.feedback = temp[0];
                     }
-                   
                 }
 
                 return (my.dashboardVm.feedback.length) || (  typeof(my.dashboardVm.feedback.Title) != 'undefined' && my.dashboardVm.feedback.Title != "" )? true : false;
@@ -66,8 +65,6 @@
             getDashboardVm: getDashboardVm,
             photoUrl: photoUrl,
             feedback: feedback,
-          //  test: test,
-        //    getSuccess: getSuccess,
             getFeedback:getFeedback,
         };
     }();

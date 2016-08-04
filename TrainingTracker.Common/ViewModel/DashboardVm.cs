@@ -31,6 +31,7 @@ namespace TrainingTracker.Common.ViewModel
         /// Lastweek feedback
         /// </summary>
         public bool LastWeekFeedbackAdded { get; set; }
+
  
     }
 }

@@ -14,5 +14,14 @@ namespace TrainingTracker.DAL.Interface
         /// <param name="userId">User Id</param>
         /// <returns>List Of session</returns>
         List<Session> GetSessionsByUserId(int userId);
+
+        /// <summary>
+        /// Inteface method to fetch sessions by User id
+        /// </summary>
+        /// <param name="objSession">User Id</param>
+        /// <returns>List Of session</returns>
+       bool AddEditSessions( Session objSession );
+
+       List<Session> GetSessionOnFilter(int pageSize ,int sessionType ,string searchKeyword); 
     }
 }

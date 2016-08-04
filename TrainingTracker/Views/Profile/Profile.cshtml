@@ -157,9 +157,9 @@
                         <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 5 " class=" pull-left feedback-input meta">
                             <label>Select date range:</label>
                             <div class="input-daterange input-group" id="datepicker">
-                                <input type="text" data-bind="datepicker: feedbackPost.StartDate, value: feedbackPost.StartDate" class="date-picker input-sm form-control" name="start" />
+                                <input type="text" data-bind="datepicker: feedbackPost.StartDate,endDate:new Date(), value: feedbackPost.StartDate" class="date-picker input-sm form-control" name="start" />
                                 <span class="input-group-addon">to</span>
-                                <input type="text" data-bind="datepicker: feedbackPost.EndDate, value: feedbackPost.EndDate" class="date-picker input-sm form-control" name="end" />
+                                <input type="text" data-bind="datepicker: feedbackPost.EndDate,endDate:new Date(), value: feedbackPost.EndDate" class="date-picker input-sm form-control" name="end" />
                             </div>
                         </div>
                         <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId != 1 " class="pull-right feedback-input meta">

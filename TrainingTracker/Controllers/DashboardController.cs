@@ -20,5 +20,7 @@ namespace TrainingTracker.Controllers
         {
             return Json(new DashboardBl().GetDashboardData(), JsonRequestBehavior.AllowGet);
         }
+
+       
     }
 }
