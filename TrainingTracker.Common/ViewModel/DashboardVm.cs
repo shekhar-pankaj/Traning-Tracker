@@ -6,6 +6,7 @@ namespace TrainingTracker.Common.ViewModel
     public class DashboardVm
     {
         public List<UserData> Trainees { get; set; }
+        public List<Session> UpcomingSessions { get; set; }
     }
 
     public class UserData

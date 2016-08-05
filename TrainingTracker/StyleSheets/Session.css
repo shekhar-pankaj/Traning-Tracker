@@ -1,4 +1,4 @@
-﻿table th
+﻿.post-heading table th
 {
     text-align: center;
     background-color: #46b8da;
@@ -8,39 +8,39 @@
     font-size: 14px;
 }
 
-    table th:nth-child(6)
+  .post-heading table th:nth-child(6)
     {
         background-color: #fff;
     }
 
-    table th:nth-child(n+4), table th:nth-child(1), table td:nth-child(n+4), table td:nth-child(1)
+  .post-heading table th:nth-child(n+4), table th:nth-child(1), table td:nth-child(n+4), table td:nth-child(1)
     {
         width: 15%;
     }
 
-table button
+.post-heading table button
 {
     width: 50% !important;
     margin-left: 34%;
     background-color: #CCC !important;
 }
 
-table tbody tr:nth-child(odd)
+.post-heading table tbody tr:nth-child(odd)
 {
     background-color: #CFFAF5;
 }
 
-table tbody tr:nth-child(even)
+.post-heading table tbody tr:nth-child(even)
 {
     background-color: #E7DFF5;
 }
 
-table tbody tr td:nth-child(6)
+.post-heading table tbody tr td:nth-child(6)
 {
     background-color: #FFF;
 }
 
-table td
+.post-heading table td
 {
     font-size: 12px;
     text-align: center;

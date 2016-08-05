@@ -90,6 +90,7 @@
                     my.sessionVm.sessions([]);
                     my.sessionVm.sessions.push(item);
                 });
+                my.sessionVm.showDialog(false);
             },
                 openSessionDailog= function() {
                     my.sessionVm.sessionDetails.Id(0);
@@ -104,7 +105,7 @@
             checkboxSelectAll=function() {
                 
              //   if (my.sessionVm.allAttendees())
-
+                my.sessionVm.sessionDetails.Attendee([]);
                 ko.utils.arrayForEach(my.sessionVm.allAttendees(), function (item)
                 {
                     if (item.IsTrainee)

@@ -30,6 +30,7 @@ namespace TrainingTracker.BLL
 
         public UserProfileVm GetUserProfileVm(int userId)
         {
+          
             return new UserProfileVm
             {
                 User = UserDataAccesor.GetUserById(userId) ,
@@ -38,6 +39,7 @@ namespace TrainingTracker.BLL
                 Sessions = SessionDataAccesor.GetSessionsByUserId(userId) ,
                 Projects = ProjectDataAccesor.GetProjectsByUserId(userId) ,
                 Feedbacks = FeedbackDataAccesor.GetUserFeedback(userId , 5) ,
+                RecentCrFeedback = FeedbackDataAccesor.GetUserFeedback(userId , 100 , 4) ,
                 FeedbackTypes = new List<FeedbackType>
                 {
                     new FeedbackType

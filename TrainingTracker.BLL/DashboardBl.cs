@@ -14,7 +14,8 @@ namespace TrainingTracker.BLL
         {
             var dashboardVm = new DashboardVm
             {
-                Trainees = UserDataAccesor.GetDashboardData()
+                Trainees = UserDataAccesor.GetDashboardData(),
+                UpcomingSessions = SessionDataAccesor.GetSessionOnFilter(100,1,"")
             };
 
             var lastFriday = DateTime.Now;

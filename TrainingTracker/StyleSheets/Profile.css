@@ -3,6 +3,10 @@
     font-size: 12px;
 }
 
+p {
+    margin: 1em !important
+}
+
 .profile-img {
     height: 150px;
     width: 150px;
@@ -56,7 +60,7 @@
 }
 
 .feedback-input {
-    padding:5px;
+    padding:13px;
 }
 
 .feedback-radio {
@@ -78,6 +82,10 @@
 
 .rating-Exceptional {
     color: green;
+}
+
+.collapsed .custom-glyph:before {
+    content: "\e080" !important ;
 }
 
 /*Yellow Button************************************************************/

@@ -18,7 +18,7 @@ namespace TrainingTracker.Controllers
         /// <returns></returns>
         public ActionResult Valid()
         {
-            return RedirectToAction("AllProfiles", "Profile");
+            return RedirectToAction( "Index","Dashboard");
         }
 
         public ActionResult AuthenticateLogin(string userName, string password)
