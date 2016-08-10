@@ -3,10 +3,6 @@
     font-size: 12px;
 }
 
-p {
-    margin: 1em !important
-}
-
 .profile-img {
     height: 150px;
     width: 150px;
@@ -60,7 +56,7 @@ p {
 }
 
 .feedback-input {
-    padding:13px;
+    padding:5px;
 }
 
 .feedback-radio {
@@ -82,10 +78,6 @@ p {
 
 .rating-Exceptional {
     color: green;
-}
-
-.collapsed .custom-glyph:before {
-    content: "\e080" !important ;
 }
 
 /*Yellow Button************************************************************/
@@ -223,5 +215,3 @@ p {
             .post .post-footer .comments-list .comment > .comments-list {
                 margin-left: 50px;
             }
-
-          

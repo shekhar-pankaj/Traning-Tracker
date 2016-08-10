@@ -26,14 +26,6 @@
         },
         getDashboardVm: function (callback) {
             my.ajaxService.ajaxGetJson("/Dashboard/GetDashboardData", null, callback);
-        },
-        addEditSession:function(sessionDetails, callback)
-        {
-            my.ajaxService.ajaxPostJson("/Session/AddEditSession", sessionDetails, callback);
-        },
-        getSessionsOnFilter:function(pageSize,seminarType,searchKeyword,getSessionsOnFilterCallback) 
-        {
-            my.ajaxService.ajaxGetJson("/Session/GetUserFeedbackOnFilter?pageSize=" + pageSize + "&seminarType=" + seminarType + "&searchKeyword="+ '', null, getSessionsOnFilterCallback);
         }
     };
 }(my));

@@ -4,213 +4,59 @@
 <link href="~/StyleSheets/Dashboard.css" rel="stylesheet" />
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-8 no-left-margin ">
-            <div id="divHeaderWrapper" class="col-xs-12 " >
-                <div id="traineeDashboardHeader" class="col-xs-12 no-left-margin no-right-margin" >
-                    <div id="divTraineeSnapshotMainHeader" class="col-xs-12 spacer-top-bottom"><span>Trainee Snapshot</span></div>
-                    <div class="col-xs-3 no-left-margin no-right-margin margin-top spacer-top-bottom"><span>Trainee</span></div>
-                    <div class="col-xs-1 no-left-margin no-right-margin margin-top spacer-top-bottom"><span>WF</span></div>
-                    <div class="col-xs-8 no-left-margin no-right-margin spacer-top-bottom">
-                        <div><span class="col-xs-12 no-left-margin no-right-margin" style="border-bottom: 1px solid #FFF">Last Feedbacks</span>
-                            <span class="col-xs-5 no-left-margin no-right-margin" >Type</span>
-                            <span class="col-xs-2 no-left-margin no-right-margin" >Rating</span>
-                            <span class="col-xs-5 no-left-margin no-right-margin" >Added By</span></div>
-                    </div>
-                    @*<div class="col-xs-2 no-left-margin no-right-margin .margin-top"><span>Skills</span></div>*@
-                </div>
-            </div>
-            <div class="col-xs-12 no-left-margin no-right-margin" data-bind="foreach: users">
-                <div class="dashboard-user-row clearfix" data-bind="attr:{id:'divUserId_' + User.UserId}" >
-                    <div class="user-collapser no-left-margin no-right-margin collapsed " data-toggle="collapse" data-bind=" attr: { 'data-target': '#divCollapsableUserId_' + User.UserId }">
-                        <div class="col-xs-12 no-left-margin no-right-margin ">
-                            <span class="pull-right" data-bind="visible: RemainingFeedbacks.length > 1">
-                                <i class="glyphicon glyphicon-chevron-down custom-glyph"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="dashboard-users col-xs-12 spacer-top-bottom " >
-                        <div class="col-xs-3 no-left-margin no-right-margin">
-                            <!-- <a class="col-xs-4" data-bind="attr: { href: '/Profile/UserProfile?userId=' + User.UserId }">
-                                     <img data-bind="attr: { src: PhotoUrl }"
-                                          class="img-responsive img-circle profile-img ">
-                                 </a> -->
-                          <a data-bind="attr:{href:'/Profile/UserProfile?userId='+ User.UserId}" target="_blank">  <span class="col-xs-11 col-xs-offset-1 no-left-margin no-right-margin " data-bind="    text: User.FullName"></span></a>
-                            <!-- <span class=" col-xs-1">
-                                     <i class="glyphicon glyphicon glyphicon-edit"></i>
-                                 </span> -->
-                        </div>                      
-                        <div class="col-xs-1 no-left-margin no-right-margin">
-                            <div data-bind="if: LastWeekFeedbackAdded === false" style="margin-left: 36%;">
-                              <a data-bind="attr: { href: '/Profile/UserProfile?userId=' + User.UserId }" target="_blank">  <span class="feedback-pending"></span></a>
-                            </div>
-                            <div data-bind="if: LastWeekFeedbackAdded === true">
-                                <div data-bind="if: my.dashboardVm.getFeedback('1', 'Weekly', User.UserId) === true">
-                                    @* <span class="pull-left" data-bind="text: my.dashboardVm.feedback.WeekForFeedbackPresent"></span>*@
-                                    <div
-                                        data-bind="css: {
-                                                       'rating-slow': my.dashboardVm.feedback.Rating == 1,
-                                                           'rating-Average': my.dashboardVm.feedback.Rating == 2,
-                                                           'rating-Fast': my.dashboardVm.feedback.Rating == 3,
-                                                           'rating-Exceptional': my.dashboardVm.feedback.Rating == 4
-                                                       }">
-                                        <!-- ko foreach: new Array(my.dashboardVm.feedback.Rating)  -->
-                                        <span class="glyphicon glyphicon-star"
-                                              style="display: inline-block;"></span><!-- /ko -->
-                                   
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Weekly Feedback</th>
+                            <th>Skills</th>
+                            <th>Exceptional Ratings</th>
+                            <th>Fast Ratings</th>
+                            <th>Average Ratings</th>
+                            <th>Poor Ratings</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: users">
+                        <tr>
+                            <td>
+                                <a data-bind="attr: {href: '/Profile/UserProfile?userId=' + User.UserId}">
+                                    <img data-bind="attr: {src: PhotoUrl}"
+                                         class="img-responsive img-circle profile-img">
+                                </a>
+                            </td>
+                            <td data-bind="text: User.FullName"></td>
+                            <td class="feedback-td">
+                                <a data-bind="attr: {href: '/Profile/UserProfile?userId=' + User.UserId}">
+                                    <div data-bind="if: IsFeedbackPending === true">
+                                        <i class="glyphicon glyphicon-remove feedback-pending"></i>
                                     </div>
-                                    @*<div class="pull-right"><span class="">~</span>
-                                    <span class="pull-right" data-bind="text: my.dashboardVm.feedback.AddedBy.FullName"></span></div>*@
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-xs-8 no-left-margin no-right-margin">
-                                                   
-                            <div data-bind="if: my.dashboardVm.getFeedback('1', 'All', User.UserId) === true">
-                                 <span class="col-xs-5  " data-bind="visible: my.dashboardVm.feedback.FeedbackType.FeedbackTypeId == 3 ">Assigment</span>
- <span class="col-xs-5 " data-bind="visible: my.dashboardVm.feedback.FeedbackType.FeedbackTypeId == 4 ">Code Review</span>  
-                                <div class="col-xs-2" data-bind="css: {
-                                                        'rating-slow': my.dashboardVm.feedback.Rating == 1,
-                                                        'rating-Average': my.dashboardVm.feedback.Rating == 2,
-                                                        'rating-Fast': my.dashboardVm.feedback.Rating == 3,
-                                                        'rating-Exceptional': my.dashboardVm.feedback.Rating == 4
-                                                    }">
-                                    <!-- ko foreach: new Array(my.dashboardVm.feedback.Rating)  -->
-                                    <span class="glyphicon glyphicon-star"
-                                          style="display: inline-block;"></span><!-- /ko -->
-                                   
-                                </div>
-                                <span class=" col-xs-5" data-bind="text: my.dashboardVm.feedback.AddedBy.FullName"></span></div>
-                            <div data-bind="if: my.dashboardVm.getFeedback('1', 'All', User.UserId) === false">
-                               ---
-                            </div>
-                        </div>
-                       
-                        @*  <div class="col-xs-2 no-left-margin no-right-margin">
-                             <div data-bind="if: my.dashboardVm.getFeedback('1', 'Skills', User.UserId) === true">
-                                 <span class="" data-bind="text: my.dashboardVm.feedback.Skill.Name"></span>   
-                                    <div data-bind="css: {
-                                            'rating-slow': my.dashboardVm.feedback.Rating == 1,
-                                            'rating-Average': my.dashboardVm.feedback.Rating == 2,
-                                            'rating-Fast': my.dashboardVm.feedback.Rating == 3,
-                                            'rating-Exceptional': my.dashboardVm.feedback.Rating == 4
-                                        }">
-                                        <!-- ko foreach: new Array(my.dashboardVm.feedback.Rating)  -->
-                                        <span class="glyphicon glyphicon-star"
-                                              style="display: inline-block;"></span><!-- /ko -->
-                                   
+                                    <div data-bind="if: IsFeedbackPending === false">
+                                        <i class="glyphicon glyphicon-ok feedback-success"></i>
                                     </div>
-                                   
-                            </div>
-                        </div>*@
-                    </div>
-                    <div class="col-xs-12   collapse no-left-margin no-right-margin"  data-bind="attr: { 'id': 'divCollapsableUserId_' + User.UserId }" >
-                        
-                        <div class="col-xs-3 no-left-margin no-right-margin"></div>
-                        <div class="col-xs-1 no-left-margin no-right-margin">
-                            @*   <div data-bind="if: my.dashboardVm.getFeedback('5', 'Weekly', User.UserId) === true">
-                                  <div data-bind="foreach:my.dashboardVm.feedback">
-                                       <span class="pull-left" data-bind="text: WeekForFeedbackPresent"></span>
-                                    <div
-                                        data-bind="css: {
-                                                            'rating-slow': Rating == 1,
-                                                            'rating-Average': Rating == 2,
-                                                            'rating-Fast': Rating == 3,
-                                                            'rating-Exceptional': Rating == 4
-                                                        }">
-                                        <!-- ko foreach: new Array(Rating)  -->
-                                        <span class="glyphicon glyphicon-star"
-                                              style="display: inline-block;"></span><!-- /ko -->
-                                   
-                                    </div>
-                                    <div class="pull-right"><span class="">~</span>
-                                    <span class="pull-right" data-bind="text: AddedBy.FullName"></span>
-                                  </div>
-                               </div>
-                            </div>*@
-                        </div>
-                        <div class="col-xs-8 no-left-margin no-right-margin">
-                            <div data-bind="if: my.dashboardVm.getFeedback('5', 'All', User.UserId) === true">
-                                <div data-bind="foreach: my.dashboardVm.feedback">
-                                    <span class="col-xs-5 spacer-top-bottom " data-bind="visible :FeedbackType.FeedbackTypeId == 3 ">Assigment</span>
- <span class="col-xs-5 spacer-top-bottom " data-bind="visible: FeedbackType.FeedbackTypeId == 4 ">Code Review</span>                                    
-<div class="col-xs-2 spacer-top-bottom " data-bind="css: {
-                                                        'rating-slow': Rating == 1,
-                                                        'rating-Average': Rating == 2,
-                                                        'rating-Fast': Rating == 3,
-                                                        'rating-Exceptional': Rating == 4
-                                                    }">
-                                        <!-- ko foreach: new Array(Rating)  -->
-                                        <span class="glyphicon glyphicon-star"
-                                              style="display: inline-block;"></span>
-                                        <!-- /ko -->
-                                   
-                                    </div>
-                                    <div class="col-xs-5 spacer-top-bottom ">
-                                        <span class="" data-bind="text:AddedBy.FullName"></span></div>
-                                </div> </div>
-                            @*  <div data-bind="if: my.dashboardVm.getFeedback('5', 'All', User.UserId) === false">
-                                No Data Available
-                            </div>*@
-                        </div>
-                        @* <div class="col-xs-2 no-left-margin no-right-margin">
-                            <div data-bind="if: my.dashboardVm.getFeedback('5', 'Skills', User.UserId) === true">
-                                <div data-bind="foreach: my.dashboardVm.feedback">
-                                    <span class="" data-bind="text: Skill.Name"></span>
-                                    <div
-                                        data-bind="css: {
-                                                            'rating-slow': Rating == 1,
-                                                            'rating-Average': Rating == 2,
-                                                            'rating-Fast': Rating == 3,
-                                                            'rating-Exceptional': Rating == 4
-                                                        }">
-                                        <!-- ko foreach: new Array(my.dashboardVm.feedback.Rating)  -->
-                                        <span class="glyphicon glyphicon-star"
-                                              style="display: inline-block;"></span><!-- /ko -->
-                                   
-                                    </div>
-                                
-                                </div>
-
-                            </div>
-
-                        </div>*@
-                    </div>
-                
-                </div>
-                
+                                </a>
+                            </td>
+                            <td data-bind="text: Skills"></td>
+                            <td class="feedback-td" data-bind="text: ExceptionalRating"></td>
+                            <td class="feedback-td" data-bind="text: FastRating"></td>
+                            <td class="feedback-td" data-bind="text: AverageRating"></td>
+                            <td class="feedback-td" data-bind="text: PoorRating"></td>
+                            <td data-bind="text: User.Email"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="col-xs-4 no-left-margin table-responsive"> 
-            
-            <table  style="width: 100%">
-                <thead>
-                    <tr><th colspan="3">Upcoming Sessions</th></tr>
-                    <tr>
-                        <th>Title</th>
-                        <th>Presenter</th>
-                        <th>Date</th></tr>
-                </thead>
-                <tbody data-bind="foreach: my.dashboardVm.sessions">
-                    <tr>
-                        <td><a data-bind="attr:{'href': '/Session/index?sessionId=' + Id }" target="_blank"> <span data-bind="    text:Title"></span></a></td>
-                       
-                        <td><span  data-bind="text:PresenterFullName"></span></td>
-                        <td><span  data-bind="text: moment(Date).format('DD/MM/YYYY')"></span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
     </div>
 </div>
 
-@section Scripts
-{
-    <script src="~/Scripts/knockout-3.4.0.js"></script>
-    <script src="~/Scripts/moment.min.js"></script>
-    <script src="~/Scripts/Custom/App.js"></script>
-    <script src="~/Scripts/Custom/AjaxService.js"></script>
-    <script src="~/Scripts/Custom/UserService.js"></script>
-    <script src="~/Scripts/Custom/Dashboard.js"></script>
-}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/knockout-3.4.0.js"></script>
+<script src="~/Scripts/Custom/App.js"></script>
+<script src="~/Scripts/Custom/AjaxService.js"></script>
+<script src="~/Scripts/Custom/UserService.js"></script>
+<script src="~/Scripts/Custom/Dashboard.js"></script>
