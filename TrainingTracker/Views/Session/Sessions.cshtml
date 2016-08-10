@@ -5,7 +5,7 @@
 <link href="~/Content/DatePicker/bootstrap-datepicker3.css" rel="stylesheet" />
 <link href="~/StyleSheets/Session.css" rel="stylesheet" />
 
-<div class="container-fluid">
+<div class="container-fluid col-xs-8 col-xs-offset-2">
     <div class="panel panel-white post panel-shadow">
         <div class="post-heading">
             <div class="pull-left feedback-input meta">
@@ -72,11 +72,17 @@
             <div class="modal-body col-xs-12 ">
                 <div class="col-xs-8 no-left-margin ">
                     <h5>Title</h5>
-                    <input type="text" class="form-control" data-bind="value: my.sessionVm.sessionDetails.Title" />
+                    <input type="text" class="form-control" data-bind="value: my.sessionVm.sessionDetails.Title, attr: { readonly: !(my.sessionVm.sessionSettings.isNewSession() || my.sessionVm.sessionSettings.isEditable())}" />
                     <h5>Description</h5>
-                    <textarea class="form-control" rows="8" data-bind="value: my.sessionVm.sessionDetails.Description"></textarea>
+                    <textarea class="form-control" rows="8" data-bind="value: my.sessionVm.sessionDetails.Description, attr: { readonly: !(my.sessionVm.sessionSettings.isNewSession() || my.sessionVm.sessionSettings.isEditable()) }"></textarea>
                     <h5>Session Date</h5>
-                    <input type="text" class="form-control" data-bind="datepicker: my.sessionVm.sessionDetails.Date, value: my.sessionVm.sessionDetails.Date" />
+
+                    <!-- ko if: (my.sessionVm.sessionSettings.isNewSession() || my.sessionVm.sessionSettings.isEditable()) -->
+                    <input type="text" class="form-control" data-bind="datepicker: my.sessionVm.sessionDetails.Date, startDate:new Date(), value: my.sessionVm.sessionDetails.Date" />
+                    <!-- /ko -->
+                     <!-- ko if: !(my.sessionVm.sessionSettings.isNewSession() || my.sessionVm.sessionSettings.isEditable()) -->
+                    <input type="text" class="form-control" data-bind=" value: my.sessionVm.sessionDetails.Date" readonly="readonly"/>
+                    <!-- /ko -->
                     <span class="error" data-bind="text: my.sessionVm.sessionSettings.errorText, value: my.sessionVm.sessionSettings.errorText"></span>
                 </div>
                 <div class="col-xs-4 no-left-margin no-right-margin" style="height: 313px;">
@@ -85,19 +91,19 @@
                         <div class="row"  data-bind="visible: my.sessionVm.currentUser.UserId == my.sessionVm.sessionDetails.Presenter() && moment(moment(my.sessionVm.sessionDetails.Date()).format('MM/DD/YYYY')).isSameOrAfter(moment(my.sessionVm.todayDate).format('MM/DD/YYYY'))">
                             <div class="col-xs-12">
                                 <span class="custom-checkbox">
-                                    <input type="checkbox" data-bind="click: function () { checkboxSelectAll(); return true;}" id="ckbSelectAll"/>
+                                    <input type="checkbox" data-bind="click: function () { checkboxSelectAll(); return true; }, checked: my.sessionVm.sessionSettings.allSelected" id="ckbSelectAll"/>
                                     <span class="box">
                                         <span class="tick"></span>
                                     </span>
                                 </span>
-                                <label for="ckbSelectAll" class=" lblForCheckbox make-checkbox-label-in-align">Select All</label>
+                                <label for="ckbSelectAll" class=" lblForCheckbox make-checkbox-label-in-align" data-bind="text: my.sessionVm.sessionSettings.allSelectedText">Select All</label>
                             </div>
                         </div>
                         <div style="overflow:scroll-x" data-bind="foreach: my.sessionVm.allAttendees">
                             <div class="row" data-bind="visible: my.sessionVm.currentUser.UserId == my.sessionVm.sessionDetails.Presenter() && moment(moment(my.sessionVm.sessionDetails.Date()).format('MM/DD/YYYY')).isSameOrAfter(moment(my.sessionVm.todayDate).format('MM/DD/YYYY'))">
                                 <div class="col-xs-12">
                                     <span class="custom-checkbox">
-                                        <input type="checkbox" data-bind="attr: { id: 'ckb_' + UserId, value: UserId }, checked: my.sessionVm.sessionDetails.Attendee" />
+                                        <input type="checkbox" data-bind="attr: { id: 'ckb_' + UserId, value: UserId }, checked: my.sessionVm.sessionDetails.Attendee, click: function () { my.sessionVm.observeAttendee(); return true;}" />
                                         <span class="box">
                                             <span class="tick"></span>
                                         </span>
@@ -118,7 +124,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-bind="click: my.sessionVm.showDialogueFunction">Close</button>
                 <button type="button" class="btn btn-primary" data-bind="click: my.sessionVm.addSession, visible: (my.sessionVm.sessionSettings.isNewSession)" id="btnAddSession">Add Session</button>
-                <button type="button" class="btn btn-primary" data-bind="click: my.sessionVm.editSession, visible: my.sessionVm.sessionSettings.isEditable" id="btnEditSession">Edit Session</button>
+                <button type="button" class="btn btn-primary" data-bind="click: my.sessionVm.editSession, visible: my.sessionVm.sessionSettings.isEditable" id="btnEditSession">Save Session</button>
             </div>
         </div>
         <!-- /.modal-content -->

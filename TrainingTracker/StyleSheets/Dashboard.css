@@ -128,10 +128,14 @@ table thead tr:nth-child(1) th {
 .user-collapser {
     position:absolute;
     height: 36px;
-    width: 36px;
+    width: 45px;
     cursor: pointer;
     z-index: 1000;
      margin-top: 11px;
+}
+
+.user-collapser i {
+    right: 166%;
 }
 
 .spacer-top-bottom {

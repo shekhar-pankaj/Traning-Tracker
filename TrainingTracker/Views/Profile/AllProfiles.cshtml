@@ -7,7 +7,7 @@
         <div class="col-lg-12">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#">All Profiles</a></li>
-                <li><a href="#">Trainers</a></li>
+               @* <li><a href="#">Trainers</a></li>
                 <li><a href="#">Trainees</a></li>
                 <li class="col-sm-3 col-md-3 pull-right">
                     <div class="input-group">
@@ -16,7 +16,7 @@
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
-                </li>
+                </li>*@
                 @*<li class="pull-right">
                     <button data-bind="click: showTrainers"
                             class="btn btn-primary" type="submit">
@@ -32,7 +32,7 @@
             <div class="panel-group">
                 <ul class="list-inline" data-bind="foreach: users">
                     <li>
-                        <a data-bind="attr: {href: '/Profile/UserProfile?userId=' + UserId}">
+                        <a data-bind="attr: {href: my.rootUrl + '/Profile/UserProfile?userId=' + UserId}">
                             <div data-bind="css: { 'panel-success': IsTrainer, 'panel-info': IsTrainee, 'panel-danger': IsManager}"
                                  class="panel" style="width:250px">
                                 <div class="panel-heading">

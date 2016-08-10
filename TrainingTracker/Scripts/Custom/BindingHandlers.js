@@ -4,6 +4,7 @@
         var dateFormat = allBindings().dateFormat;
         var buttonImage = allBindings().buttonImage; // allBindings.get('dateFormat');
         var endDate = allBindings().endDate;
+        var startDate = allBindings().startDate;
 
         if (typeof dateFormat == 'undefined') {
             dateFormat = 'mm/dd/yyyy';
@@ -12,6 +13,10 @@
         if (typeof (endDate) === 'undefined')
         {
             endDate = null;
+        }
+        if (typeof (startDate) === 'undefined')
+        {
+            startDate = null;
         }
 
         if (typeof buttonImage == 'undefined') {
@@ -26,7 +31,8 @@
             //buttonImage: buttonImage,
             //showOn: "both",
             todayHighlight: true,
-            endDate: endDate
+            endDate: endDate,
+            startDate:startDate
         };
 
         if (typeof valueAccessor() === 'object') {

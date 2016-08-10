@@ -18,6 +18,7 @@ namespace TrainingTracker.BLL
                 UpcomingSessions = SessionDataAccesor.GetSessionOnFilter(100,1,"")
             };
 
+
             var lastFriday = DateTime.Now;
             while (lastFriday.DayOfWeek != DayOfWeek.Friday) lastFriday = lastFriday.AddDays(-1);
 
@@ -33,7 +34,9 @@ namespace TrainingTracker.BLL
                     feedback.WeekForFeedbackPresent= feedback.StartDate.ToString("dd/MM/yyyy") + "-" + feedback.EndDate.ToString("dd/MM/yyyy");
                 }
                 trainee.LastWeekFeedbackAdded = feedbackAdded;
-               
+
+                trainee.RemainingFeedbacks = trainee.RemainingFeedbacks.OrderByDescending(x => x.AddedOn).ToList();
+
                 // trainee.IsFeedbackPending = !(trainee.LastWeeklyFeedback > checkLowerDate && trainee.LastWeeklyFeedback <= lastFriday);
             }
 

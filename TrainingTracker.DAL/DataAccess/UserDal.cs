@@ -244,7 +244,7 @@ namespace TrainingTracker.DAL.DataAccess
                     var objUserData = users.First(x => x.User.UserId == Convert.ToInt32(rows["UserId"]));
                     AddFeedbacksToTheList(ref users , rows);
                 }
-
+              
                 //users.AddRange(from DataRow row in dt.Rows
                 //               select new UserData
                 //               {
@@ -316,6 +316,7 @@ namespace TrainingTracker.DAL.DataAccess
                 {
                     case 3:
                     case 4:
+                    case 5:
                         userData.First(x => x.User.UserId == userId)
                                 .RemainingFeedbacks
                                 .Add(feedback);
@@ -327,11 +328,11 @@ namespace TrainingTracker.DAL.DataAccess
                                     .SkillsFeedback
                                     .Add(feedback);
                         break;
-                    case 5:
-                        userData.First(x => x.User.UserId == Convert.ToInt32(row["UserId"]))
-                                .WeeklyFeedback
-                               .Add(feedback);
-                        break;
+                    //case 5:
+                    //    userData.First(x => x.User.UserId == Convert.ToInt32(row["UserId"]))
+                    //            .WeeklyFeedback
+                    //           .Add(feedback);
+                     //   break;
 
                 }
 
