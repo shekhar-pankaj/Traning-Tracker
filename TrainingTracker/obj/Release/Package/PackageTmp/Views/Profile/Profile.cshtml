@@ -35,14 +35,14 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                    <div class="list-group" data-bind="visible: userVm.User.IsTrainee">
+                    <div class="list-group collapsed"  data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divSkillscollapasable">
                         <div class="list-group-item active">
                             <label>Skills</label>
                             <span class="pull-right">
-                                <i class="glyphicon glyphicon-chevron-down"></i>
+                                <i class="glyphicon glyphicon-chevron-down custom-glyph"></i>
                             </span> 
                         </div>
-                        <div data-bind="foreach: userVm.Skills">
+                        <div id="divSkillscollapasable" class="collapse" data-bind="foreach: userVm.Skills">
                             <div class="list-group-item">
                                 <div data-bind="text: Name" style="display: inline-block;"></div>
                                 <div class="pull-right" style="display: inline-block;">
@@ -61,30 +61,71 @@
                             </div>
 
                         </div>
-                    </div>
-                    <div class="list-group" data-bind="visible: userVm.User.IsTrainee">
+                    </div>                   
+                    <div class="list-group collapsed" data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divSessioncollapasable">
                         <div class="list-group-item active">
-                            <label>Projects</label> 
+                            <label>  Sessions attended</label> 
                             <span class="pull-right">
-                                <i class="glyphicon glyphicon-chevron-down"></i>
+                                <i class="glyphicon  glyphicon-chevron-down custom-glyph"></i>
                             </span> 
                         </div>
-                        <div data-bind="foreach: userVm.Projects">
-                            <div data-bind="text: Title"
-                                class="list-group-item">
+                        <div id="divSessioncollapasable" class="collapse" data-bind="foreach: userVm.Sessions">
+                            <div data-bind="text: Title" 
+                                 class="list-group-item collapse">
                             </div>
                         </div>
                     </div>
-                    <div class="list-group" data-bind="visible: userVm.User.IsTrainee">
+                    <div class="list-group" data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divCodeReviewcollapasable">
                         <div class="list-group-item active">
-                            <label>  Sessions attended</label> 
+                            <label>  Code Review Feedbacks</label> 
                                 <span class="pull-right">
-                                <i class="glyphicon  glyphicon-chevron-down"></i>
+                                <i class="glyphicon  glyphicon-chevron-down custom-glyph"></i>
                             </span> 
                         </div>
-                        <div data-bind="foreach: userVm.Sessions">
-                            <div data-bind="text: Title"
-                                class="list-group-item">
+                        <div id="divCodeReviewcollapasable" class="in" data-bind="">
+                            <div class="list-group-item collapse">
+                                <div  style="display: inline-block">Latest Feedback : </div>
+                                <div class="pull-right" data-bind="if: my.profileVm.recentCodeReviewFeedback().length > 0" style="display: inline-block;">
+                                    <div data-bind="css: {
+                                                                 'rating-slow': my.profileVm.recentCodeReviewFeedback()[0].Rating == 1,
+                                                                 'rating-Average': my.profileVm.recentCodeReviewFeedback()[0].Rating == 2,
+                                                                 'rating-Fast': my.profileVm.recentCodeReviewFeedback()[0].Rating == 3,
+                                                                 'rating-Exceptional': my.profileVm.recentCodeReviewFeedback()[0].Rating == 4
+                                                        }">
+                                        <!-- ko foreach: new Array(my.profileVm.recentCodeReviewFeedback()[0].Rating)  -->
+                                        <span class="glyphicon glyphicon-star"
+                                              style="display: inline-block;"></span>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                                <div class="pull-right" data-bind="if: my.profileVm.recentCodeReviewFeedback().length == 0" style="display: inline-block;">
+                                    No Feedbacks
+                                </div>
+
+                            </div>
+                            <div class="list-group-item collapse">
+                                <div  style="display: inline-block">Exceptional Feedback Count: </div>
+                                <div class="pull-right" style="display: inline-block;" data-bind="text: my.profileVm.getCountForFeedback(4)">
+                                   
+                                </div>
+                            </div>
+                            <div class="list-group-item collapse">
+                                <div  style="display: inline-block">Fast Feedback Count: </div>
+                                <div class="pull-right" style="display: inline-block; " data-bind="text: my.profileVm.getCountForFeedback(3)">
+                                   
+                                </div>
+                            </div>
+                            <div class="list-group-item collapse">
+                                <div  style="display: inline-block">Average Feedback Count: </div>
+                                <div class="pull-right" style="display: inline-block;" data-bind="text: my.profileVm.getCountForFeedback(2)">
+                                   
+                                </div>
+                            </div>
+                            <div class="list-group-item collapse">
+                            <div  style="display: inline-block">Slow Feedback Count: </div>
+                                <div class="pull-right" style="display: inline-block;" data-bind="text: my.profileVm.getCountForFeedback(1)">
+                                   
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -157,9 +198,9 @@
                         <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 5 " class=" pull-left feedback-input meta">
                             <label>Select date range:</label>
                             <div class="input-daterange input-group" id="datepicker">
-                                <input type="text" data-bind="datepicker: feedbackPost.StartDate, value: feedbackPost.StartDate" class="date-picker input-sm form-control" name="start" />
+                                <input type="text" data-bind="datepicker: feedbackPost.StartDate,endDate:new Date(), value: feedbackPost.StartDate" class="date-picker input-sm form-control" name="start" />
                                 <span class="input-group-addon">to</span>
-                                <input type="text" data-bind="datepicker: feedbackPost.EndDate, value: feedbackPost.EndDate" class="date-picker input-sm form-control" name="end" />
+                                <input type="text" data-bind="datepicker: feedbackPost.EndDate,endDate:new Date(), value: feedbackPost.EndDate" class="date-picker input-sm form-control" name="end" />
                             </div>
                         </div>
                         <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId != 1 " class="pull-right feedback-input meta">
@@ -265,14 +306,18 @@
     </div>
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/knockout-3.4.0.js"></script>
-<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
-<script src="~/Scripts/moment.min.js"></script>
-<script src="~/Scripts/typehead.js"></script>
-<script src="~/Scripts/Custom/BindingHandlers.js"></script>
-<script src="~/Scripts/Custom/App.js"></script>
-<script src="~/Scripts/Custom/AjaxService.js"></script>
-<script src="~/Scripts/Custom/UserService.js"></script>
-<script src="~/Scripts/Custom/UserProfile.js"></script>
+@section Scripts
+{
+
+    @*<script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>*@
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/typehead.js"></script>
+    <script src="~/Scripts/Custom/BindingHandlers.js"></script>
+    <script src="~/Scripts/Custom/App.js"></script>
+    <script src="~/Scripts/Custom/AjaxService.js"></script>
+    <script src="~/Scripts/Custom/UserService.js"></script>
+    <script src="~/Scripts/Custom/UserProfile.js"></script>
+}

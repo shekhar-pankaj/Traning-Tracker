@@ -5,6 +5,7 @@
             selectedSkill = ko.observable(),
             selectedProject = ko.observable(),
             validationMessage = ko.observable(),
+            recentCodeReviewFeedback =ko.observable(),
             controls = {
                 skillOption: ko.observable("1"),
                 assignmentOption: ko.observable(1),
@@ -47,7 +48,13 @@
                     feedback.AddedBy.UserImageUrl = my.rootUrl + "/Uploads/ProfilePicture/" + feedback.AddedBy.ProfilePictureName;
                 });
                 jsonData.Feedbacks = ko.observableArray(jsonData.Feedbacks);
+                my.profileVm.recentCodeReviewFeedback(jsonData.RecentCrFeedback);
                 my.profileVm.userVm = jsonData;
+                //my.profileVm.userVm.Feedbacks = ko.observableArray([]);
+                //$.each(jsonData.Feedbacks, function (key)
+                //{
+                //    my.profileVm.userVm.Feedbacks.push(jsonData.Feedbacks[key]);
+                //});
                 ko.applyBindings(my.profileVm);
                 my.profileVm.feedbackPost.Rating(0);
             },
@@ -142,6 +149,7 @@
                 if (my.profileVm.validatePost()) {
                     my.profileVm.feedbackPost.AddedFor = { UserId: my.profileVm.userId };
                     my.profileVm.feedbackPost.AddedBy = { UserId: my.profileVm.currentUser.UserId };
+                    my.profileVm.feedbackPost.Skill = selectedSkill;
                     my.userService.addUserFeedback(my.profileVm.feedbackPost, my.profileVm.addFeedbackCallback);
                 }
             },
@@ -156,13 +164,20 @@
             applyFilter = function() {
                 my.userService.getFeedbackonAppliedFilter(my.profileVm.filter.selectedPageSize(), my.profileVm.filter.filterFeedback().FeedbackTypeId, my.profileVm.userId, my.profileVm.applyFilterCallback);
             },
-            applyFilterCallback = function (feedbacks)
-            {
+            applyFilterCallback = function (feedbacks) {
+                my.profileVm.userVm.Feedbacks([]);
                 $.each(feedbacks, function (key)
                 {
                     feedbacks[key].AddedBy.UserImageUrl = my.rootUrl + "/Uploads/ProfilePicture/" + feedbacks[key].AddedBy.ProfilePictureName;
+                    my.profileVm.userVm.Feedbacks.push(feedbacks[key]);
                 });
-                my.profileVm.userVm.Feedbacks(feedbacks) ;
+            },
+            getCountForFeedback=function(type) {
+                var feedbackFilteredOnType = ko.utils.arrayFilter(my.profileVm.recentCodeReviewFeedback(), function (item)
+                {
+                    return item.Rating == type;
+                });
+                return feedbackFilteredOnType.length;
             };
 
         return {
@@ -188,7 +203,9 @@
             controls: controls,
             filter: filter,
             applyFilter: applyFilter,
-            applyFilterCallback: applyFilterCallback
+            applyFilterCallback: applyFilterCallback,
+            recentCodeReviewFeedback: recentCodeReviewFeedback,
+            getCountForFeedback: getCountForFeedback
         };
     }();
 
