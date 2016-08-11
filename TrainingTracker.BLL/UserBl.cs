@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TrainingTracker.BLL.Base;
 using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.ViewModel;
@@ -39,7 +40,9 @@ namespace TrainingTracker.BLL
                 Sessions = SessionDataAccesor.GetSessionsByUserId(userId) ,
                 Projects = ProjectDataAccesor.GetProjectsByUserId(userId) ,
                 Feedbacks = FeedbackDataAccesor.GetUserFeedback(userId , 5) ,
-                RecentCrFeedback = FeedbackDataAccesor.GetUserFeedback(userId , 100 , 4) ,
+                RecentCrFeedback = FeedbackDataAccesor.GetUserFeedback(userId , 1000 , 4) ,
+                RecentWeeklyFeedback = FeedbackDataAccesor.GetUserFeedback(userId , 1000 , 5) ,
+                AllTrainer =  GetAllUsers().Where(x=>x.IsTrainer || x.IsManager).ToList(),
                 FeedbackTypes = new List<FeedbackType>
                 {
                     new FeedbackType

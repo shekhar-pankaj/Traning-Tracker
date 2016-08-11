@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TrainingTracker.BLL.Base;
+﻿using TrainingTracker.BLL.Base;
 using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.ViewModel;
 
