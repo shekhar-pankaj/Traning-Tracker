@@ -33,10 +33,25 @@
                      callback(json);
                  }
              });
-         };
+         },
+        ajaxUploadImage = function (method, formData, callback) {
+             $.ajax({
+                 url: getServiceUrl(method),
+                 type: "POST",
+                 data: formData,
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 success: function (json) {
+                     callback(json);
+                 }
+             });
+         }
+        ;
         return {
             ajaxGetJson: ajaxGetJson,
-            ajaxPostJson: ajaxPostJson
+            ajaxPostJson: ajaxPostJson,
+            ajaxUploadImage: ajaxUploadImage
         };
     })();
 }(my));

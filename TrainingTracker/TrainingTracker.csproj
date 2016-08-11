@@ -21,7 +21,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -4714,6 +4715,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="StyleSheets\AddEditProfile.css" />
     <Content Include="StyleSheets\AllProfiles.css" />
     <Content Include="StyleSheets\Dashboard.css" />
     <Content Include="StyleSheets\Layout.css" />
@@ -4722,7 +4724,9 @@
     <Content Include="StyleSheets\Session.css" />
     <Content Include="StyleSheets\simple-sidebar.css" />
     <Content Include="Uploads\ProfilePicture\harshw.JPG" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -4740,6 +4744,7 @@
     <Content Include="Views\Plan\Plan.cshtml" />
     <Content Include="Views\Profile\AddEditProfile.cshtml" />
     <Content Include="Views\Session\Sessions.cshtml" />
+    <Content Include="Views\Shared\_PartialProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

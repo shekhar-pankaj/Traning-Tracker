@@ -8,6 +8,7 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     @*<link href="~/StyleSheets/simple-sidebar.css" rel="stylesheet" />*@
     <link href="~/StyleSheets/Layout.css" rel="stylesheet" />
+
 </head>
     <body>
         <div id="wrapper">
@@ -22,6 +23,7 @@
                     <li class="menu-li"><a href="~/Dashboard/Index">Dashboard</a></li>
                     <li class="menu-li"><a href="~/Profile/AllProfiles">All Profiles</a></li>
                     <li class="menu-li"><a href="~/Session">Sessions</a></li>
+                    @*<li class="menu-li"><a href="~/Profile/AddEditProfile">EditProfile</a></li>*@
                 </ul>
                 @*<div id="sidebar-wrapper" class="toggled">
                 <ul class="sidebar-nav">
@@ -45,6 +47,15 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <p>
+                                               
+                                                <a href="#" data-bind="click: my.addUserVm.openUserProfile" type="button"
+                                                   class="btn btn-info btn-block">
+                                                    Manage Account
+                                                </a>
+                                                <a href="#" data-bind="click: my.addUserVm.openAllUsersProfile,visible:(my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager() )" type="button"
+                                                   class="btn btn-info btn-block">
+                                                    Edit Profiles
+                                                </a>
                                                 <a href="~/Login/SignOut"
                                                    class="btn btn-danger btn-block">
                                                     Sign out
@@ -64,17 +75,22 @@
                 <div>
                     @RenderBody()
                 </div>
+                <div>
+                    @Html.Partial("_PartialProfile")
+                </div>
             </div>
         </div>
     </body>
 
+<script src="~/Scripts/Custom/AddEditProfile.js"></script>
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-@*<script src="~/Scripts/knockout-3.4.0.js"></script>*@
+<script src="~/Scripts/knockout-3.4.0.js"></script>
 <script src="~/Scripts/Custom/App.js"></script>
 <script src="~/Scripts/Custom/AjaxService.js"></script>
 <script src="~/Scripts/Custom/UserService.js"></script>
-    <script src="~/Scripts/Custom/Layout.js"></script>
+<script src="~/Scripts/Custom/Layout.js"></script>
+
 @RenderSection("Scripts",false)
 </html>
 
