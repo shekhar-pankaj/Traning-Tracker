@@ -368,7 +368,7 @@
                             </div>
                         </div>
                         <div class="post-description">
-                            <p data-bind="text: FeedbackText"></p>
+                            <p data-bind="html: FeedbackText.replace(/\r\n|\r|\n/g, '<br />')" style></p>
                         </div>
                     </div>
                 </div>
