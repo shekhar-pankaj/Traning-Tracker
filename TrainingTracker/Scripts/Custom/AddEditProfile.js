@@ -58,10 +58,7 @@
             getCurrentUser = function () {
                 my.userService.getCurrentUser(my.addUserVm.getCurrentUserCallback);
             },
-            setUser = function (currentId) {
-                ko.utils.arrayForEach(my.addUserVm.users(), function (item) {
-                    var itemId = item.UserId;
-                    if (itemId == currentId) {
+            setUser = function (item) {
                         my.addUserVm.user.UserId(item.UserId);
                         my.addUserVm.user.FirstName(item.FirstName);
                         my.addUserVm.user.LastName(item.LastName);
@@ -76,12 +73,38 @@
                         my.addUserVm.user.Password("");
                         my.addUserVm.user.IsFemale(item.IsFemale);
                         my.addUserVm.user.enableChangePassword(false);
-                    }
-                });
+                //my.addUserVm.user=my.addUserVm.users()[currentId];
+                //ko.utils.arrayForEach(my.addUserVm.users(), function (item) {
+                //    var itemId = item.UserId;
+                //    if (itemId == currentId) {
+                //        my.addUserVm.user.UserId(item.UserId);
+                //        my.addUserVm.user.FirstName(item.FirstName);
+                //        my.addUserVm.user.LastName(item.LastName);
+                //        my.addUserVm.user.UserName(item.UserName);
+                //        my.addUserVm.user.Email(item.Email);
+                //        my.addUserVm.user.Designation(item.Designation);
+                //        my.addUserVm.user.IsAdministrator(item.IsAdministrator);
+                //        my.addUserVm.user.IsTrainer(item.IsTrainer);
+                //        my.addUserVm.user.IsTrainee(item.IsTrainee);
+                //        my.addUserVm.user.IsManager(item.IsManager);
+                //        my.addUserVm.user.ProfilePictureName(item.ProfilePictureName);
+                //        my.addUserVm.user.Password("");
+                //        my.addUserVm.user.IsFemale(item.IsFemale);
+                //        my.addUserVm.user.enableChangePassword(false);
+                //    }
+                //});
             },
-            createUserCallback = function (json) {
-                if (json == "true") {
-                    my.addUserVm.getUsers();
+            saveUserCallback = function (jsonData) {
+                if (jsonData.status= "true") {
+                    //my.addUserVm.getUsers();
+                    //my.addUserVm.getCurrentUser();
+                    //my.addUserVm.setUser(my.addUserVm.currentUser.UserId());
+                    if (jsonData.iUserId > 0) {
+                        my.addUserVm.user.UserId(jsonData.iUserId);
+                        var objUser = ko.toJS(my.addUserVm.user);
+                        objUser.FullName = my.addUserVm.fullName(objUser);
+                        my.addUserVm.users.push(objUser);
+                    }
                     my.addUserVm.user.IsReadOnly(true);
                     my.addUserVm.user.IsNewProfile(false);
                     my.addUserVm.user.enableChangePassword(false);
@@ -91,8 +114,15 @@
                     alert("User saving unsuccessful!!");
                 }
             },
-            createNewUser = function () {
-                my.userService.createUser(user, my.addUserVm.createUserCallback);
+            saveUser = function () {
+                if (my.addUserVm.user.IsNewProfile())
+                {
+                    my.userService.createUser(user, my.addUserVm.saveUserCallback);
+                }
+                else
+                {
+                    my.userService.updateUser(user, my.addUserVm.saveUserCallback);
+                }
             },
             genderSelection = ko.computed({
                 read: function () {
@@ -120,28 +150,29 @@
                 return item.FirstName + " " + item.LastName;
             },
             getUsersCallback = function (userList) {
+                my.addUserVm.users = ko.observableArray([]),
                 ko.utils.arrayForEach(userList, function (item) {
                     item.FullName = my.addUserVm.fullName(item);
-                    item.IsEditable = my.addUserVm.isEditable(item);
+                    //item.IsEditable = my.addUserVm.isEditable(item);
                     my.addUserVm.users.push(item);
                 });
             },
-            isEditable = function (item) {
-                if (my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) {
-                    return true;
-                }
-                else if (my.addUserVm.currentUser.UserId() == item.UserId) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            },
+            //isEditable = function (item) {
+            //    if (my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) {
+            //        return true;
+            //    }
+            //    else if (my.addUserVm.currentUser.UserId() == item.UserId) {
+            //        return true;
+            //    }
+            //    else {
+            //        return false;
+            //    }
+            //},
             getUsers = function () {
                 my.userService.getAllUsers(my.addUserVm.getUsersCallback);
             },
-            showProfile = function (currentId, event) {
-                my.addUserVm.setUser(currentId);
+            showProfile = function (objUser, event) {
+                my.addUserVm.setUser(objUser);
                 my.addUserVm.user.IsReadOnly(true);
                 my.addUserVm.user.IsNewProfile(false);
             },
@@ -177,7 +208,7 @@
             openUserProfile = function () {
                 closeDialogue();
                 my.addUserVm.showDialog(true);
-                my.addUserVm.setUser(my.addUserVm.currentUser.UserId());
+                my.addUserVm.setUser(ko.toJS(my.addUserVm.currentUser));
             },
             showAllUsersProfile = ko.observable(false),
             openAllUsersProfile = function () {
@@ -186,7 +217,7 @@
                 if (my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) {
                     my.addUserVm.showAllUsersProfile(true);
                 }
-                my.addUserVm.setUser(my.addUserVm.currentUser.UserId());
+                my.addUserVm.setUser(ko.toJS(my.addUserVm.currentUser));
             }
 
         ;
@@ -202,11 +233,11 @@
             addProfile: addProfile,
             user: user,
             fullName: fullName,
-            isEditable: isEditable,
+            //isEditable: isEditable,
             showProfile: showProfile,
             editProfile: editProfile,
-            createUserCallback: createUserCallback,
-            createNewUser: createNewUser,
+            saveUserCallback: saveUserCallback,
+            saveUser: saveUser,
             genderSelection: genderSelection,
             uploadImage: uploadImage,
             uploadImageCallback: uploadImageCallback,
@@ -227,48 +258,48 @@
             my.addUserVm.uploadImage();
         }
     });
-    //ko.bindingHandlers.enableChildren = {
-    //    update: function (elem, valueAccessor) {
-    //        var enabled = ko.utils.unwrapObservable(valueAccessor());
-    //        ko.utils.arrayForEach(elem.getElementsByTagName('input'), function (i) {
-    //            i.disabled = !enabled;
-    //        });
-    //        ko.utils.arrayForEach(elem.getElementsByTagName('button'), function (i) {
-    //            i.disabled = !enabled;
-    //        });
-    //        ko.utils.arrayForEach(elem.getElementsByTagName('a'), function (i) {
-    //            i.disabled = !enabled;
-    //        });
+    ko.bindingHandlers.enableChildren = {
+        update: function (elem, valueAccessor) {
+            var enabled = ko.utils.unwrapObservable(valueAccessor());
+            ko.utils.arrayForEach(elem.getElementsByTagName('input'), function (i) {
+                i.disabled = !enabled;
+            });
+            ko.utils.arrayForEach(elem.getElementsByTagName('button'), function (i) {
+                i.disabled = !enabled;
+            });
+            ko.utils.arrayForEach(elem.getElementsByTagName('a'), function (i) {
+                i.disabled = !enabled;
+            });
 
-    //    }
-    //};
+        }
+    };
 
     /*Added for image file upload*/
-    //ko.bindingHandlers.fileSrc = {
-    //    init: function (element, valueAccessor) {
-    //        ko.utils.registerEventHandler(element, "change", function () {
-    //            var reader = new FileReader();
-    //            reader.onload = function (e) {
-    //                var value = valueAccessor();
-    //                value(e.target.result);
-    //            }
-    //            reader.readAsText(element.files[0]);
-    //        });
-    //    },
-    //    update: function (element, valueAccessor) {
+    ko.bindingHandlers.fileSrc = {
+        init: function (element, valueAccessor) {
+            ko.utils.registerEventHandler(element, "change", function () {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var value = valueAccessor();
+                    value(e.target.result);
+                }
+                reader.readAsText(element.files[0]);
+            });
+        },
+        update: function (element, valueAccessor) {
 
-    //        ko.utils.registerEventHandler(element, "change", function () {
-    //            var reader = new FileReader();
-    //            reader.onload = function (e) {
-    //                var value = valueAccessor();
-    //                value(e.target.result);
-    //            }
-    //            reader.readAsText(element.files[0]);
-    //            element.files[0] = valueAccessor()
-    //            console.log(element.files[0]);
-    //        });
-    //    }
-    //};
+            ko.utils.registerEventHandler(element, "change", function () {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var value = valueAccessor();
+                    value(e.target.result);
+                }
+                reader.readAsText(element.files[0]);
+                element.files[0] = valueAccessor()
+                console.log(element.files[0]);
+            });
+        }
+    };
     my.addUserVm.getCurrentUser();
     my.addUserVm.getUsers();
     //ko.applyBindings(my.addUserVm);

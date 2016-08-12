@@ -4,6 +4,9 @@
         createUser: function (user, callback) {
             my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/CreateUser", user, callback);
         },
+        updateUser: function (user, callback) {
+            my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/UpdateUser", user, callback);
+        },
         getAllUsers: function (callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetAllUsers", null, callback);
         },
