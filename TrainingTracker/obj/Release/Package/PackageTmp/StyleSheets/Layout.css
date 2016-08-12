@@ -1,0 +1,132 @@
+﻿.navbar-default {
+    background-color: #4fc3f7;
+    border-color: #29b6f6;
+}
+
+    .navbar-default .navbar-brand {
+        color: #e1f5fe;
+    }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #b3e5fc;
+        }
+
+    .navbar-default .navbar-text {
+        color: #e1f5fe;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #e1f5fe;
+    }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #b3e5fc;
+        }
+
+    .navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+        color: #b3e5fc;
+        background-color: #29b6f6;
+    }
+
+    .navbar-default .navbar-nav > .open > a,
+    .navbar-default .navbar-nav > .open > a:hover,
+    .navbar-default .navbar-nav > .open > a:focus {
+        color: #b3e5fc;
+        background-color: #29b6f6;
+    }
+
+    .navbar-default .navbar-toggle {
+        border-color: #29b6f6;
+    }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #29b6f6;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #e1f5fe;
+        }
+
+    .navbar-default .navbar-collapse,
+    .navbar-default .navbar-form {
+        border-color: #e1f5fe;
+    }
+
+    .navbar-default .navbar-link {
+        color: #e1f5fe;
+    }
+
+        .navbar-default .navbar-link:hover {
+            color: #b3e5fc;
+        }
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #e1f5fe;
+    }
+
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #b3e5fc;
+        }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #b3e5fc;
+        background-color: #29b6f6;
+    }
+}
+
+/*Font*/
+/* latin-ext */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Josefin Sans'), local('JosefinSans'), url(https://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5j0LW-43aMEzIO6XUTLjad8.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Josefin Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Josefin Sans'), local('JosefinSans'), url(https://fonts.gstatic.com/s/josefinsans/v9/xgzbb53t8j-Mo-vYa23n5ugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+#logo {
+    width: 187px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+#page-wrapper {
+    /*margin-top: 80px;*/
+    /*margin-left: 250px;*/
+}
+
+#userDetail {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.profile-pic {
+    width: 30px;
+    height: 30px;
+}
+
+.menu-li {
+    padding: 0 !important;
+}

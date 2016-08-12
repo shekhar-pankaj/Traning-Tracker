@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+<link href="~/StyleSheets/Dashboard.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Weekly Feedback</th>
+                            <th>Skills</th>
+                            <th>Exceptional Ratings</th>
+                            <th>Fast Ratings</th>
+                            <th>Average Ratings</th>
+                            <th>Poor Ratings</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: users">
+                        <tr>
+                            <td>
+                                <a data-bind="attr: {href: '/Profile/UserProfile?userId=' + User.UserId}">
+                                    <img data-bind="attr: {src: PhotoUrl}"
+                                         class="img-responsive img-circle profile-img">
+                                </a>
+                            </td>
+                            <td data-bind="text: User.FullName"></td>
+                            <td class="feedback-td">
+                                <a data-bind="attr: {href: '/Profile/UserProfile?userId=' + User.UserId}">
+                                    <div data-bind="if: IsFeedbackPending === true">
+                                        <i class="glyphicon glyphicon-remove feedback-pending"></i>
+                                    </div>
+                                    <div data-bind="if: IsFeedbackPending === false">
+                                        <i class="glyphicon glyphicon-ok feedback-success"></i>
+                                    </div>
+                                </a>
+                            </td>
+                            <td data-bind="text: Skills"></td>
+                            <td class="feedback-td" data-bind="text: ExceptionalRating"></td>
+                            <td class="feedback-td" data-bind="text: FastRating"></td>
+                            <td class="feedback-td" data-bind="text: AverageRating"></td>
+                            <td class="feedback-td" data-bind="text: PoorRating"></td>
+                            <td data-bind="text: User.Email"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/knockout-3.4.0.js"></script>
+<script src="~/Scripts/Custom/App.js"></script>
+<script src="~/Scripts/Custom/AjaxService.js"></script>
+<script src="~/Scripts/Custom/UserService.js"></script>
+<script src="~/Scripts/Custom/Dashboard.js"></script>
