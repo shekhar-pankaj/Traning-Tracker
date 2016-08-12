@@ -48,7 +48,7 @@ namespace TrainingTracker.DAL.DataAccess
         /// </summary>
         /// <param name="userData">User data object.</param>
         /// <returns>True if added.</returns>
-        public bool AddUser( User userData , out long iUserId)
+        public bool AddUser( User userData )
         {
             var prms = new List<SqlParameter>
             {
@@ -79,62 +79,8 @@ namespace TrainingTracker.DAL.DataAccess
             };
             try
             {
-                var rowsAffected = SqlUtility.ExecuteScalarReturnID(SPAddUser.NAME ,
+                var rowsAffected = SqlUtility.ExecuteNonQuery(SPAddUser.NAME ,
                     CommandType.StoredProcedure , prms);
-                iUserId = rowsAffected;
-                if(iUserId>0)
-                {
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogUtility.ErrorRoutine(ex);
-                iUserId = 0;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Calls stored procedure which updates user.
-        /// </summary>
-        /// <param name="objUser">User data object.</param>
-        /// <returns>True if updated.</returns>
-        public bool UpdateUser(User objUser)
-        {
-            var prms = new List<SqlParameter>
-            {
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_USER_ID,
-                SqlDbType.VarChar,objUser.UserId),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_FIRST_NAME,
-                SqlDbType.VarChar,objUser.FirstName),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_LAST_NAME,
-                SqlDbType.VarChar,objUser.LastName),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_USER_NAME,
-                SqlDbType.VarChar,objUser.UserName),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_PASSWORD,
-                SqlDbType.VarChar,!string.IsNullOrEmpty(objUser.Password)?objUser.Password:""),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_EMAIL,
-                SqlDbType.VarChar,objUser.Email),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_DESIGNATION,
-                SqlDbType.VarChar,objUser.Designation),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_PROFILE_PICTURE_NAME,
-                SqlDbType.VarChar,objUser.ProfilePictureName),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_FEMALE,
-                SqlDbType.Bit,objUser.IsFemale),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_ADMINISTRATOR,
-                SqlDbType.VarChar,objUser.IsAdministrator),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_TRAINER,
-                SqlDbType.VarChar,objUser.IsTrainer),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_TRAINEE,
-                SqlDbType.VarChar,objUser.IsTrainee),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_MANAGER,
-                SqlDbType.VarChar,objUser.IsManager)
-            };
-            try
-            {
-                var rowsAffected = SqlUtility.ExecuteNonQuery(SPUpdateUser.NAME,
-                    CommandType.StoredProcedure, prms);
                 return (rowsAffected > 0);
             }
             catch (Exception ex)
@@ -143,6 +89,7 @@ namespace TrainingTracker.DAL.DataAccess
             }
             return false;
         }
+
         /// <summary>
         /// Gets all Users.
         /// </summary>

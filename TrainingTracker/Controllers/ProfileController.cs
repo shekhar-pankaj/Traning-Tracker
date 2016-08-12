@@ -33,30 +33,7 @@ namespace TrainingTracker.Controllers
         [HttpPost]
         public ActionResult CreateUser(User userData)
         {
-            //return Json(new UserBl().AddUser(userData) ? "true" : "false");
-            long iUserId;
-            bool status = false;
-            status =new UserBl().AddUser(userData, out iUserId)?true:false;
-            var data = new
-            {
-                iUserId = iUserId,
-                status = status
-            };
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult UpdateUser(User userData)
-        {
-            bool status = false;
-            status = new UserBl().UpdateUser(userData)? true : false;
-            var data = new
-            {
-                iUserId = 0,
-                status = status
-            };
-            return Json(data, JsonRequestBehavior.AllowGet);
-            //return Json(new UserBl().UpdateUser(userData) ? "true" : "false");
+            return Json(new UserBl().AddUser(userData) ? "true" : "false");
         }
 
         [HttpPost]

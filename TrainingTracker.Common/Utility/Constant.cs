@@ -53,26 +53,6 @@
     }
 
     /// <summary>
-    /// Constant class for Stored procedure UPDATE_USER.
-    /// </summary>
-    public static class SPUpdateUser
-    {
-        public const string NAME = "UPDATE_USER";
-        public const string PARAM_USER_ID = "@UserId";
-        public const string PARAM_FIRST_NAME = "@FirstName";
-        public const string PARAM_LAST_NAME = "@LastName";
-        public const string PARAM_USER_NAME = "@Username";
-        public const string PARAM_PASSWORD = "@Password";
-        public const string PARAM_EMAIL = "@Email";
-        public const string PARAM_DESIGNATION = "@Designation";
-        public const string PARAM_PROFILE_PICTURE_NAME = "@ProfilePictureName";
-        public const string PARAM_IS_FEMALE = "@IsFemale";
-        public const string PARAM_IS_ADMINISTRATOR = "@IsAdministrator";
-        public const string PARAM_IS_TRAINER = "@IsTrainer";
-        public const string PARAM_IS_TRAINEE = "@IsTrainee";
-        public const string PARAM_IS_MANAGER = "@IsManager";
-    }
-    /// <summary>
     /// Constant class for Stored procedure GET_ALL_USERS.
     /// </summary>
     public static class SPGetAllUsers
