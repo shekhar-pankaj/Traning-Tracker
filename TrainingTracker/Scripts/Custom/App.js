@@ -23,7 +23,13 @@ $(document).ready(function () {
 
         return typeof(value) === 'undefined' || value == null || value == '';
     };
-
+    my.reset = function (obj) {
+        for (var prop in obj) {
+            if (obj.hasOwnProperty(prop) && ko.isObservable(obj[prop])) {
+                obj[prop]('');
+            }
+        }
+    };
   
 
 });

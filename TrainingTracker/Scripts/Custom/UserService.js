@@ -34,6 +34,10 @@
         getSessionsOnFilter:function(pageSize,seminarType,searchKeyword,getSessionsOnFilterCallback) 
         {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Session/GetUserFeedbackOnFilter?pageSize=" + pageSize + "&seminarType=" + seminarType + "&searchKeyword=" + '', null, getSessionsOnFilterCallback);
+        },
+        uploadImage: function (imagefile, callback) {
+            my.ajaxService.ajaxUploadImage("/Profile/UploadImage", imagefile, callback);
         }
+
     };
 }(my));

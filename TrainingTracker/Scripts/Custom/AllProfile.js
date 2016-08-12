@@ -14,6 +14,7 @@
                     item.PhotoUrl = my.allProfileVm.photoUrl(item);
                     my.allProfileVm.users.push(item);
                 });
+                ko.applyBindings(my.allProfileVm);
             },
             getUsers = function () {
                 my.userService.getAllUsers(my.allProfileVm.getUsersCallback);
@@ -35,5 +36,5 @@
     }();
 
     my.allProfileVm.getUsers();
-    ko.applyBindings(my.allProfileVm);
+    //ko.applyBindings(my.allProfileVm);
 });
