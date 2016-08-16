@@ -1,9 +1,10 @@
 ﻿
-<div class="row">
+@*<div class="row">*@
     <div id="divAddEditSession" class="modal-dialog overlay" style="width:1400px;padding-left:50px;" data-bind="visible: my.addUserVm.showDialog()">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-bind="click: my.addUserVm.closeDialogue" aria-hidden="true">&times;</button>
+                <span class="modal-title" data-bind="text:my.addUserVm.message"></span>
                 @* <h4 class="modal-title" data-bind="text:"></h4>*@
             </div>
             <div class="modal-body col-xs-12 ">
@@ -88,21 +89,24 @@
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Designation</label>
                                 <div class="col-lg-6">
-                                    <select data-bind="value: my.addUserVm.user.Designation, enable: ((my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) && (!my.addUserVm.user.IsReadOnly()) )"
-                                            class="form-control">
-                                        <option>Sr. Software Engineer</option>
-                                        <option>Associate Lead</option>
-                                        <option>Delivery Manager</option>
-                                        <option>Trainee Software Engineer</option>
-                                    </select>
-                                </div>
+                                    @*<select data-bind="value: my.addUserVm.user.Designation, enable: ((my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) && (!my.addUserVm.user.IsReadOnly()) )"
+                                            class="form-control">*@
+                                        <select data-bind="value: my.addUserVm.user.Designation, enable: ((my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) && (!my.addUserVm.user.IsReadOnly()) )"
+                                                class="form-control">
+                                            <option>Sr. Software Engineer</option>
+                                            <option>Associate Lead</option>
+                                            <option>Delivery Manager</option>
+                                            <option>Trainee Software Engineer</option>
+                                        </select>
+</div>
                                 <label class="col-lg-4"></label>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Role</label>
-                                <div class="col-lg-10" data-bind="enableChildren: ((my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) && (!my.addUserVm.user.IsReadOnly()))">
+                                @*<div class="col-lg-10" data-bind="enableChildren: ((my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) && (!my.addUserVm.user.IsReadOnly()))">*@
+                                <div class="col-lg-10" data-bind="enableChildren: ((my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) && (!my.addUserVm.user.IsReadOnly()))">
                                     <label class="checkbox-inline">
                                         <input data-bind="checked: my.addUserVm.user.IsAdministrator"
                                                type="checkbox" value="">Administrator
@@ -170,13 +174,15 @@
         <!-- /.modal-content -->
     </div>
 
-</div>
+@*</div>*@
 
 <link href="~/StyleSheets/AddEditProfile.css" rel="stylesheet" />
+<script src="~/Scripts/Custom/AddEditProfile.js"></script>
+<!--Common
 <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script src="~/Scripts/knockout-3.4.0.js"></script>
-    <script src="~/Scripts/Custom/App.js"></script>
-    <script src="~/Scripts/Custom/AjaxService.js"></script>
-    <script src="~/Scripts/Custom/UserService.js"></script>
-    <script src="~/Scripts/Custom/BindingHandlers.js"></script>
-    <script src="~/Scripts/Custom/AddEditProfile.js"></script>
+<script src="~/Scripts/knockout-3.4.0.js"></script>
+<script src="~/Scripts/Custom/App.js"></script>
+<script src="~/Scripts/Custom/AjaxService.js"></script>
+<script src="~/Scripts/Custom/UserService.js"></script>
+<script src="~/Scripts/Custom/BindingHandlers.js"></script>
+    -->

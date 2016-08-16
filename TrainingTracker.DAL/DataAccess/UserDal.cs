@@ -47,6 +47,7 @@ namespace TrainingTracker.DAL.DataAccess
         /// Calls stored procedure which adds user.
         /// </summary>
         /// <param name="userData">User data object.</param>
+        /// <param name="iUserId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
         public bool AddUser( User userData , out long iUserId)
         {
@@ -79,13 +80,8 @@ namespace TrainingTracker.DAL.DataAccess
             };
             try
             {
-                var rowsAffected = SqlUtility.ExecuteScalarReturnID(SPAddUser.NAME ,
-                    CommandType.StoredProcedure , prms);
-                iUserId = rowsAffected;
-                if(iUserId>0)
-                {
-                    return true;
-                }
+                return  (iUserId = SqlUtility.ExecuteScalar(SPAddUser.NAME ,
+                    CommandType.StoredProcedure , prms))>0?true:false;
             }
             catch (Exception ex)
             {

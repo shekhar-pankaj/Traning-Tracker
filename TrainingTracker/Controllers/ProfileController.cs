@@ -48,14 +48,14 @@ namespace TrainingTracker.Controllers
         [HttpPost]
         public ActionResult UpdateUser(User userData)
         {
-            bool status = false;
-            status = new UserBl().UpdateUser(userData)? true : false;
-            var data = new
-            {
-                iUserId = 0,
-                status = status
-            };
-            return Json(data, JsonRequestBehavior.AllowGet);
+            //bool status = false;
+            //status = new UserBl().UpdateUser(userData) ? true : false;
+            //var data = new
+            //{
+            //    status = status
+            //};
+            //return Json(data, JsonRequestBehavior.AllowGet);
+            return Json(new { status= new UserBl().UpdateUser(userData) ? "true" : "false" });
             //return Json(new UserBl().UpdateUser(userData) ? "true" : "false");
         }
 
