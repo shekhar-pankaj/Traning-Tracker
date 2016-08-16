@@ -16,7 +16,7 @@
                         <div style="overflow-y: scroll; height:400px;">
                             <ul data-bind="foreach:my.addUserVm.users" class="list-group">
                                 <li class="list-group-item">
-                                    <a data-bind="text:FullName, click: my.addUserVm.showProfile(UserId)"
+                                    <a data-bind="text:FullName, click: my.addUserVm.showProfile(my.addUserVm.users()[$index()])"
                                        href="#" type="button" class="btn btnProfile "></a>
                                 </li>
                             </ul>
@@ -150,7 +150,7 @@
                                     type="button" class="btn btn-sm btn-primary">
                                 Edit
                             </button>
-                            <button data-bind="click: my.addUserVm.createNewUser, visible: !my.addUserVm.user.IsReadOnly()"
+                            <button data-bind="click: my.addUserVm.saveUser, visible: !my.addUserVm.user.IsReadOnly()"
                                     type="button" class="btn btn-sm btn-primary">
                                 Save
                             </button>
