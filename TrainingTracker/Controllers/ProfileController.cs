@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.IO;
+using System.Web;
+using System.Web.Mvc;
 using TrainingTracker.BLL;
 using TrainingTracker.Common.Entity;
 
@@ -11,6 +14,10 @@ namespace TrainingTracker.Controllers
         public ActionResult UserProfile(int userId)
         {
             return View("Profile");
+        }
+        public ActionResult ManageProfile()
+        {
+            return PartialView("_PartialProfile");
         }
 
         public ActionResult AllProfiles()
@@ -26,7 +33,30 @@ namespace TrainingTracker.Controllers
         [HttpPost]
         public ActionResult CreateUser(User userData)
         {
-            return Json(new UserBl().AddUser(userData) ? "true" : "false");
+            //return Json(new UserBl().AddUser(userData) ? "true" : "false");
+            long iUserId;
+            bool status = false;
+            status =new UserBl().AddUser(userData, out iUserId)?true:false;
+            var data = new
+            {
+                iUserId = iUserId,
+                status = status
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateUser(User userData)
+        {
+            bool status = false;
+            status = new UserBl().UpdateUser(userData)? true : false;
+            var data = new
+            {
+                iUserId = 0,
+                status = status
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+            //return Json(new UserBl().UpdateUser(userData) ? "true" : "false");
         }
 
         [HttpPost]
@@ -50,5 +80,28 @@ namespace TrainingTracker.Controllers
             return Json(new UserBl().GetUserFeedbackOnFilter(userId, pageSize, feedbackId), JsonRequestBehavior.AllowGet);
         }
 
+        //Added for Upload Image 
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase fileName)
+        {
+            HttpPostedFileBase file = Request.Files["file"];
+            string strFileName = string.Empty;
+            try
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    Guid gId;
+                    gId = Guid.NewGuid();
+                    strFileName = gId.ToString().Trim() + ".jpg";
+                    var path = Path.Combine(Server.MapPath("~/Uploads/ProfilePicture/"), strFileName);
+                    file.SaveAs(path);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return Json(strFileName);
+        }
     }
 }

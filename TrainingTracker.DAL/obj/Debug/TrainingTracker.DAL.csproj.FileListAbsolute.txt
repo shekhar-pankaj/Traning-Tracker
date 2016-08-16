@@ -5,3 +5,10 @@ D:\Projects\TraningTracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.Common.
 D:\Projects\TraningTracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.csprojResolveAssemblyReference.cache
 D:\Projects\TraningTracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.dll
 D:\Projects\TraningTracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.pdb
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.DAL.dll
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.DAL.pdb
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.Common.dll
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.Common.pdb
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.csprojResolveAssemblyReference.cache
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.dll
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.pdb

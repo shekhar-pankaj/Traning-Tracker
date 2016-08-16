@@ -4,6 +4,9 @@
         createUser: function (user, callback) {
             my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/CreateUser", user, callback);
         },
+        updateUser: function (user, callback) {
+            my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/UpdateUser", user, callback);
+        },
         getAllUsers: function (callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetAllUsers", null, callback);
         },
@@ -34,6 +37,10 @@
         getSessionsOnFilter:function(pageSize,seminarType,searchKeyword,getSessionsOnFilterCallback) 
         {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Session/GetUserFeedbackOnFilter?pageSize=" + pageSize + "&seminarType=" + seminarType + "&searchKeyword=" + '', null, getSessionsOnFilterCallback);
+        },
+        uploadImage: function (imagefile, callback) {
+            my.ajaxService.ajaxUploadImage("/Profile/UploadImage", imagefile, callback);
         }
+
     };
 }(my));

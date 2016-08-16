@@ -172,3 +172,46 @@ $(document).ready(function () {
     //    }
     //};
 });
+
+/*Added for image file upload*/
+ko.bindingHandlers.fileSrc = {
+    init: function (element, valueAccessor) {
+        ko.utils.registerEventHandler(element, "change", function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var value = valueAccessor();
+                value(e.target.result);
+            }
+            reader.readAsText(element.files[0]);
+        });
+    },
+    update: function (element, valueAccessor) {
+
+        ko.utils.registerEventHandler(element, "change", function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var value = valueAccessor();
+                value(e.target.result);
+            }
+            reader.readAsText(element.files[0]);
+            element.files[0] = valueAccessor()
+            console.log(element.files[0]);
+        });
+    }
+};
+//Added for enable and disable all the child elements
+ko.bindingHandlers.enableChildren = {
+    update: function (elem, valueAccessor) {
+        var enabled = ko.utils.unwrapObservable(valueAccessor());
+        ko.utils.arrayForEach(elem.getElementsByTagName('input'), function (i) {
+            i.disabled = !enabled;
+        });
+        ko.utils.arrayForEach(elem.getElementsByTagName('button'), function (i) {
+            i.disabled = !enabled;
+        });
+        ko.utils.arrayForEach(elem.getElementsByTagName('a'), function (i) {
+            i.disabled = !enabled;
+        });
+
+    }
+};
