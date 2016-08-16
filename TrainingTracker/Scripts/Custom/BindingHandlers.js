@@ -208,6 +208,9 @@ $(document).ready(function () {
             ko.utils.arrayForEach(elem.getElementsByTagName('input'), function (i) {
                 i.disabled = !enabled;
             });
+            ko.utils.arrayForEach(elem.getElementsByTagName('select'), function (i) {
+                i.disabled = !enabled;
+            });
             ko.utils.arrayForEach(elem.getElementsByTagName('button'), function (i) {
                 i.disabled = !enabled;
             });
@@ -219,6 +222,9 @@ $(document).ready(function () {
         update: function (elem, valueAccessor) {
             var enabled = ko.utils.unwrapObservable(valueAccessor());
             ko.utils.arrayForEach(elem.getElementsByTagName('input'), function (i) {
+                i.disabled = !enabled;
+            });
+            ko.utils.arrayForEach(elem.getElementsByTagName('select'), function (i) {
                 i.disabled = !enabled;
             });
             ko.utils.arrayForEach(elem.getElementsByTagName('button'), function (i) {

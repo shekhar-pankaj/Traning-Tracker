@@ -13,6 +13,7 @@
             IsTrainer: ko.observable(),
             IsTrainee: ko.observable(),
             IsManager: ko.observable(),
+            IsActive: ko.observable(),
             ProfilePictureName: ko.observable("Dummy.jpg"),
             Password: ko.observable(),
             IsFemale: ko.observable("false"),
@@ -39,6 +40,7 @@
                 ProfilePictureName: ko.observable(""),
                 Password: ko.observable(""),
                 IsFemale: ko.observable(""),
+                IsActive: ko.observable(),
             },
             getCurrentUserCallback = function (item) {
                 my.addUserVm.currentUser.UserId(item.UserId);
@@ -54,6 +56,7 @@
                 my.addUserVm.currentUser.ProfilePictureName(item.ProfilePictureName);
                 my.addUserVm.currentUser.Password("");
                 my.addUserVm.currentUser.IsFemale(item.IsFemale);
+                my.addUserVm.currentUser.IsActive(item.IsActive);
             },
             getCurrentUser = function () {
                 my.userService.getCurrentUser(my.addUserVm.getCurrentUserCallback);
@@ -72,6 +75,7 @@
                 my.addUserVm.user.ProfilePictureName(item.ProfilePictureName);
                 my.addUserVm.user.Password("");
                 my.addUserVm.user.IsFemale(item.IsFemale);
+                my.addUserVm.user.IsActive(item.IsActive);
                 my.addUserVm.user.enableChangePassword(false);
                 //my.addUserVm.user=my.addUserVm.users()[currentId];
                 //ko.utils.arrayForEach(my.addUserVm.users(), function (item) {
@@ -95,7 +99,7 @@
                 //});
             },
             saveUserCallback = function (jsonData) {
-                if (jsonData.status = "true") {
+                if (jsonData.status == "true") {
                     //my.addUserVm.getUsers();
                     //my.addUserVm.getCurrentUser();
                     //my.addUserVm.setUser(my.addUserVm.currentUser.UserId());
@@ -103,7 +107,7 @@
                         my.addUserVm.user.UserId(jsonData.iUserId);
                         var objUser = ko.toJS(my.addUserVm.user);
                         objUser.FullName = my.addUserVm.fullName(objUser);
-                        my.addUserVm.users.push(objUser);
+                        my.addUserVm.lstUsers.push(objUser);
                     }
                     my.addUserVm.user.IsReadOnly(true);
                     my.addUserVm.user.IsNewProfile(false);
@@ -149,12 +153,12 @@
             fullName = function (item) {
                 return item.FirstName + " " + item.LastName;
             },
-            users = ko.observableArray([]),
+            lstUsers = ko.observableArray([]),
             getUsersCallback = function (userList) {
-                my.addUserVm.users = ko.observableArray([]),
+                my.addUserVm.lstUsers = ko.observableArray([]),
                 ko.utils.arrayForEach(userList, function (item) {
                     item.FullName = my.addUserVm.fullName(item);
-                    my.addUserVm.users.push(item);
+                    my.addUserVm.lstUsers.push(item);
                 });
             },
             getUsers = function () {
@@ -208,7 +212,7 @@
         ;
 
         return {
-            users: users,
+            lstUsers: lstUsers,
             currentUser: currentUser,
             getCurrentUserCallback: getCurrentUserCallback,
             getCurrentUser: getCurrentUser,

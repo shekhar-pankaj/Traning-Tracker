@@ -50,6 +50,7 @@
         public const string PARAM_IS_TRAINER = "@IsTrainer";
         public const string PARAM_IS_TRAINEE = "@IsTrainee";
         public const string PARAM_IS_MANAGER = "@IsManager";
+        public const string PARAM_IS_ACTIVE = "@IsACTIVE";
     }
 
     /// <summary>
@@ -71,6 +72,7 @@
         public const string PARAM_IS_TRAINER = "@IsTrainer";
         public const string PARAM_IS_TRAINEE = "@IsTrainee";
         public const string PARAM_IS_MANAGER = "@IsManager";
+        public const string PARAM_IS_ACTIVE = "@IsACTIVE";
     }
     /// <summary>
     /// Constant class for Stored procedure GET_ALL_USERS.

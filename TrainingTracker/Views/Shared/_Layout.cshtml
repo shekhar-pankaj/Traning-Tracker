@@ -59,15 +59,15 @@
                                                
                                                 <a href="#" data-bind="click: my.addUserVm.openUserProfile" type="button"
                                                    class="btn btn-info btn-block">
-                                                    Manage Account
+                                                    My Profile
                                                 </a>
                                                 @*<a href="#" data-bind="click: my.addUserVm.openAllUsersProfile,visible:(my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager() )" type="button"
                                                    class="btn btn-info btn-block">
                                                     Edit Profiles
                                                 </a>*@
-                                                <a href="#" data-bind="click: my.addUserVm.openAllUsersProfile,visible:(my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager )" type="button"
+                                                <a href="#" data-bind="click: my.addUserVm.openAllUsersProfile, visible:(my.meta.isAdministrator() || my.meta.isManager() )" type="button"
                                                    class="btn btn-info btn-block">
-                                                    Edit Profiles
+                                                    Manage User
                                                 </a>
                                                 <a href="~/Login/SignOut"
                                                    class="btn btn-danger btn-block">
