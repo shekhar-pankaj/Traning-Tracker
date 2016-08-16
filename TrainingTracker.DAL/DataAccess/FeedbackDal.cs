@@ -39,7 +39,9 @@ namespace TrainingTracker.DAL.DataAccess
                 SqlUtility.CreateParameter(SPAddFeedback.PARAM_START_DATE, 
                 SqlDbType.Date,feedbackData.StartDate),
                 SqlUtility.CreateParameter(SPAddFeedback.PARAM_END_DATE, 
-                SqlDbType.Date,feedbackData.EndDate)
+                SqlDbType.Date,feedbackData.EndDate),
+                SqlUtility.CreateParameter("@AddedOn", 
+                SqlDbType.DateTime,feedbackData.AddedOn==DateTime.MinValue? DateTime.Now:feedbackData.AddedOn)
             };
                 var rowsAffected = SqlUtility.ExecuteNonQuery(SPAddFeedback.NAME,
                     CommandType.StoredProcedure, prms);

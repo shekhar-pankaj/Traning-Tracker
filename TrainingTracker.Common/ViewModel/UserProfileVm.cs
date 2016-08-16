@@ -12,6 +12,12 @@ namespace TrainingTracker.Common.ViewModel
         public List<Feedback> Feedbacks { get; set; }
         public List<FeedbackType> FeedbackTypes { get; set; }
         public List<Skill> AllSkills { get; set; }
-        public List<Feedback> RecentCrFeedback { get; set; }
+        public List<Feedback> RecentCrFeedback { get; set;}
+        
+        /// <summary>
+        /// Gets and sets List of weekly feedbacks
+        /// </summary>
+        public List<Feedback> RecentWeeklyFeedback { get; set; }
+        public List<User> AllTrainer { get; set; }
     }
 }

@@ -364,8 +364,7 @@ namespace TrainingTracker.DAL.DataAccess
                 switch (Convert.ToInt32(row["FeedbackType"]))
                 {
                     case 3:
-                    case 4:
-                    case 5:
+                    case 4:                   
                         userData.First(x => x.User.UserId == userId)
                                 .RemainingFeedbacks
                                 .Add(feedback);
@@ -377,11 +376,12 @@ namespace TrainingTracker.DAL.DataAccess
                                     .SkillsFeedback
                                     .Add(feedback);
                         break;
-                    //case 5:
-                    //    userData.First(x => x.User.UserId == Convert.ToInt32(row["UserId"]))
-                    //            .WeeklyFeedback
-                    //           .Add(feedback);
-                     //   break;
+                    case 5:
+                        var objUSerData = userData.First(x => x.User.UserId == userId);
+
+                            objUSerData.WeeklyFeedback.Add(feedback);
+                            objUSerData.RemainingFeedbacks.Add(feedback);
+                        break;
 
                 }
 
