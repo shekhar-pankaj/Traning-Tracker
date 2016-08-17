@@ -99,7 +99,7 @@
                 //});
             },
             saveUserCallback = function (jsonData) {
-                if (jsonData.status == "true") {
+                if (jsonData.status) {
                     //my.addUserVm.getUsers();
                     //my.addUserVm.getCurrentUser();
                     //my.addUserVm.setUser(my.addUserVm.currentUser.UserId());
@@ -155,12 +155,13 @@
             },
             lstUsers = ko.observableArray([]),
             getUsersCallback = function (userList) {
-                my.addUserVm.lstUsers = ko.observableArray([]),
+                my.addUserVm.lstUsers([]),
                 ko.utils.arrayForEach(userList, function (item) {
                     item.FullName = my.addUserVm.fullName(item);
                     my.addUserVm.lstUsers.push(item);
                 });
             },
+            
             getUsers = function () {
                 my.userService.getAllUsers(my.addUserVm.getUsersCallback);
             },
@@ -208,6 +209,12 @@
                 }
                 my.addUserVm.setUser(my.meta.currentUser);
             },
+            getCss = function () {
+                if(my.addUserVm.showAllUsersProfile())
+                    return { 'width': '70%' };
+                    return { 'width': '50%' };
+                
+            },
             message = ko.observable("");
         ;
 
@@ -234,7 +241,8 @@
             openUserProfile: openUserProfile,
             openAllUsersProfile: openAllUsersProfile,
             showAllUsersProfile: showAllUsersProfile,
-            message: message
+            message: message,
+            getCss: getCss
         };
     }();
 
@@ -248,7 +256,7 @@
     });
    // my.addUserVm.getCurrentUser();
    my.addUserVm.getUsers();
-    //ko.applyBindings(my.addUserVm);
+   // ko.applyBindings(my.addUserVm);
 
 
 });

@@ -29,14 +29,18 @@ namespace TrainingTracker.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userData"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult CreateUser(User userData)
         {
             //return Json(new UserBl().AddUser(userData) ? "true" : "false");
             long iUserId;
             bool status = false;
-            status =new UserBl().AddUser(userData, out iUserId)?true:false;
+            status =new UserBl().AddUser(userData, out iUserId);
             var data = new
             {
                 iUserId = iUserId,
@@ -44,7 +48,11 @@ namespace TrainingTracker.Controllers
             };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Updates the existing user.
+        /// </summary>
+        /// <param name="userData">Input user object</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UpdateUser(User userData)
         {
@@ -55,7 +63,7 @@ namespace TrainingTracker.Controllers
             //    status = status
             //};
             //return Json(data, JsonRequestBehavior.AllowGet);
-            return Json(new { status= new UserBl().UpdateUser(userData) ? "true" : "false" });
+            return Json(new { status= new UserBl().UpdateUser(userData)});
             //return Json(new UserBl().UpdateUser(userData) ? "true" : "false");
         }
 

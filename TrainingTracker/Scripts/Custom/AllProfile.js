@@ -9,6 +9,7 @@
                 return my.rootUrl + "/Uploads/ProfilePicture/" + item.ProfilePictureName;
             },
             getUsersCallback = function (userList) {
+                my.allProfileVm.users([]);
                 ko.utils.arrayForEach(userList, function (item) {
                     item.FullName = my.allProfileVm.fullName(item);
                     item.PhotoUrl = my.allProfileVm.photoUrl(item);
@@ -36,5 +37,5 @@
     }();
 
     my.allProfileVm.getUsers();
-    //ko.applyBindings(my.allProfileVm);
+  //  ko.applyBindings(my.allProfileVm);
 });

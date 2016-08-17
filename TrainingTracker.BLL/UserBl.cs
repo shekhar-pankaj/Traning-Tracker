@@ -13,11 +13,11 @@ namespace TrainingTracker.BLL
         /// Calls stored procedure which adds user.
         /// </summary>
         /// <param name="userData">User data object.</param>
-        /// <param name="iUserId">Out parameter created UserId.</param>
+        /// <param name="UserId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
-        public bool AddUser(User userData,out long iUserId)
+        public bool AddUser(User userData,out long UserId)
         {
-            return UserDataAccesor.AddUser(userData,out iUserId);
+            return UserDataAccesor.AddUser(userData,out UserId);
         }
         /// <summary>
         /// Calls stored procedure which updates user.

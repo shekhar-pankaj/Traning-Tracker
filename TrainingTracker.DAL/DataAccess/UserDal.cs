@@ -47,9 +47,9 @@ namespace TrainingTracker.DAL.DataAccess
         /// Calls stored procedure which adds user.
         /// </summary>
         /// <param name="userData">User data object.</param>
-        /// <param name="iUserId">Out parameter created UserId.</param>
+        /// <param name="UserId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
-        public bool AddUser( User userData , out long iUserId)
+        public bool AddUser( User userData , out long UserId)
         {
             var prms = new List<SqlParameter>
             {
@@ -82,13 +82,13 @@ namespace TrainingTracker.DAL.DataAccess
             };
             try
             {
-                return  (iUserId = SqlUtility.ExecuteScalar(SPAddUser.NAME ,
+                return  (UserId = SqlUtility.ExecuteScalar(SPAddUser.NAME ,
                     CommandType.StoredProcedure , prms))>0?true:false;
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
-                iUserId = 0;
+                UserId = 0;
             }
             return false;
         }
@@ -109,9 +109,9 @@ namespace TrainingTracker.DAL.DataAccess
                 SqlUtility.CreateParameter(SPUpdateUser.PARAM_LAST_NAME,
                 SqlDbType.VarChar,objUser.LastName),
                 SqlUtility.CreateParameter(SPUpdateUser.PARAM_USER_NAME,
-                SqlDbType.VarChar,objUser.UserName),
+                SqlDbType.VarChar,objUser.UserName),           
                 SqlUtility.CreateParameter(SPUpdateUser.PARAM_PASSWORD,
-                SqlDbType.VarChar,!string.IsNullOrEmpty(objUser.Password)?objUser.Password:""),
+                SqlDbType.VarChar,objUser.Password ?? ""),
                 SqlUtility.CreateParameter(SPUpdateUser.PARAM_EMAIL,
                 SqlDbType.VarChar,objUser.Email),
                 SqlUtility.CreateParameter(SPUpdateUser.PARAM_DESIGNATION,
@@ -131,10 +131,10 @@ namespace TrainingTracker.DAL.DataAccess
                 SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_ACTIVE,
                 SqlDbType.VarChar,objUser.IsActive)
             };
+
             try
             {
-                var rowsAffected = SqlUtility.ExecuteNonQuery(SPUpdateUser.NAME,
-                    CommandType.StoredProcedure, prms);
+                var rowsAffected = SqlUtility.ExecuteNonQuery(SPUpdateUser.NAME, CommandType.StoredProcedure, prms);
                 return (rowsAffected > 0);
             }
             catch (Exception ex)
@@ -143,6 +143,7 @@ namespace TrainingTracker.DAL.DataAccess
             }
             return false;
         }
+
         /// <summary>
         /// Gets all Users.
         /// </summary>
