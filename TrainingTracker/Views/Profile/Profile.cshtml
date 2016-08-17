@@ -43,22 +43,29 @@
                             </span> 
                         </div>                       
                     </div>  
-                    <div id="divSkillscollapasable" class="collapse" data-bind="foreach: userVm.Skills">
+                    <div id="divSkillscollapasable" class="collapse" data-bind="visible: userVm.User.IsTrainee" >
+                        <div data-bind="foreach: userVm.Skills">
                             <div class="list-group-item">
                                 <div data-bind="text: Name" style="display: inline-block;"></div>
                                 <div class="pull-right" style="display: inline-block;">
                                     <div data-bind="css: {
-    'rating-slow': Rating == 1,
-    'rating-Average': Rating == 2,
-    'rating-Fast': Rating == 3,
-    'rating-Exceptional': Rating == 4
-}">
+                                                            'rating-slow': Rating == 1,
+                                                            'rating-Average': Rating == 2,
+                                                            'rating-Fast': Rating == 3,
+                                                            'rating-Exceptional': Rating == 4
+                                                        }">
                                         <!-- ko foreach: new Array(Rating)  -->
                                         <span class="glyphicon glyphicon-star"
-                                            style="display: inline-block;"></span>
+                                              style="display: inline-block;"></span>
                                         <!-- /ko -->
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div data-bind="visible:userVm.Skills.length==0">
+                            <div class="list-group-item">
+                                <span>No Skills added for Trainee</span>
+                           </div>
                             </div>
 
                         </div>     
@@ -71,13 +78,16 @@
                             </span> 
                         </div>                      
                     </div>
-                    <div id="divSessioncollapasable" class="collapse" data-bind="foreach: userVm.Sessions">
-                            <div data-bind="text: Title" 
-                                 class="list-group-item collapse">
-                            </div>
+                    <div id="divSessioncollapasable" class="collapse" data-bind="visible: userVm.User.IsTrainee">
+                        <div data-bind="foreach: userVm.Sessions">
+                            <div data-bind="text: Title" class="list-group-item collapse"></div>
+                        </div>
+                        <div data-bind="visible:userVm.Sessions.length==0">
+                            <div  class="list-group-item collapse"><span>No Sessions Attendend</span></div>
+                        </div>
                         </div>
                     
-                    <div class="list-group collapsed" data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divCodeReviewcollapasable">
+                    <div class="list-group collapsed" data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divWeeklyReviewcollapasable">
                         <div class="list-group-item active">
                             <label>  Weekly Feedbacks</label> 
                             <span class="pull-right">
@@ -85,16 +95,16 @@
                             </span> 
                         </div>                      
                     </div>
-                    <div id="divCodeReviewcollapasable" class="collapse" data-bind="">
+                    <div id="divWeeklyReviewcollapasable" class="collapse" data-bind="visible: userVm.User.IsTrainee">
                             <div class="list-group-item ">
                                 <div  style="display: inline-block">Latest Feedback : </div>
                                 <div class="pull-right" data-bind="if: my.profileVm.recentWeeklyFeedback().length > 0" style="display: inline-block;">
                                     <div data-bind="css: {
-    'rating-slow': my.profileVm.recentWeeklyFeedback()[0].Rating == 1,
-    'rating-Average': my.profileVm.recentWeeklyFeedback()[0].Rating == 2,
-    'rating-Fast': my.profileVm.recentWeeklyFeedback()[0].Rating == 3,
-    'rating-Exceptional': my.profileVm.recentWeeklyFeedback()[0].Rating == 4
-}">
+                                                            'rating-slow': my.profileVm.recentWeeklyFeedback()[0].Rating == 1,
+                                                            'rating-Average': my.profileVm.recentWeeklyFeedback()[0].Rating == 2,
+                                                            'rating-Fast': my.profileVm.recentWeeklyFeedback()[0].Rating == 3,
+                                                            'rating-Exceptional': my.profileVm.recentWeeklyFeedback()[0].Rating == 4
+                                                        }">
                                         <!-- ko foreach: new Array(my.profileVm.recentWeeklyFeedback()[0].Rating)  -->
                                         <span class="glyphicon glyphicon-star"
                                               style="display: inline-block;"></span>
@@ -141,7 +151,7 @@
                         </div>
                        
                     </div>
-                    <div id="divCodeReviewcollapasable" class="in" data-bind="">
+                    <div id="divCodeReviewcollapasable" class="in" data-bind="visible: userVm.User.IsTrainee">
                             <div class="list-group-item collapse">
                                 <div  style="display: inline-block">Latest Feedback : </div>
                                 <div class="pull-right" data-bind="if: my.profileVm.recentCodeReviewFeedback().length > 0" style="display: inline-block;">
@@ -352,11 +362,11 @@
                                 <div data-bind="text: 'Added ' + FeedbackType.Description + ' Feedback'" class="text-muted time" style="display: inline-block;"></div>
                                 <div style="display: inline-block; padding-left: 10px"
                                      data-bind="css: {
-'rating-slow': Rating == 1,
-    'rating-Average': Rating == 2,
-    'rating-Fast': Rating == 3,
-    'rating-Exceptional': Rating == 4
-}">
+                                                                'rating-slow': Rating == 1,
+                                                                    'rating-Average': Rating == 2,
+                                                                    'rating-Fast': Rating == 3,
+                                                                    'rating-Exceptional': Rating == 4
+                                                                }">
                                     <!-- ko foreach: new Array(Rating)  -->
                                     <span class="glyphicon glyphicon-star"
                                           style="display: inline-block;"></span>

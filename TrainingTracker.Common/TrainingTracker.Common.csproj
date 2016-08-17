@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\Constants.cs" />
+    <Compile Include="Encryption\Cryptography.cs" />
     <Compile Include="Entity\Feedback.cs" />
     <Compile Include="Entity\FeedbackType.cs" />
     <Compile Include="Entity\Project.cs" />
