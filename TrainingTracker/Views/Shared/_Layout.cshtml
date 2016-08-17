@@ -8,7 +8,16 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     @*<link href="~/StyleSheets/simple-sidebar.css" rel="stylesheet" />*@
     <link href="~/StyleSheets/Layout.css" rel="stylesheet" />
-
+    <!--common js file-->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Custom/App.js"></script>
+    <script src="~/Scripts/Custom/AjaxService.js"></script>
+    <script src="~/Scripts/Custom/UserService.js"></script>
+    <script src="~/Scripts/Custom/BindingHandlers.js"></script>
+    <!--common js file-->
+    <script src="~/Scripts/Custom/Layout.js"></script>
 </head>
     <body>
         <div id="wrapper">
@@ -50,11 +59,15 @@
                                                
                                                 <a href="#" data-bind="click: my.addUserVm.openUserProfile" type="button"
                                                    class="btn btn-info btn-block">
-                                                    Manage Account
+                                                    My Profile
                                                 </a>
-                                                <a href="#" data-bind="click: my.addUserVm.openAllUsersProfile,visible:(my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager() )" type="button"
+                                                @*<a href="#" data-bind="click: my.addUserVm.openAllUsersProfile,visible:(my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager() )" type="button"
                                                    class="btn btn-info btn-block">
                                                     Edit Profiles
+                                                </a>*@
+                                                <a href="#" data-bind="click: my.addUserVm.openAllUsersProfile, visible:(my.meta.isAdministrator() || my.meta.isManager() )" type="button"
+                                                   class="btn btn-info btn-block">
+                                                    Manage User
                                                 </a>
                                                 <a href="~/Login/SignOut"
                                                    class="btn btn-danger btn-block">
@@ -82,15 +95,15 @@
         </div>
     </body>
 
-<script src="~/Scripts/Custom/BindingHandlers.js"></script>
-<script src="~/Scripts/Custom/AddEditProfile.js"></script>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
+@*<script src="~/Scripts/Custom/BindingHandlers.js"></script>*@
+@*<script src="~/Scripts/Custom/AddEditProfile.js"></script>*@
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/knockout-3.4.0.js"></script>
 <script src="~/Scripts/Custom/App.js"></script>
 <script src="~/Scripts/Custom/AjaxService.js"></script>
-<script src="~/Scripts/Custom/UserService.js"></script>
-<script src="~/Scripts/Custom/Layout.js"></script>
+<script src="~/Scripts/Custom/UserService.js"></script>*@
+@*<script src="~/Scripts/Custom/Layout.js"></script>*@
 
 @RenderSection("Scripts",false)
 </html>

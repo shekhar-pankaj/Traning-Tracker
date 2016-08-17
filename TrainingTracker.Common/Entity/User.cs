@@ -16,6 +16,7 @@
         public bool IsTrainer { get; set; }
         public bool IsTrainee { get; set; }
         public bool IsManager { get; set; }
+        public bool IsActive { get; set; }
 
         public bool IsValid { get; set; }
         public int UserRating { get; set; }

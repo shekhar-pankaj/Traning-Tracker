@@ -118,7 +118,7 @@ namespace TrainingTracker.Common.Utility
         /// <param name="commandType">Command type.</param>
         /// <param name="sqlParams">Sql parameters.</param>
         /// <returns>Number of rows affected.</returns>
-        public static Int64 ExecuteScalarReturnID(string sql, CommandType commandType, List<SqlParameter> sqlParams)
+        public static long ExecuteScalar(string sql, CommandType commandType, List<SqlParameter> sqlParams)
         {
             long id=0;
 
@@ -135,7 +135,6 @@ namespace TrainingTracker.Common.Utility
                     {
                         dbCommand.Parameters.Add(prm);
                     }
-
                     var returnId = dbCommand.ExecuteScalar();
                     id = Convert.ToInt64(returnId);
                 }
