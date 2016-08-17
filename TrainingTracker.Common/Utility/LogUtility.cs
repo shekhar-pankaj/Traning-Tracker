@@ -23,7 +23,7 @@ namespace TrainingTracker.Common.Utility
         /// <summary>
         /// Error log file name.
         /// </summary>
-        private const string ERROR_LOG_FILE = "NorthScopeLogFile_{0}.txt";
+        private const string ERROR_LOG_FILE = "TrainingTracker_{0}.txt";
         /// <summary>
         /// Date format constant.
         /// </summary>
@@ -151,6 +151,5 @@ namespace TrainingTracker.Common.Utility
                 return string.Empty;
             }
         }
-
     }
 }
