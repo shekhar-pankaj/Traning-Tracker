@@ -1,0 +1,38 @@
+﻿using System.Collections.Generic;
+using TrainingTracker.Common.Entity;
+
+namespace TrainingTracker.Common.ViewModel
+{
+    public class DashboardVm
+    {
+        public List<UserData> Trainees { get; set; }
+        public List<Session> UpcomingSessions { get; set; }
+    }
+
+    public class UserData
+    {
+        public User User { get; set; }
+
+        /// <summary>
+        /// List of all Weekly feedbacks
+        /// </summary>
+        public List<Feedback> WeeklyFeedback { get; set; }
+
+        /// <summary>
+        /// List of All skills and other feedback
+        /// </summary>
+        public List<Feedback> SkillsFeedback { get; set; }
+
+        /// <summary>
+        /// List of All Remaining Feedbacks
+        /// </summary>
+        public List<Feedback> RemainingFeedbacks { get; set; }
+
+        /// <summary>
+        /// Lastweek feedback
+        /// </summary>
+        public bool LastWeekFeedbackAdded { get; set; }
+
+ 
+    }
+}

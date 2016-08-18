@@ -1,0 +1,607 @@
+Source        : System.Data
+Method        : TdsExecuteRPC
+Date        : 7:00:07 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+Stack Trace    : at System.Data.SqlClient.TdsParser.TdsExecuteRPC(_SqlRPC[] rpcArray, Int32 timeout, Boolean inSchema, SqlNotificationRequest notificationRequest, TdsParserStateObject stateObj, Boolean isCommandProc, Boolean sync, TaskCompletionSource`1 completion, Int32 startRpc, Int32 startParam)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteNonQuery(String sql, CommandType commandType, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 107
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.AddFeedback(Feedback feedbackData) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 48
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TdsExecuteRPC
+Date        : 7:14:09 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+Stack Trace    : at System.Data.SqlClient.TdsParser.TdsExecuteRPC(_SqlRPC[] rpcArray, Int32 timeout, Boolean inSchema, SqlNotificationRequest notificationRequest, TdsParserStateObject stateObj, Boolean isCommandProc, Boolean sync, TaskCompletionSource`1 completion, Int32 startRpc, Int32 startParam)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteNonQuery(String sql, CommandType commandType, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 107
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.AddFeedback(Feedback feedbackData) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 46
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TdsExecuteRPC
+Date        : 7:17:46 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+Stack Trace    : at System.Data.SqlClient.TdsParser.TdsExecuteRPC(_SqlRPC[] rpcArray, Int32 timeout, Boolean inSchema, SqlNotificationRequest notificationRequest, TdsParserStateObject stateObj, Boolean isCommandProc, Boolean sync, TaskCompletionSource`1 completion, Int32 startRpc, Int32 startParam)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteNonQuery(String sql, CommandType commandType, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 107
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.AddFeedback(Feedback feedbackData) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 46
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TdsExecuteRPC
+Date        : 7:19:26 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+Stack Trace    : at System.Data.SqlClient.TdsParser.TdsExecuteRPC(_SqlRPC[] rpcArray, Int32 timeout, Boolean inSchema, SqlNotificationRequest notificationRequest, TdsParserStateObject stateObj, Boolean isCommandProc, Boolean sync, TaskCompletionSource`1 completion, Int32 startRpc, Int32 startParam)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteNonQuery(String sql, CommandType commandType, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 107
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.AddFeedback(Feedback feedbackData) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 46
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TdsExecuteRPC
+Date        : 7:23:23 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+Stack Trace    : at System.Data.SqlClient.TdsParser.TdsExecuteRPC(_SqlRPC[] rpcArray, Int32 timeout, Boolean inSchema, SqlNotificationRequest notificationRequest, TdsParserStateObject stateObj, Boolean isCommandProc, Boolean sync, TaskCompletionSource`1 completion, Int32 startRpc, Int32 startParam)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteNonQuery(String sql, CommandType commandType, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 107
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.AddFeedback(Feedback feedbackData) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 46
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserById(Int32 userId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 184
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserById(Int32 userId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 184
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SkillDal.GetSkillsByUserId(Int32 userId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SkillDal.cs:line 25
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SkillDal.GetAllSkillsForApp() in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SkillDal.cs:line 50
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionsByUserId(Int32 userId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 26
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SkillDal.GetSkillsByUserId(Int32 userId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SkillDal.cs:line 25
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SkillDal.GetAllSkillsForApp() in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SkillDal.cs:line 50
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionsByUserId(Int32 userId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 26
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.ProjectDal.GetProjectsByUserId(Int32 userId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\ProjectDal.cs:line 25
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.GetUserFeedback(Int32 userId, Int32 count, Nullable`1 feedbackId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 75
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:44 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.GetUserFeedback(Int32 userId, Int32 count, Nullable`1 feedbackId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 75
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:45 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.ProjectDal.GetProjectsByUserId(Int32 userId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\ProjectDal.cs:line 25
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:45 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.GetUserFeedback(Int32 userId, Int32 count, Nullable`1 feedbackId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 75
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:45 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.GetUserFeedback(Int32 userId, Int32 count, Nullable`1 feedbackId) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 75
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:26:45 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 7:27:11 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:12 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:12 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetDashboardData() in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 225
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:12 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionOnFilter(Int32 pageSize, Int32 sessionType, String searchKeyword) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 95
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 7:27:43 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:43 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetDashboardData() in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 225
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:43 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionOnFilter(Int32 pageSize, Int32 sessionType, String searchKeyword) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 95
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:43 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:43 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:43 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetDashboardData() in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 225
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:43 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionOnFilter(Int32 pageSize, Int32 sessionType, String searchKeyword) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 95
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:59 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 7:27:59 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 9 - Associating port with I/O completion mechanism failed)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in d:\Projects\TraningTracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 56
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionOnFilter(Int32 pageSize, Int32 sessionType, String searchKeyword) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 95
+^^-----------------------------------------------------^^
+Source        : TrainingTracker.DAL
+Method        : AddFeedback
+Date        : 7:50:07 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : Object reference not set to an instance of an object.
+Stack Trace    : at TrainingTracker.DAL.DataAccess.FeedbackDal.AddFeedback(Feedback feedbackData) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 21
+^^-----------------------------------------------------^^
+Source        : TrainingTracker.DAL
+Method        : AddFeedback
+Date        : 7:58:12 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : Object reference not set to an instance of an object.
+Stack Trace    : at TrainingTracker.DAL.DataAccess.FeedbackDal.AddFeedback(Feedback feedbackData) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 21
+^^-----------------------------------------------------^^
+Source        : TrainingTracker.DAL
+Method        : AddFeedback
+Date        : 8:02:40 PM
+Time        : 8/10/2016
+Computer    : shekharp7
+Error        : Object reference not set to an instance of an object.
+Stack Trace    : at TrainingTracker.DAL.DataAccess.FeedbackDal.AddFeedback(Feedback feedbackData) in d:\Projects\TraningTracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 21
+^^-----------------------------------------------------^^
