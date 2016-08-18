@@ -49,7 +49,7 @@ namespace TrainingTracker.DAL.DataAccess
         /// <param name="userData">User data object.</param>
         /// <param name="UserId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
-        public bool AddUser( User userData , out long UserId)
+        public bool AddUser( User userData , out int UserId)
         {
             var prms = new List<SqlParameter>
             {
