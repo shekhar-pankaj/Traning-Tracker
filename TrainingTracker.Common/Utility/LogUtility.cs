@@ -65,15 +65,7 @@ namespace TrainingTracker.Common.Utility
         {
             string strPathName = string.Format(ERROR_LOG_FILE, DateTime.Now.ToString(DATE_FORMAT));
 
-            if (StrLogFilePath.Equals(string.Empty))
-            {
-                //Get Default log file path.
-                strPathName = GetLogFilePath();
-            }
-            else
-            {
-                strPathName = Path.Combine(StrLogFilePath, strPathName);
-            }
+            strPathName = StrLogFilePath.Equals(string.Empty) ? GetLogFilePath() : Path.Combine(StrLogFilePath, strPathName);
 
             return WriteErrorLog(strPathName, objException);
         }
