@@ -15,7 +15,7 @@ namespace TrainingTracker.BLL
         /// <param name="userData">User data object.</param>
         /// <param name="UserId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
-        public bool AddUser(User userData,out long UserId)
+        public bool AddUser(User userData,out int UserId)
         {
             return UserDataAccesor.AddUser(userData,out UserId);
         }

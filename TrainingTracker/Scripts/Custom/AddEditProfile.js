@@ -77,34 +77,12 @@
                 my.addUserVm.user.IsFemale(item.IsFemale);
                 my.addUserVm.user.IsActive(item.IsActive);
                 my.addUserVm.user.enableChangePassword(false);
-                //my.addUserVm.user=my.addUserVm.users()[currentId];
-                //ko.utils.arrayForEach(my.addUserVm.users(), function (item) {
-                //    var itemId = item.UserId;
-                //    if (itemId == currentId) {
-                //        my.addUserVm.user.UserId(item.UserId);
-                //        my.addUserVm.user.FirstName(item.FirstName);
-                //        my.addUserVm.user.LastName(item.LastName);
-                //        my.addUserVm.user.UserName(item.UserName);
-                //        my.addUserVm.user.Email(item.Email);
-                //        my.addUserVm.user.Designation(item.Designation);
-                //        my.addUserVm.user.IsAdministrator(item.IsAdministrator);
-                //        my.addUserVm.user.IsTrainer(item.IsTrainer);
-                //        my.addUserVm.user.IsTrainee(item.IsTrainee);
-                //        my.addUserVm.user.IsManager(item.IsManager);
-                //        my.addUserVm.user.ProfilePictureName(item.ProfilePictureName);
-                //        my.addUserVm.user.Password("");
-                //        my.addUserVm.user.IsFemale(item.IsFemale);
-                //        my.addUserVm.user.enableChangePassword(false);
-                //    }
-                //});
+
             },
             saveUserCallback = function (jsonData) {
                 if (jsonData.status) {
-                    //my.addUserVm.getUsers();
-                    //my.addUserVm.getCurrentUser();
-                    //my.addUserVm.setUser(my.addUserVm.currentUser.UserId());
-                    if (jsonData.iUserId > 0) {
-                        my.addUserVm.user.UserId(jsonData.iUserId);
+                    if (jsonData.userId > 0) {
+                        my.addUserVm.user.UserId(jsonData.userId);
                         var objUser = ko.toJS(my.addUserVm.user);
                         objUser.FullName = my.addUserVm.fullName(objUser);
                         my.addUserVm.lstUsers.push(objUser);
@@ -112,11 +90,10 @@
                     my.addUserVm.user.IsReadOnly(true);
                     my.addUserVm.user.IsNewProfile(false);
                     my.addUserVm.user.enableChangePassword(false);
-                    //alert("User saved successfully!");
+                    //my.meta.currentUser = ko.toJS(my.addUserVm.user);
                     my.addUserVm.message("User saved successfully!");
                 }
                 else {
-                    //alert("User saving unsuccessful!!");
                     my.addUserVm.message("User saving unsuccessful!");
                 }
             },
@@ -198,12 +175,7 @@
             showAllUsersProfile = ko.observable(false),
             openAllUsersProfile = function () {
                 closeDialogue();
-                //my.addUserVm.getUsers();
                 my.addUserVm.showDialog(true);
-                //if (my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) {
-                //    my.addUserVm.showAllUsersProfile(true);
-                //}
-                //my.addUserVm.setUser(ko.toJS(my.addUserVm.currentUser));
                 if (my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) {
                     my.addUserVm.showAllUsersProfile(true);
                 }
@@ -213,7 +185,6 @@
                 if(my.addUserVm.showAllUsersProfile())
                     return { 'width': '70%' };
                     return { 'width': '50%' };
-                
             },
             message = ko.observable("");
         ;

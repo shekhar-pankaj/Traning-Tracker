@@ -1,17 +1,12 @@
 ﻿@*<div class="row">*@
-<div id="divUserProfile" class="modal-dialog overlay" style="padding-left:50px; display:none;" data-bind="visible: my.addUserVm.showDialog(),style:my.addUserVm.getCss('header')">
+<div id="divUserProfile" class="modal-dialog overlay"  data-bind="visible: my.addUserVm.showDialog(),style:my.addUserVm.getCss('header')">
 <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-bind="click: my.addUserVm.closeDialogue" aria-hidden="true">&times;</button>
         <span class="modal-title" data-bind="text:my.addUserVm.message"></span>
-        @* <h4 class="modal-title" data-bind="text:"></h4>*@
     </div>
     <div class="modal-body col-xs-12">
         <div  data-bind="visible:my.addUserVm.showAllUsersProfile(),css:{'col-xs-4':my.addUserVm.showAllUsersProfile()}">
-            @*<div class="row">
-                    <span class="btn-sm btn-block btn-primary"> Profiles</span>
-                </div>*@
-
             <div class="row" style="overflow-y: scroll; height:400px;">
                 <ul data-bind="foreach:my.addUserVm.lstUsers" class="list-group">
                     <li class="list-group-item">
@@ -22,7 +17,7 @@
             </div>
             <div class="row" style="margin-top:10px;">
                 <button data-bind="click: my.addUserVm.addProfile"
-                        type="button" class="btn btn-sm btn-block">
+                        type="button" class="btn btn-sm btn-block btn-primary">
                     Add Profile
                 </button>
             </div>
@@ -172,10 +167,6 @@
                             type="button" class="btn btn-sm btn-primary pull-right">
                         Save
                     </button>
-                    @*<button data-bind="enable:!(my.addUserVm.user.IsReadOnly()), click: my.addUserVm.cancelEditing"
-                            type="button" class="btn btn-sm btn-primary">
-                        Cancel
-                    </button>*@
                 </div>
             </div>
         </div>
