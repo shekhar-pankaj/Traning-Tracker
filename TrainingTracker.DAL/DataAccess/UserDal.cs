@@ -47,7 +47,7 @@ namespace TrainingTracker.DAL.DataAccess
         /// <param name="userData">User data object.</param>
         /// <param name="userId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
-        public bool AddUser( User userData , out long userId )
+        public bool AddUser( User userData , out int userId )
         {
             userId = 0;
             try
@@ -146,12 +146,12 @@ namespace TrainingTracker.DAL.DataAccess
                                                         Email = x.Email ,
                                                         Designation = x.Designation ,
                                                         ProfilePictureName = x.ProfilePictureName ,
-                                                        IsFemale = x.IsFemale.GetValueOrDefault() ,
-                                                        IsAdministrator =x.IsAdministrator.GetValueOrDefault()  ,
-                                                        IsTrainer =  x.IsTrainer.GetValueOrDefault() ,
-                                                        IsTrainee =  x.IsTrainee.GetValueOrDefault(),
-                                                        IsManager = x.IsManager.GetValueOrDefault(),
-                                                        IsActive = x.IsActive.GetValueOrDefault()
+                                                        IsFemale = x.IsFemale??false ,
+                                                        IsAdministrator = x.IsAdministrator ?? false ,
+                                                        IsTrainer = x.IsTrainer ?? false ,
+                                                        IsTrainee = x.IsTrainee ?? false ,
+                                                        IsManager = x.IsManager ?? false ,
+                                                        IsActive = x.IsActive ?? false
                                                     }).ToList();
                 }
             }
@@ -184,12 +184,12 @@ namespace TrainingTracker.DAL.DataAccess
                                                    Email = x.Email ,
                                                    Designation = x.Designation ,
                                                    ProfilePictureName = x.ProfilePictureName ,
-                                                   IsFemale = x.IsFemale.GetValueOrDefault() ,
-                                                   IsAdministrator =x.IsAdministrator.GetValueOrDefault()  ,
-                                                   IsTrainer =  x.IsTrainer.GetValueOrDefault() ,
-                                                   IsTrainee =  x.IsTrainee.GetValueOrDefault(),
-                                                   IsManager = x.IsManager.GetValueOrDefault(),
-                                                   IsActive = x.IsActive.GetValueOrDefault(),
+                                                   IsFemale = x.IsFemale ?? false ,
+                                                   IsAdministrator = x.IsAdministrator ?? false ,
+                                                   IsTrainer = x.IsTrainer ?? false ,
+                                                   IsTrainee = x.IsTrainee ?? false ,
+                                                   IsManager = x.IsManager ?? false ,
+                                                   IsActive = x.IsActive ?? false ,
                                                    UserRating = 0 
                                                 }).First();
 
@@ -224,12 +224,12 @@ namespace TrainingTracker.DAL.DataAccess
                                             Email = x.Email ,
                                             Designation = x.Designation ,
                                             ProfilePictureName = x.ProfilePictureName ,
-                                            IsFemale = x.IsFemale.GetValueOrDefault() ,
-                                            IsAdministrator = x.IsAdministrator.GetValueOrDefault() ,
-                                            IsTrainer = x.IsTrainer.GetValueOrDefault() ,
-                                            IsTrainee = x.IsTrainee.GetValueOrDefault() ,
-                                            IsManager = x.IsManager.GetValueOrDefault() ,
-                                            IsActive = x.IsActive.GetValueOrDefault() ,
+                                            IsFemale = x.IsFemale ?? false ,
+                                            IsAdministrator = x.IsAdministrator ?? false ,
+                                            IsTrainer = x.IsTrainer ?? false ,
+                                            IsTrainee = x.IsTrainee ?? false ,
+                                            IsManager = x.IsManager ?? false ,
+                                            IsActive = x.IsActive ?? false ,
                                             UserRating = 0
                                         }).First();
                 }

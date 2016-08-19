@@ -1,39 +1,34 @@
-﻿@*<div class="row">*@
-<div id="divUserProfile" class="modal-dialog overlay" style="padding-left:50px; display:none;" data-bind="visible: my.addUserVm.showDialog(),style:my.addUserVm.getCss('header')">
+﻿﻿@*<div class="row">*@
+<div id="divUserProfile" class="modal-dialog overlay" style="display: none"  data-bind="visible: my.addUserVm.showDialog(), style: my.addUserVm.getCss('header')">
 <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-bind="click: my.addUserVm.closeDialogue" aria-hidden="true">&times;</button>
-        <span class="modal-title" data-bind="text:my.addUserVm.message"></span>
-        @* <h4 class="modal-title" data-bind="text:"></h4>*@
+        <span class="modal-title" data-bind="text: my.addUserVm.message"></span>
     </div>
     <div class="modal-body col-xs-12">
-        <div  data-bind="visible:my.addUserVm.showAllUsersProfile(),css:{'col-xs-4':my.addUserVm.showAllUsersProfile()}">
-            @*<div class="row">
-                    <span class="btn-sm btn-block btn-primary"> Profiles</span>
-                </div>*@
-
+        <div  data-bind="visible: my.addUserVm.showAllUsersProfile(), css: { 'col-xs-4': my.addUserVm.showAllUsersProfile() }">
             <div class="row" style="overflow-y: scroll; height:400px;">
-                <ul data-bind="foreach:my.addUserVm.lstUsers" class="list-group">
+                <ul data-bind="foreach: my.addUserVm.lstUsers" class="list-group">
                     <li class="list-group-item">
-                        <a data-bind="text:FullName, click: my.addUserVm.showProfile(my.addUserVm.lstUsers()[$index()])"
+                        <a data-bind="text: FullName, click: my.addUserVm.showProfile(my.addUserVm.lstUsers()[$index()])"
                            href="#" type="button" class="btn btnProfile "></a>
                     </li>
                 </ul>
             </div>
             <div class="row" style="margin-top:10px;">
                 <button data-bind="click: my.addUserVm.addProfile"
-                        type="button" class="btn btn-sm btn-block">
+                        type="button" class="btn btn-sm btn-block btn-primary">
                     Add Profile
                 </button>
             </div>
         </div>
-        <div data-bind="css:{'col-xs-8':my.addUserVm.showAllUsersProfile(),'col-xs-12':!my.addUserVm.showAllUsersProfile()}">
+        <div data-bind="css: { 'col-xs-8': my.addUserVm.showAllUsersProfile(), 'col-xs-12': !my.addUserVm.showAllUsersProfile() }">
             <div class="col-xs-4 imgWrap">
                 <form enctype="multipart/form-data">
-                    <img data-bind="attr: {src: my.addUserVm.user.PhotoUrl() }" alt="Profile image not found!"
+                    <img data-bind="attr: { src: my.addUserVm.user.PhotoUrl() }" alt="Profile image not found!"
                          class="img-responsive img-circle profile-img user-profile-img">
                     <label for="form-file" data-bind="visible: (!my.addUserVm.user.IsReadOnly())" class="imgDescription"><span class="glyphicon glyphicon-camera"></span>&nbsp;&nbsp; Upload an image</label>
-                    <input type="file" name="file" id="form-file" data-bind="fileSrc: my.addUserVm.user.fileData, name:file, visible: (!my.addUserVm.user.IsReadOnly())" class="imgDescription hidden user-profile-img" accept="image/*" />
+                    <input type="file" name="file" id="form-file" data-bind="fileSrc: my.addUserVm.user.fileData, name: file, visible: (!my.addUserVm.user.IsReadOnly())" class="imgDescription hidden user-profile-img" accept="image/*" />
                 </form>
             </div>
             <div class="col-xs-8">
@@ -42,7 +37,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Name</label>
                             <div class="col-lg-3">
-                                <input data-bind="value: my.addUserVm.user.FirstName , enable: (!my.addUserVm.user.IsReadOnly())"
+                                <input data-bind="value: my.addUserVm.user.FirstName, enable: (!my.addUserVm.user.IsReadOnly())"
                                        type="text" class="form-control" placeholder="First Name">
                             </div>
                             <div class="col-lg-3">
@@ -67,11 +62,11 @@
                             <label class="col-lg-2 control-label">Gender</label>
                             <div class="col-lg-4">
                                 <label class="radio-inline">
-                                    <input data-bind="checked:my.addUserVm.genderSelection, enable: (!my.addUserVm.user.IsReadOnly())"
+                                    <input data-bind="checked: my.addUserVm.genderSelection, enable: (!my.addUserVm.user.IsReadOnly())"
                                            type="radio" value="false" name="genderRadio">Male
                                 </label>
                                 <label class="radio-inline">
-                                    <input data-bind="checked:my.addUserVm.genderSelection, enable: (!my.addUserVm.user.IsReadOnly())"
+                                    <input data-bind="checked: my.addUserVm.genderSelection, enable: (!my.addUserVm.user.IsReadOnly())"
                                            type="radio" value="true" name="genderRadio">Female
                                 </label>
                             </div>
@@ -92,9 +87,9 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Designation</label>
                             <div class="col-lg-6">
-                                @*<select data-bind="value: my.addUserVm.user.Designation, enable: ((my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) && (!my.addUserVm.user.IsReadOnly()) )"
+                                @*<select data-bind="value: my.addUserVm.user.Designation, enable: ((my.addUserVm.currentUser.IsAdministrator() || my.addUserVm.currentUser.IsManager()) && (!my.addUserVm.user.IsReadOnly()))"
                                 class="form-control">*@
-                                <select data-bind="value: my.addUserVm.user.Designation, enable: ((my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) && (!my.addUserVm.user.IsReadOnly()) )"
+                                <select data-bind="value: my.addUserVm.user.Designation, enable: ((my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) && (!my.addUserVm.user.IsReadOnly()))"
                                         class="form-control">
                                     <option>Sr. Software Engineer</option>
                                     <option>Associate Lead</option>
@@ -110,7 +105,7 @@
                             <label class="col-lg-2 control-label"></label>
                             <div class="col-lg-10">
                                 <label class="checkbox-inline">
-                                    <input data-bind="checked: my.addUserVm.user.IsActive,  enable: ((my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) && (!my.addUserVm.user.IsReadOnly()) )"
+                                    <input data-bind="checked: my.addUserVm.user.IsActive, enable: ((my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) && (!my.addUserVm.user.IsReadOnly()))"
                                            type="checkbox" value="">IsActive
                                 </label>
 
@@ -164,7 +159,7 @@
                     </div>
                 </form>
                 <div class="col-lg-8">
-                    <button data-bind="visible:(my.addUserVm.user.IsReadOnly()), click: my.addUserVm.editProfile"
+                    <button data-bind="visible: (my.addUserVm.user.IsReadOnly()), click: my.addUserVm.editProfile"
                             type="button" class="btn btn-sm btn-primary pull-right">
                         Edit
                     </button>
@@ -172,10 +167,6 @@
                             type="button" class="btn btn-sm btn-primary pull-right">
                         Save
                     </button>
-                    @*<button data-bind="enable:!(my.addUserVm.user.IsReadOnly()), click: my.addUserVm.cancelEditing"
-                            type="button" class="btn btn-sm btn-primary">
-                        Cancel
-                    </button>*@
                 </div>
             </div>
         </div>

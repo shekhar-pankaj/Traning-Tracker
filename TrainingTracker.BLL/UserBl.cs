@@ -6,6 +6,9 @@ using TrainingTracker.Common.ViewModel;
 
 namespace TrainingTracker.BLL
 {
+    /// <summary>
+    /// Bussiness class for user
+    /// </summary>
     public class UserBl:BussinessBase
     {
 
@@ -13,12 +16,13 @@ namespace TrainingTracker.BLL
         /// Calls stored procedure which adds user.
         /// </summary>
         /// <param name="userData">User data object.</param>
-        /// <param name="UserId">Out parameter created UserId.</param>
+        /// <param name="userId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
-        public bool AddUser(User userData,out long UserId)
+        public bool AddUser(User userData,out int userId)
         {
-            return UserDataAccesor.AddUser(userData,out UserId);
+            return UserDataAccesor.AddUser(userData , out userId);
         }
+
         /// <summary>
         /// Calls stored procedure which updates user.
         /// </summary>
@@ -26,19 +30,34 @@ namespace TrainingTracker.BLL
         /// <returns>True if updated.</returns>
         public bool UpdateUser(User userData)
         {
+            userData.Password = Common.Encryption.Cryptography.Encrypt(userData.Password);
             return UserDataAccesor.UpdateUser(userData);
         }
 
+        /// <summary>
+        /// GEt all user
+        /// </summary>
+        /// <returns>List of User</returns>
         public List<User> GetAllUsers()
         {
             return UserDataAccesor.GetAllUsers();
         }
 
+        /// <summary>
+        /// Get User By name
+        /// </summary>
+        /// <param name="userName">string of User Name</param>
+        /// <returns>instance of User object</returns>
         public User GetUserByUserName(string userName)
         {
             return (string.IsNullOrEmpty(userName)) ? new User() : UserDataAccesor.GetUserByUserName(userName);
         }
 
+        /// <summary>
+        /// Get view model for user profile page
+        /// </summary>
+        /// <param name="userId">logged in user id</param>
+        /// <returns>instance of User vm</returns>
         public UserProfileVm GetUserProfileVm(int userId)
         {
           
