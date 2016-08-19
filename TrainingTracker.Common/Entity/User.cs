@@ -21,4 +21,5 @@
         public bool IsValid { get; set; }
         public int UserRating { get; set; }
     }
+
 }

@@ -12,12 +12,12 @@
     display: block;
     text-align: center;
     line-height: 150%;
-    width: 200px;
+    /*width: 200px;*/
     height: 20px;
     color: white;
     background: #666666;
-    visibility: hidden;
-    opacity: 0;
+    /*visibility: hidden;
+    opacity: 0;*/
 }
 
 
@@ -55,4 +55,6 @@
 
 #divUserProfile
 {
+    padding-left:50px;
+  z-index: 10;
 }

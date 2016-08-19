@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Utility;
 using TrainingTracker.Common.ViewModel;
+using TrainingTracker.DAL.EntityFramework;
 using TrainingTracker.DAL.Interface;
-
+using Feedback = TrainingTracker.Common.Entity.Feedback;
+using FeedbackType = TrainingTracker.Common.Entity.FeedbackType;
+using Skill = TrainingTracker.Common.Entity.Skill;
+using User = TrainingTracker.Common.Entity.User;
 
 namespace TrainingTracker.DAL.DataAccess
 {
+    /// <summary>
+    /// Class for User Dal Implementation
+    /// </summary>
     public class UserDal : IUserDal
     {
 
@@ -22,126 +27,104 @@ namespace TrainingTracker.DAL.DataAccess
         /// <returns>True if valid customer.</returns>
         public bool ValidateUser( User userData )
         {
-            var prms = new List<SqlParameter>
-            {
-                SqlUtility.CreateParameter(SPValidateUser.PARAM_USER_NAME, 
-                SqlDbType.VarChar,userData.UserName),
-                SqlUtility.CreateParameter(SPValidateUser.PARAM_PASSWORD, 
-                SqlDbType.VarChar,userData.Password)
-            };
             try
             {
-                var dt = SqlUtility.ExecuteAndGetTable(SPValidateUser.NAME ,
-                    CommandType.StoredProcedure , SPValidateUser.TABLE_NAME , prms);
-                if (dt.Rows[0][0].ToString().Equals("1"))
-                    return true;
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    return context.Users.Any(x => x.UserName == userData.UserName && x.Password == userData.Password);
+                }
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
+                return false;
             }
-            return false;
         }
 
         /// <summary>
         /// Calls stored procedure which adds user.
         /// </summary>
         /// <param name="userData">User data object.</param>
-        /// <param name="UserId">Out parameter created UserId.</param>
+        /// <param name="userId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
-        public bool AddUser( User userData , out long UserId)
+        public bool AddUser( User userData , out int userId )
         {
-            var prms = new List<SqlParameter>
-            {
-                SqlUtility.CreateParameter(SPAddUser.PARAM_FIRST_NAME, 
-                SqlDbType.VarChar,userData.FirstName),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_LAST_NAME, 
-                SqlDbType.VarChar,userData.LastName),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_USER_NAME, 
-                SqlDbType.VarChar,userData.UserName),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_PASSWORD, 
-                SqlDbType.VarChar,userData.Password),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_EMAIL, 
-                SqlDbType.VarChar,userData.Email),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_DESIGNATION, 
-                SqlDbType.VarChar,userData.Designation),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_PROFILE_PICTURE_NAME, 
-                SqlDbType.VarChar,userData.ProfilePictureName),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_IS_FEMALE, 
-                SqlDbType.Bit,userData.IsFemale),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_IS_ADMINISTRATOR, 
-                SqlDbType.VarChar,userData.IsAdministrator),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_IS_TRAINER, 
-                SqlDbType.VarChar,userData.IsTrainer),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_IS_TRAINEE, 
-                SqlDbType.VarChar,userData.IsTrainee),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_IS_MANAGER, 
-                SqlDbType.VarChar,userData.IsManager),
-                SqlUtility.CreateParameter(SPAddUser.PARAM_IS_ACTIVE,
-                SqlDbType.VarChar,userData.IsActive)
-            };
+            userId = 0;
             try
             {
-                return  (UserId = SqlUtility.ExecuteScalar(SPAddUser.NAME ,
-                    CommandType.StoredProcedure , prms))>0?true:false;
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    EntityFramework.User objUser = new EntityFramework.User
+                                                        {
+                                                            FirstName = userData.FirstName ,
+                                                            LastName = userData.LastName ,
+                                                            UserName = userData.UserName ,
+                                                            Password = userData.Password ,
+                                                            Email = userData.Email ,
+                                                            Designation = userData.Designation ,
+                                                            ProfilePictureName = userData.ProfilePictureName ,
+                                                            IsFemale = userData.IsFemale ,
+                                                            IsAdministrator = userData.IsAdministrator ,
+                                                            IsTrainer = userData.IsTrainer ,
+                                                            IsTrainee = userData.IsTrainee ,
+                                                            IsManager = userData.IsManager ,
+                                                        };
+                    context.Users.Add(objUser);
+                    context.SaveChanges();
+                    userId = objUser.UserId;
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
-                UserId = 0;
+                return false;
             }
-            return false;
         }
 
         /// <summary>
         /// Calls stored procedure which updates user.
         /// </summary>
-        /// <param name="objUser">User data object.</param>
+        /// <param name="userData">User data object.</param>
         /// <returns>True if updated.</returns>
-        public bool UpdateUser(User objUser)
+        public bool UpdateUser( User userData )
         {
-            var prms = new List<SqlParameter>
-            {
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_USER_ID,
-                SqlDbType.VarChar,objUser.UserId),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_FIRST_NAME,
-                SqlDbType.VarChar,objUser.FirstName),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_LAST_NAME,
-                SqlDbType.VarChar,objUser.LastName),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_USER_NAME,
-                SqlDbType.VarChar,objUser.UserName),           
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_PASSWORD,
-                SqlDbType.VarChar,objUser.Password ?? ""),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_EMAIL,
-                SqlDbType.VarChar,objUser.Email),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_DESIGNATION,
-                SqlDbType.VarChar,objUser.Designation),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_PROFILE_PICTURE_NAME,
-                SqlDbType.VarChar,objUser.ProfilePictureName),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_FEMALE,
-                SqlDbType.Bit,objUser.IsFemale),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_ADMINISTRATOR,
-                SqlDbType.VarChar,objUser.IsAdministrator),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_TRAINER,
-                SqlDbType.VarChar,objUser.IsTrainer),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_TRAINEE,
-                SqlDbType.VarChar,objUser.IsTrainee),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_MANAGER,
-                SqlDbType.VarChar,objUser.IsManager),
-                SqlUtility.CreateParameter(SPUpdateUser.PARAM_IS_ACTIVE,
-                SqlDbType.VarChar,objUser.IsActive)
-            };
+            if (userData.UserId <= 0) return false;
 
             try
             {
-                var rowsAffected = SqlUtility.ExecuteNonQuery(SPUpdateUser.NAME, CommandType.StoredProcedure, prms);
-                return (rowsAffected > 0);
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    var userContext = context.Users.FirstOrDefault(x => x.UserId == userData.UserId);
+
+                    if (userContext == null) return false;
+
+                    userContext.FirstName = userData.FirstName;
+                    userContext.LastName = userData.LastName;
+                    userContext.UserName = userData.UserName;
+                    userContext.Email = userData.Email;
+                    userContext.Designation = userData.Designation;
+                    userContext.ProfilePictureName = userData.ProfilePictureName;
+                    userContext.IsFemale = userData.IsFemale;
+                    userContext.IsAdministrator = userData.IsAdministrator;
+                    userContext.IsTrainer = userData.IsTrainer;
+                    userContext.IsTrainee = userData.IsTrainee;
+                    userContext.IsManager = userData.IsManager;
+
+                    if (userData.Password != null)
+                    {
+                        userContext.Password = userData.Password;
+                    }
+
+                    context.SaveChanges();
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
+                return false;
             }
-            return false;
         }
 
         /// <summary>
@@ -150,120 +133,112 @@ namespace TrainingTracker.DAL.DataAccess
         /// <returns>List of all users.</returns>
         public List<User> GetAllUsers()
         {
-            var users = new List<User>();
-
-            var prms = new List<SqlParameter>();
             try
             {
-                var dt = SqlUtility.ExecuteAndGetTable(SPGetAllUsers.NAME ,
-                    CommandType.StoredProcedure , SPGetAllUsers.TABLE_NAME , prms);
-
-                users.AddRange(from DataRow row in dt.Rows
-                               select new User
-                               {
-                                   UserId = Convert.ToInt32(row["UserId"]) ,
-                                   FirstName = row["FirstName"].ToString() ,
-                                   LastName = row["LastName"].ToString() ,
-                                   UserName = row["UserName"].ToString() ,
-                                   Email = row["Email"].ToString() ,
-                                   Designation = row["Designation"].ToString() ,
-                                   ProfilePictureName = row["ProfilePictureName"].ToString() ,
-                                   IsFemale = Convert.ToBoolean(row["IsFemale"]) ,
-                                   IsAdministrator = Convert.ToBoolean(row["IsAdministrator"]) ,
-                                   IsTrainer = Convert.ToBoolean(row["IsTrainer"]) ,
-                                   IsTrainee = Convert.ToBoolean(row["IsTrainee"]) ,
-                                   IsManager = Convert.ToBoolean(row["IsManager"]),
-                                   IsActive = Convert.ToBoolean(row["IsActive"])
-                               });
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    return context.Users.Select(x => new User
+                                                    {
+                                                        UserId = x.UserId ,
+                                                        FirstName = x.FirstName ,
+                                                        LastName = x.LastName ,
+                                                        UserName = x.UserName ,
+                                                        Email = x.Email ,
+                                                        Designation = x.Designation ,
+                                                        ProfilePictureName = x.ProfilePictureName ,
+                                                        IsFemale = x.IsFemale??false ,
+                                                        IsAdministrator = x.IsAdministrator ?? false ,
+                                                        IsTrainer = x.IsTrainer ?? false ,
+                                                        IsTrainee = x.IsTrainee ?? false ,
+                                                        IsManager = x.IsManager ?? false ,
+                                                        IsActive = x.IsActive ?? false
+                                                    }).ToList();
+                }
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
+                return null;
             }
-
-            return users;
         }
 
+        /// <summary>
+        /// Fetch user by User Name
+        /// </summary>
+        /// <param name="userName">string of username to be searched</param>
+        /// <returns>Instance of User</returns>
         public User GetUserByUserName( string userName )
         {
-            var user = new User();
-
-            var prms = new List<SqlParameter>
-            {
-                SqlUtility.CreateParameter(SPGetUser.PARAM_USER_NAME, SqlDbType.VarChar, userName),
-                SqlUtility.CreateParameter(SPGetUser.PARAM_SCENARIO, SqlDbType.Int, 2)
-            };
-
             try
             {
-                var dt = SqlUtility.ExecuteAndGetTable(SPGetUser.NAME ,
-                    CommandType.StoredProcedure , SPGetUser.TABLE_NAME , prms);
-
-                var row = dt.Rows[0];
-                user = new User
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
-                    UserId = Convert.ToInt32(row["UserId"]) ,
-                    FirstName = row["FirstName"].ToString() ,
-                    LastName = row["LastName"].ToString() ,
-                    UserName = row["UserName"].ToString() ,
-                    Email = row["Email"].ToString() ,
-                    Designation = row["Designation"].ToString() ,
-                    ProfilePictureName = row["ProfilePictureName"].ToString() ,
-                    IsFemale = Convert.ToBoolean(row["IsFemale"]) ,
-                    IsAdministrator = Convert.ToBoolean(row["IsAdministrator"]) ,
-                    IsTrainer = Convert.ToBoolean(row["IsTrainer"]) ,
-                    IsTrainee = Convert.ToBoolean(row["IsTrainee"]) ,
-                    IsManager = Convert.ToBoolean(row["IsManager"]),
-                    IsActive = Convert.ToBoolean(row["IsActive"]),
-                    UserRating = (row["UserRating"] == DBNull.Value) ? 0 : Convert.ToInt32(row["UserRating"])
-                };
+                    //No user can have same UserName, so used First in IQuerable clause intented to throw exception.
+                    return context.Users.Where(x => x.UserName == userName)
+                                        .Select(x=> new User
+                                                {
+                                                   UserId = x.UserId ,
+                                                   FirstName = x.FirstName ,
+                                                   LastName = x.LastName ,
+                                                   UserName = x.UserName ,
+                                                   Email = x.Email ,
+                                                   Designation = x.Designation ,
+                                                   ProfilePictureName = x.ProfilePictureName ,
+                                                   IsFemale = x.IsFemale ?? false ,
+                                                   IsAdministrator = x.IsAdministrator ?? false ,
+                                                   IsTrainer = x.IsTrainer ?? false ,
+                                                   IsTrainee = x.IsTrainee ?? false ,
+                                                   IsManager = x.IsManager ?? false ,
+                                                   IsActive = x.IsActive ?? false ,
+                                                   UserRating = 0 
+                                                }).First();
+
+                }
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
+                return new User();
             }
-
-            return user;
         }
+
+        /// <summary>
+        /// Fetch User by UserId
+        /// </summary>
+        /// <param name="userId">user id</param>
+        /// <returns>Instance of user</returns>
         public User GetUserById( int userId )
         {
-            var user = new User();
-
-            var prms = new List<SqlParameter>
-            {
-                SqlUtility.CreateParameter(SPGetUser.PARAM_USER_ID, SqlDbType.Int, userId),
-                SqlUtility.CreateParameter(SPGetUser.PARAM_SCENARIO, SqlDbType.Int, 1)
-            };
-
             try
             {
-                var dt = SqlUtility.ExecuteAndGetTable(SPGetUser.NAME ,
-                    CommandType.StoredProcedure , SPGetUser.TABLE_NAME , prms);
-
-                var row = dt.Rows[0];
-                user = new User
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
-                    UserId = userId ,
-                    FirstName = row["FirstName"].ToString() ,
-                    LastName = row["LastName"].ToString() ,
-                    UserName = row["UserName"].ToString() ,
-                    Email = row["Email"].ToString() ,
-                    Designation = row["Designation"].ToString() ,
-                    ProfilePictureName = row["ProfilePictureName"].ToString() ,
-                    IsFemale = Convert.ToBoolean(row["IsFemale"]) ,
-                    IsAdministrator = Convert.ToBoolean(row["IsAdministrator"]) ,
-                    IsTrainer = Convert.ToBoolean(row["IsTrainer"]) ,
-                    IsTrainee = Convert.ToBoolean(row["IsTrainee"]) ,
-                    IsManager = Convert.ToBoolean(row["IsManager"]) ,
-                    UserRating = (row["UserRating"] == DBNull.Value) ? 0 : Convert.ToInt32(row["UserRating"])
-                };
+                    //No user can have same user id it's an Primary key, so used First in IQuerable clause intented to throw exception.
+                    return context.Users.Where(x => x.UserId == userId)
+                                        .Select(x => new User
+                                        {
+                                            UserId = x.UserId ,
+                                            FirstName = x.FirstName ,
+                                            LastName = x.LastName ,
+                                            UserName = x.UserName ,
+                                            Email = x.Email ,
+                                            Designation = x.Designation ,
+                                            ProfilePictureName = x.ProfilePictureName ,
+                                            IsFemale = x.IsFemale ?? false ,
+                                            IsAdministrator = x.IsAdministrator ?? false ,
+                                            IsTrainer = x.IsTrainer ?? false ,
+                                            IsTrainee = x.IsTrainee ?? false ,
+                                            IsManager = x.IsManager ?? false ,
+                                            IsActive = x.IsActive ?? false ,
+                                            UserRating = 0
+                                        }).First();
+                }
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
+                return null;
             }
-
-            return user;
         }
 
         /// <summary>
@@ -291,34 +266,15 @@ namespace TrainingTracker.DAL.DataAccess
                             {
                                 UserId = Convert.ToInt32(rows["UserId"]) ,
                                 FullName = rows["FullName"].ToString() ,
-                            },
-                            RemainingFeedbacks = new List<Feedback>(),
-                            WeeklyFeedback = new List<Feedback>(),
+                            } ,
+                            RemainingFeedbacks = new List<Feedback>() ,
+                            WeeklyFeedback = new List<Feedback>() ,
                             SkillsFeedback = new List<Feedback>()
                         });
                     }
                     var objUserData = users.First(x => x.User.UserId == Convert.ToInt32(rows["UserId"]));
                     AddFeedbacksToTheList(ref users , rows);
                 }
-              
-                //users.AddRange(from DataRow row in dt.Rows
-                //               select new UserData
-                //               {
-                //                   User = new User
-                //                   {
-                //                       UserId = Convert.ToInt32(row["UserId"]),
-                //                       FullName = row["FullName"].ToString(),
-                //                       UserName = row["UserName"].ToString(),
-                //                       Email = row["Email"].ToString(),
-                //                       ProfilePictureName = row["ProfilePictureName"].ToString()
-                //                   },
-                //                   PoorRating = Convert.ToInt32(row["PoorRating"]),
-                //                   AverageRating = Convert.ToInt32(row["AverageRating"]),
-                //                   FastRating = Convert.ToInt32(row["FastRating"]),
-                //                   ExceptionalRating = Convert.ToInt32(row["ExceptionalRating"]),
-                //                   Skills = (row["Skills"] == DBNull.Value) ? string.Empty : row["Skills"].ToString(),
-                //                   LastWeeklyFeedback = (row["LastWeeklyFeedback"] == DBNull.Value) ? new DateTime(1900, 1, 1) : Convert.ToDateTime(row["LastWeeklyFeedback"]),
-                //               });
             }
             catch (Exception ex)
             {
@@ -328,22 +284,25 @@ namespace TrainingTracker.DAL.DataAccess
             return users;
         }
 
+        /// <summary>
+        /// Private method to Add Feedbacks to the  List
+        /// </summary>
+        /// <param name="userData">reference to userData</param>
+        /// <param name="row">datarow</param>
         private void AddFeedbacksToTheList( ref List<UserData> userData , DataRow row )
         {
-            int skillId,feedbackType;
-            DateTime startDate,addedOn;
+            int skillId , feedbackType;
+            DateTime startDate , addedOn;
             DateTime endDate;
 
             DateTime.TryParse(Convert.ToString(row["StartDate"]) , out startDate);
-            DateTime.TryParse(Convert.ToString(row["EndDate"]),out endDate);
+            DateTime.TryParse(Convert.ToString(row["EndDate"]) , out endDate);
             DateTime.TryParse(Convert.ToString(row["AddedOn"]) , out addedOn);
-            Int32.TryParse(Convert.ToString(row["SkillId"]), out skillId);
+            Int32.TryParse(Convert.ToString(row["SkillId"]) , out skillId);
             Int32.TryParse(Convert.ToString(row["FeedbackType"]) , out feedbackType);
 
             if (feedbackType == 0) return;
-
-            try
-            {
+         
                 var feedback = new Feedback
                 {
                     AddedBy = new User { FullName = Convert.ToString(row["AddedBy"]) } ,
@@ -366,12 +325,12 @@ namespace TrainingTracker.DAL.DataAccess
                     EndDate = endDate ,
                 };
 
-                  int userId = Convert.ToInt32(row["UserId"]);
+                int userId = Convert.ToInt32(row["UserId"]);
 
                 switch (Convert.ToInt32(row["FeedbackType"]))
                 {
                     case 3:
-                    case 4:                   
+                    case 4:
                         userData.First(x => x.User.UserId == userId)
                                 .RemainingFeedbacks
                                 .Add(feedback);
@@ -386,19 +345,10 @@ namespace TrainingTracker.DAL.DataAccess
                     case 5:
                         var objUSerData = userData.First(x => x.User.UserId == userId);
 
-                            objUSerData.WeeklyFeedback.Add(feedback);
-                            objUSerData.RemainingFeedbacks.Add(feedback);
+                        objUSerData.WeeklyFeedback.Add(feedback);
+                        objUSerData.RemainingFeedbacks.Add(feedback);
                         break;
-
                 }
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
         }
-
     }
 }
