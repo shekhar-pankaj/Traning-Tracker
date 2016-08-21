@@ -7,11 +7,18 @@ using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Utility;
 using TrainingTracker.DAL.Interface;
 
-
 namespace TrainingTracker.DAL.DataAccess
 {
+    /// <summary>
+    /// Dataaccess class for session, Implementing IDal
+    /// </summary>
     public class SessionDal : ISessionDal
     {
+        /// <summary>
+        /// fetch Session based authored by User Id
+        /// </summary>
+        /// <param name="userId">userid of presenter</param>
+        /// <returns>List of session</returns>
         public List<Session> GetSessionsByUserId( int userId )
         {
             var sessions = new List<Session>();
@@ -30,7 +37,6 @@ namespace TrainingTracker.DAL.DataAccess
                                   select new Session
                                   {
                                       Title = row["Title"].ToString() ,
-                                     // SessionId = Convert.ToInt32(row["SessionId"])
                                   });
             }
             catch (Exception ex)
@@ -74,12 +80,12 @@ namespace TrainingTracker.DAL.DataAccess
         }
 
         /// <summary>
-        /// 
+        /// Get Session based on filter
         /// </summary>
-        /// <param name="pageSize"></param>
-        /// <param name="sessionType"></param>
-        /// <param name="searchKeyword"></param>
-        /// <returns></returns>
+        /// <param name="pageSize">record count</param>
+        /// <param name="sessionType">type of session</param>
+        /// <param name="searchKeyword">search keyword</param>
+        /// <returns>List of session</returns>
         public List<Session> GetSessionOnFilter( int pageSize , int sessionType , string searchKeyword )
         {
             List<Session> sessions =new List<Session>();
@@ -98,7 +104,6 @@ namespace TrainingTracker.DAL.DataAccess
 
                 foreach (DataRow row in dt.Rows)
                 {
-                 //   var sessionID = Convert.ToInt32(row["SessionId"]);
                     if (sessions.All(x => x.Id != Convert.ToInt32(row["SessionId"])))
                     {
                         sessions.Add(new Session
@@ -116,6 +121,7 @@ namespace TrainingTracker.DAL.DataAccess
                     int userId;
                     var objSession = sessions.FirstOrDefault(x => x.Id == Convert.ToInt32(row["SessionId"]));
 
+                    // if session doesn't exist or failed to convert user id
                     if (objSession == null || !Int32.TryParse(row["UserId"].ToString(), out userId) ) continue;
 
                     User objUser = new User
@@ -127,17 +133,6 @@ namespace TrainingTracker.DAL.DataAccess
 
                     objSession.SessionAttendees.Add(objUser);
                 }
-
-                //sessions.AddRange(from DataRow row in 
-                //                  select new Session
-                //                  {
-                //                      Title = row["Title"].ToString() ,
-                //                      Id = Convert.ToInt32(row["SessionId"]),
-                //                      Date = Convert.ToDateTime(row["SessionDate"]),
-                //                      Description = row["Description"].ToString(),
-                //                      PresenterFullName =row["PresenterFullName"].ToString(),
-                //                      Presenter = Convert.ToInt32(row["Presenter"])
-                //                  });
             }
             catch (Exception ex)
             {

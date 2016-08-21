@@ -36,8 +36,6 @@
             {
                 var pageSize = typeof (my.sessionVm.selectedFilter.pageSize()) == 'undefined' ? 10 : my.sessionVm.selectedFilter.pageSize();
                 var seminarType = typeof (my.sessionVm.selectedFilter.seminarType()) == 'undefined' ? 0 : my.sessionVm.selectedFilter.seminarType();
-                //my.sessionVm.selectedFilter.pageSize(pageSize);
-                //my.sessionVm.selectedFilter.seminarType(seminarType);
                 my.userService.getSessionsOnFilter(pageSize, seminarType, '', my.sessionVm.getSessionsOnFilterCallback);
             },
             getSessionsOnFilterCallback = function (sessionJson)
@@ -119,16 +117,8 @@
                     my.sessionVm.showDialog(true);
                 },
             checkboxSelectAll=function() {
-                
-                //   if (my.sessionVm.allAttendees())
                 if (my.sessionVm.sessionDetails.Attendee().length == my.sessionVm.allAttendees().length || my.sessionVm.sessionSettings.allSelectedText() == 'Uncheck to clear all')
                 {
-                    //if (my.sessionVm.sessionSettings.allSelectedText() == 'Check to select all')
-                    //{
-                    //    my.sessionVm.sessionSettings.allSelectedText("Uncheck to clear all");
-                    //    my.sessionVm.sessionSettings.allSelected(false);
-                    //    return false;
-                    //}
                     my.sessionVm.sessionSettings.allSelectedText("Check to select all");
                     my.sessionVm.sessionSettings.allSelected(false);
                     my.sessionVm.sessionDetails.Attendee([]);
@@ -166,6 +156,7 @@
                 });
 
                 if (filteredSession.length == 0) return;
+                
                 my.sessionVm.sessionDetails.Id(filteredSession[0].Id);
                 my.sessionVm.sessionDetails.Description(filteredSession[0].Description);
                 my.sessionVm.sessionDetails.Title(filteredSession[0].Title);
@@ -173,15 +164,19 @@
                 my.sessionVm.sessionDetails.Presenter(filteredSession[0].Presenter);
                 my.sessionVm.sessionSettings.isNewSession(false);
                 my.sessionVm.sessionDetails.Attendee([]);
+                
                 ko.utils.arrayForEach(filteredSession[0].SessionAttendees, function (item)
                 {
                     my.sessionVm.sessionDetails.Attendee.push(item.UserId.toString());
                 });
                 
-                if (my.sessionVm.sessionDetails.Attendee().length == my.sessionVm.allAttendees().length) {
+                if (my.sessionVm.sessionDetails.Attendee().length == my.sessionVm.allAttendees().length)
+                {
                     my.sessionVm.sessionSettings.allSelectedText("Uncheck to clear all");
                     my.sessionVm.sessionSettings.allSelected(true);
-                } else {
+                }
+                else
+                {
                     my.sessionVm.sessionSettings.allSelectedText("Check to select all");
                     my.sessionVm.sessionSettings.allSelected(false);
 
@@ -200,6 +195,7 @@
 
                 my.sessionVm.showDialog(true);
             };
+        
         return {
             currentUser: currentUser,
             getCurrentUser: getCurrentUser,
@@ -230,8 +226,6 @@
     }();
     my.sessionVm.getCurrentUser();
     
-    ko.applyBindings(my.sessionVm);
-    
-    
+    ko.applyBindings(my.sessionVm);   
 });
 

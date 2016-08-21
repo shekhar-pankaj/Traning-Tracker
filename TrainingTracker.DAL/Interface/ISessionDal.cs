@@ -22,6 +22,13 @@ namespace TrainingTracker.DAL.Interface
         /// <returns>List Of session</returns>
        bool AddEditSessions( Session objSession );
 
+       /// <summary>
+       /// Interface method to fetch Sessions on filters
+       /// </summary>
+       /// <param name="pageSize">record count to be returned</param>
+       /// <param name="sessionType">session type</param>
+       /// <param name="searchKeyword">search keyword</param>
+       /// <returns>List of session </returns>
        List<Session> GetSessionOnFilter(int pageSize ,int sessionType ,string searchKeyword); 
     }
 }
