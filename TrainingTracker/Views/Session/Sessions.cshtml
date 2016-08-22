@@ -15,20 +15,24 @@
             <div class="pull-left feedback-input meta">
                 <label class="">Session Type:</label>
                 <select class=" input-sm form-control" data-bind="options: filter.seminarType(),
-    optionsText: 'Description',
-    optionsValue: 'Id',
-    value: selectedFilter.seminarType,
-    optionsCaption: 'Select Type'">
+                                                                  optionsText: 'Description',
+                                                                  optionsValue: 'Id',
+                                                                  value: selectedFilter.seminarType,
+                                                                  optionsCaption: 'Select Type'">
                 </select>
             </div>
 
             <div class="pull-left feedback-input meta">
                 <label style="visibility: hidden">Apply Filter</label>
-                <button data-bind=" click: getSessionsOnFilter " style="margin-top: -5px; height: 34px;" type="button" class="form-control btn btn-info  input-sm ">Apply Filter <i class="glyphicon glyphicon-filter"></i></button>
+                <button data-bind=" click: getSessionsOnFilter "  type="button" class="feedback-button form-control btn btn-info  input-sm ">Apply Filter 
+                    <i class="glyphicon glyphicon-filter"></i>
+                </button>
             </div>
             <div class="pull-right feedback-input meta">
                 <label style="visibility: hidden">Apply Filter</label>
-                <button data-bind="click: openSessionDailog  " style="margin-top: -5px; height: 34px;" type="button" class="form-control btn btn-info  input-sm ">Add New Session <i class="glyphicon glyphicon-plus"></i></button>
+                <button data-bind="click: openSessionDailog  " type="button" class="feedback-button form-control btn btn-info  input-sm ">Add New Session 
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -66,7 +70,7 @@
         </div>
     </div>
 
-    <div id="divAddEditSession" class="modal-dialog" style="display:none;" data-bind="visible: my.sessionVm.showDialog()">
+    <div id="divAddEditSession" class="modal-dialog"  data-bind="visible: my.sessionVm.showDialog()">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-bind="click: my.sessionVm.showDialogueFunction" aria-hidden="true">&times;</button>
@@ -83,9 +87,11 @@
                     <!-- ko if: (my.sessionVm.sessionSettings.isNewSession() || my.sessionVm.sessionSettings.isEditable()) -->
                     <input type="text" class="form-control" data-bind="datepicker: my.sessionVm.sessionDetails.Date, startDate:new Date(), value: my.sessionVm.sessionDetails.Date" />
                     <!-- /ko -->
+
                      <!-- ko if: !(my.sessionVm.sessionSettings.isNewSession() || my.sessionVm.sessionSettings.isEditable()) -->
                     <input type="text" class="form-control" data-bind=" value: my.sessionVm.sessionDetails.Date" readonly="readonly"/>
                     <!-- /ko -->
+
                     <span class="error" data-bind="text: my.sessionVm.sessionSettings.errorText, value: my.sessionVm.sessionSettings.errorText"></span>
                 </div>
                 <div class="col-xs-4 no-left-margin no-right-margin" style="height: 313px;">
@@ -138,12 +144,10 @@
 
 @section Scripts
 {
-@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
 <script src="~/Scripts/knockout-3.4.0.js"></script>
 <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/Custom/BindingHandlers.js"></script>
-@*<script src="~/Scripts/Custom/App.js"></script>*@
-    <script src="~/Scripts/Custom/AllSessions.js"></script>
+<script src="~/Scripts/Custom/AllSessions.js"></script>
 }
 

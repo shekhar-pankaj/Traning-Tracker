@@ -8,15 +8,15 @@
     font-size: 14px;
 }
 
-  .post-heading table th:nth-child(6)
-    {
-        background-color: #fff;
-    }
+.post-heading table th:nth-child(6)
+{
+    background-color: #fff;
+}
 
-  .post-heading table th:nth-child(n+4), table th:nth-child(1), table td:nth-child(n+4), table td:nth-child(1)
-    {
-        width: 15%;
-    }
+.post-heading table th:nth-child(n+4), table th:nth-child(1), table td:nth-child(n+4), table td:nth-child(1)
+{
+    width: 15%;
+}
 
 .post-heading table button
 {
@@ -88,6 +88,7 @@
 
 #divAddEditSession
 {
+    display: none;
     position: absolute;
     left: 10%;
     top: 16%;
@@ -102,54 +103,54 @@
     padding-right: 5px;
 }
 
-    .custom-checkbox > .box
-    {
-        position: relative;
-        display: block;
-        width: 20px;
-        height: 20px;
-        border: 1px solid #838383;
-        background-color: #ffffff;
-        border-radius: 10px;
-    }
+ .custom-checkbox > .box
+ {
+     position: relative;
+     display: block;
+     width: 20px;
+     height: 20px;
+     border: 1px solid #838383;
+     background-color: #ffffff;
+     border-radius: 10px;
+ }
 
-.custom-checkbox > .box > .tick
-{
-    display: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 6px;
-    position: absolute;
-    top: 3px;
-    box-shadow: inset 10px -7px 2px #838383;
-    left: 3px;
-}
+ .custom-checkbox > .box > .tick
+ {
+     display: none;
+     width: 12px;
+     height: 12px;
+     border-radius: 6px;
+     position: absolute;
+     top: 3px;
+     box-shadow: inset 10px -7px 2px #838383;
+     left: 3px;
+ }
 
-.custom-checkbox > input:checked + .box > .tick
-{
-    display: block;
-}
+ .custom-checkbox > input:checked + .box > .tick
+ {
+     display: block;
+ }
 
-.custom-checkbox > input
-{
-    position: absolute;
-    outline: none;
-    top: 0;
-    padding: 0;
-    width: 16px;
-    height: 16px;
-    border: none;
-    margin: 0;
-    opacity: 0;
-    z-index: 1;
-    width: 50px;
-}
+ .custom-checkbox > input
+ {
+     position: absolute;
+     outline: none;
+     top: 0;
+     padding: 0;
+     width: 16px;
+     height: 16px;
+     border: none;
+     margin: 0;
+     opacity: 0;
+     z-index: 1;
+     width: 50px;
+ }
 
-.custom-checkbox > input:active + .box
-{
-    border-color: #838383;
-    background-color: #ffffff;
-}
+ .custom-checkbox > input:active + .box
+ {
+     border-color: #838383;
+     background-color: #ffffff;
+ }
 
 .label-for-checkbox
 {
@@ -169,4 +170,10 @@
 .make-checkbox-label-in-align
 {
     margin-top: -4px;
+}
+
+.feedback-button
+{
+    margin-top: -5px;
+    height: 34px;
 }

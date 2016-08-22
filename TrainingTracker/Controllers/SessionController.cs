@@ -23,18 +23,17 @@ namespace TrainingTracker.Controllers
         /// <summary>
         /// Get Sessions for user on filter
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Json result</returns>
         public ActionResult GetUserFeedbackOnFilter( int pageSize , int seminarType , string searchKeyword = "" )
         {
             return Json(new SessionBl().GetSessionOnFilter(pageSize , seminarType , searchKeyword) , JsonRequestBehavior.AllowGet);
 
         }
 
-
         /// <summary>
         ///Add or Edit Session
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Json result</returns>
         public ActionResult AddEditSession( Session sessionDetails  )
         {
             return Json(new SessionBl().AddEditSessions(sessionDetails) , JsonRequestBehavior.AllowGet);
