@@ -20,6 +20,7 @@ namespace TrainingTracker.BLL
         /// <returns>True if added.</returns>
         public bool AddUser(User userData,out int userId)
         {
+            userData.Password = Common.Encryption.Cryptography.Encrypt(userData.Password);
             return UserDataAccesor.AddUser(userData , out userId);
         }
 

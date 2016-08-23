@@ -81,14 +81,13 @@
     padding-right: 0;
 }
 
-.modal-dialog
+#divAddEditSession.modal-dialog
 {
     width: 80% !important;
 }
 
 #divAddEditSession
 {
-    display: none;
     position: absolute;
     left: 10%;
     top: 16%;
