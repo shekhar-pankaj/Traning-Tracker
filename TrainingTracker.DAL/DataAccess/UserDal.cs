@@ -111,7 +111,7 @@ namespace TrainingTracker.DAL.DataAccess
                     userContext.IsTrainee = userData.IsTrainee;
                     userContext.IsManager = userData.IsManager;
 
-                    if (userData.Password != null)
+                    if (!string.IsNullOrEmpty(userData.Password))
                     {
                         userContext.Password = userData.Password;
                     }
