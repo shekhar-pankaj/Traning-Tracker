@@ -7,7 +7,7 @@
                 QuestionText: ko.observable(""),
                 Description: ko.observable(),
                 SkillId: ko.observable(),
-                AddedBy: currentUser.UserId,
+                AddedBy: 0,
                 LevelMapping:[]
             },
             setQuestionLevel = function (level, value) {
@@ -49,6 +49,7 @@
                 my.questionVm.alerts.questionAddedSuccess("Question added.");
                 my.questionVm.newQuestion.QuestionText("");
                 my.questionVm.newQuestion.Description("");
+                my.questionVm.newQuestion.AddedBy = my.meta.currentUser.UserId;
                 my.questionVm.getQuestionsBySkillAndExperience();
             },
             addQuestion = function () {

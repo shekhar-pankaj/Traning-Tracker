@@ -20,5 +20,7 @@ namespace TrainingTracker.DAL.Interface
         /// </summary>
         /// <returns></returns>
         List<Skill> GetAllSkillsForApp();
+
+        List<Skill> GetSkillsWithQuestionCount();
     }
 }

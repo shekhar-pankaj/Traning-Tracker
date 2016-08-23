@@ -4,6 +4,7 @@ using TrainingTracker.Common.Entity;
 
 namespace TrainingTracker.Controllers
 {
+    [Authorize]
     public class QuestionsController : Controller
     {
         public ActionResult Index()

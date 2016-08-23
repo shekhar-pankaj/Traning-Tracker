@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Utility;
+using TrainingTracker.DAL.EntityFramework;
 using TrainingTracker.DAL.Interface;
+using Question = TrainingTracker.Common.Entity.Question;
+using Skill = TrainingTracker.Common.Entity.Skill;
 
 namespace TrainingTracker.DAL.DataAccess
 {
@@ -65,5 +67,25 @@ namespace TrainingTracker.DAL.DataAccess
             return skills;
         }
 
+        public List<Skill> GetSkillsWithQuestionCount()
+        {
+            try
+            {
+                using (var context = new TrainingTrackerEntities())
+                {
+                    return context.Skills.Select(x => new Skill
+                            {
+                                SkillId = x.SkillId,
+                                Name = x.Name,
+                                Count = context.Questions.Count(q=>q.SkillId==x.SkillId)
+                            }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return null;
+            }
+        }
     }
 }

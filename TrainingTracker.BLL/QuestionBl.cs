@@ -34,7 +34,7 @@ namespace TrainingTracker.BLL
         {
             return new QuestionVm
             {
-                Categories = SkillDataAccesor.GetAllSkillsForApp(),
+                Categories = SkillDataAccesor.GetSkillsWithQuestionCount(),
                 Questions = new List<Question>()
             };
         }
