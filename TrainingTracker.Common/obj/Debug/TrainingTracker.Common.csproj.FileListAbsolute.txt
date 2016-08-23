@@ -3,3 +3,7 @@ D:\Projects\TraningTracker\TrainingTracker.Common\bin\Debug\TrainingTracker.Comm
 D:\Projects\TraningTracker\TrainingTracker.Common\obj\Debug\TrainingTracker.Common.csprojResolveAssemblyReference.cache
 D:\Projects\TraningTracker\TrainingTracker.Common\obj\Debug\TrainingTracker.Common.dll
 D:\Projects\TraningTracker\TrainingTracker.Common\obj\Debug\TrainingTracker.Common.pdb
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\bin\Debug\TrainingTracker.Common.dll
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\bin\Debug\TrainingTracker.Common.pdb
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\obj\Debug\TrainingTracker.Common.dll
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\obj\Debug\TrainingTracker.Common.pdb

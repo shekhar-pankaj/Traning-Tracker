@@ -24,8 +24,16 @@ namespace TrainingTracker.DAL.Interface
         /// Calls stored procedure which adds user.
         /// </summary>
         /// <param name="userData">User data object.</param>
+        /// <param name="userId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
-        bool AddUser(User userData);
+        bool AddUser(User userData,out int userId);
+
+        /// <summary>
+        /// Calls stored procedure which updates user.
+        /// </summary>
+        /// <param name="objUser">User data object.</param>
+        /// <returns>True if updated.</returns>
+        bool UpdateUser(User objUser);
 
         /// <summary>
         /// Gets all Users.

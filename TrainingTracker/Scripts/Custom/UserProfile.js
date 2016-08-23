@@ -5,7 +5,9 @@
             selectedSkill = ko.observable(),
             selectedProject = ko.observable(),
             validationMessage = ko.observable(),
-            recentCodeReviewFeedback =ko.observable(),
+            tempAllTrainer =ko.observable(), // remove this once temproray feature use end
+            recentCodeReviewFeedback = ko.observable(),
+            recentWeeklyFeedback = ko.observable(),
             controls = {
                 skillOption: ko.observable("1"),
                 assignmentOption: ko.observable(1),
@@ -13,9 +15,10 @@
             },
             filter = {
                 filterFeedback: ko.observable(),
-                pageSize: ko.observableArray(['5', '10', '20']),
+                pageSize: ko.observableArray(['5', '10', '20','100']),
                 selectedPageSize: ko.observable(),
-    },
+                tempAddedBy: ko.observable() // remove this once temproray feature use end
+         },
             feedbackPost = {
                 Title: ko.observable(),
                 FeedbackText: ko.observable(),
@@ -25,6 +28,7 @@
                 Rating: ko.observable(0),
                 AddedFor: '',
                 AddedBy: '',
+                AddedOn:ko.observable(),
                 StartDate: ko.observable(),
                 EndDate: ko.observable()
             },
@@ -48,13 +52,10 @@
                     feedback.AddedBy.UserImageUrl = my.rootUrl + "/Uploads/ProfilePicture/" + feedback.AddedBy.ProfilePictureName;
                 });
                 jsonData.Feedbacks = ko.observableArray(jsonData.Feedbacks);
-                my.profileVm.recentCodeReviewFeedback(jsonData.RecentCrFeedback);
+                my.profileVm.recentCodeReviewFeedback(jsonData.RecentCrFeedback); 
+                my.profileVm.recentWeeklyFeedback(jsonData.RecentWeeklyFeedback);
+                my.profileVm.tempAllTrainer(jsonData.AllTrainer); // Temp Feature
                 my.profileVm.userVm = jsonData;
-                //my.profileVm.userVm.Feedbacks = ko.observableArray([]);
-                //$.each(jsonData.Feedbacks, function (key)
-                //{
-                //    my.profileVm.userVm.Feedbacks.push(jsonData.Feedbacks[key]);
-                //});
                 ko.applyBindings(my.profileVm);
                 my.profileVm.feedbackPost.Rating(0);
             },
@@ -63,20 +64,7 @@
             },
             validatePost = function() {
                 var result = true;
-                //if (my.profileVm.feedbackPost.FeedbackType().FeedbackTypeId == 2) {
-                //    if (my.profileVm.selectedSkill() == undefined ||
-                //                    my.profileVm.selectedSkill() == "") {
-                //        my.profileVm.validationMessage("You need to select a skill to add feedback.");
-                //        result = false;
-                //    }
-                //}
-                //else if (my.profileVm.feedbackPost.FeedbackType().FeedbackTypeId == 3) {
-                //    if (my.profileVm.selectedProject() == undefined ||
-                //                    my.profileVm.selectedProject() == "") {
-                //        my.profileVm.validationMessage("You need to select a project to add feedback.");
-                //        result = false;
-                //    }
-                //}
+                
                 var validationMessageArray = [];
 
                 if (my.profileVm.feedbackPost.FeedbackText() == undefined ||
@@ -133,11 +121,6 @@
 
                 }
                 
-               // my.profileVm.feedbackPost.AddedBy.UserImageUrl = my.rootUrl + "/Uploads/ProfilePicture/" + my.profileVm.userVm;
-
-              //  my.profileVm.userVm.Feedbacks.unshift(my.profileVm.feedbackPost);
-                //  ko.mapping.fromJs(my.profileVm.userVm.Feedbacks, my.profileVm);
-                //  my.profileVm.getUser();
                 my.profileVm.selectedSkill(0);
                 my.profileVm.feedbackPost.FeedbackType("Comment");
                 my.profileVm.feedbackPost.FeedbackText("");
@@ -148,7 +131,13 @@
 
                 if (my.profileVm.validatePost()) {
                     my.profileVm.feedbackPost.AddedFor = { UserId: my.profileVm.userId };
-                    my.profileVm.feedbackPost.AddedBy = { UserId: my.profileVm.currentUser.UserId };
+                    
+                    if (typeof(my.profileVm.filter.tempAddedBy()) == 'undefined') {
+                        my.profileVm.feedbackPost.AddedBy = { UserId: my.profileVm.currentUser.UserId };
+                    } else {
+                        my.profileVm.feedbackPost.AddedBy = { UserId: my.profileVm.filter.tempAddedBy().UserId };
+                    }
+                   
                     my.profileVm.feedbackPost.Skill = selectedSkill;
                     my.userService.addUserFeedback(my.profileVm.feedbackPost, my.profileVm.addFeedbackCallback);
                 }
@@ -161,8 +150,9 @@
             getCurrentUser = function() {
                 my.userService.getCurrentUser(my.profileVm.getCurrentUserCallback);
             },        
-            applyFilter = function() {
-                my.userService.getFeedbackonAppliedFilter(my.profileVm.filter.selectedPageSize(), my.profileVm.filter.filterFeedback().FeedbackTypeId, my.profileVm.userId, my.profileVm.applyFilterCallback);
+            applyFilter = function () {
+                var filtertype = typeof(my.profileVm.filter.filterFeedback()) == 'undefined' ? 0 : (my.profileVm.filter.filterFeedback().FeedbackTypeId);
+                my.userService.getFeedbackonAppliedFilter(my.profileVm.filter.selectedPageSize(), filtertype, my.profileVm.userId, my.profileVm.applyFilterCallback);
             },
             applyFilterCallback = function (feedbacks) {
                 my.profileVm.userVm.Feedbacks([]);
@@ -172,8 +162,8 @@
                     my.profileVm.userVm.Feedbacks.push(feedbacks[key]);
                 });
             },
-            getCountForFeedback=function(type) {
-                var feedbackFilteredOnType = ko.utils.arrayFilter(my.profileVm.recentCodeReviewFeedback(), function (item)
+            getCountForFeedback=function(type,feedbackList) {
+                var feedbackFilteredOnType = ko.utils.arrayFilter(feedbackList, function (item)
                 {
                     return item.Rating == type;
                 });
@@ -205,7 +195,9 @@
             applyFilter: applyFilter,
             applyFilterCallback: applyFilterCallback,
             recentCodeReviewFeedback: recentCodeReviewFeedback,
-            getCountForFeedback: getCountForFeedback
+            getCountForFeedback: getCountForFeedback,
+            recentWeeklyFeedback:recentWeeklyFeedback,
+            tempAllTrainer: tempAllTrainer //temp feature
         };
     }();
 

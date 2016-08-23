@@ -112,6 +112,38 @@ namespace TrainingTracker.Common.Utility
         }
 
         /// <summary>
+        /// Executes a non-result set query. Returns number of rows affected.
+        /// </summary>
+        /// <param name="sql">Sql command.</param>
+        /// <param name="commandType">Command type.</param>
+        /// <param name="sqlParams">Sql parameters.</param>
+        /// <returns>Number of rows affected.</returns>
+        public static int ExecuteScalar(string sql, CommandType commandType, List<SqlParameter> sqlParams)
+        {
+            int id;
+
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (var dbCommand = new SqlCommand())
+                {
+                    dbCommand.Connection = conn;
+                    dbCommand.CommandText = sql;
+                    dbCommand.CommandType = commandType;
+
+                    foreach (var prm in sqlParams)
+                    {
+                        dbCommand.Parameters.Add(prm);
+                    }
+                    var returnId = dbCommand.ExecuteScalar();
+                    id = Convert.ToInt32(returnId);
+                }
+            }
+
+            return id;
+        }
+
+        /// <summary>
         /// Executes command to return bytes.
         /// </summary>
         /// <param name="sql">Sql command.</param>

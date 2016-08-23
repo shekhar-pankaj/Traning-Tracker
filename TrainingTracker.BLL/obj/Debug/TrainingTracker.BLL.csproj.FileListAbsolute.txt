@@ -7,3 +7,12 @@ D:\Projects\TraningTracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.Common.
 D:\Projects\TraningTracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.DAL.pdb
 D:\Projects\TraningTracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.dll
 D:\Projects\TraningTracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.pdb
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.BLL.dll
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.BLL.pdb
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.Common.dll
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.DAL.dll
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.Common.pdb
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.DAL.pdb
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.csprojResolveAssemblyReference.cache
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.dll
+D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.pdb
