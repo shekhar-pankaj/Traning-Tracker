@@ -26,8 +26,8 @@ namespace TrainingTracker.DAL.EntityFramework
         public int AddedBy { get; set; }
         public System.DateTime AddedDate { get; set; }
     
+        public virtual ICollection<QuestionLevelMapping> QuestionLevelMappings { get; set; }
         public virtual Skill Skill { get; set; }
         public virtual User User { get; set; }
-        public virtual ICollection<QuestionLevelMapping> QuestionLevelMappings { get; set; }
     }
 }

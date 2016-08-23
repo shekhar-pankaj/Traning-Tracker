@@ -4,56 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TrainingTrackerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="TrainingTrackerModelStoreContainer">
-          <EntitySet Name="Comments" EntityType="TrainingTrackerModel.Store.Comments" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Feedback" EntityType="TrainingTrackerModel.Store.Feedback" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="FeedbackType" EntityType="TrainingTrackerModel.Store.FeedbackType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="LearningSource" EntityType="TrainingTrackerModel.Store.LearningSource" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Plans" EntityType="TrainingTrackerModel.Store.Plans" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PlanSkillMapping" EntityType="TrainingTrackerModel.Store.PlanSkillMapping" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Project" EntityType="TrainingTrackerModel.Store.Project" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ProjectPlanMapping" EntityType="TrainingTrackerModel.Store.ProjectPlanMapping" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Session" EntityType="TrainingTrackerModel.Store.Session" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Skills" EntityType="TrainingTrackerModel.Store.Skills" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="TrainingTrackerModel.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserProjectMapping" EntityType="TrainingTrackerModel.Store.UserProjectMapping" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserSessionMapping" EntityType="TrainingTrackerModel.Store.UserSessionMapping" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserSkillMapping" EntityType="TrainingTrackerModel.Store.UserSkillMapping" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="fk_Feedback_AddedBy" Association="TrainingTrackerModel.Store.fk_Feedback_AddedBy">
-            <End Role="User" EntitySet="User" />
-            <End Role="Feedback" EntitySet="Feedback" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Feedback_AddedFor" Association="TrainingTrackerModel.Store.fk_Feedback_AddedFor">
-            <End Role="User" EntitySet="User" />
-            <End Role="Feedback" EntitySet="Feedback" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Feedback_FeedbackType" Association="TrainingTrackerModel.Store.fk_Feedback_FeedbackType">
-            <End Role="FeedbackType" EntitySet="FeedbackType" />
-            <End Role="Feedback" EntitySet="Feedback" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Session_User" Association="TrainingTrackerModel.Store.fk_Session_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Session" EntitySet="Session" />
-          </AssociationSet>
-          <AssociationSet Name="fk_UserSessionMapping_AddedBy" Association="TrainingTrackerModel.Store.fk_UserSessionMapping_AddedBy">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
-          </AssociationSet>
-          <AssociationSet Name="fk_UserSessionMapping_Session" Association="TrainingTrackerModel.Store.fk_UserSessionMapping_Session">
-            <End Role="Session" EntitySet="Session" />
-            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
-          </AssociationSet>
-          <AssociationSet Name="fk_UserSessionMapping_User" Association="TrainingTrackerModel.Store.fk_UserSessionMapping_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
-          </AssociationSet>
-        </EntityContainer>
+    <Schema Namespace="TrainingTrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Comments">
           <Key>
             <PropertyRef Name="CommentId" />
           </Key>
-          <Property Name="CommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Comment" Type="varchar(max)" />
           <Property Name="AddedOn" Type="datetime" />
           <Property Name="AddedBy" Type="int" />
@@ -63,7 +19,7 @@
           <Key>
             <PropertyRef Name="FeedbackId" />
           </Key>
-          <Property Name="FeedbackId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FeedbackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FeedbackText" Type="varchar(max)" />
           <Property Name="Title" Type="varchar" MaxLength="100" />
           <Property Name="FeedbackType" Type="int" />
@@ -80,7 +36,7 @@
           <Key>
             <PropertyRef Name="FeedbackTypeId" />
           </Key>
-          <Property Name="FeedbackTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FeedbackTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Sequence" Type="int" />
         </EntityType>
@@ -88,7 +44,7 @@
           <Key>
             <PropertyRef Name="SourceId" />
           </Key>
-          <Property Name="SourceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SkillId" Type="int" />
           <Property Name="Title" Type="varchar" MaxLength="200" />
           <Property Name="Description" Type="varchar(max)" />
@@ -101,7 +57,7 @@
           <Key>
             <PropertyRef Name="PlanId" />
           </Key>
-          <Property Name="PlanId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PlanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="200" />
           <Property Name="Sequqence" Type="int" />
           <Property Name="AddedOn" Type="datetime" />
@@ -113,7 +69,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PlanId" Type="int" />
           <Property Name="SkillId" Type="int" />
         </EntityType>
@@ -121,7 +77,7 @@
           <Key>
             <PropertyRef Name="ProjectId" />
           </Key>
-          <Property Name="ProjectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="200" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="CreatedBy" Type="int" />
@@ -137,11 +93,32 @@
           <Property Name="PlanId" Type="int" />
           <Property Name="ProjectId" Type="int" />
         </EntityType>
+        <EntityType Name="QuestionLevelMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="Level" Type="smallint" Nullable="false" />
+          <Property Name="ExperienceStartRange" Type="smallint" Nullable="false" />
+          <Property Name="ExperienceEndRange" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionText" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="SkillId" Type="int" Nullable="false" />
+          <Property Name="AddedBy" Type="int" Nullable="false" />
+          <Property Name="AddedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Session">
           <Key>
             <PropertyRef Name="SessionId" />
           </Key>
-          <Property Name="SessionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="200" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Presenter" Type="int" />
@@ -152,7 +129,7 @@
           <Key>
             <PropertyRef Name="SkillId" />
           </Key>
-          <Property Name="SkillId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
           <Property Name="Description" Type="varchar" MaxLength="500" />
           <Property Name="AddedOn" Type="date" />
@@ -162,7 +139,7 @@
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="100" />
           <Property Name="LastName" Type="varchar" MaxLength="100" />
           <Property Name="UserName" Type="varchar" MaxLength="50" />
@@ -182,7 +159,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
           <Property Name="ProjectId" Type="int" />
           <Property Name="StartedOn" Type="datetime" />
@@ -193,7 +170,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" />
           <Property Name="SessionId" Type="int" />
           <Property Name="AddedOn" Type="datetime" />
@@ -203,15 +180,15 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SkillId" Type="int" />
           <Property Name="UserId" Type="int" />
           <Property Name="AddedOn" Type="datetime" />
           <Property Name="AddedBy" Type="int" />
         </EntityType>
         <Association Name="fk_Feedback_AddedBy">
-          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
-          <End Role="Feedback" Type="TrainingTrackerModel.Store.Feedback" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -222,8 +199,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Feedback_AddedFor">
-          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
-          <End Role="Feedback" Type="TrainingTrackerModel.Store.Feedback" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -234,8 +211,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Feedback_FeedbackType">
-          <End Role="FeedbackType" Type="TrainingTrackerModel.Store.FeedbackType" Multiplicity="0..1" />
-          <End Role="Feedback" Type="TrainingTrackerModel.Store.Feedback" Multiplicity="*" />
+          <End Role="FeedbackType" Type="Self.FeedbackType" Multiplicity="0..1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FeedbackType">
               <PropertyRef Name="FeedbackTypeId" />
@@ -245,9 +222,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QuestionLevelMapping_QuestionId">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="QuestionLevelMapping" Type="Self.QuestionLevelMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionLevelMapping">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_SkillId">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_UserId">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Session_User">
-          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
-          <End Role="Session" Type="TrainingTrackerModel.Store.Session" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -258,8 +271,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_UserSessionMapping_AddedBy">
-          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
-          <End Role="UserSessionMapping" Type="TrainingTrackerModel.Store.UserSessionMapping" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserSessionMapping" Type="Self.UserSessionMapping" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -270,8 +283,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_UserSessionMapping_Session">
-          <End Role="Session" Type="TrainingTrackerModel.Store.Session" Multiplicity="0..1" />
-          <End Role="UserSessionMapping" Type="TrainingTrackerModel.Store.UserSessionMapping" Multiplicity="*" />
+          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
+          <End Role="UserSessionMapping" Type="Self.UserSessionMapping" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Session">
               <PropertyRef Name="SessionId" />
@@ -282,8 +295,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_UserSessionMapping_User">
-          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
-          <End Role="UserSessionMapping" Type="TrainingTrackerModel.Store.UserSessionMapping" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserSessionMapping" Type="Self.UserSessionMapping" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -293,6 +306,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="TrainingTrackerModelStoreContainer">
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedbackType" EntityType="Self.FeedbackType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LearningSource" EntityType="Self.LearningSource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plans" EntityType="Self.Plans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanSkillMapping" EntityType="Self.PlanSkillMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectPlanMapping" EntityType="Self.ProjectPlanMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionLevelMapping" EntityType="Self.QuestionLevelMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProjectMapping" EntityType="Self.UserProjectMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSessionMapping" EntityType="Self.UserSessionMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSkillMapping" EntityType="Self.UserSkillMapping" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Feedback_AddedBy" Association="Self.fk_Feedback_AddedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Feedback_AddedFor" Association="Self.fk_Feedback_AddedFor">
+            <End Role="User" EntitySet="User" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Feedback_FeedbackType" Association="Self.fk_Feedback_FeedbackType">
+            <End Role="FeedbackType" EntitySet="FeedbackType" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionLevelMapping_QuestionId" Association="Self.FK_QuestionLevelMapping_QuestionId">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionLevelMapping" EntitySet="QuestionLevelMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_SkillId" Association="Self.FK_Questions_SkillId">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_UserId" Association="Self.FK_Questions_UserId">
+            <End Role="User" EntitySet="User" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Session_User" Association="Self.fk_Session_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserSessionMapping_AddedBy" Association="Self.fk_UserSessionMapping_AddedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserSessionMapping_Session" Association="Self.fk_UserSessionMapping_Session">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserSessionMapping_User" Association="Self.fk_UserSessionMapping_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -339,6 +410,20 @@
           <AssociationSet Name="fk_UserSessionMapping_Session" Association="TrainingTrackerModel.fk_UserSessionMapping_Session">
             <End Role="Session" EntitySet="Sessions" />
             <End Role="UserSessionMapping" EntitySet="UserSessionMappings" />
+          </AssociationSet>
+          <EntitySet Name="QuestionLevelMappings" EntityType="TrainingTrackerModel.QuestionLevelMapping" />
+          <EntitySet Name="Questions" EntityType="TrainingTrackerModel.Question" />
+          <AssociationSet Name="FK_QuestionLevelMapping_QuestionId" Association="TrainingTrackerModel.FK_QuestionLevelMapping_QuestionId">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="QuestionLevelMapping" EntitySet="QuestionLevelMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_SkillId" Association="TrainingTrackerModel.FK_Questions_SkillId">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_UserId" Association="TrainingTrackerModel.FK_Questions_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Question" EntitySet="Questions" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Comment">
@@ -455,6 +540,7 @@
           <Property Name="Description" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
           <Property Name="AddedOn" Type="DateTime" Precision="0" />
           <Property Name="AddedBy" Type="Int32" />
+          <NavigationProperty Name="Questions" Relationship="TrainingTrackerModel.FK_Questions_SkillId" FromRole="Skill" ToRole="Question" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -480,6 +566,7 @@
           <NavigationProperty Name="Sessions" Relationship="TrainingTrackerModel.fk_Session_User" FromRole="User" ToRole="Session" />
           <NavigationProperty Name="UserSessionMappings" Relationship="TrainingTrackerModel.fk_UserSessionMapping_AddedBy" FromRole="User" ToRole="UserSessionMapping" />
           <NavigationProperty Name="UserSessionMappings1" Relationship="TrainingTrackerModel.fk_UserSessionMapping_User" FromRole="User" ToRole="UserSessionMapping" />
+          <NavigationProperty Name="Questions" Relationship="TrainingTrackerModel.FK_Questions_UserId" FromRole="User" ToRole="Question" />
         </EntityType>
         <EntityType Name="UserProjectMapping">
           <Key>
@@ -596,6 +683,67 @@
             </Principal>
             <Dependent Role="UserSessionMapping">
               <PropertyRef Name="SessionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="QuestionLevelMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="Level" Type="Int16" Nullable="false" />
+          <Property Name="ExperienceStartRange" Type="Int16" Nullable="false" />
+          <Property Name="ExperienceEndRange" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="TrainingTrackerModel.FK_QuestionLevelMapping_QuestionId" FromRole="QuestionLevelMapping" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionText" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SkillId" Type="Int32" Nullable="false" />
+          <Property Name="AddedBy" Type="Int32" Nullable="false" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="QuestionLevelMappings" Relationship="TrainingTrackerModel.FK_QuestionLevelMapping_QuestionId" FromRole="Question" ToRole="QuestionLevelMapping" />
+          <NavigationProperty Name="Skill" Relationship="TrainingTrackerModel.FK_Questions_SkillId" FromRole="Question" ToRole="Skill" />
+          <NavigationProperty Name="User" Relationship="TrainingTrackerModel.FK_Questions_UserId" FromRole="Question" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_QuestionLevelMapping_QuestionId">
+          <End Type="TrainingTrackerModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.QuestionLevelMapping" Role="QuestionLevelMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionLevelMapping">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_SkillId">
+          <End Type="TrainingTrackerModel.Skill" Role="Skill" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="SkillId" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_UserId">
+          <End Type="TrainingTrackerModel.User" Role="User" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="AddedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -779,6 +927,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="QuestionLevelMappings">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.QuestionLevelMapping">
+              <MappingFragment StoreEntitySet="QuestionLevelMapping">
+                <ScalarProperty Name="ExperienceEndRange" ColumnName="ExperienceEndRange" />
+                <ScalarProperty Name="ExperienceStartRange" ColumnName="ExperienceStartRange" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -796,6 +967,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
