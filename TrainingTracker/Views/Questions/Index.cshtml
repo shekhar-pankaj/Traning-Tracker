@@ -6,17 +6,24 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link href="~/StyleSheets/Questions.css" rel="stylesheet" />
 <link href="~/StyleSheets/CustomButtons.css" rel="stylesheet" />
-<div class="container-fluid">
+<div class="container-fluid" style="display: none" data-bind="visible: true">
     <div class="row no-gutter">
         <div class="col-lg-2  category-pane">
             <div class="input-group category-list-search">
-                <input type="text" class="form-control" placeholder="search catagories...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-                </span>
+                <input type="text" class="form-control" placeholder="search catagories..." data-bind="value: categoryFilter, valueUpdate:'afterkeydown'">
+                <div class="input-group-btn">
+                    <div class="btn btn-default"><i class="glyphicon glyphicon-search"></i></div>
+                </div>
             </div>
             <div class="category-list">
-                <div class="list-group" data-bind="foreach: questionsVm.Categories">
+                <div data-bind="visible:filterCategory().length == 0">
+                    <div class="alert alert-info" role="alert">
+                        Oh! It seems we don't have this category created yet. You can add this category by clicking on the Add button here.
+                        <br /><br />
+                        <button class="btn btn-primary" data-bind="click:function(){addCategory();}"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add</button>
+                    </div>
+                </div>
+                <div class="list-group" data-bind="foreach: filterCategory">
                     <div data-bind="click: function(){$parent.userSelections.skillId(SkillId); $parent.getQuestionsBySkillAndExperience();}">
                         <a href="#" class="list-group-item" data-bind="css: {active: $parent.userSelections.skillId() == SkillId}">
                             <span data-bind="text: Name"></span>

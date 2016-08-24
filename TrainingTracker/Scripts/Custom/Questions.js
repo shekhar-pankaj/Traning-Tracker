@@ -1,14 +1,27 @@
 ﻿$(document).ready(function () {
     my.questionVm = function () {
-        var questionsVm = {},
+        var questionsVm = {
+                Categories: ko.observableArray([]),
+                Questions: []
+            },
             currentUser = { UserId: 1 },
-            nowShowingQuestions = ko.observableArray(),
+            nowShowingQuestions = ko.observableArray([]),
+            categoryFilter = ko.observable(""),
+            filterCategory = ko.computed(function () {
+                if (!categoryFilter()) {
+                    return questionsVm.Categories();
+                } else {
+                    return ko.utils.arrayFilter(questionsVm.Categories(), function (category) {
+                        return category.Name.toLowerCase().indexOf(categoryFilter().toLowerCase()) >= 0;
+                    });
+                }
+            }),
             newQuestion = {
                 QuestionText: ko.observable(""),
                 Description: ko.observable(),
                 SkillId: ko.observable(),
                 AddedBy: 0,
-                LevelMapping:[]
+                LevelMapping: []
             },
             setQuestionLevel = function (level, value) {
                 if (level.questionLevel() == value) {
@@ -45,15 +58,22 @@
                 questionValidation: ko.observable(""),
                 questionAddedSuccess: ko.observable("")
             },
+            addCategoryCallback = function () {
+                my.questionVm.getQuestionsVm();
+            },
+            addCategory = function () {
+                my.questionsService.addCategory({ Name: my.questionVm.categoryFilter, AddedBy: my.meta.currentUser.UserId },
+                    my.questionVm.addCategoryCallback);
+            },
             addQuestionCallback = function (response) {
                 my.questionVm.alerts.questionAddedSuccess("Question added.");
                 my.questionVm.newQuestion.QuestionText("");
                 my.questionVm.newQuestion.Description("");
-                my.questionVm.newQuestion.AddedBy = my.meta.currentUser.UserId;
                 my.questionVm.getQuestionsBySkillAndExperience();
             },
             addQuestion = function () {
                 my.questionVm.alerts.questionAddedSuccess("");
+                my.questionVm.newQuestion.AddedBy = my.meta.currentUser.UserId;
                 my.questionVm.newQuestion.SkillId = my.questionVm.userSelections.skillId();
                 my.questionsService.addQuestion(my.questionVm.newQuestion, my.questionVm.addQuestionCallback);
             },
@@ -74,7 +94,7 @@
                     my.questionVm.alerts.questionValidation(message);
                 }
             },
-            clearLevelSelection = function() {
+            clearLevelSelection = function () {
                 my.questionVm.questionLevels.expLevel0.questionLevel(0);
                 my.questionVm.questionLevels.expLevel1.questionLevel(0);
                 my.questionVm.questionLevels.expLevel2.questionLevel(0);
@@ -120,7 +140,10 @@
                 }
             },
             getQuesionsVmCallback = function (response) {
-                my.questionVm.questionsVm = response;
+                my.questionVm.questionsVm.Categories([]);
+                $.each(response.Categories, function (arrayId, item) {
+                    my.questionVm.questionsVm.Categories.push(item);
+                });
                 ko.applyBindings(my.questionVm);
             },
             getQuestionsVm = function () {
@@ -161,7 +184,11 @@
             questionLevels: questionLevels,
             setQuestionLevel: setQuestionLevel,
             generateLevelMapping: generateLevelMapping,
-            clearLevelSelection: clearLevelSelection
+            clearLevelSelection: clearLevelSelection,
+            categoryFilter: categoryFilter,
+            filterCategory: filterCategory,
+            addCategory: addCategory,
+            addCategoryCallback: addCategoryCallback
         };
     }();
     $('[data-toggle="tooltip"]').tooltip();

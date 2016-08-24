@@ -35,8 +35,13 @@ namespace TrainingTracker.Controllers
         [HttpPost]
         public ActionResult AddQuestion(Question question)
         {
-            new QuestionBl().AddQuestion(question);
-            return Json("true");
+            return Json(new QuestionBl().AddQuestion(question).ToString());
+        }
+
+        [HttpPost]
+        public ActionResult AddCategory(Skill category)
+        {
+            return Json(new QuestionBl().AddSkill(category).ToString());
         }
     }
 }

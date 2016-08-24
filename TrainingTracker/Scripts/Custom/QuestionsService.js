@@ -16,6 +16,9 @@
         },
         addQuestion: function (question, callback) {
             my.ajaxService.ajaxPostJson(my.rootUrl + "/Questions/AddQuestion", question, callback);
+        },
+        addCategory: function (category, callback) {
+            my.ajaxService.ajaxPostJson(my.rootUrl + "/Questions/AddCategory", category, callback);
         }
     };
 }(my));
