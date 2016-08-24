@@ -30,6 +30,11 @@ namespace TrainingTracker.BLL
             return QuestionDataAccesor.AddQuestion(question);
         }
 
+        public bool AddSkill(Skill skill)
+        {
+            return SkillDataAccesor.AddSkill(skill);
+        }
+
         public QuestionVm GetQuestionVm()
         {
             return new QuestionVm
