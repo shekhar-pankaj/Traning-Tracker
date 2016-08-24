@@ -44,5 +44,13 @@ namespace TrainingTracker.BLL.Base
                 return new FeedbackDal();
             }
         }
+
+        public IQuestionDal QuestionDataAccesor
+        {
+            get
+            {
+                return new QuestionDal();
+            }
+        }
     }
 }
