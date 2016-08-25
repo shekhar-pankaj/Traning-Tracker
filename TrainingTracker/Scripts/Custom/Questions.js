@@ -171,6 +171,7 @@
             my.questionsService.getQuestionsVm(getQuesionsVmCallback);
         },
         getQuestionsBySkillAndExperienceCallback = function (response) {
+            my.questionVm.questionsVm.Questions([]);
             $.each(response, function (arrayId, item) {
                 my.questionVm.questionsVm.Questions.push(item);
             });

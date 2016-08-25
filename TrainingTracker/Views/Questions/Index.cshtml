@@ -69,13 +69,13 @@
             <div data-bind="visible: userSelections.skillId() != 0">
                 <div class="level-selector">
                     <ul class="nav nav-tabs nav-justified">
-                        <li data-bind="css:{active: userSelections.level() ==1}, click:function(){userSelections.level(1);displayFilteredQuestions();}">
+                        <li data-bind="css:{active: userSelections.level() ==1}, click:function(){userSelections.level(1);}">
                             <a href="#"><span>Basic&nbsp;&nbsp;&nbsp;</span><span class="badge" data-bind="text:questionCounts.basic"></span> </a>
                         </li>
-                        <li data-bind="css:{active: userSelections.level() ==2}, click:function(){userSelections.level(2);displayFilteredQuestions();}">
+                        <li data-bind="css:{active: userSelections.level() ==2}, click:function(){userSelections.level(2);}">
                             <a href="#"><span>Intermediate&nbsp;&nbsp;&nbsp;</span><span class="badge" data-bind="text:questionCounts.intermediate"></span></a>
                         </li>
-                        <li data-bind="css:{active: userSelections.level() ==3}, click:function(){userSelections.level(3);displayFilteredQuestions();}">
+                        <li data-bind="css:{active: userSelections.level() ==3}, click:function(){userSelections.level(3);}">
                             <a href="#"><span>Core&nbsp;&nbsp;&nbsp;</span><span class="badge" data-bind="text:questionCounts.core"></span></a>
                         </li>
                     </ul>
