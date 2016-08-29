@@ -14,10 +14,17 @@ namespace TrainingTracker.DAL.EntityFramework
     
     public partial class Skill
     {
+        public Skill()
+        {
+            this.Questions = new HashSet<Question>();
+        }
+    
         public int SkillId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> AddedOn { get; set; }
         public Nullable<int> AddedBy { get; set; }
+    
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

@@ -47,6 +47,8 @@
     <Compile Include="Entity\FeedbackType.cs" />
     <Compile Include="Entity\LoginModel.cs" />
     <Compile Include="Entity\Project.cs" />
+    <Compile Include="Entity\Question.cs" />
+    <Compile Include="Entity\QuestionLevelMapping.cs" />
     <Compile Include="Entity\Session.cs" />
     <Compile Include="Entity\Skill.cs" />
     <Compile Include="Entity\User.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Utility\LogUtility.cs" />
     <Compile Include="Utility\SqlUtility.cs" />
     <Compile Include="ViewModel\DashboardVm.cs" />
+    <Compile Include="ViewModel\QuestionVm.cs" />
     <Compile Include="ViewModel\SessionVm.cs" />
     <Compile Include="ViewModel\UserProfileVm.cs" />
   </ItemGroup>

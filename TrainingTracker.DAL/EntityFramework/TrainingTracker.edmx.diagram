@@ -26,6 +26,11 @@
         <AssociationConnector Association="TrainingTrackerModel.fk_UserSessionMapping_AddedBy" />
         <AssociationConnector Association="TrainingTrackerModel.fk_UserSessionMapping_User" />
         <AssociationConnector Association="TrainingTrackerModel.fk_UserSessionMapping_Session" />
+        <EntityTypeShape EntityType="TrainingTrackerModel.QuestionLevelMapping" Width="1.5" PointX="16.25" PointY="4.25" />
+        <EntityTypeShape EntityType="TrainingTrackerModel.Question" Width="1.5" PointX="14" PointY="4" />
+        <AssociationConnector Association="TrainingTrackerModel.FK_QuestionLevelMapping_QuestionId" />
+        <AssociationConnector Association="TrainingTrackerModel.FK_Questions_SkillId" />
+        <AssociationConnector Association="TrainingTrackerModel.FK_Questions_UserId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

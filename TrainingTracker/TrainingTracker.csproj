@@ -118,6 +118,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -153,6 +154,8 @@
     <Content Include="Scripts\Custom\FeedbackChart.js" />
     <Content Include="Scripts\Custom\Layout.js" />
     <Content Include="Scripts\Custom\Login.js" />
+    <Content Include="Scripts\Custom\Questions.js" />
+    <Content Include="Scripts\Custom\QuestionsService.js" />
     <Content Include="Scripts\Custom\UserProfile.js" />
     <Content Include="Scripts\Custom\UserService.js" />
     <Content Include="Content\DatePicker\bootstrap-datepicker.css.map" />
@@ -184,11 +187,13 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="StyleSheets\AddEditProfile.css" />
     <Content Include="StyleSheets\AllProfiles.css" />
+    <Content Include="StyleSheets\CustomButtons.css" />
     <Content Include="StyleSheets\Dashboard.css" />
     <Content Include="StyleSheets\FeedbackPlot.css" />
     <Content Include="StyleSheets\Layout.css" />
     <Content Include="StyleSheets\Login.css" />
     <Content Include="StyleSheets\Profile.css" />
+    <Content Include="StyleSheets\Questions.css" />
     <Content Include="StyleSheets\Session.css" />
     <Content Include="StyleSheets\simple-sidebar.css" />
     <Content Include="Uploads\ProfilePicture\harshw.JPG" />
@@ -214,6 +219,7 @@
     <Content Include="Views\Session\Sessions.cshtml" />
     <Content Include="Views\Shared\_PartialProfile.cshtml" />
     <Content Include="Views\Shared\_FeedbackIllustration.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
