@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link href="~/StyleSheets/Questions.css" rel="stylesheet" />
 <link href="~/StyleSheets/CustomButtons.css" rel="stylesheet" />
-<div class="container-fluid">
+<div class="container-fluid" style="display: none" data-bind="visible: true">
     <div class="row no-gutter">
         <div class="col-lg-2  category-pane">
             <div class="input-group category-list-search">
@@ -69,18 +69,24 @@
             <div data-bind="visible: userSelections.skillId() != 0">
                 <div class="level-selector">
                     <ul class="nav nav-tabs nav-justified">
-                        <li role="presentation" data-bind="css:{active: userSelections.level() ==1}, click:function(){userSelections.level(1);displayFilteredQuestions();}"><a href="#">Basic</a></li>
-                        <li role="presentation" data-bind="css:{active: userSelections.level() ==2}, click:function(){userSelections.level(2);displayFilteredQuestions();}"><a href="#">Intermediate</a></li>
-                        <li role="presentation" data-bind="css:{active: userSelections.level() ==3}, click:function(){userSelections.level(3);displayFilteredQuestions();}"><a href="#">Core</a></li>
+                        <li data-bind="css:{active: userSelections.level() ==1}, click:function(){userSelections.level(1);}">
+                            <a href="#"><span>Basic&nbsp;&nbsp;&nbsp;</span><span class="badge" data-bind="text:questionCounts.basic"></span> </a>
+                        </li>
+                        <li data-bind="css:{active: userSelections.level() ==2}, click:function(){userSelections.level(2);}">
+                            <a href="#"><span>Intermediate&nbsp;&nbsp;&nbsp;</span><span class="badge" data-bind="text:questionCounts.intermediate"></span></a>
+                        </li>
+                        <li data-bind="css:{active: userSelections.level() ==3}, click:function(){userSelections.level(3);}">
+                            <a href="#"><span>Core&nbsp;&nbsp;&nbsp;</span><span class="badge" data-bind="text:questionCounts.core"></span></a>
+                        </li>
                     </ul>
                 </div>
                 <div class="list-group" data-bind="foreach: nowShowingQuestions">
-                    <a href="#" class="list-group-item">
-                        <div class="list-group-item-heading" data-toggle="collapse" data-bind="attr: { 'data-target': '#q_' + $index() }">
+                    <a href="#" class="list-group-item" data-toggle="collapse" data-bind="attr: { 'data-target': '#q_' + $index() }">
+                        <div class="list-group-item-heading">
                             <h4 data-bind="text: QuestionText"></h4>
                         </div>
                         <div data-bind="attr: { 'id': 'q_' + $index() }" class="collapse">
-                            <p class="list-group-item-text" data-bind="text: Description"></p>
+                            <span style="white-space:pre-wrap" class="list-group-item-text" data-bind="text: Description"></span>
                         </div>
                     </a>
                 </div>

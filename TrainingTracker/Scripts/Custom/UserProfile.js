@@ -5,7 +5,7 @@
             selectedSkill = ko.observable(),
             selectedProject = ko.observable(),
             validationMessage = ko.observable(),
-            tempAllTrainer =ko.observable(), // remove this once temproray feature use end
+            tempAllTrainer = ko.observable(), // remove this once temproray feature use end
             recentCodeReviewFeedback = ko.observable(),
             recentWeeklyFeedback = ko.observable(),
             controls = {
@@ -13,12 +13,20 @@
                 assignmentOption: ko.observable(1),
                 crOption: ko.observable(1),
             },
+            plotFilter =
+            {
+                StartDate: ko.observable(),
+                EndDate: ko.observable(moment(new Date()).format('MM/DD/YYYY')),
+                Trainer: ko.observable(),
+                FeedbackType: ko.observableArray(['3','4','5']),
+                TraineeId: 0
+            },
             filter = {
                 filterFeedback: ko.observable(),
                 pageSize: ko.observableArray(['5', '10', '20','100']),
                 selectedPageSize: ko.observable(),
                 tempAddedBy: ko.observable() // remove this once temproray feature use end
-         },
+             },
             feedbackPost = {
                 Title: ko.observable(),
                 FeedbackText: ko.observable(),
@@ -55,9 +63,16 @@
                 my.profileVm.recentCodeReviewFeedback(jsonData.RecentCrFeedback); 
                 my.profileVm.recentWeeklyFeedback(jsonData.RecentWeeklyFeedback);
                 my.profileVm.tempAllTrainer(jsonData.AllTrainer); // Temp Feature
+                my.profileVm.plotFilter.StartDate(moment(jsonData.User.DateAddedToSystem).format('MM/DD/YYYY'));
+                my.profileVm.plotFilter.TraineeId = jsonData.User.UserId;
                 my.profileVm.userVm = jsonData;
                 ko.applyBindings(my.profileVm);
-                my.profileVm.feedbackPost.Rating(0);
+                my.profileVm.feedbackPost.Rating(0);  
+            },
+            loadPlotData=function() {                   
+                if (typeof(my.chartVm) !== 'undefined') {
+                    my.chartVm.loadUserPlotData(plotFilter.TraineeId, plotFilter.StartDate(), plotFilter.EndDate(), plotFilter.FeedbackType(), typeof (plotFilter.Trainer()) == 'undefined' ? undefined : plotFilter.Trainer().UserId);
+                }
             },
             getUser = function() {
                 my.userService.getUserProfileVm(my.profileVm.userId, my.profileVm.getUserCallback);
@@ -196,9 +211,11 @@
             applyFilterCallback: applyFilterCallback,
             recentCodeReviewFeedback: recentCodeReviewFeedback,
             getCountForFeedback: getCountForFeedback,
-            recentWeeklyFeedback:recentWeeklyFeedback,
-            tempAllTrainer: tempAllTrainer //temp feature
-        };
+            recentWeeklyFeedback: recentWeeklyFeedback,
+            tempAllTrainer: tempAllTrainer, //temp feature,
+            plotFilter: plotFilter,
+            loadPlotData:loadPlotData
+    };
     }();
 
     my.profileVm.getCurrentUser();

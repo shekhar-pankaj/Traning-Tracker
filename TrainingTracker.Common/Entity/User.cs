@@ -1,4 +1,6 @@
-﻿namespace TrainingTracker.Common.Entity
+﻿using System;
+
+namespace TrainingTracker.Common.Entity
 {
     public class User
     {
@@ -17,7 +19,7 @@
         public bool IsTrainee { get; set; }
         public bool IsManager { get; set; }
         public bool IsActive { get; set; }
-
+        public DateTime? DateAddedToSystem { get; set; }
         public bool IsValid { get; set; }
         public int UserRating { get; set; }
     }

@@ -103,5 +103,20 @@ namespace TrainingTracker.Controllers
             }
             return Json(strFileName);
         }
+
+        /// <summary>
+        /// Method to handle xhr request for plot service.
+        /// </summary>
+        /// <param name="traineeId">trainee's id</param>
+        /// <param name="startDate">start date</param>
+        /// <param name="endDate">end date</param>
+        /// <param name="arrayFeedbackType">array of feedback type</param>
+        /// <param name="trainerId">trainer id</param>
+        /// <returns>returns json results, contains feedback based on applied filters</returns>
+        public JsonResult GetUserFeedbackOnFilterForPlot(int traineeId, DateTime? startDate, DateTime? endDate,
+                                                         string arrayFeedbackType, int trainerId)
+        {
+            return Json(new UserBl().GetUserFeedbackOnFilterForPlot(traineeId , startDate , endDate , arrayFeedbackType , trainerId) , JsonRequestBehavior.AllowGet);
+        }
     }
 }

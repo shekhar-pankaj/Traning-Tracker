@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TrainingTracker.BLL.Base;
 using TrainingTracker.Common.Entity;
@@ -109,6 +110,71 @@ namespace TrainingTracker.BLL
         public List<Feedback> GetUserFeedbackOnFilter(int userId, int pageSize, int feedbackId )
         {
             return FeedbackDataAccesor.GetUserFeedback(userId , pageSize , feedbackId);
+        }
+
+        /// <summary>
+        /// fetches the user feedback based on filters
+        /// </summary>
+        /// <param name="traineeId">trainee's id</param>
+        /// <param name="startDate">start date</param>
+        /// <param name="endDate">end date</param>
+        /// <param name="arrayFeedbackType">array of feedback type</param>
+        /// <param name="trainerId">trainer id</param>
+        /// <returns>returns instances of Feedback Plots</returns>
+        public FeedbackPlot GetUserFeedbackOnFilterForPlot(int traineeId, DateTime? startDate, DateTime? endDate,
+                                                                          string arrayFeedbackType, int trainerId)
+        {
+           
+            FeedbackPlot objfeedbackPlot =new FeedbackPlot
+            {
+                AssignmentFeedbacks = new List<Feedback>(),
+                CodeReviewFeedbacks = new List<Feedback>(),
+                WeeklyFeedbacks = new List<Feedback>()
+            };
+
+            if (string.IsNullOrEmpty(arrayFeedbackType)) return objfeedbackPlot;
+
+            int[] feedbackTypes = Array.ConvertAll(arrayFeedbackType.Split(','),int.Parse);
+
+            foreach (var type in feedbackTypes)
+            {
+                switch (type)
+                {
+                    case 3:
+                        objfeedbackPlot.AssignmentFeedbacks = FeedbackDataAccesor.GetUserFeedback(traineeId , 1000 , type)
+                                                                                 .Where(x => 
+                                                                                             x.AddedBy.UserId == (trainerId==0?x.AddedBy.UserId:trainerId) &&
+                                                                                             x.AddedOn >= (startDate ?? x.AddedOn) && 
+                                                                                             x.AddedOn <= (endDate ?? x.AddedOn) 
+                                                                                       )
+                                                                                 .ToList(); 
+                        break;
+
+                    case 4:
+                      //  var testtt = FeedbackDataAccesor.GetUserFeedback(traineeId, 1000, type);
+
+
+                        objfeedbackPlot.CodeReviewFeedbacks = FeedbackDataAccesor.GetUserFeedback(traineeId , 1000 , type)
+                                                                                 .Where(x =>
+                                                                                     (trainerId == 0 || x.AddedBy.UserId == trainerId) &&
+                                                                                             (!startDate.HasValue || x.AddedOn >= startDate) &&
+                                                                                             (!endDate.HasValue || x.AddedOn <= endDate)
+                                                                                     )
+                                                                                 .ToList(); 
+                        break;
+
+                    case 5:
+                        objfeedbackPlot.WeeklyFeedbacks = FeedbackDataAccesor.GetUserFeedback(traineeId , 1000 , type)
+                                                                              .Where(x => 
+                                                                                          x.AddedBy.UserId == (trainerId==0?x.AddedBy.UserId:trainerId) &&
+                                                                                          x.AddedOn >= (startDate ?? x.AddedOn) && 
+                                                                                          x.AddedOn <= (endDate ?? x.AddedOn) 
+                                                                                    )
+                                                                              .ToList(); 
+                        break;
+                }               
+            }
+            return objfeedbackPlot;
         }
     }
 }
