@@ -140,6 +140,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Chart.bundle.min.js" />
+    <Content Include="Scripts\Chart.Core.min.js" />
+    <Content Include="Scripts\Chart.Scatter.min.js" />
     <Content Include="Scripts\Custom\AddEditProfile.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -147,6 +150,7 @@
     <Content Include="Scripts\Custom\AllSessions.js" />
     <Content Include="Scripts\Custom\BindingHandlers.js" />
     <Content Include="Scripts\Custom\Dashboard.js" />
+    <Content Include="Scripts\Custom\FeedbackChart.js" />
     <Content Include="Scripts\Custom\Layout.js" />
     <Content Include="Scripts\Custom\Login.js" />
     <Content Include="Scripts\Custom\UserProfile.js" />
@@ -181,6 +185,7 @@
     <Content Include="StyleSheets\AddEditProfile.css" />
     <Content Include="StyleSheets\AllProfiles.css" />
     <Content Include="StyleSheets\Dashboard.css" />
+    <Content Include="StyleSheets\FeedbackPlot.css" />
     <Content Include="StyleSheets\Layout.css" />
     <Content Include="StyleSheets\Login.css" />
     <Content Include="StyleSheets\Profile.css" />
@@ -208,6 +213,7 @@
     <Content Include="Views\Profile\AddEditProfile.cshtml" />
     <Content Include="Views\Session\Sessions.cshtml" />
     <Content Include="Views\Shared\_PartialProfile.cshtml" />
+    <Content Include="Views\Shared\_FeedbackIllustration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

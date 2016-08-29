@@ -40,7 +40,9 @@
         },
         uploadImage: function (imagefile, callback) {
             my.ajaxService.ajaxUploadImage("/Profile/UploadImage", imagefile, callback);
+        },
+        getUserFeedbackForPlot :function(traineeId, startDate, endDate, arrayFeedbackType, trainer, callback) {
+            my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetUserFeedbackOnFilterForPlot?traineeId=" + traineeId + "&startDate=" + startDate + "&endDate=" + endDate + "&trainerId=" + trainer + "&arrayFeedbackType=" + arrayFeedbackType, null, callback);
         }
-
     };
 }(my));
