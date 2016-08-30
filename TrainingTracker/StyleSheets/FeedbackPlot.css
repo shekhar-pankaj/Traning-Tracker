@@ -55,12 +55,64 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
      color: #fff !important;
      cursor: not-allowed !important;
  }
+
+  #divHorizontalTab div.disabled-navigation > div {
+      border-bottom: 3px solid #ccc !important;
+  }
  #divHorizontalTab div.rotate-ninty-anti-clock {
      background-color: #0a0b0c;
      color: #fff0f5;
      cursor: pointer;
  }
 
- .active-tab {
-         border-bottom: 3px solid red;
+ .active-tab >div{
+         border-bottom: 3px solid red !important;
  }
+
+ #navCr {
+     width: 200%; height: 33%; 
+ }
+
+ #navWeekly {
+     width: 200%; height: 33%; 
+ }
+
+ #navAss {
+    width: 200%; height: 33%; 
+ }
+ 
+  #navCr > div,#navWeekly  > div , #navAss > div {
+         height: 50%;
+    width: 100%;
+    position: absolute;
+      color: #ffffff;
+     border-bottom: 3px solid #0a0b0c;
+ }
+
+  #navCr > div > span,#navWeekly  > div  > span, #navAss > div > span {
+       
+           position: relative;
+    top: 44%;
+    right: -28%;
+      }
+ 
+  #navWeekly  > div >span {
+       right: -42%;
+  }
+
+  @media (min-width: 992px) and (max-width: 1200px) {
+      
+#navWeekly > div >span {
+    right: -42%;
+}
+#navCr,#navWeekly,#navAss {
+    width: 263%;
+}
+#navCr > div, #navWeekly  > div, #navAss > div {
+    height: 40%;
+}
+
+#navCr > div > span, #navWeekly  > div  > span, #navAss > div > span {
+    top: 45%;
+}
+  }

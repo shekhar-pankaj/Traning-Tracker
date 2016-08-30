@@ -59,6 +59,8 @@ $(document).ready(function() {
                 segmentStrokeColor: '#222222'
             },
             lineDateSettings: {
+                responsive: true,
+                scaleOverride: true,
                 scaleBeginAtZero: true,
                 animation: true,
                 animationEasing: "linear",
@@ -68,22 +70,28 @@ $(document).ready(function() {
                 scaleShowLabels: true,
                 scaleType: 'date',
                 scaleDateTimeFormat: 'mmm d, yyyy',
-                scaleLabel: function (value) {
+                scaleSteps: 5,
+                scaleStepWidth: 1,
+                pointDotRadius: 10,
+                pointHitDetectionRadius: 10,
+                scaleLabel: function (value)
+                {
                     var label = "";
-                    switch(parseInt(value.value)) {
-                    case 1:
-                        label = "Slow";
-                        break;
-                    case 2:
-                        label = "Avg.";
-                        break;
-                    case 3:
-                        label = "Fast";
-                        break;
+                    switch (parseInt(value.value))
+                    {
+                        case 1:
+                            label = "Slow";
+                            break;
+                        case 2:
+                            label = "Avg.";
+                            break;
+                        case 3:
+                            label = "Fast";
+                            break;
                         case 4:
                             label = "Exp.";
                             break;
-                            
+
                     }
                     return label;
                 }
