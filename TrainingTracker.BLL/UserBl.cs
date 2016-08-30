@@ -142,11 +142,11 @@ namespace TrainingTracker.BLL
                 {
                     case 3:
                         objfeedbackPlot.AssignmentFeedbacks = FeedbackDataAccesor.GetUserFeedback(traineeId , 1000 , type)
-                                                                                 .Where(x => 
-                                                                                             x.AddedBy.UserId == (trainerId==0?x.AddedBy.UserId:trainerId) &&
-                                                                                             x.AddedOn >= (startDate ?? x.AddedOn) && 
-                                                                                             x.AddedOn <= (endDate ?? x.AddedOn) 
-                                                                                       )
+                                                                                 .Where(x =>
+                                                                                     (trainerId == 0 || x.AddedBy.UserId == trainerId) &&
+                                                                                             (!startDate.HasValue || x.AddedOn > startDate.Value.AddDays(-1)) &&
+                                                                                             (!endDate.HasValue || x.AddedOn < endDate.Value.AddDays(1))
+                                                                                     )
                                                                                  .ToList(); 
                         break;
 
@@ -157,20 +157,20 @@ namespace TrainingTracker.BLL
                         objfeedbackPlot.CodeReviewFeedbacks = FeedbackDataAccesor.GetUserFeedback(traineeId , 1000 , type)
                                                                                  .Where(x =>
                                                                                      (trainerId == 0 || x.AddedBy.UserId == trainerId) &&
-                                                                                             (!startDate.HasValue || x.AddedOn >= startDate) &&
-                                                                                             (!endDate.HasValue || x.AddedOn <= endDate)
+                                                                                             (!startDate.HasValue || x.AddedOn > startDate.Value.AddDays(-1)) &&
+                                                                                             (!endDate.HasValue || x.AddedOn < endDate.Value.AddDays(1))
                                                                                      )
                                                                                  .ToList(); 
                         break;
 
                     case 5:
                         objfeedbackPlot.WeeklyFeedbacks = FeedbackDataAccesor.GetUserFeedback(traineeId , 1000 , type)
-                                                                              .Where(x => 
-                                                                                          x.AddedBy.UserId == (trainerId==0?x.AddedBy.UserId:trainerId) &&
-                                                                                          x.AddedOn >= (startDate ?? x.AddedOn) && 
-                                                                                          x.AddedOn <= (endDate ?? x.AddedOn) 
-                                                                                    )
-                                                                              .ToList(); 
+                                                                              .Where(x =>
+                                                                                     (trainerId == 0 || x.AddedBy.UserId == trainerId) &&
+                                                                                             (!startDate.HasValue || x.AddedOn > startDate.Value.AddDays(-1)) &&
+                                                                                             (!endDate.HasValue || x.AddedOn < endDate.Value.AddDays(1))
+                                                                                     )
+                                                                                 .ToList(); 
                         break;
                 }               
             }
