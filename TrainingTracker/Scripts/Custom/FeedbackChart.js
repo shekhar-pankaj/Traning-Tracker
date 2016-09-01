@@ -74,6 +74,7 @@ $(document).ready(function() {
                 scaleStepWidth: 1,
                 pointDotRadius: 10,
                 pointHitDetectionRadius: 10,
+                useUtc: false,
                 scaleLabel: function (value)
                 {
                     var label = "";

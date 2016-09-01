@@ -5,6 +5,7 @@ $(document).ready(function () {
     if (my.rootUrl == "/") {
         my.rootUrl = "";
     }
+    my.xhrRequestcount = 0;
 
     my.queryParams = (function (a) {
         if (a == "") return {};
@@ -30,8 +31,22 @@ $(document).ready(function () {
             }
         }
     };
-  
 
+    my.toggleLoader = function(load) {
+        if (typeof (load) == 'undefined' || !load) {
+            my.xhrRequestcount--;
+        }
+        else {
+            my.xhrRequestcount++;
+            $('div#loaderWrapper').fadeIn('slow');
+        }
+        setTimeout(function() {
+            if (my.xhrRequestcount <= 0) {
+                $('div#loaderWrapper').fadeOut('slow');
+                my.xhrRequestcount = 0;
+            }
+        }, 2000);
+    };
 });
 
 
