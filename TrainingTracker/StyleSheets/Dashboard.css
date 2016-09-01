@@ -171,3 +171,24 @@ a:hover
 .collapsed .custom-glyph:before {
     content: "\e080" !important ;
 }
+/*Added for wz_tooltip styles*/
+div#WzTtDiV {
+    border-radius:15px;
+    text-align: center;
+    color: #fff;
+    background: black!important;
+    width:210px!important;
+}
+div#WzTtDiV table {
+    border:none;
+}
+div#WzTtDiV table tr {
+    border:none!important;
+}
+div#WzTtDiV table tbody tr td {
+    list-style: none;
+    padding:20px!important;
+    background:black!important;
+    color:white!important;
+}
+/*End of wz_tooltip styles*/

@@ -33,6 +33,10 @@ namespace TrainingTracker.Common.ViewModel
         /// </summary>
         public bool LastWeekFeedbackAdded { get; set; }
 
- 
+        /// <summary>
+        /// List of weeks where feedback is not added for user.
+        /// </summary>
+        public List<string> WeekForFeedbackNotPresent { get; set; }
+
     }
 }

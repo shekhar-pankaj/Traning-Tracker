@@ -267,7 +267,8 @@ namespace TrainingTracker.DAL.DataAccess
                         {
                             User = new User
                             {
-                                UserId = Convert.ToInt32(rows["UserId"]) ,
+                                UserId = Convert.ToInt32(rows["UserId"]),
+                                DateAddedToSystem = Convert.ToDateTime(rows["DateAddedToSystem"]),
                                 FullName = rows["FullName"].ToString() ,
                             } ,
                             RemainingFeedbacks = new List<Feedback>() ,

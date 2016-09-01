@@ -41,7 +41,11 @@
                         </div>                      
                         <div class="col-xs-1 no-left-margin no-right-margin">
                             <div data-bind="if: LastWeekFeedbackAdded === false" style="margin-left: 36%;">
-                              <a data-bind="attr: { href:my.rootUrl + '/Profile/UserProfile?userId=' + User.UserId }" >  <span class="feedback-pending"></span></a>
+                                <span data-bind="event: { mouseover:function () { my.dashboardVm.loadWeekForFeedbackNotPresent(WeekForFeedbackNotPresent) }},text:WeekForFeedbackNotPresent.length, wzTooltip: {HtmlId:'listNoFeedBack',HtmlTag:'true'}" class="feedback-pending badge"></span>
+
+                                <ul style="display:none; " id="listNoFeedBack" class="feedback-pending-contents list-unstyled" data-bind="foreach:my.dashboardVm.eachUserPendingFeedbackWeek(), visible:false">
+                                    <li data-bind="text:$data"></li>
+                                </ul>
                             </div>
                             <div data-bind="if: LastWeekFeedbackAdded === true">
                                 <div data-bind="if: my.dashboardVm.getFeedback('1', 'Weekly', User.UserId) === true">
@@ -224,4 +228,6 @@
     <script src="~/Scripts/Custom/AjaxService.js"></script>
     <script src="~/Scripts/Custom/UserService.js"></script>
     <script src="~/Scripts/Custom/Dashboard.js"></script>
+    <script src="~/Scripts/Custom/BindingHandlers.js"></script>
+    <script src="~/Scripts/wz_tooltip.js"></script>
 }
