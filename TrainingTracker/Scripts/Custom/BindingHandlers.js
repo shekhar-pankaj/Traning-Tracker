@@ -283,6 +283,21 @@ $(document).ready(function () {
 
         }
     };
+    ko.bindingHandlers.wzTooltip = {
+        update: function (element, valueAccessor) {
+            var options = valueAccessor();
+            config.FontSize = '12px';
+            ko.utils.registerEventHandler(element, "mouseover", function () {
+                if (options.HtmlTag === "true") {
+                    TagToTip(options.HtmlId);
+                }
+                else { Tip(options.tittle); }
+            });
+            ko.utils.registerEventHandler(element, "mouseout", function () {
+                UnTip();
+            });
+        }
+    };
 });
 
 

@@ -1,11 +1,17 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using TrainingTracker.Authorize;
 using TrainingTracker.BLL;
 using TrainingTracker.Common.Entity;
 
 namespace TrainingTracker.Controllers
 {
+
+    [CustomAuthorizeAttribute]
     public class LoginController : Controller
     {
         /// <summary>
@@ -21,12 +27,16 @@ namespace TrainingTracker.Controllers
         /// Http get method for Default login controller method
         /// </summary>
         /// <returns></returns>
+
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Login()
         {
             return View("Login");
         }
 
+
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login( LoginModel objLoginModel )
         {
@@ -36,7 +46,19 @@ namespace TrainingTracker.Controllers
             
             if (userData.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(objLoginModel.UserName , true);
+                string currentUser = new JavaScriptSerializer().Serialize(new UserBl().GetUserByUserName(userData.UserName));
+
+                FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
+                  1,
+                  userData.UserName.ToString(),
+                  DateTime.Now,
+                  DateTime.Now.AddDays(1),
+                  false,
+                  currentUser,
+                  "/");
+                HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
+                Response.Cookies.Add(cookie);
+                //FormsAuthentication.SetAuthCookie(objLoginModel.UserName , true);
                 return RedirectToAction("Index" , "Dashboard");
             }
             ModelState.AddModelError("","Login Failed,Invalid Credentials");
