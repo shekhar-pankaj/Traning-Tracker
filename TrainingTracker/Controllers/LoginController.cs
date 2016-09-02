@@ -47,7 +47,7 @@ namespace TrainingTracker.Controllers
             if (userData.IsValid)
             {
                 User currentUser = new UserBl().GetUserByUserName(userData.UserName);
-                string serializedUser = new JavaScriptSerializer().Serialize(new UserBl().GetUserByUserName(userData.UserName));
+                string serializedUser = new JavaScriptSerializer().Serialize(currentUser);
 
                 FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                   1,
