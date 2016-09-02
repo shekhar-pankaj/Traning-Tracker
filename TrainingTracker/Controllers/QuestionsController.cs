@@ -1,10 +1,12 @@
 ﻿using System.Web.Mvc;
+using TrainingTracker.Authorize;
 using TrainingTracker.BLL;
+using TrainingTracker.Common.Constants;
 using TrainingTracker.Common.Entity;
 
 namespace TrainingTracker.Controllers
 {
-    [Authorize]
+    [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
     public class QuestionsController : Controller
     {
         public ActionResult Index()

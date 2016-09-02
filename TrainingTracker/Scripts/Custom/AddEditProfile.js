@@ -99,37 +99,31 @@
             },
             saveUser = function () {
                 my.addUserVm.message("");
+                var emptyFields = [];
                 if (my.isNullorEmpty(my.addUserVm.user.FirstName())) {
-                    my.addUserVm.message("Please provide FirstName");
-                    return false;
+                    emptyFields.push("FirstName");
                 }
-                else if (my.isNullorEmpty(my.addUserVm.user.UserName())) {
-                    my.addUserVm.message("Please provide UserName");
-                    return false;
+                if (my.isNullorEmpty(my.addUserVm.user.UserName())) {
+                    emptyFields.push("UserName");
                 }
-                else if (my.isNullorEmpty(my.addUserVm.user.IsFemale())) {
-                    my.addUserVm.message("Please provide Gender");
-                    return false;
+                if (my.isNullorEmpty(my.addUserVm.user.IsFemale())) {
+                    emptyFields.push("Gender");
                 }
-                else if (my.isNullorEmpty(my.addUserVm.user.Email())) {
-                    my.addUserVm.message("Please provide Email");
-                    return false;
+                if (!my.validateEmail(my.isNullorEmpty(my.addUserVm.user.Email()) || (my.addUserVm.user.Email()))) {
+                    emptyFields.push("valid Email");
                 }
-                else if (!my.validateEmail(my.addUserVm.user.Email())) {
-                    my.addUserVm.message("Please provide valid Email");
-                    return false;
+                if (my.isNullorEmpty(my.addUserVm.user.Designation())) {
+                    emptyFields.push("Designation");
                 }
-                else if (my.isNullorEmpty(my.addUserVm.user.Designation())) {
-                    my.addUserVm.message("Please provide Designation");
-                    return false;
+                if (!my.addUserVm.user.IsAdministrator() && !my.addUserVm.user.IsTrainer() && !my.addUserVm.user.IsTrainee() && !my.addUserVm.user.IsManager()) {
+                    emptyFields.push("Role");
                 }
-                else if (!my.addUserVm.user.IsAdministrator() && !my.addUserVm.user.IsTrainer() && !my.addUserVm.user.IsTrainee() && !my.addUserVm.user.IsManager()) {
-                    my.addUserVm.message("Please provide at least one role.");
-                    return false;
+                if ((my.addUserVm.user.IsNewProfile() || my.addUserVm.user.enableChangePassword()) && my.isNullorEmpty(my.addUserVm.user.Password())) {
+                    emptyFields.push("Password");
                 }
-                else if (my.addUserVm.user.IsNewProfile() && my.isNullorEmpty(my.addUserVm.user.Password())) {
-                    my.addUserVm.message("Please provide Password");
-                    return false;
+
+                if (emptyFields != 'undefined' && emptyFields.length > 0) {
+                    my.addUserVm.message("Please provide " + emptyFields.join(',') + " !");
                 }
                 if (my.addUserVm.user.IsNewProfile()) {
                     my.userService.createUser(user, my.addUserVm.saveUserCallback);

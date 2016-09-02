@@ -35,15 +35,15 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                    <div class="list-group collapsed"  data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divSkillscollapasable">
+                    <div class="list-group collapsed" data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divSkillscollapasable">
                         <div class="list-group-item active">
                             <label>Skills</label>
                             <span class="pull-right">
                                 <i class="glyphicon glyphicon-chevron-down custom-glyph"></i>
-                            </span> 
-                        </div>                       
-                    </div>  
-                    <div id="divSkillscollapasable" class="collapse" data-bind="visible: userVm.User.IsTrainee" >
+                            </span>
+                        </div>
+                    </div>
+                    <div id="divSkillscollapasable" class="collapse" data-bind="visible: userVm.User.IsTrainee">
                         <div data-bind="foreach: userVm.Skills">
                             <div class="list-group-item">
                                 <div data-bind="text: Name" style="display: inline-block;"></div>
@@ -68,36 +68,36 @@
                             </div>
                         </div>
 
-                    </div>     
-            
+                    </div>
+
                     <div class="list-group collapsed" data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divSessioncollapasable">
                         <div class="list-group-item active">
-                            <label>  Sessions attended</label> 
+                            <label>  Sessions attended</label>
                             <span class="pull-right">
                                 <i class="glyphicon  glyphicon-chevron-down custom-glyph"></i>
-                            </span> 
-                        </div>                      
+                            </span>
+                        </div>
                     </div>
                     <div id="divSessioncollapasable" class="collapse" data-bind="visible: userVm.User.IsTrainee">
                         <div data-bind="foreach: userVm.Sessions">
                             <div data-bind="text: Title" class="list-group-item collapse"></div>
                         </div>
                         <div data-bind="visible:userVm.Sessions.length==0">
-                            <div  class="list-group-item collapse"><span>No Sessions Attendend</span></div>
+                            <div class="list-group-item collapse"><span>No Sessions Attendend</span></div>
                         </div>
                     </div>
-                    
+
                     <div class="list-group collapsed" data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divWeeklyReviewcollapasable">
                         <div class="list-group-item active">
-                            <label>  Weekly Feedbacks</label> 
+                            <label>  Weekly Feedbacks</label>
                             <span class="pull-right">
                                 <i class="glyphicon  glyphicon-chevron-down custom-glyph"></i>
-                            </span> 
-                        </div>                      
+                            </span>
+                        </div>
                     </div>
                     <div id="divWeeklyReviewcollapasable" class="collapse" data-bind="visible: userVm.User.IsTrainee">
                         <div class="list-group-item ">
-                            <div  style="display: inline-block">Latest Feedback : </div>
+                            <div style="display: inline-block">Latest Feedback : </div>
                             <div class="pull-right" data-bind="if: my.profileVm.recentWeeklyFeedback().length > 0" style="display: inline-block;">
                                 <div data-bind="css: {
                                                             'rating-slow': my.profileVm.recentWeeklyFeedback()[0].Rating == 1,
@@ -117,43 +117,43 @@
 
                         </div>
                         <div class="list-group-item ">
-                            <div  style="display: inline-block">Exceptional Feedback Count: </div>
+                            <div style="display: inline-block">Exceptional Feedback Count: </div>
                             <div class="pull-right" style="display: inline-block;" data-bind="text: my.profileVm.getCountForFeedback(4, my.profileVm.recentWeeklyFeedback())">
-                                   
+
                             </div>
                         </div>
                         <div class="list-group-item ">
-                            <div  style="display: inline-block">Fast Feedback Count: </div>
+                            <div style="display: inline-block">Fast Feedback Count: </div>
                             <div class="pull-right" style="display: inline-block; " data-bind="text: my.profileVm.getCountForFeedback(3, my.profileVm.recentWeeklyFeedback())">
-                                   
+
                             </div>
                         </div>
                         <div class="list-group-item ">
-                            <div  style="display: inline-block">Average Feedback Count: </div>
+                            <div style="display: inline-block">Average Feedback Count: </div>
                             <div class="pull-right" style="display: inline-block;" data-bind="text: my.profileVm.getCountForFeedback(2, my.profileVm.recentWeeklyFeedback())">
-                                   
+
                             </div>
                         </div>
                         <div class="list-group-item ">
-                            <div  style="display: inline-block">Slow Feedback Count: </div>
+                            <div style="display: inline-block">Slow Feedback Count: </div>
                             <div class="pull-right" style="display: inline-block;" data-bind="text: my.profileVm.getCountForFeedback(1, my.profileVm.recentWeeklyFeedback())">
-                                   
+
                             </div>
                         </div>
                     </div>
 
                     <div class="list-group" data-bind="visible: userVm.User.IsTrainee" data-toggle="collapse" data-target="#divCodeReviewcollapasable">
                         <div class="list-group-item active">
-                            <label>  Code Review Feedbacks</label> 
+                            <label>  Code Review Feedbacks</label>
                             <span class="pull-right">
                                 <i class="glyphicon  glyphicon-chevron-down custom-glyph"></i>
-                            </span> 
+                            </span>
                         </div>
-                       
+
                     </div>
                     <div id="divCodeReviewcollapasable" class="in" data-bind="visible: userVm.User.IsTrainee">
                         <div class="list-group-item collapse">
-                            <div  style="display: inline-block">Latest Feedback : </div>
+                            <div style="display: inline-block">Latest Feedback : </div>
                             <div class="pull-right" data-bind="if: my.profileVm.recentCodeReviewFeedback().length > 0" style="display: inline-block;">
                                 <div data-bind="css: {
                                                             'rating-slow': my.profileVm.recentCodeReviewFeedback()[0].Rating == 1,
@@ -173,27 +173,27 @@
 
                         </div>
                         <div class="list-group-item collapse">
-                            <div  style="display: inline-block">Exceptional Feedback Count: </div>
+                            <div style="display: inline-block">Exceptional Feedback Count: </div>
                             <div class="pull-right" style="display: inline-block;" data-bind="text: my.profileVm.getCountForFeedback(4, my.profileVm.recentCodeReviewFeedback())">
-                                   
+
                             </div>
                         </div>
                         <div class="list-group-item collapse">
-                            <div  style="display: inline-block">Fast Feedback Count: </div>
+                            <div style="display: inline-block">Fast Feedback Count: </div>
                             <div class="pull-right" style="display: inline-block; " data-bind="text: my.profileVm.getCountForFeedback(3, my.profileVm.recentCodeReviewFeedback())">
-                                   
+
                             </div>
                         </div>
                         <div class="list-group-item collapse">
-                            <div  style="display: inline-block">Average Feedback Count: </div>
+                            <div style="display: inline-block">Average Feedback Count: </div>
                             <div class="pull-right" style="display: inline-block;" data-bind="text: my.profileVm.getCountForFeedback(2, my.profileVm.recentCodeReviewFeedback())">
-                                   
+
                             </div>
                         </div>
                         <div class="list-group-item collapse">
-                            <div  style="display: inline-block">Slow Feedback Count: </div>
+                            <div style="display: inline-block">Slow Feedback Count: </div>
                             <div class="pull-right" style="display: inline-block;" data-bind="text: my.profileVm.getCountForFeedback(1, my.profileVm.recentCodeReviewFeedback())">
-                                   
+
                             </div>
                         </div>
                     </div>
@@ -204,147 +204,150 @@
                     <li role="presentation" class="active">
                         <a href="#divFeedbackArea" aria-controls="divFeedbackArea" role="tab" data-toggle="tab">Feedbacks</a>
                     </li>
-                    <li role="presentation" data-bind="      click:  function(){my.profileVm.loadPlotData();}">
+                    <li role="presentation" data-bind=" click function(){my.profileVm.loadPlotData();}">
                         <a href="#divFeedbackChart" aria-controls="divFeedbackChart" role="tab" data-toggle="tab" data-bind="">Synopsis</a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="divFeedbackArea">
-                        <div class="panel panel-white post panel-shadow" data-bind="visible: !my.profileVm.currentUser.IsTrainee">
-                            <div class="post-heading">
-                                 <div class="image col-xs-12 col-md-1 no-right-margin">
-                                    <img data-bind="attr: { src: currentUser.avatarUrl }"
-                                         class="img-circle avatar" alt="user profile image">
-                                </div>
-                                <div class="feedback-input meta  col-xs-12 col-md-2 no-right-margin">
-                                    <label>Feedback Type:</label>
-                                    <select class="input-sm form-control" data-bind="options: userVm.FeedbackTypes,
+                        @if (HttpContext.Current.User.IsInRole("Administrator") || HttpContext.Current.User.IsInRole("Manager") || HttpContext.Current.User.IsInRole("Trainer"))
+                        {
+                            <div class="panel panel-white post panel-shadow" data-bind="visible: !my.profileVm.currentUser.IsTrainee">
+                                <div class="post-heading">
+                                    <div class="image col-xs-12 col-md-1 no-right-margin">
+                                        <img data-bind="attr: { src: currentUser.avatarUrl }"
+                                             class="img-circle avatar" alt="user profile image">
+                                    </div>
+                                    <div class="feedback-input meta  col-xs-12 col-md-2 no-right-margin">
+                                        <label>Feedback Type:</label>
+                                        <select class="input-sm form-control" data-bind="options: userVm.FeedbackTypes,
                                                                                      optionsText: 'Description',
-                                                                                     value: feedbackPost.FeedbackType">
-                                    </select>
-                                </div>
-                                <div class="col-xs-12 col-md-4  no-right-margin no-left-margin">
-                                    <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 2 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
-                                        <label>Skill:</label>
-                                        <label class="radio-inline"><input value="1" data-bind="checked: controls.skillOption" type="radio" name="optradio">Select existing</label>
-                                        <label class="radio-inline"><input value="2" data-bind="checked: controls.skillOption" type="radio" name="optradio">Other</label>
-                                        <select class="input-sm form-control" data-bind="visible: controls.skillOption() == 1, options: userVm.AllSkills,
+                                                                                     value: feedbackPost.FeedbackType"></select>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4  no-right-margin no-left-margin">
+                                        <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 2 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
+                                            <label>Skill:</label>
+                                            <label class="radio-inline"><input value="1" data-bind="checked: controls.skillOption" type="radio" name="optradio">Select existing</label>
+                                            <label class="radio-inline"><input value="2" data-bind="checked: controls.skillOption" type="radio" name="optradio">Other</label>
+                                            <select class="input-sm form-control" data-bind="visible: controls.skillOption() == 1, options: userVm.AllSkills,
     optionsText: 'Name',
     value: selectedSkill"></select>
-                                        <input type="text"
-                                               data-bind="visible: controls.skillOption() == 2, value: feedbackPost.Title"
-                                               class="input-sm form-control"
-                                               placeholder="Enter skill title" />
-                                    </div>
-                                    <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 3 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
-                                        <label>Assignment:</label>
-                                        <input type="text"
-                                               data-bind="value: feedbackPost.Title"
-                                               class="input-sm form-control"
-                                               placeholder="enter assignment title" />
-                                        @*TO BE ENABLED AFTER ADD PROJECT IMPLEMENTATION*@
-                                        @*<label class="radio-inline"><input value="1" data-bind="checked: controls.assignmentOption" type="radio" name="optradio">Select existing</label>
-                            <label class="radio-inline"><input value="2" data-bind="checked: controls.assignmentOption" type="radio" name="optradio">Other</label>
-                            <select class="input-sm form-control" data-bind="visible: controls.assignmentOption() == 1, options: userVm.Projects,
-    optionsText: 'Title',
-    value: selectedProject">
-                            </select>
-                            <input type="text"
-                                   data-bind="visible: controls.assignmentOption() == 2, value: feedbackPost.Title"
-                                   class="input-sm form-control"
-                                   placeholder="Enter assignment title" />*@
-                                    </div>
-                                    <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 4 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
-                                        <label>Project:</label>
-                                        <input type="text"
-                                               data-bind="value: feedbackPost.Title"
-                                               class="input-sm form-control"
-                                               placeholder="Enter project title" />
-                                        @*TO BE ENABLED AFTER ADD PROJECT IMPLEMENTATION*@
-                                        @*<label class="radio-inline"><input value="1" data-bind="checked: controls.crOption" type="radio" name="optradio">Select existing</label>
-                            <label class="radio-inline"><input value="2" data-bind="checked: controls.crOption" type="radio" name="optradio">Other</label>
-                            <select class="input-sm form-control" data-bind="visible: controls.crOption() == 1, options: userVm.Projects,
-    optionsText: 'Title',
-    value: selectedProject">
-                            </select>
-                            <input type="text"
-                                   data-bind="visible: controls.crOption() == 2, value: feedbackPost.Title"
-                                   class="input-sm form-control"
-                                   placeholder="Enter project title" />*@
-                                    </div>
-                                    <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 5 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
-                                        <label>Select date range:</label>
-                                        <div class="input-daterange input-group" id="datepicker">
-                                            <input type="text" data-bind="datepicker: feedbackPost.StartDate, endDate: new Date(), value: feedbackPost.StartDate" class="date-picker input-sm form-control" name="start" />
-                                            <span class="input-group-addon">to</span>
-                                            <input type="text" data-bind="datepicker: feedbackPost.EndDate, endDate: new Date(), value: feedbackPost.EndDate" class="date-picker input-sm form-control" name="end" />
+                                            <input type="text"
+                                                   data-bind="visible: controls.skillOption() == 2, value: feedbackPost.Title"
+                                                   class="input-sm form-control"
+                                                   placeholder="Enter skill title" />
                                         </div>
-                                    </div></div>
-                                <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId != 1 " class="feedback-input meta col-xs-12 col-md-5  no-right-margin no-left-margin">
-                                    <label class="col-xs-12 col-md-12 ">Rating:</label>
-                                    <br />
-                                    <div class="btn-group col-xs-12 col-md-12 no-right-margin">
-                                        <button data-bind="click: setRating(1)"
-                                                type="button"
-                                                class="btn btn-sm btn-danger col-xs-3">
-                                            Slow <i data-bind="visible: feedbackPost.Rating() == 1" class="glyphicon glyphicon-ok"></i>
-                                        </button>
-                                        <button data-bind="click: setRating(2)"
-                                                type="button"
-                                                class="btn btn-sm  btn-warning col-xs-3">
-                                            Avg. <i data-bind="visible: feedbackPost.Rating() == 2" class="glyphicon glyphicon-ok"></i>
-                                        </button>
-                                        <button data-bind="click: setRating(3)"
-                                                type="button"
-                                                class="btn btn-sm  btn-primary col-xs-3">
-                                            Fast <i data-bind="visible: feedbackPost.Rating() == 3" class="glyphicon glyphicon-ok"></i>
-                                        </button>
-                                        <button data-bind="click: setRating(4)"
-                                                type="button"
-                                                class="btn btn-sm  btn-success col-xs-3">
-                                            Exp. <i data-bind="visible: feedbackPost.Rating() == 4" class="glyphicon glyphicon-ok"></i>
-                                        </button>
+                                        <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 3 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
+                                            <label>Assignment:</label>
+                                            <input type="text"
+                                                   data-bind="value: feedbackPost.Title"
+                                                   class="input-sm form-control"
+                                                   placeholder="enter assignment title" />
+                                            @*TO BE ENABLED AFTER ADD PROJECT IMPLEMENTATION*@
+                                            @*<label class="radio-inline"><input value="1" data-bind="checked: controls.assignmentOption" type="radio" name="optradio">Select existing</label>
+                                                                        <label class="radio-inline"><input value="2" data-bind="checked: controls.assignmentOption" type="radio" name="optradio">Other</label>
+                                                                        <select class="input-sm form-control" data-bind="visible: controls.assignmentOption() == 1, options: userVm.Projects,
+                                                optionsText: 'Title',
+                                                value: selectedProject">
+                                                                        </select>
+                                                                        <input type="text"
+                                                                               data-bind="visible: controls.assignmentOption() == 2, value: feedbackPost.Title"
+                                                                               class="input-sm form-control"
+                                                                               placeholder="Enter assignment title" />*@
+                                        </div>
+                                        <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 4 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
+                                            <label>Project:</label>
+                                            <input type="text"
+                                                   data-bind="value: feedbackPost.Title"
+                                                   class="input-sm form-control"
+                                                   placeholder="Enter project title" />
+                                            @*TO BE ENABLED AFTER ADD PROJECT IMPLEMENTATION*@
+                                            @*<label class="radio-inline"><input value="1" data-bind="checked: controls.crOption" type="radio" name="optradio">Select existing</label>
+                                                                        <label class="radio-inline"><input value="2" data-bind="checked: controls.crOption" type="radio" name="optradio">Other</label>
+                                                                        <select class="input-sm form-control" data-bind="visible: controls.crOption() == 1, options: userVm.Projects,
+                                                optionsText: 'Title',
+                                                value: selectedProject">
+                                                                        </select>
+                                                                        <input type="text"
+                                                                               data-bind="visible: controls.crOption() == 2, value: feedbackPost.Title"
+                                                                               class="input-sm form-control"
+                                                                               placeholder="Enter project title" />*@
+                                        </div>
+                                        <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 5 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
+                                            <label>Select date range:</label>
+                                            <div class="input-daterange input-group" id="datepicker">
+                                                <input type="text" data-bind="datepicker: feedbackPost.StartDate, endDate: new Date(), value: feedbackPost.StartDate" class="date-picker input-sm form-control" name="start" />
+                                                <span class="input-group-addon">to</span>
+                                                <input type="text" data-bind="datepicker: feedbackPost.EndDate, endDate: new Date(), value: feedbackPost.EndDate" class="date-picker input-sm form-control" name="end" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId != 1 " class="feedback-input meta col-xs-12 col-md-5  no-right-margin no-left-margin">
+                                        <label class="col-xs-12 col-md-12 ">Rating:</label>
+                                        <br />
+                                        <div class="btn-group col-xs-12 col-md-12 no-right-margin">
+                                            <button data-bind="click: setRating(1)"
+                                                    type="button"
+                                                    class="btn btn-sm btn-danger col-xs-3">
+                                                Slow <i data-bind="visible: feedbackPost.Rating() == 1" class="glyphicon glyphicon-ok"></i>
+                                            </button>
+                                            <button data-bind="click: setRating(2)"
+                                                    type="button"
+                                                    class="btn btn-sm  btn-warning col-xs-3">
+                                                Avg. <i data-bind="visible: feedbackPost.Rating() == 2" class="glyphicon glyphicon-ok"></i>
+                                            </button>
+                                            <button data-bind="click: setRating(3)"
+                                                    type="button"
+                                                    class="btn btn-sm  btn-primary col-xs-3">
+                                                Fast <i data-bind="visible: feedbackPost.Rating() == 3" class="glyphicon glyphicon-ok"></i>
+                                            </button>
+                                            <button data-bind="click: setRating(4)"
+                                                    type="button"
+                                                    class="btn btn-sm  btn-success col-xs-3">
+                                                Exp. <i data-bind="visible: feedbackPost.Rating() == 4" class="glyphicon glyphicon-ok"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="no-right-margin no-left-margin post-description comment-div">
+                                    <div class="col-xs-12 col-md-12 no-right-margin ">
+                                        <textarea data-bind="value: feedbackPost.FeedbackText"
+                                                  class="form-control comment-input-control" rows="3" type="text" placeholder="Enter feedback"></textarea>
+                                    </div>
+                                    <div class="col-xs-12 col-md-11 ">
+                                        <label data-bind="text: validationMessage" class="validation-error"></label>
+                                    </div>
+
+                                    <div class="comment-send col-xs-12 col-md-1 col-lg-1 no-left-margin no-right-margin">
+                                        <button data-bind="click: addFeedback" type="button" class="btn btn-info pull-right">Add <i class="glyphicon glyphicon-send"></i></button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
                             </div>
-                            <div class="no-right-margin no-left-margin post-description comment-div">
-                                <div class="col-xs-12 col-md-12 no-right-margin ">
-                                    <textarea data-bind="value: feedbackPost.FeedbackText"
-                                              class="form-control comment-input-control" rows="3" type="text" placeholder="Enter feedback"></textarea>
-                                </div>
-                                <div class="col-xs-12 col-md-11 ">
-                                    <label data-bind="text: validationMessage" class="validation-error"></label>
-                                </div>
-                        
-                                <div class="comment-send col-xs-12 col-md-1 col-lg-1 no-left-margin no-right-margin">
-                                    <button data-bind="click: addFeedback" type="button" class="btn btn-info pull-right">Add <i class="glyphicon glyphicon-send"></i></button>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>      
+                        }
                         <div class="col-xs-12 col-md-12 no-left-margin no-right-margin panel panel-white post panel-shadow">
                             <div class="post-heading">
                                 <div class="col-xs-12 col-md-2 feedback-input meta">
-                                    <label class="">Feedback Count:</label> 
+                                    <label class="">Feedback Count:</label>
                                     <select class=" input-sm form-control" data-bind="options: filter.pageSize, value: filter.selectedPageSize"></select>
                                 </div>
                                 <div class="col-xs-12 col-md-2 feedback-input meta">
-                                    <label class="">Feedback Type:</label> 
+                                    <label class="">Feedback Type:</label>
                                     <select class=" input-sm form-control" data-bind="options: userVm.FeedbackTypes,
     optionsText: 'Description',
     value: filter.filterFeedback, optionsCaption: 'All'"></select>
                                 </div>
                                 @*<div class="pull-left feedback-input meta">
-                        
-                                </div>*@
+
+                                    </div>*@
                                 <div class="col-xs-12 col-md-3 col-md-offset-5  feedback-input meta">
-                                    <label style="visibility:hidden ">Apply Filter</label> 
-                                    <button data-bind=" click: applyFilter " style="margin-top: -5px;height: 34px;" type="button" class="form-control btn btn-info  input-sm ">Apply Filter <i class="glyphicon glyphicon-filter"></i></button>
+                                    <label style="visibility:hidden ">Apply Filter</label>
+                                    <button data-bind=" click applyFilter " style="margin-top: -5px;height: 34px;" type="button" class="form-control btn btn-info  input-sm ">Apply Filter <i class="glyphicon glyphicon-filter"></i></button>
                                 </div>
                             </div>
                         </div>
-                
-    
+
+
                         <div id="feedbackSection" class="col-xs-12 col-md-12 no-left-margin no-right-margin" data-bind="foreach: userVm.Feedbacks">
                             <div class="panel panel-white post panel-shadow">
                                 <div class="post-heading">
@@ -380,31 +383,30 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
 
                     <div role="tabpanel" class="tab-pane" id="divFeedbackChart">
                         <div class="panel panel-white post panel-shadow">
                             <div class="post-heading">
                                 <div class="feedback-input meta col-xs-4">
-                                    <label class="col-xs-12">Start Date:</label>                               
+                                    <label class="col-xs-12">Start Date:</label>
                                     <input type="text" data-bind="datepicker: plotFilter.StartDate, startDate:plotFilter.StartDate(), endDate: new Date(), value: plotFilter.StartDate" class="date-picker input-sm form-control col-xs-12" name="startSynopsis" />
                                 </div>
                                 <div class="feedback-input meta col-xs-4">
-                                    <label class="col-xs-12">End Date:</label>                               
+                                    <label class="col-xs-12">End Date:</label>
                                     <input type="text" data-bind="datepicker: plotFilter.EndDate,startDate:plotFilter.StartDate(), endDate: new Date(), value: plotFilter.EndDate" class="date-picker input-sm form-control col-xs-12" name="endSynopsis" />
                                 </div>
                                 <div class="feedback-input meta col-xs-4">
-                                    <label class="col-xs-12">Feedback By:</label>                               
+                                    <label class="col-xs-12">Feedback By:</label>
                                     <select class="input-sm form-control" data-bind="options: my.profileVm.tempAllTrainer(),
                                                 optionsText: 'FullName',
-                                                value: plotFilter.Trainer, optionsCaption: 'All'">                                                                                   
-                                    </select>
+                                                value: plotFilter.Trainer, optionsCaption: 'All'"></select>
                                 </div>
                                 <div class="feedback-input meta col-xs-9">
-                                    <label class="col-xs-12">Include Feedbacks for:</label>                               
+                                    <label class="col-xs-12">Include Feedbacks for:</label>
                                     <div class="col-xs-4">
                                         <span class="custom-checkbox">
-                                            <input type="checkbox"  id="ckbCodeReview" data-bind="attr: { value: '4' }, checked: my.profileVm.plotFilter.FeedbackType"/>
+                                            <input type="checkbox" id="ckbCodeReview" data-bind="attr: { value: '4' }, checked: my.profileVm.plotFilter.FeedbackType" />
                                             <span class="box">
                                                 <span class="tick"></span>
                                             </span>
@@ -413,7 +415,7 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <span class="custom-checkbox">
-                                            <input type="checkbox"  id="ckbWeeklyFeedback" data-bind="attr:{value:'5'}, checked: my.profileVm.plotFilter.FeedbackType"/>
+                                            <input type="checkbox" id="ckbWeeklyFeedback" data-bind="attr:{value:'5'}, checked: my.profileVm.plotFilter.FeedbackType" />
                                             <span class="box">
                                                 <span class="tick"></span>
                                             </span>
@@ -422,7 +424,7 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <span class="custom-checkbox">
-                                            <input type="checkbox"  id="ckbAssignment" data-bind="attr: { value: '3' }, checked: my.profileVm.plotFilter.FeedbackType"/>
+                                            <input type="checkbox" id="ckbAssignment" data-bind="attr: { value: '3' }, checked: my.profileVm.plotFilter.FeedbackType" />
                                             <span class="box">
                                                 <span class="tick"></span>
                                             </span>
@@ -431,8 +433,9 @@
                                     </div>
                                 </div>
                                 <div class="feedback-input meta col-xs-3">
-                                    <label class="col-xs-12"></label> 
-                                    <button  type="button" class="feedback-button form-control btn btn-info  input-sm " data-bind="  click: function(){my.profileVm.loadPlotData();}">Draw Plot
+                                    <label class="col-xs-12"></label>
+                                    <button type="button" class="feedback-button form-control btn btn-info  input-sm " data-bind=" click function(){my.profileVm.loadPlotData();}">
+                                        Draw Plot
                                         <i class="glyphicon glyphicon-stats"></i>
                                     </button>
                                 </div>
@@ -440,10 +443,10 @@
                         </div>
                         <div class="panel panel-white post panel-shadow col-xs-12 no-right-margin no-left-margin">
                             <div class="custom-top-bottom-padding no-right-margin no-left-margin">
-                               @Html.Partial("_FeedbackIllustration") 
+                                @Html.Partial("_FeedbackIllustration")
                             </div>
                         </div>
-                     </div>                  
+                    </div>
                 </div>
             </div>
         </div>
@@ -454,10 +457,10 @@
 {
 
     @*<script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>*@
+        <script src="~/Scripts/bootstrap.js"></script>*@
     <script src="~/Scripts/knockout-3.4.0.js"></script>
-    <script   src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"   ></script>
-<script src="~/Scripts/Chart.Scatter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+    <script src="~/Scripts/Chart.Scatter.min.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/typehead.js"></script>

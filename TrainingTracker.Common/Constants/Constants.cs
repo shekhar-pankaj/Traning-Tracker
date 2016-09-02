@@ -16,9 +16,21 @@ namespace TrainingTracker.Common.Constants
     /// </summary>
     public static class UserRoles
     {
+        /// <summary>
+        /// User Administrator role.
+        /// </summary>
         public const string Administrator = "Administrator";
+        /// <summary>
+        /// User Manager role.
+        /// </summary>
         public const string Manager = "Manager";
+        /// <summary>
+        /// User Trainee role.
+        /// </summary>
         public const string Trainee = "Trainee";
+        /// <summary>
+        /// User Trainer role.
+        /// </summary>
         public const string Trainer = "Trainer";
     }
 }

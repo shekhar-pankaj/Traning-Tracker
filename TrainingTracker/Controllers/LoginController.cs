@@ -46,7 +46,8 @@ namespace TrainingTracker.Controllers
             
             if (userData.IsValid)
             {
-                string currentUser = new JavaScriptSerializer().Serialize(new UserBl().GetUserByUserName(userData.UserName));
+                User currentUser = new UserBl().GetUserByUserName(userData.UserName);
+                string serializedUser = new JavaScriptSerializer().Serialize(new UserBl().GetUserByUserName(userData.UserName));
 
                 FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                   1,
@@ -54,12 +55,11 @@ namespace TrainingTracker.Controllers
                   DateTime.Now,
                   DateTime.Now.AddDays(1),
                   false,
-                  currentUser,
+                  serializedUser,
                   "/");
                 HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
                 Response.Cookies.Add(cookie);
-                //FormsAuthentication.SetAuthCookie(objLoginModel.UserName , true);
-                return RedirectToAction("Index" , "Dashboard");
+                return RedirectToAction("Index", "Dashboard");
             }
             ModelState.AddModelError("","Login Failed,Invalid Credentials");
             return View("Login");
