@@ -2,24 +2,35 @@
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using TrainingTracker.Authorize;
 using TrainingTracker.BLL;
+using TrainingTracker.Common.Constants;
 using TrainingTracker.Common.Entity;
 
 namespace TrainingTracker.Controllers
 {
-    [Authorize]
+    [CustomAuthorizeAttribute]
     public class ProfileController : Controller
     {
         // GET: UserProfile?userId=
+        [CustomAuthorize(Roles = UserRoles.Administrator+","+UserRoles.Manager+","+UserRoles.Trainer)]
         public ActionResult UserProfile(int userId)
         {
             return View("Profile");
         }
+        /// <summary>
+        /// Manage users profile.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ManageProfile()
         {
             return PartialView("_PartialProfile");
         }
-
+        /// <summary>
+        /// Shows all the profiles.
+        /// </summary>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
         public ActionResult AllProfiles()
         {
             return View("AllProfiles");
@@ -35,6 +46,7 @@ namespace TrainingTracker.Controllers
         /// <param name="userData"></param>
         /// <returns></returns>
         [HttpPost]
+        [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
         public ActionResult CreateUser(User userData)
         {
             int userId;
@@ -65,6 +77,7 @@ namespace TrainingTracker.Controllers
             return Json(new FeedbackBl().AddFeedback(feedbackPost) ? "true" : "false");
         }
 
+        [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
         public ActionResult GetAllUsers()
         {
             return Json(new UserBl().GetAllUsers(), JsonRequestBehavior.AllowGet);

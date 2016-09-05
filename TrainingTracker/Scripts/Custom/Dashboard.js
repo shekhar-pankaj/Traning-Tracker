@@ -62,6 +62,10 @@
                 }
 
                 return (my.dashboardVm.feedback.length) || (  typeof(my.dashboardVm.feedback.Title) != 'undefined' && my.dashboardVm.feedback.Title != "" )? true : false;
+            },
+            eachUserPendingFeedbackWeek = ko.observable([]),
+            loadWeekForFeedbackNotPresent = function (data) {
+                eachUserPendingFeedbackWeek(data);
             };
         
 
@@ -72,10 +76,13 @@
             photoUrl: photoUrl,
             feedback: feedback,
             getFeedback: getFeedback,
-            sessions: sessions
+            sessions: sessions,
+            eachUserPendingFeedbackWeek: eachUserPendingFeedbackWeek,
+            loadWeekForFeedbackNotPresent: loadWeekForFeedbackNotPresent
         };
     }();
 
     my.dashboardVm.getDashboardVm();
     //ko.applyBindings(my.dashboardVm);
+    
 });

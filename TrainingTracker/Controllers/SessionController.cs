@@ -1,5 +1,6 @@
 ﻿
 using System.Web.Mvc;
+using TrainingTracker.Authorize;
 using TrainingTracker.BLL;
 using TrainingTracker.Common.Entity;
 
@@ -8,7 +9,7 @@ namespace TrainingTracker.Controllers
     /// <summary>
     /// Controller class for session
     /// </summary>
-    [Authorize]
+    [CustomAuthorizeAttribute]
     public class SessionController:Controller
     {
         /// <summary>

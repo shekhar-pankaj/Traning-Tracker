@@ -3,11 +3,13 @@
     my.meta = function () {
         var currentUser = {},
             isAdministrator = ko.observable(false);
+        userProfileUrl = ko.observable("");
             isManager=ko.observable(false);
             getCurrentUserCallback = function (user) {
                 my.meta.currentUser = user;
                 my.meta.isManager(user.IsAdministrator);
                 my.meta.isAdministrator(user.IsManager);
+                my.meta.userProfileUrl('/Profile/UserProfile?userId=' + user.UserId);
                 my.meta.initializeNavbar();
             },
             avatarUrl = function (item) {
@@ -28,7 +30,8 @@
             initializeNavbar: initializeNavbar,
             avatarUrl: avatarUrl,
             isAdministrator: isAdministrator,
-            isManager: isManager
+            isManager: isManager,
+            userProfileUrl: userProfileUrl
         };
     }();
 

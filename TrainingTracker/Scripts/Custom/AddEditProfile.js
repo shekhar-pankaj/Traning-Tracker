@@ -1,8 +1,6 @@
-﻿$(document).ready(function ()
-{
+﻿$(document).ready(function () {
 
-    my.addUserVm = function ()
-    {
+    my.addUserVm = function () {
 
         var user = {
             UserId: ko.observable(),
@@ -19,8 +17,7 @@
             ProfilePictureName: ko.observable("Dummy.jpg"),
             Password: ko.observable(),
             IsFemale: ko.observable("false"),
-            PhotoUrl: function ()
-            {
+            PhotoUrl: function () {
                 return my.rootUrl + "/Uploads/ProfilePicture/" + my.addUserVm.user.ProfilePictureName();
 
             },
@@ -45,8 +42,7 @@
                 IsFemale: ko.observable(""),
                 IsActive: ko.observable(),
             },
-            getCurrentUserCallback = function (item)
-            {
+            getCurrentUserCallback = function (item) {
                 my.addUserVm.currentUser.UserId(item.UserId);
                 my.addUserVm.currentUser.FirstName(item.FirstName);
                 my.addUserVm.currentUser.LastName(item.LastName);
@@ -62,12 +58,10 @@
                 my.addUserVm.currentUser.IsFemale(item.IsFemale);
                 my.addUserVm.currentUser.IsActive(item.IsActive);
             },
-            getCurrentUser = function ()
-            {
+            getCurrentUser = function () {
                 my.userService.getCurrentUser(my.addUserVm.getCurrentUserCallback);
             },
-            setUser = function (item)
-            {
+            setUser = function (item) {
                 my.addUserVm.user.UserId(item.UserId);
                 my.addUserVm.user.FirstName(item.FirstName);
                 my.addUserVm.user.LastName(item.LastName);
@@ -85,12 +79,9 @@
                 my.addUserVm.user.enableChangePassword(false);
 
             },
-            saveUserCallback = function (jsonData)
-            {
-                if (jsonData.status)
-                {
-                    if (jsonData.userId > 0)
-                    {
+            saveUserCallback = function (jsonData) {
+                if (jsonData.status) {
+                    if (jsonData.userId > 0) {
                         my.addUserVm.user.UserId(jsonData.userId);
                         var objUser = ko.toJS(my.addUserVm.user);
                         objUser.FullName = my.addUserVm.fullName(objUser);
@@ -102,34 +93,54 @@
                     //my.meta.currentUser = ko.toJS(my.addUserVm.user);
                     my.addUserVm.message("User saved successfully!");
                 }
-                else
-                {
+                else {
                     my.addUserVm.message("User saving unsuccessful!");
                 }
             },
-            saveUser = function ()
-            {
-                if (my.addUserVm.user.IsNewProfile())
-                {
+            saveUser = function () {
+                my.addUserVm.message("");
+                var emptyFields = [];
+                if (my.isNullorEmpty(my.addUserVm.user.FirstName())) {
+                    emptyFields.push("FirstName");
+                }
+                if (my.isNullorEmpty(my.addUserVm.user.UserName())) {
+                    emptyFields.push("UserName");
+                }
+                if (my.isNullorEmpty(my.addUserVm.user.IsFemale())) {
+                    emptyFields.push("Gender");
+                }
+                if (!my.validateEmail(my.isNullorEmpty(my.addUserVm.user.Email()) || (my.addUserVm.user.Email()))) {
+                    emptyFields.push("valid Email");
+                }
+                if (my.isNullorEmpty(my.addUserVm.user.Designation())) {
+                    emptyFields.push("Designation");
+                }
+                if (!my.addUserVm.user.IsAdministrator() && !my.addUserVm.user.IsTrainer() && !my.addUserVm.user.IsTrainee() && !my.addUserVm.user.IsManager()) {
+                    emptyFields.push("Role");
+                }
+                if ((my.addUserVm.user.IsNewProfile() || my.addUserVm.user.enableChangePassword()) && my.isNullorEmpty(my.addUserVm.user.Password())) {
+                    emptyFields.push("Password");
+                }
+
+                if (emptyFields != 'undefined' && emptyFields.length > 0) {
+                    my.addUserVm.message("Please provide " + emptyFields.join(',') + " !");
+                }
+                if (my.addUserVm.user.IsNewProfile()) {
                     my.userService.createUser(user, my.addUserVm.saveUserCallback);
                 }
-                else
-                {
+                else {
                     my.userService.updateUser(user, my.addUserVm.saveUserCallback);
                 }
             },
             genderSelection = ko.computed({
-                read: function ()
-                {
+                read: function () {
                     return user.IsFemale().toString();
                 },
-                write: function (newValue)
-                {
+                write: function (newValue) {
                     user.IsFemale(newValue === "true");
                 }
             }),
-        resetUser = function ()
-        {
+        resetUser = function () {
             my.reset(user);
             my.addUserVm.user.IsFemale(false);
             my.addUserVm.user.Designation("Sr. Software Engineer");
@@ -138,80 +149,66 @@
             my.addUserVm.user.IsNewProfile(false);
             my.addUserVm.message("");
         },
-        addProfile = (function ()
-        {
+        addProfile = (function () {
             resetUser();
             my.addUserVm.user.IsReadOnly(false);
             my.addUserVm.user.IsNewProfile(true);
         }),
-            fullName = function (item)
-            {
+            fullName = function (item) {
                 return item.FirstName + " " + item.LastName;
             },
             lstUsers = ko.observableArray([]),
-            getUsersCallback = function (userList)
-            {
+            getUsersCallback = function (userList) {
                 my.addUserVm.lstUsers([]),
-                ko.utils.arrayForEach(userList, function (item)
-                {
+                ko.utils.arrayForEach(userList, function (item) {
                     item.FullName = my.addUserVm.fullName(item);
                     my.addUserVm.lstUsers.push(item);
                 });
             },
 
-            getUsers = function ()
-            {
+            getUsers = function () {
                 my.userService.getAllUsers(my.addUserVm.getUsersCallback);
             },
-            showProfile = function (objUser, event)
-            {
+            showProfile = function (objUser, event) {
                 resetUser();
                 my.addUserVm.setUser(objUser);
                 my.addUserVm.user.IsReadOnly(true);
                 my.addUserVm.user.IsNewProfile(false);
             },
-            editProfile = function (event)
-            {
+            editProfile = function (event) {
                 my.addUserVm.message("");
                 my.addUserVm.user.IsReadOnly(false);
                 my.addUserVm.user.IsNewProfile(false);
             },
-            uploadImageCallback = function (jsonData)
-            {
+            uploadImageCallback = function (jsonData) {
                 if (!my.isNullorEmpty(jsonData))
                     my.addUserVm.user.ProfilePictureName(jsonData);
             },
-            uploadImage = function ()
-            {
+            uploadImage = function () {
                 var formData = new FormData($('form')[0]);
                 my.userService.uploadImage(formData, my.addUserVm.uploadImageCallback);
             },
             showDialog = ko.observable(false),
-            closeDialogue = function ()
-            {
+            closeDialogue = function () {
                 resetUser();
                 my.addUserVm.showDialog(false);
                 my.addUserVm.showAllUsersProfile(false);
             },
-            openUserProfile = function ()
-            {
+            openUserProfile = function () {
                 closeDialogue();
                 my.addUserVm.showDialog(true);
                 my.addUserVm.setUser(my.meta.currentUser);
             },
             showAllUsersProfile = ko.observable(false),
-            openAllUsersProfile = function ()
-            {
+            openAllUsersProfile = function () {
                 closeDialogue();
                 my.addUserVm.showDialog(true);
-                if (my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager)
-                {
+                if (my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) {
                     my.addUserVm.showAllUsersProfile(true);
                 }
                 my.addUserVm.setUser(my.meta.currentUser);
             },
-            getCss = function ()
-            {
+            getCss = function () {
                 if (my.addUserVm.showAllUsersProfile())
                     return { 'width': '70%' };
                 return { 'width': '50%' };
@@ -247,14 +244,11 @@
         };
     }();
 
-    my.addUserVm.user.fileData.subscribe(function ()
-    {
-        if (my.addUserVm.user.ProfilePictureName() == "")
-        {
+    my.addUserVm.user.fileData.subscribe(function () {
+        if (my.addUserVm.user.ProfilePictureName() == "") {
             my.addUserVm.user.ProfilePictureName("Dummy.jpg");
         }
-        else
-        {
+        else {
             my.addUserVm.uploadImage();
         }
     });
