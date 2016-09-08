@@ -3,13 +3,15 @@
     my.meta = function () {
         var currentUser = {},
             isAdministrator = ko.observable(false);
-        userProfileUrl = ko.observable("");
             isManager=ko.observable(false);
+            isTrainee = ko.observable(false);
+            userProfileUrl = ko.observable("");
             getCurrentUserCallback = function (user) {
                 my.meta.currentUser = user;
-                my.meta.isManager(user.IsAdministrator);
-                my.meta.isAdministrator(user.IsManager);
-                my.meta.userProfileUrl('/Profile/UserProfile?userId=' + user.UserId);
+                my.meta.isManager(user.IsManager);
+                my.meta.isAdministrator(user.IsAdministrator);
+                my.meta.isTrainee(user.IsTrainee);
+                my.meta.userProfileUrl(my.rootUrl + '/Profile/UserProfile?userId=' + user.UserId);
                 my.meta.initializeNavbar();
             },
             avatarUrl = function (item) {
@@ -31,7 +33,8 @@
             avatarUrl: avatarUrl,
             isAdministrator: isAdministrator,
             isManager: isManager,
-            userProfileUrl: userProfileUrl
+            userProfileUrl: userProfileUrl,
+            isTrainee: isTrainee
         };
     }();
 

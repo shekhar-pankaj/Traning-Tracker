@@ -122,8 +122,8 @@
                     emptyFields.push("Password");
                 }
 
-                if (emptyFields != 'undefined' && emptyFields.length > 0) {
-                    my.addUserVm.message("Please provide " + emptyFields.join(',') + " !");
+                if (emptyFields !== null && emptyFields.length > 0) {
+                    my.addUserVm.message("Please provide " + emptyFields.join(',') + " !"); return false;
                 }
                 if (my.addUserVm.user.IsNewProfile()) {
                     my.userService.createUser(user, my.addUserVm.saveUserCallback);
