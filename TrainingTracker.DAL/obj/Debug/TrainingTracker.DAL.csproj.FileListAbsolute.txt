@@ -12,3 +12,13 @@ D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\bin\Debug\Train
 D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.csprojResolveAssemblyReference.cache
 D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.dll
 D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.pdb
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.DAL.dll.config
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.DAL.dll
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.DAL.pdb
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\bin\Debug\EntityFramework.dll
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.Common.dll
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\bin\Debug\TrainingTracker.Common.pdb
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\bin\Debug\EntityFramework.xml
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.csprojResolveAssemblyReference.cache
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.dll
+D:\Projects\Traning-Tracker\TrainingTracker.DAL\obj\Debug\TrainingTracker.DAL.pdb

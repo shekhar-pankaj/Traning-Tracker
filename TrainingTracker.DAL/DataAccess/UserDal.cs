@@ -142,6 +142,7 @@ namespace TrainingTracker.DAL.DataAccess
                                                         UserId = x.UserId ,
                                                         FirstName = x.FirstName ,
                                                         LastName = x.LastName ,
+                                                        FullName = x.FirstName + " " + x.LastName,
                                                         UserName = x.UserName ,
                                                         Email = x.Email ,
                                                         Designation = x.Designation ,
@@ -151,7 +152,8 @@ namespace TrainingTracker.DAL.DataAccess
                                                         IsTrainer = x.IsTrainer ?? false ,
                                                         IsTrainee = x.IsTrainee ?? false ,
                                                         IsManager = x.IsManager ?? false ,
-                                                        IsActive = x.IsActive ?? false
+                                                        IsActive = x.IsActive ?? false,
+                                                        DateAddedToSystem = x.DateAddedToSystem                                                       
                                                     }).ToList();
                 }
             }
@@ -230,6 +232,7 @@ namespace TrainingTracker.DAL.DataAccess
                                             IsTrainee = x.IsTrainee ?? false ,
                                             IsManager = x.IsManager ?? false ,
                                             IsActive = x.IsActive ?? false ,
+                                            DateAddedToSystem = x.DateAddedToSystem ,   
                                             UserRating = 0
                                         }).First();
                 }
@@ -264,7 +267,8 @@ namespace TrainingTracker.DAL.DataAccess
                         {
                             User = new User
                             {
-                                UserId = Convert.ToInt32(rows["UserId"]) ,
+                                UserId = Convert.ToInt32(rows["UserId"]),
+                                DateAddedToSystem = Convert.ToDateTime(rows["DateAddedToSystem"]),
                                 FullName = rows["FullName"].ToString() ,
                             } ,
                             RemainingFeedbacks = new List<Feedback>() ,

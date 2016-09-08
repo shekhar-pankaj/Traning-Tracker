@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="DataAccess\FeedbackDal.cs" />
     <Compile Include="DataAccess\ProjectDal.cs" />
+    <Compile Include="DataAccess\QuestionDal.cs" />
     <Compile Include="DataAccess\SessionDal.cs" />
     <Compile Include="DataAccess\SkillDal.cs" />
     <Compile Include="DataAccess\UserDal.cs" />
@@ -73,6 +74,12 @@
       <DependentUpon>TrainingTracker.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\ProjectPlanMapping.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Question.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\QuestionLevelMapping.cs">
       <DependentUpon>TrainingTracker.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Session.cs">
@@ -110,6 +117,7 @@
     </Compile>
     <Compile Include="Interface\IFeedbackDal.cs" />
     <Compile Include="Interface\IProjectDal.cs" />
+    <Compile Include="Interface\IQuestionDal.cs" />
     <Compile Include="Interface\ISessionDal.cs" />
     <Compile Include="Interface\ISkillDal.cs" />
     <Compile Include="Interface\IUserDal.cs" />

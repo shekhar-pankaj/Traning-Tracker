@@ -1,3 +1,0 @@
-ALTER TABLE [dbo].[User]
-  ADD IsActive bit
-  DEFAULT 1 WITH VALUES

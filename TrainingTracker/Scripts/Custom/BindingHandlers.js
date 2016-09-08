@@ -48,130 +48,177 @@
 
 };
 
-//ko.bindingHandlers.modal = {
-//    init: function(element, valueAccessor) {
-//        $(element).modal({
-//            show: false
-//        });
+    ko.bindingHandlers.barClick = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
+        {
+            if (!allBindings.has('chartData'))
+            {
+                throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
+                return;
+            }
+            var chartType = allBindings.get('chartType');
+            if (chartType !== 'Bar')
+            {
+                throw Error('barClick can only be used with chartType Bar');
+                return;
+            }
+        },
+        update: function (element, valueAccesor, allBindings, viewModel, bindingContext) { }
+    };
+    ko.bindingHandlers.lineClick = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
+        {
+            if (!allBindings.has('chartData'))
+            {
+                throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
+                return;
+            }
+            var chartType = allBindings.get('chartType');
+            if (chartType !== 'Line')
+            {
+                throw Error('lineClick can only be used with chartType Line');
+                return;
+            }
+        },
+        update: function (element, valueAccesor, allBindings, viewModel, bindingContext) { }
+    };
+    ko.bindingHandlers.segmentClick = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
+        {
+            if (!allBindings.has('chartData'))
+            {
+                throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
+                return;
+            }
+            var chartType = allBindings.get('chartType');
+            if (chartType !== 'Pie' && chartType !== 'Doughnut')
+            {
+                throw Error('segmentClick can only be used with chartType Pie or Donut');
+                return;
+            }
+        },
+        update: function (element, valueAccesor, allBindings, viewModel, bindingContext) { }
+    };
+    ko.bindingHandlers.chartType = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
+        {
+            if (!allBindings.has('chartData'))
+            {
+                throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
+            }
+        },
+        update: function (element, valueAccessor, allBindings, viewModel, bindingContext)
+        {
+            var ctx = element.getContext('2d'),
+                type = ko.unwrap(valueAccessor()),
+                data = ko.unwrap(allBindings.get('chartData')),
+                options = ko.unwrap(allBindings.get('chartOptions')) || {},
+            	segmentClick = ko.unwrap(allBindings.get('segmentClick')),
+                barClick = ko.unwrap(allBindings.get('barClick')),
+                lineClick = ko.unwrap(allBindings.get('lineClick'));
 
-//        var value = valueAccessor();
-//        if (typeof value === 'function') {
-//            $(element).on('hide.bs.modal', function() {
-//                value(false);
-//            });
-//        }
+            // NB: Fix for newer knockout (see https://gist.github.com/jmhdez/4987b053e817d65d7c68)
+			if (this.chart) {
+				this.chart.destroy();
+				delete this.chart;
+			}
+			if (ctx.canvas.chart) {
+			    ctx.canvas.chart.destroy();
+			    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+			}
 
-//    },
-//    update: function(element, valueAccessor) {
-//        var value = valueAccessor();
-//        if (ko.utils.unwrapObservable(value)) {
-//            $(element).modal('show');
-//        } else {
-//            $(element).modal('hide');
-//        }
-//    }
-//};
+			if ($('#divFeedbackChart').css('display') == 'none') return;
+            
+			//this.chart = new Chart(ctx)[type](data, options);
+			//*/
 
+            if (data == null) return;
 
+            //ko.utils.domNodeDisposal.addDisposeCallback(element,
 
-//ko.bindingHandlers.datepicker = {
-//    init: function (element, valueAccessor, allBindingsAccessor) {
-//        //initialize datepicker with some optional options
-//        var options = allBindingsAccessor().datepickerOptions || {
-//            useCurrent: false,
-//            format: 'mm/dd/yyyy'
-//        };
-//        $(element).datepicker(options);
+            //function ()
+            //{
+            //    $(element).chart.destroy();
+            //    delete $(element).chart;
+            //});
+            
+            var newChart;
 
-//        //when a user changes the date, update the view model
-//        ko.utils.registerEventHandler(element, "changeDate", function (event) {
-//            var value = valueAccessor();
-//            if (ko.isObservable(value)) {
-//                value(event.date);
-//            }
-//        });
-//    },
-//    update: function (element, valueAccessor) {
-//        //when the view model is updated, update the widget
-//        $(element).datepicker("update", ko.utils.unwrapObservable(valueAccessor()));
-//    }
-//};
+            if (type == 'Line') {
+                newChart = new Chart(ctx).Scatter(data, options);
+            } else {
+                 newChart = new Chart(ctx)[type](data, options);
+            }
+            newChart.clear();
+            var $element = $(element)[0];
+            $element.chart = newChart;
+            //* End of fix
 
-$(document).ready(function () {
+            //* Remove existing click binding
+            if ($element.click)
+            {
+                $element.removeEventListener('click', $element.click);
+                delete ($element.click);
+            }
+            //* Add segment click binding
+            switch (type)
+            {
+                case "Pie":
+                case "Doughnut":
+                    if (segmentClick)
+                    {
+                        $element.click = function (evt)
+                        {
+                            var activePoints = newChart.getSegmentsAtEvent(evt);
+                            segmentClick(activePoints[0], newChart);
+                        };
+                    }
+                    break;
+                case "Bar":
+                    if (barClick)
+                    {
+                        $element.click = function (evt)
+                        {
+                            barClick(newChart.getBarsAtEvent(evt), newChart);
+                        };
+                    }
+                    break;
+                case "Line":
+                    if (lineClick)
+                    {
+                        $element.click = function (evt) { lineClick(newChart.getPointsAtEvent(evt), newChart); };
+                    }
+                    break;
+                default:
+                    break;
+            }
+            $element.addEventListener('click', $element.click);
+           // if ($('#divFeedbackChart').css('display') == 'inline-block') $('#divFeedbackChart').css('display', 'none');
+        }
+    };
 
-    //ko.bindingHandlers.datepicker = {
-    //    init: function (element, valueAccessor, allBindingsAccessor) {
-    //        //initialize datepicker with some optional options
-    //        var options = allBindingsAccessor().datepickerOptions || {};
-    //        $(element).datepicker(options);
+    ko.bindingHandlers.chartData = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
+        {
+            if (!allBindings.has('chartType'))
+            {
+                throw Error('chartData must be used in conjunction with chartType and (optionally) chartOptions');
+            }
+        }
+    };
 
-    //        //when a user changes the date, update the view model
-    //        ko.utils.registerEventHandler(element, "changeDate", function (event) {
-    //            var value = valueAccessor();
-    //            if (ko.isObservable(value)) {
-    //                value(event.date);
-    //            }
-    //        });
-    //    },
-    //    update: function (element, valueAccessor) {
-    //        var widget = $(element).data("datepicker");
-    //        //when the view model is updated, update the widget
-    //        if (widget) {
-    //            widget.date = ko.utils.unwrapObservable(valueAccessor());
-    //            widget.setValue();
-    //        }
-    //    }
-    //};
+    ko.bindingHandlers.chartOptions = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
+        {
+            if (!allBindings.has('chartData') || !allBindings.has('chartType'))
+            {
+                throw Error('chartOptions must be used in conjunction with chartType and chartData');
+            }
+        }
+    };
 
-    //ko.bindingHandlers.typeaheadJS = {
-    //    init: function (element, valueAccessor, allBindingsAccessor) {
-    //        var el = $(element);
-    //        var options = ko.utils.unwrapObservable(valueAccessor());
-    //        var allBindings = allBindingsAccessor();
+/***** End of ko-chart.js *****/
 
-    //        var data = new Bloodhound({
-    //            datumTokenizer: Bloodhound.tokenizers.obj.whitespace(options.displayKey),
-    //            queryTokenizer: Bloodhound.tokenizers.whitespace,
-    //            limit: options.limit,
-    //            prefetch: options.prefetch, // pass the options from the model to typeahead
-    //            remote: options.remote // pass the options from the model to typeahead
-    //        });
-
-    //        // kicks off the loading/processing of 'local' and 'prefetch'
-    //        initialize();
-
-    //        el.attr("autocomplete", "off").typeahead(null, {
-    //            name: options.name,
-    //            displayKey: options.displayKey,
-    //            // `ttAdapter` wraps the suggestion engine in an adapter that
-    //            // is compatible with the typeahead jQuery plugin
-    //            source: data.ttAdapter()
-
-    //        }).on('typeahead:selected', function (obj, datum) {
-    //            id(datum.id); // set the id observable when a user selects an option from the typeahead list
-    //        });
-    //    }
-    //};
-
-    //ko.bindingHandlers.typeahead = {
-    //    init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-    //        var $element = $(element);
-    //        var allBindings = allBindingsAccessor();
-    //        var typeaheadArr = ko.utils.unwrapObservable(valueAccessor());
-
-    //        $element.attr("autocomplete", "off")
-    //                .typeahead({
-    //                    'source': typeaheadArr,
-    //                    'minLength': allBindings.minLength,
-    //                    'items': allBindings.items,
-    //                    'updater': function (item) {
-    //                        allBindings.value(item);
-    //                        return item;
-    //                    }
-    //                });
-    //    }
-    //};
-});
 
 /*Added for image file upload*/
 
@@ -236,4 +283,21 @@ $(document).ready(function () {
 
         }
     };
+    ko.bindingHandlers.wzTooltip = {
+        update: function (element, valueAccessor) {
+            var options = valueAccessor();
+            config.FontSize = '12px';
+            ko.utils.registerEventHandler(element, "mouseover", function () {
+                if (options.HtmlTag === "true") {
+                    TagToTip(options.HtmlId);
+                }
+                else { Tip(options.tittle); }
+            });
+            ko.utils.registerEventHandler(element, "mouseout", function () {
+                UnTip();
+            });
+        }
+    };
 });
+
+

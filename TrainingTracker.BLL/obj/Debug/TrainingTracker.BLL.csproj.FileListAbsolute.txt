@@ -16,3 +16,14 @@ D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\bin\Debug\Train
 D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.csprojResolveAssemblyReference.cache
 D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.dll
 D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.pdb
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.BLL.dll
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.BLL.pdb
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.Common.dll
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.DAL.dll
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\bin\Debug\EntityFramework.dll
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.Common.pdb
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\bin\Debug\TrainingTracker.DAL.pdb
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\bin\Debug\EntityFramework.xml
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.csprojResolveAssemblyReference.cache
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.dll
+D:\Projects\Traning-Tracker\TrainingTracker.BLL\obj\Debug\TrainingTracker.BLL.pdb

@@ -1,0 +1,510 @@
+Source        : System.Data
+Method        : TryGetConnection
+Date        : 4:01:08 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Stack Trace    : at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetAllUsers() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 104
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserById(Int32 userId) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 184
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.SkillDal.GetSkillsByUserId(Int32 userId) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\SkillDal.cs:line 25
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionsByUserId(Int32 userId) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 26
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionsByUserId(Int32 userId) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 26
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.ProjectDal.GetProjectsByUserId(Int32 userId) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\ProjectDal.cs:line 25
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.GetUserFeedback(Int32 userId, Int32 count, Nullable`1 feedbackId) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 73
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.GetUserFeedback(Int32 userId, Int32 count, Nullable`1 feedbackId) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 73
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:09 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.FeedbackDal.GetUserFeedback(Int32 userId, Int32 count, Nullable`1 feedbackId) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\FeedbackDal.cs:line 73
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:12 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:12 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetAllUsers() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 104
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:12 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetAllUsers() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 104
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TryGetConnection
+Date        : 4:01:52 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Stack Trace    : at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetAllUsers() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 104
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TryGetConnection
+Date        : 4:01:52 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Stack Trace    : at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetDashboardData() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 225
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 4:01:53 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:01:53 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionOnFilter(Int32 pageSize, Int32 sessionType, String searchKeyword) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 95
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TryGetConnection
+Date        : 4:07:11 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Stack Trace    : at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetAllUsers() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 104
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TryGetConnection
+Date        : 4:07:11 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Stack Trace    : at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetDashboardData() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 225
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 4:07:12 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TryGetConnection
+Date        : 4:13:17 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Stack Trace    : at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetAllUsers() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 104
+^^-----------------------------------------------------^^
+Source        : System.Data
+Method        : TryGetConnection
+Date        : 4:13:17 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+Stack Trace    : at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetDashboardData() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 225
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:13:18 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionOnFilter(Int32 pageSize, Int32 sessionType, String searchKeyword) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 95
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:13:18 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetDashboardData() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 225
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:13:18 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionOnFilter(Int32 pageSize, Int32 sessionType, String searchKeyword) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 95
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : OnError
+Date        : 4:13:38 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetUserByUserName(String userName) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 144
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:13:38 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetDashboardData() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 225
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:13:38 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.SessionDal.GetSessionOnFilter(Int32 pageSize, Int32 sessionType, String searchKeyword) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\SessionDal.cs:line 95
+^^-----------------------------------------------------^^
+Source        : .Net SqlClient Data Provider
+Method        : TryGetConnection
+Date        : 4:13:38 PM
+Time        : 8/18/2016
+Computer    : shekharp7
+Error        : A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+Stack Trace    : at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at TrainingTracker.Common.Utility.SqlUtility.ExecuteAndGetTable(String commandText, CommandType commandType, String tableName, List`1 sqlParams) in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.Common\Utility\SqlUtility.cs:line 54
+   at TrainingTracker.DAL.DataAccess.UserDal.GetAllUsers() in D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker.DAL\DataAccess\UserDal.cs:line 104
+^^-----------------------------------------------------^^

@@ -114,11 +114,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Authorization\CustomAuthorize.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="Controllers\UnauthorizedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -140,6 +143,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Chart.bundle.min.js" />
+    <Content Include="Scripts\Chart.Core.min.js" />
+    <Content Include="Scripts\Chart.Scatter.min.js" />
     <Content Include="Scripts\Custom\AddEditProfile.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -147,8 +153,12 @@
     <Content Include="Scripts\Custom\AllSessions.js" />
     <Content Include="Scripts\Custom\BindingHandlers.js" />
     <Content Include="Scripts\Custom\Dashboard.js" />
+    <Content Include="Scripts\Custom\FeedbackChart.js" />
     <Content Include="Scripts\Custom\Layout.js" />
     <Content Include="Scripts\Custom\Login.js" />
+    <Content Include="Scripts\Custom\Questions.js" />
+    <Content Include="Scripts\Custom\QuestionsService.js" />
+    <Content Include="Scripts\Custom\Unauthorized.js" />
     <Content Include="Scripts\Custom\UserProfile.js" />
     <Content Include="Scripts\Custom\UserService.js" />
     <Content Include="Content\DatePicker\bootstrap-datepicker.css.map" />
@@ -177,13 +187,17 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\wz_tooltip.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="StyleSheets\AddEditProfile.css" />
     <Content Include="StyleSheets\AllProfiles.css" />
+    <Content Include="StyleSheets\CustomButtons.css" />
     <Content Include="StyleSheets\Dashboard.css" />
+    <Content Include="StyleSheets\FeedbackPlot.css" />
     <Content Include="StyleSheets\Layout.css" />
     <Content Include="StyleSheets\Login.css" />
     <Content Include="StyleSheets\Profile.css" />
+    <Content Include="StyleSheets\Questions.css" />
     <Content Include="StyleSheets\Session.css" />
     <Content Include="StyleSheets\simple-sidebar.css" />
     <Content Include="Uploads\ProfilePicture\harshw.JPG" />
@@ -208,6 +222,9 @@
     <Content Include="Views\Profile\AddEditProfile.cshtml" />
     <Content Include="Views\Session\Sessions.cshtml" />
     <Content Include="Views\Shared\_PartialProfile.cshtml" />
+    <Content Include="Views\Shared\_FeedbackIllustration.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\Unauthorized\UnauthorizedAccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

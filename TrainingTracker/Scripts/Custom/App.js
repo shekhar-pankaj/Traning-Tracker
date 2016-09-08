@@ -5,6 +5,7 @@ $(document).ready(function () {
     if (my.rootUrl == "/") {
         my.rootUrl = "";
     }
+    my.xhrRequestcount = 0;
 
     my.queryParams = (function (a) {
         if (a == "") return {};
@@ -20,8 +21,7 @@ $(document).ready(function () {
     })(window.location.search.substr(1).split('&'));
     
     my.isNullorEmpty = function(value) {
-
-        return typeof(value) === 'undefined' || value == null || value == '';
+        return typeof (value) === 'undefined' || value === null || value === '' || ((typeof (value) === 'string') && (value.trim() === ''));
     };
     my.reset = function (obj) {
         for (var prop in obj) {
@@ -30,8 +30,29 @@ $(document).ready(function () {
             }
         }
     };
-  
 
+    my.validateEmail = function (email) {
+        var regExEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regExEmail.test(email);
+    }
+	 my.toggleLoader = function(load) {
+        if (typeof (load) == 'undefined' || !load) {
+            my.xhrRequestcount--;
+        }
+        else {
+            my.xhrRequestcount++;
+            $('div#loaderWrapper').fadeIn('slow');
+        }
+        setTimeout(function() {
+            if (my.xhrRequestcount <= 0) {
+                $('div#loaderWrapper').fadeOut('slow');
+                my.xhrRequestcount = 0;
+            }
+        }, 2000);
+    };
+
+
+   
 });
 
 
