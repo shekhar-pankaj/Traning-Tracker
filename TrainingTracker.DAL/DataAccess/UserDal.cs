@@ -68,6 +68,8 @@ namespace TrainingTracker.DAL.DataAccess
                                                             IsTrainer = userData.IsTrainer ,
                                                             IsTrainee = userData.IsTrainee ,
                                                             IsManager = userData.IsManager ,
+                                                            DateAddedToSystem = DateTime.Now,
+                                                            IsActive = true
                                                         };
                     context.Users.Add(objUser);
                     context.SaveChanges();

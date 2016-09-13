@@ -29,10 +29,13 @@
                 </button>
             </div>
             <div class="pull-right feedback-input meta">
-                <label style="visibility: hidden">Apply Filter</label>
-                <button data-bind="click: openSessionDailog  " type="button" class="feedback-button form-control btn btn-info  input-sm ">Add New Session 
-                    <i class="glyphicon glyphicon-plus"></i>
-                </button>
+                @if (HttpContext.Current.User.IsInRole("Administrator") || HttpContext.Current.User.IsInRole("Manager") || HttpContext.Current.User.IsInRole("Trainer"))
+                {
+                    <label style="visibility: hidden">Apply Filter</label>
+                    <button data-bind="click: openSessionDailog  " type="button" class="feedback-button form-control btn btn-info  input-sm ">Add New Session 
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                }
             </div>
         </div>
     </div>
@@ -70,6 +73,7 @@
         </div>
     </div>
 
+
     <div id="divAddEditSession" class="modal-dialog"  data-bind="visible: my.sessionVm.showDialog()" style="display: none">
         <div class="modal-content">
             <div class="modal-header">
@@ -88,7 +92,7 @@
                     <input type="text" class="form-control" data-bind="datepicker: my.sessionVm.sessionDetails.Date, startDate:new Date(), value: my.sessionVm.sessionDetails.Date" />
                     <!-- /ko -->
 
-                     <!-- ko if: !(my.sessionVm.sessionSettings.isNewSession() || my.sessionVm.sessionSettings.isEditable()) -->
+                    <!-- ko if: !(my.sessionVm.sessionSettings.isNewSession() || my.sessionVm.sessionSettings.isEditable()) -->
                     <input type="text" class="form-control" data-bind=" value: my.sessionVm.sessionDetails.Date" readonly="readonly"/>
                     <!-- /ko -->
 
@@ -96,7 +100,7 @@
                 </div>
                 <div class="col-xs-4 no-left-margin no-right-margin" style="height: 313px;">
                     <h5>Attendees</h5>
-                    <div class="form-control" style="height:100%">
+                    <div class="form-control" style="height: 100%;overflow-y: scroll;overflow-x: hidden;">
                         <div class="row"  data-bind="visible: my.sessionVm.currentUser.UserId == my.sessionVm.sessionDetails.Presenter() && moment(moment(my.sessionVm.sessionDetails.Date()).format('MM/DD/YYYY')).isSameOrAfter(moment(my.sessionVm.todayDate).format('MM/DD/YYYY'))">
                             <div class="col-xs-12">
                                 <span class="custom-checkbox">
@@ -108,7 +112,7 @@
                                 <label for="ckbSelectAll" class=" lblForCheckbox make-checkbox-label-in-align" data-bind="text: my.sessionVm.sessionSettings.allSelectedText">Select All</label>
                             </div>
                         </div>
-                        <div style="overflow:scroll-x" data-bind="foreach: my.sessionVm.allAttendees">
+                        <div style="overflow: scroll-x" data-bind="foreach: my.sessionVm.allAttendees">
                             <div class="row" data-bind="visible: my.sessionVm.currentUser.UserId == my.sessionVm.sessionDetails.Presenter() && moment(moment(my.sessionVm.sessionDetails.Date()).format('MM/DD/YYYY')).isSameOrAfter(moment(my.sessionVm.todayDate).format('MM/DD/YYYY'))">
                                 <div class="col-xs-12">
                                     <span class="custom-checkbox">
@@ -120,11 +124,11 @@
                                     <label data-bind="attr: { 'for': 'ckb_' + UserId },text:FirstName + ' ' + LastName" for="ckbSelectAll" class=" lblForCheckbox make-checkbox-label-in-align">Select All</label>
                                 </div>
                             </div>
-                             <div class="row" data-bind="visible:my.sessionVm.currentUser.UserId != my.sessionVm.sessionDetails.Presenter() || moment(moment(my.sessionVm.sessionDetails.Date()).format('MM/DD/YYYY')).isBefore(moment(my.sessionVm.todayDate).format('MM/DD/YYYY'))">
-                                 <div class="col-xs-12" data-bind="visible:my.sessionVm.sessionDetails.Attendee().indexOf(UserId.toString()) > -1">
+                            <div class="row" data-bind="visible:my.sessionVm.currentUser.UserId != my.sessionVm.sessionDetails.Presenter() || moment(moment(my.sessionVm.sessionDetails.Date()).format('MM/DD/YYYY')).isBefore(moment(my.sessionVm.todayDate).format('MM/DD/YYYY'))">
+                                <div class="col-xs-12" data-bind="visible:my.sessionVm.sessionDetails.Attendee().indexOf(UserId.toString()) > -1">
                                     <label data-bind=" text: FirstName + ' ' + LastName" class=" lblForCheckbox make-checkbox-label-in-align"></label>
-                                 </div>
-                             </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -138,6 +142,7 @@
         </div>
         <!-- /.modal-content -->
     </div>
+
     <!-- /.modal-dialog -->
 
 </div>

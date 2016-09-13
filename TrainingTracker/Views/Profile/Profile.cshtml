@@ -231,7 +231,7 @@
                     <li role="presentation" class="active">
                         <a href="#divFeedbackArea" aria-controls="divFeedbackArea" role="tab" data-toggle="tab">Feedbacks</a>
                     </li>
-                    <li role="presentation" data-bind=" click function(){my.profileVm.loadPlotData();}">
+                    <li role="presentation" data-bind=" click: function(){my.profileVm.loadPlotData();}">
                         <a href="#divFeedbackChart" aria-controls="divFeedbackChart" role="tab" data-toggle="tab" data-bind="">Synopsis</a>
                     </li>
                 </ul>
@@ -369,7 +369,7 @@
                                     </div>*@
                                 <div class="col-xs-12 col-md-3 col-md-offset-5  feedback-input meta">
                                     <label style="visibility:hidden ">Apply Filter</label>
-                                    <button data-bind=" click applyFilter " style="margin-top: -5px;height: 34px;" type="button" class="form-control btn btn-info  input-sm ">Apply Filter <i class="glyphicon glyphicon-filter"></i></button>
+                                    <button data-bind=" click :applyFilter " style="margin-top: -5px;height: 34px;" type="button" class="form-control btn btn-info  input-sm ">Apply Filter <i class="glyphicon glyphicon-filter"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -461,7 +461,7 @@
                                 </div>
                                 <div class="feedback-input meta col-xs-3">
                                     <label class="col-xs-12"></label>
-                                    <button type="button" class="feedback-button form-control btn btn-info  input-sm " data-bind=" click function(){my.profileVm.loadPlotData();}">
+                                    <button type="button" class="feedback-button form-control btn btn-info  input-sm " data-bind=" click: function(){my.profileVm.loadPlotData();}">
                                         Draw Plot
                                         <i class="glyphicon glyphicon-stats"></i>
                                     </button>
