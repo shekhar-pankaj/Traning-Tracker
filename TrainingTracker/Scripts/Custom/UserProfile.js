@@ -183,7 +183,38 @@
                     return item.Rating == type;
                 });
                 return feedbackFilteredOnType.length;
-            };
+            },
+             isCommentFeedbackModalVisible = ko.observable(false),
+        showCommentFeedback = function () {
+            my.profileVm.loadcommentFeedbacks();
+            isCommentFeedbackModalVisible(true);
+        },
+        closeCommentFeedbackModal = function () {
+            isCommentFeedbackModalVisible(false);
+        },
+        commentFeedbacks = ko.observableArray([]),
+        loadcommentFeedbacks = function () {
+            var obj = ko.toJS(my.profileVm.feedbackPost);
+            // my.profileVm.userId;
+            //
+            //my.userService.getFeedbackByFeedbackCriteria(obj, my.profileVm.loadcommentFeedbacksCallback);
+            my.userService.getFeedbackonAppliedFilter(100, 3, my.profileVm.userId, my.profileVm.feedbackPost.StartDate(), my.profileVm.feedbackPost.EndDate(), my.profileVm.loadcommentFeedbacksCallback);
+        },
+            loadcommentFeedbacksCallback = function (feedbacks) {
+                my.profileVm.commentFeedbacks([]);
+                var startDate = new Date(my.profileVm.feedbackPost.StartDate()).getTime();
+                var endDate = new Date(my.profileVm.feedbackPost.EndDate()).getTime()
+                $.each(feedbacks, function (key) {
+                    if ((new Date(moment(feedbacks[key].AddedOn)).getTime() >= startDate) && (new Date(moment(feedbacks[key].AddedOn)).getTime() <= endDate)) {
+                        feedbacks[key].AddedBy.UserImageUrl = my.rootUrl + "/Uploads/ProfilePicture/" + feedbacks[key].AddedBy.ProfilePictureName;
+                        my.profileVm.commentFeedbacks.push(feedbacks[key]);
+                    }
+                });
+            }
+        isCommentCollapsed = ko.observable(false),
+        toggleCollapsedPanel = function () {
+            my.profileVm.isCommentCollapsed(!my.profileVm.isCommentCollapsed());
+        };
 
         return {
             userId: userId,
@@ -214,7 +245,16 @@
             recentWeeklyFeedback: recentWeeklyFeedback,
             tempAllTrainer: tempAllTrainer, //temp feature,
             plotFilter: plotFilter,
-            loadPlotData:loadPlotData
+            loadPlotData: loadPlotData,
+
+            showCommentFeedback: showCommentFeedback,
+            isCommentFeedbackModalVisible: isCommentFeedbackModalVisible,
+            closeCommentFeedbackModal: closeCommentFeedbackModal,
+            commentFeedbacks: commentFeedbacks,
+            loadcommentFeedbacks: loadcommentFeedbacks,
+            loadcommentFeedbacksCallback: loadcommentFeedbacksCallback,
+            isCommentCollapsed: isCommentCollapsed,
+            toggleCollapsedPanel: toggleCollapsedPanel
     };
     }();
 

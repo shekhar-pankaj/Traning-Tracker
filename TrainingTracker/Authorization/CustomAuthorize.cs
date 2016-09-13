@@ -23,10 +23,9 @@ namespace TrainingTracker.Authorize
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
 
+            bool isAuthorized = false;
             try
             {
-                //bool isAuthorized = base.AuthorizeCore(httpContext);
-                bool isAuthorized = false;
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(httpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value);
 
                 if (httpContext.User.Identity.IsAuthenticated && authTicket != null)
@@ -55,19 +54,20 @@ namespace TrainingTracker.Authorize
                     }
 
                     GenericPrincipal userPrincipal =
-                                     new GenericPrincipal(new GenericIdentity(authTicket.Name), currentUserRoles != null ? currentUserRoles.ToArray() : null);
+                                     new GenericPrincipal(new GenericIdentity(authTicket.Name),currentUserRoles.ToArray());
 
-                    isAuthorized = ((string.IsNullOrEmpty(this.Roles)) || (this.Roles.Split(',').ToList<string>().Any(x => userPrincipal.IsInRole(x))) || (currentUser.UserId.Equals(userIdRequested)));
+                    isAuthorized = ((string.IsNullOrEmpty(this.Roles)) || (this.Roles.Split(',').ToList().Any(x => userPrincipal.IsInRole(x))) || (currentUser.UserId.Equals(userIdRequested)));
 
                     httpContext.User = userPrincipal;
 
                 }
-                return isAuthorized;
             }
             catch
             {
-                return false;
+                isAuthorized = false;
             }
+
+            return isAuthorized;
         }
         /// <summary>
         /// Called when a process requests authorization.
@@ -91,7 +91,6 @@ namespace TrainingTracker.Authorize
                 if (filterContext.Result is HttpUnauthorizedResult)
                 {
                     filterContext.Result = new RedirectResult("~/Unauthorized/UnauthorizedAccess");
-                    return;
                 }
             }
             catch
@@ -107,8 +106,8 @@ namespace TrainingTracker.Authorize
         /// <returns>Returns true if AllowAnonymous attribute is used to skip authorization else returns false</returns>
         private static bool SkipAuthorization(AuthorizationContext filterContext)
         {
-            return filterContext != null ? filterContext.ActionDescriptor.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).Any()
-                   || filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).Any() : false;
+            return filterContext != null && (filterContext.ActionDescriptor.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).Any()
+                                             || filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).Any());
         }
     }
 }
