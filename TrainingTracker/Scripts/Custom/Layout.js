@@ -2,10 +2,10 @@
 
     my.meta = function () {
         var currentUser = {},
-            isAdministrator = ko.observable(false);
-            isManager=ko.observable(false);
-            isTrainee = ko.observable(false);
-            userProfileUrl = ko.observable("");
+            isAdministrator = ko.observable(false),
+            isManager=ko.observable(false),
+            isTrainee = ko.observable(false),
+            userProfileUrl = ko.observable(""),
             getCurrentUserCallback = function (user) {
                 my.meta.currentUser = user;
                 my.meta.isManager(user.IsManager);

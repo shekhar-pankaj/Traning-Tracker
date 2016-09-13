@@ -58,7 +58,7 @@ namespace TrainingTracker.DAL.DataAccess
         /// Gets all feedback for a users.
         /// </summary>
         /// <returns>List of all feedback for a users.</returns>
-        public List<Feedback> GetUserFeedback(int userId, int count,int? feedbackId= null)
+        public List<Feedback> GetUserFeedback(int userId, int count, int? feedbackId = null, DateTime? startAddedOn = null, DateTime? endAddedOn = null)
         {
             var feedbacks = new List<Feedback>();
 
@@ -67,7 +67,9 @@ namespace TrainingTracker.DAL.DataAccess
                 SqlUtility.CreateParameter(SPGetUserFeedbacks.PARAM_USER_ID, SqlDbType.Int, userId),
                 SqlUtility.CreateParameter(SPGetUserFeedbacks.FEEDBACK_ID, SqlDbType.Int, feedbackId),
                 SqlUtility.CreateParameter(SPGetUserFeedbacks.PARAM_PAGE_SIZE, SqlDbType.Int, count),
-                SqlUtility.CreateParameter(SPGetUserFeedbacks.PARAM_OFFSET, SqlDbType.Int, 0)
+                SqlUtility.CreateParameter(SPGetUserFeedbacks.PARAM_OFFSET, SqlDbType.Int, 0),
+                SqlUtility.CreateParameter(SPGetUserFeedbacks.START_ADDED_ON, SqlDbType.Date, startAddedOn),
+                SqlUtility.CreateParameter(SPGetUserFeedbacks.END_ADDED_ON, SqlDbType.Date, endAddedOn)
             };
 
             try
@@ -96,7 +98,7 @@ namespace TrainingTracker.DAL.DataAccess
                                        },
                                        StartDate = Convert.ToDateTime(row["StartDate"]),
                                        EndDate = Convert.ToDateTime(row["EndDate"])
-                                       
+
                                    });
             }
             catch (Exception ex)

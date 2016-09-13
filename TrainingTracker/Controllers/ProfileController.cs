@@ -88,7 +88,7 @@ namespace TrainingTracker.Controllers
             return Json(new UserBl().GetUserProfileVm(userId), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetUserFeedbackOnFilter(int pageSize, int feedbackId,int userId)
+        public JsonResult GetUserFeedbackOnFilter(int pageSize, int feedbackId, int userId, DateTime? startAddedOn = null, DateTime? endAddedOn = null)
         {
             return Json(new UserBl().GetUserFeedbackOnFilter(userId, pageSize, feedbackId), JsonRequestBehavior.AllowGet);
         }

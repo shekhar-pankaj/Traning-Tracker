@@ -107,9 +107,9 @@ namespace TrainingTracker.BLL
         /// <param name="pageSize"></param>
         /// <param name="feedbackId"></param>
         /// <returns></returns>
-        public List<Feedback> GetUserFeedbackOnFilter(int userId, int pageSize, int feedbackId )
+        public List<Feedback> GetUserFeedbackOnFilter(int userId, int pageSize, int feedbackId, DateTime? startAddedOn = null, DateTime? endAddedOn = null)
         {
-            return FeedbackDataAccesor.GetUserFeedback(userId , pageSize , feedbackId);
+            return FeedbackDataAccesor.GetUserFeedback(userId, pageSize, feedbackId, startAddedOn, endAddedOn);
         }
 
         /// <summary>
