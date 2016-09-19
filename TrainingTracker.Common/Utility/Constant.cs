@@ -173,6 +173,8 @@
         public const string PARAM_OFFSET = "@Offset";
         public const string FEEDBACK_ID = "@FeedbackId";
         public const string TABLE_NAME = "Result";
+        public const string START_ADDED_ON = "@StartAddedOn";
+        public const string END_ADDED_ON = "@EndAddedOn";
     }
 
     /// <summary>

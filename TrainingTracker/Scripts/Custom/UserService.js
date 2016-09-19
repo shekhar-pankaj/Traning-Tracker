@@ -23,9 +23,6 @@
         getCurrentUser: function (callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Login/GetCurrentUser", null, callback);
         },
-        getFeedbackonAppliedFilter: function (pageSize, feedbackId, userId, callback)
-        {
-            my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetUserFeedbackOnFilter?pageSize=" + pageSize + "&feedbackId=" + feedbackId + "&userId=" + userId, null, callback);
         },
         getDashboardVm: function (callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Dashboard/GetDashboardData", null, callback);

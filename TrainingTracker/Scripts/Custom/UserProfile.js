@@ -5,7 +5,7 @@
             selectedSkill = ko.observable(),
             selectedProject = ko.observable(),
             validationMessage = ko.observable(),
-            tempAllTrainer = ko.observable(), // remove this once temproray feature use end
+            tempAllTrainer = ko.observable(), // remove this once temporary feature use end
             recentCodeReviewFeedback = ko.observable(),
             recentWeeklyFeedback = ko.observable(),
             controls = {
@@ -166,8 +166,8 @@
                 my.userService.getCurrentUser(my.profileVm.getCurrentUserCallback);
             },        
             applyFilter = function () {
-                var filtertype = typeof(my.profileVm.filter.filterFeedback()) == 'undefined' ? 0 : (my.profileVm.filter.filterFeedback().FeedbackTypeId);
-                my.userService.getFeedbackonAppliedFilter(my.profileVm.filter.selectedPageSize(), filtertype, my.profileVm.userId, my.profileVm.applyFilterCallback);
+                var filtertype = typeof (my.profileVm.filter.filterFeedback()) == 'undefined' ? 0 : (my.profileVm.filter.filterFeedback().FeedbackTypeId);       
+                my.userService.getFeedbackonAppliedFilter(my.profileVm.filter.selectedPageSize(), filtertype, my.profileVm.userId,null,null, my.profileVm.applyFilterCallback);
             },
             applyFilterCallback = function (feedbacks) {
                 my.profileVm.userVm.Feedbacks([]);
@@ -183,7 +183,31 @@
                     return item.Rating == type;
                 });
                 return feedbackFilteredOnType.length;
-            };
+            },
+             isCommentFeedbackModalVisible = ko.observable(false),
+        showCommentFeedback = function () {
+            my.profileVm.loadcommentFeedbacks();
+            isCommentFeedbackModalVisible(true);
+        },
+        closeCommentFeedbackModal = function () {
+            isCommentFeedbackModalVisible(false);
+        },
+        commentFeedbacks = ko.observableArray([]),
+        loadcommentFeedbacks = function () {
+            my.userService.getFeedbackonAppliedFilter(100, 1, my.profileVm.userId, my.profileVm.feedbackPost.StartDate(), my.profileVm.feedbackPost.EndDate(), my.profileVm.loadCommentFeedbacksCallback);
+        },
+        loadCommentFeedbacksCallback = function (feedbacks) {
+            my.profileVm.commentFeedbacks([]);
+            
+            ko.utils.arrayForEach(feedbacks, function (item)
+            {
+                my.profileVm.commentFeedbacks.push(item);
+            });
+        },
+        isCommentCollapsed = ko.observable(false),
+        toggleCollapsedPanel = function () {
+            my.profileVm.isCommentCollapsed(!my.profileVm.isCommentCollapsed());
+        };
 
         return {
             userId: userId,
@@ -214,7 +238,15 @@
             recentWeeklyFeedback: recentWeeklyFeedback,
             tempAllTrainer: tempAllTrainer, //temp feature,
             plotFilter: plotFilter,
-            loadPlotData:loadPlotData
+            loadPlotData: loadPlotData,
+            showCommentFeedback: showCommentFeedback,
+            isCommentFeedbackModalVisible: isCommentFeedbackModalVisible,
+            closeCommentFeedbackModal: closeCommentFeedbackModal,
+            commentFeedbacks: commentFeedbacks,
+            loadcommentFeedbacks: loadcommentFeedbacks,
+            loadCommentFeedbacksCallback: loadCommentFeedbacksCallback,
+            isCommentCollapsed: isCommentCollapsed,
+            toggleCollapsedPanel: toggleCollapsedPanel
     };
     }();
 

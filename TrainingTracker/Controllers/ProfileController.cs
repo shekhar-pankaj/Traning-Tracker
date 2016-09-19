@@ -83,14 +83,29 @@ namespace TrainingTracker.Controllers
             return Json(new UserBl().GetAllUsers(), JsonRequestBehavior.AllowGet);
         }
 
+
+        /// <summary>
+        /// Action to return user profile View model
+        /// </summary>
+        /// <param name="userId">user id of logged user</param>
+        /// <returns>Json Result for loggin User</returns>
         public ActionResult GetUserProfileVm(int userId)
         {
             return Json(new UserBl().GetUserProfileVm(userId), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetUserFeedbackOnFilter(int pageSize, int feedbackId,int userId)
+        /// <summary>
+        /// Action method to handle xhr request for fetching filters based on filter  condition
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="feedbackId"></param>
+        /// <param name="userId"></param>
+        /// <param name="startAddedOn"></param>
+        /// <param name="endAddedOn"></param>
+        /// <returns></returns>
+        public JsonResult GetUserFeedbackOnFilter(int pageSize, int feedbackId, int userId, DateTime? startAddedOn = null, DateTime? endAddedOn = null)
         {
-            return Json(new UserBl().GetUserFeedbackOnFilter(userId, pageSize, feedbackId), JsonRequestBehavior.AllowGet);
+            return Json(new UserBl().GetUserFeedbackOnFilter(userId , pageSize , feedbackId , startAddedOn , endAddedOn) , JsonRequestBehavior.AllowGet);
         }
 
         //Added for Upload Image 

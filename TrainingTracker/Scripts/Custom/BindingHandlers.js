@@ -287,6 +287,12 @@ $(document).ready(function () {
         update: function (element, valueAccessor) {
             var options = valueAccessor();
             config.FontSize = '12px';
+            if (!my.isNullorEmpty(options.ClickSticky)) {
+                config.ClickSticky = JSON.parse(options.ClickSticky);
+            };
+            if (!my.isNullorEmpty(options.Above)) {
+                config.ClickSticky = JSON.parse(options.Above);
+            };
             ko.utils.registerEventHandler(element, "mouseover", function () {
                 if (options.HtmlTag === "true") {
                     TagToTip(options.HtmlId);

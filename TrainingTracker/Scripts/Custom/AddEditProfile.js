@@ -83,14 +83,13 @@
                 if (jsonData.status) {
                     if (jsonData.userId > 0) {
                         my.addUserVm.user.UserId(jsonData.userId);
-                        var objUser = ko.toJS(my.addUserVm.user);
-                        objUser.FullName = my.addUserVm.fullName(objUser);
-                        my.addUserVm.lstUsers.push(objUser);
+                        var addedUser = ko.toJS(my.addUserVm.user);
+                        addedUser.FullName = my.addUserVm.fullName(addedUser);
+                        my.addUserVm.lstUsers.push(addedUser);
                     }
                     my.addUserVm.user.IsReadOnly(true);
                     my.addUserVm.user.IsNewProfile(false);
                     my.addUserVm.user.enableChangePassword(false);
-                    //my.meta.currentUser = ko.toJS(my.addUserVm.user);
                     my.addUserVm.message("User saved successfully!");
                 }
                 else {
@@ -122,7 +121,7 @@
                     emptyFields.push("Password");
                 }
 
-                if (emptyFields !== null && emptyFields.length > 0) {
+                if (emptyFields.length > 0) {
                     my.addUserVm.message("Please provide " + emptyFields.join(',') + " !"); return false;
                 }
                 if (my.addUserVm.user.IsNewProfile()) {
@@ -208,11 +207,6 @@
                 }
                 my.addUserVm.setUser(my.meta.currentUser);
             },
-            getCss = function () {
-                if (my.addUserVm.showAllUsersProfile())
-                    return { 'width': '70%' };
-                return { 'width': '50%' };
-            },
             message = ko.observable("");
         ;
 
@@ -239,8 +233,7 @@
             openUserProfile: openUserProfile,
             openAllUsersProfile: openAllUsersProfile,
             showAllUsersProfile: showAllUsersProfile,
-            message: message,
-            getCss: getCss
+            message: message
         };
     }();
 
@@ -252,9 +245,5 @@
             my.addUserVm.uploadImage();
         }
     });
-    // my.addUserVm.getCurrentUser();
     my.addUserVm.getUsers();
-    // ko.applyBindings(my.addUserVm);
-
-
 });

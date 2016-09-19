@@ -56,6 +56,7 @@
     <Compile Include="Utility\Constant.cs" />
     <Compile Include="Utility\LogUtility.cs" />
     <Compile Include="Utility\SqlUtility.cs" />
+    <Compile Include="Utility\UtilityFunctions.cs" />
     <Compile Include="ViewModel\DashboardVm.cs" />
     <Compile Include="ViewModel\QuestionVm.cs" />
     <Compile Include="ViewModel\SessionVm.cs" />
