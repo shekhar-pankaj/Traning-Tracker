@@ -336,9 +336,9 @@ body {
 }
 
 #loaderWrapper {
-    top: 10%;
-    position: absolute;
-    height: 90vh;
+   
+    position: fixed;
+    height: 100vh;
     width: 100vw;
     z-index: 10000;
     background-color: #fff;
@@ -346,12 +346,13 @@ body {
 }
 
 #loaderWrapper > div {
-    top: 25%;
+    top: 40%;
     margin: auto;
 }
 
 /*for modal*/
 .modal{
+        height: 100vh;
     background: rgba(51,51,51,0.7);
 }
 .modal-content{

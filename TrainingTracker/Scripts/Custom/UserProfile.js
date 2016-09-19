@@ -8,6 +8,8 @@
             tempAllTrainer = ko.observable(), // remove this once temporary feature use end
             recentCodeReviewFeedback = ko.observable(),
             recentWeeklyFeedback = ko.observable(),
+            commentFeedbacks = ko.observableArray([]),
+            isCommentFeedbackModalVisible = ko.observable(false),
             controls = {
                 skillOption: ko.observable("1"),
                 assignmentOption: ko.observable(1),
@@ -183,16 +185,15 @@
                     return item.Rating == type;
                 });
                 return feedbackFilteredOnType.length;
-            },
-             isCommentFeedbackModalVisible = ko.observable(false),
+            },            
         showCommentFeedback = function () {
+            closeCommentFeedbackModal();
             my.profileVm.loadcommentFeedbacks();
             isCommentFeedbackModalVisible(true);
         },
         closeCommentFeedbackModal = function () {
             isCommentFeedbackModalVisible(false);
         },
-        commentFeedbacks = ko.observableArray([]),
         loadcommentFeedbacks = function () {
             my.userService.getFeedbackonAppliedFilter(100, 1, my.profileVm.userId, my.profileVm.feedbackPost.StartDate(), my.profileVm.feedbackPost.EndDate(), my.profileVm.loadCommentFeedbacksCallback);
         },

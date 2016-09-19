@@ -3,7 +3,7 @@
 
     var serviceBase = my.rootUrl,
         getServiceUrl = function (method) {
-            if (serviceBase == undefined) {
+            if (typeof(serviceBase) == 'undefined') {
                 serviceBase = "";
             }
             return serviceBase + method;
@@ -14,16 +14,12 @@
             $.ajax({
                 url: getServiceUrl(method),
                 type: "GET",
-                beforeSend: my.toggleLoader(true),
                 data: ko.toJSON(jsonIn),
                 dataType: "json",
                 contentType: "application/json",
                 success: function(json) {
-                    callback(json);
-                    my.toggleLoader();
-                },
-                  error: my.toggleLoader()
-            
+                    callback(json);               
+                }
             });
         },
          ajaxPostJson = function (method, jsonIn, callback) {
@@ -31,14 +27,12 @@
                  url: getServiceUrl(method),
                  type: "POST",
                  data: ko.toJSON(jsonIn),
-                 beforeSend: my.toggleLoader(true),
                  dataType: "json",
                  contentType: "application/json",
-                 success: function (json) {
-                     callback(json);
-                     my.toggleLoader();
-                 },
-                 error: my.toggleLoader()
+                 success: function (json)
+                 {                   
+                     callback(json);                
+                 }
              });
          },
         ajaxUploadImage = function (method, formData, callback) {
@@ -46,15 +40,12 @@
                  url: getServiceUrl(method),
                  type: "POST",
                  data: formData,
-                 beforeSend: my.toggleLoader(true),
                  cache: false,
                  contentType: false,
                  processData: false,
                  success: function (json) {
                      callback(json);
-                     my.toggleLoader();
-                 },
-                 error: my.toggleLoader()
+                 }
              });
          }
         ;

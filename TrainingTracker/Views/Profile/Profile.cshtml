@@ -453,9 +453,9 @@
 
     </div>
 
-     <div id="divWeeklyComment" class="col-xs-12 col-md-3 modal" data-bind="style: { display: (my.profileVm.isCommentFeedbackModalVisible() && (!my.profileVm.isCommentCollapsed())) ? 'table' : 'none' }">
+     <div id="divWeeklyComment" class="col-xs-12 col-md-3 modal" data-bind="style: { display: (my.profileVm.isCommentFeedbackModalVisible() && (!my.profileVm.isCommentCollapsed())) ? 'table' : 'none','top':'auto' }">
 
-                <div class="modal-content col-xs-12  no-right-margin" style="max-height:94%" >
+                <div class="modal-content col-xs-12  no-right-margin" style="max-height:94vh" >
                     <div class="modal-header no-left-margin ">
                         <h4 class="modal-title col-xs-8  no-left-margin">Weekly Comments</h4>
                         <button type="button" class="close" data-bind="click: my.profileVm.closeCommentFeedbackModal" aria-hidden="true">&times;</button>
@@ -463,7 +463,7 @@
                     <div data-bind="visible: my.profileVm.commentFeedbacks().length < 1" class="modal-body col-xs-12  no-left-margin no-right-margin">
                         <span>No comments added.</span>
                     </div>
-                    <div data-bind="visible: my.profileVm.commentFeedbacks().length > 0" class="modal-body col-xs-12 no-left-margin no-right-margin" style="overflow-y: scroll; min-height:50%;max-height: 650px">
+                    <div data-bind="visible: my.profileVm.commentFeedbacks().length > 0" class="modal-body col-xs-12 no-left-margin no-right-margin" style="overflow-y: scroll; min-height:50%;max-height: 81vh">
                         <div id="" class="col-xs-12 col-md-12 no-left-margin" data-bind="foreach: my.profileVm.commentFeedbacks">
                             <div class="modal-body col-xs-12 col-md-12 no-left-margin no-right-margin" style="padding-bottom:0; border-bottom: 2px solid #ccc">
                                 <div>

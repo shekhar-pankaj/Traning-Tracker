@@ -31,28 +31,27 @@ $(document).ready(function () {
         }
     };
 
-    my.validateEmail = function (email) {
+    my.validateEmail = function(email) {
         var regExEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regExEmail.test(email);
-    }
-	 my.toggleLoader = function(load) {
-        if (typeof (load) == 'undefined' || !load) {
-            my.xhrRequestcount--;
-        }
-        else {
-            my.xhrRequestcount++;
-            $('div#loaderWrapper').fadeIn('slow');
-        }
-        setTimeout(function() {
-            if (my.xhrRequestcount <= 0) {
-                $('div#loaderWrapper').fadeOut('slow');
-                my.xhrRequestcount = 0;
-            }
-        }, 2000);
     };
-
-
    
+});
+
+$(document).ajaxStart(function ()
+{
+    my.xhrRequestcount++;
+    $('div#loaderWrapper').show();
+});
+
+$(document).ajaxComplete(function ()
+{
+    my.xhrRequestcount--;
+    if (my.xhrRequestcount <= 0)
+    {
+        my.xhrRequestcount = 0;
+        $('div#loaderWrapper').fadeOut(1000);
+    }
 });
 
 

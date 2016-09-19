@@ -306,6 +306,7 @@ p {
  }
 
  #divWeeklyComment {
+         top: 7vh;
      transition-property: all;
 	transition-duration: 2s;
 	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
