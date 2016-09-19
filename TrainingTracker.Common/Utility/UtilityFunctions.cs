@@ -14,7 +14,7 @@ namespace TrainingTracker.Common.Utility
        /// </summary>
        /// <param name="dayOfWeek">enumeration of type day of week</param>
         /// <param name="referenceDate">reference Date from where the last date wrt day to be calculated</param>
-       /// <returns>returns the last day</returns>
+       /// <returns>returns the last day</returns> 
         public static DateTime GetLastDateByDay(DayOfWeek dayOfWeek,DateTime referenceDate )
        {
            var differenceInDay =  dayOfWeek - referenceDate.DayOfWeek ;           
@@ -26,7 +26,7 @@ namespace TrainingTracker.Common.Utility
         /// </summary>
         /// <param name="startDate">start date</param>
         /// <param name="endDate">end date</param>
-        /// <returns>List of week strinfs</returns>
+        /// <returns>List of week strings</returns>
         public static List<string> GetAllWeeksBetweenDates(DateTime? startDate, DateTime endDate)
         {
             List<string> allWeeksList =new List<string>();

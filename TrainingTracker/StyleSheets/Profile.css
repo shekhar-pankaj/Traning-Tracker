@@ -304,3 +304,26 @@ p {
      display: table;
      width: 100%;
  }
+
+ #divWeeklyComment {
+     transition-property: all;
+	transition-duration: 2s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+ }
+
+ #divWeeklyComment .modal-content > .modal-body .modal-body:last-child {
+     border-bottom: none;
+ }
+
+ div#WzTtDiV {
+    border-radius: 15px;
+    text-align: center;
+    color: #fff;
+    background: black!important;
+     padding: 5px !important;
+  
+}
+
+ td#WzBoDyI {
+     text-align: center !important;
+ }

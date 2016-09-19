@@ -7,12 +7,18 @@ using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Utility;
 using TrainingTracker.DAL.Interface;
 
-
 namespace TrainingTracker.DAL.DataAccess
 {
+    /// <summary>
+    /// Data access classs for Feedback , Implements IFeedbackDal
+    /// </summary>
     public class FeedbackDal:IFeedbackDal
     {
-
+        /// <summary>
+        /// Dal method to Add feedback
+        /// </summary>
+        /// <param name="feedbackData"></param>
+        /// <returns></returns>
         public bool AddFeedback(Feedback feedbackData)
         {
             
@@ -98,16 +104,13 @@ namespace TrainingTracker.DAL.DataAccess
                                        },
                                        StartDate = Convert.ToDateTime(row["StartDate"]),
                                        EndDate = Convert.ToDateTime(row["EndDate"])
-
                                    });
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
             }
-
             return feedbacks;
         }
-
     }
 }

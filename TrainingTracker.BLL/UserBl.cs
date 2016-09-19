@@ -103,12 +103,18 @@ namespace TrainingTracker.BLL
         /// <summary>
         /// Fetches user Feedback based on filter
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="feedbackId"></param>
+        /// <param name="userId">user id</param>
+        /// <param name="pageSize">no of record count</param>
+        /// <param name="feedbackId">feedback type id</param>
+        /// <param name="startAddedOn">start date </param>
+        /// <param name="endAddedOn">end date</param>
         /// <returns></returns>
         public List<Feedback> GetUserFeedbackOnFilter(int userId, int pageSize, int feedbackId, DateTime? startAddedOn = null, DateTime? endAddedOn = null)
         {
+            // truncate any time part from the filter, if only if the variables have any value
+            if (startAddedOn.HasValue) startAddedOn = startAddedOn.Value.Date;
+            if (endAddedOn.HasValue) endAddedOn = endAddedOn.Value.Date;
+
             return FeedbackDataAccesor.GetUserFeedback(userId, pageSize, feedbackId, startAddedOn, endAddedOn);
         }
 

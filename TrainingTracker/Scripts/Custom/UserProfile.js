@@ -5,7 +5,7 @@
             selectedSkill = ko.observable(),
             selectedProject = ko.observable(),
             validationMessage = ko.observable(),
-            tempAllTrainer = ko.observable(), // remove this once temproray feature use end
+            tempAllTrainer = ko.observable(), // remove this once temporary feature use end
             recentCodeReviewFeedback = ko.observable(),
             recentWeeklyFeedback = ko.observable(),
             controls = {
@@ -166,8 +166,8 @@
                 my.userService.getCurrentUser(my.profileVm.getCurrentUserCallback);
             },        
             applyFilter = function () {
-                var filtertype = typeof(my.profileVm.filter.filterFeedback()) == 'undefined' ? 0 : (my.profileVm.filter.filterFeedback().FeedbackTypeId);
-                my.userService.getFeedbackonAppliedFilter(my.profileVm.filter.selectedPageSize(), filtertype, my.profileVm.userId, my.profileVm.applyFilterCallback);
+                var filtertype = typeof (my.profileVm.filter.filterFeedback()) == 'undefined' ? 0 : (my.profileVm.filter.filterFeedback().FeedbackTypeId);       
+                my.userService.getFeedbackonAppliedFilter(my.profileVm.filter.selectedPageSize(), filtertype, my.profileVm.userId,null,null, my.profileVm.applyFilterCallback);
             },
             applyFilterCallback = function (feedbacks) {
                 my.profileVm.userVm.Feedbacks([]);
@@ -194,23 +194,16 @@
         },
         commentFeedbacks = ko.observableArray([]),
         loadcommentFeedbacks = function () {
-            var obj = ko.toJS(my.profileVm.feedbackPost);
-            // my.profileVm.userId;
-            //
-            //my.userService.getFeedbackByFeedbackCriteria(obj, my.profileVm.loadcommentFeedbacksCallback);
-            my.userService.getFeedbackonAppliedFilter(100, 3, my.profileVm.userId, my.profileVm.feedbackPost.StartDate(), my.profileVm.feedbackPost.EndDate(), my.profileVm.loadcommentFeedbacksCallback);
+            my.userService.getFeedbackonAppliedFilter(100, 1, my.profileVm.userId, my.profileVm.feedbackPost.StartDate(), my.profileVm.feedbackPost.EndDate(), my.profileVm.loadCommentFeedbacksCallback);
         },
-            loadcommentFeedbacksCallback = function (feedbacks) {
-                my.profileVm.commentFeedbacks([]);
-                var startDate = new Date(my.profileVm.feedbackPost.StartDate()).getTime();
-                var endDate = new Date(my.profileVm.feedbackPost.EndDate()).getTime()
-                $.each(feedbacks, function (key) {
-                    if ((new Date(moment(feedbacks[key].AddedOn)).getTime() >= startDate) && (new Date(moment(feedbacks[key].AddedOn)).getTime() <= endDate)) {
-                        feedbacks[key].AddedBy.UserImageUrl = my.rootUrl + "/Uploads/ProfilePicture/" + feedbacks[key].AddedBy.ProfilePictureName;
-                        my.profileVm.commentFeedbacks.push(feedbacks[key]);
-                    }
-                });
-            }
+        loadCommentFeedbacksCallback = function (feedbacks) {
+            my.profileVm.commentFeedbacks([]);
+            
+            ko.utils.arrayForEach(feedbacks, function (item)
+            {
+                my.profileVm.commentFeedbacks.push(item);
+            });
+        },
         isCommentCollapsed = ko.observable(false),
         toggleCollapsedPanel = function () {
             my.profileVm.isCommentCollapsed(!my.profileVm.isCommentCollapsed());
@@ -246,13 +239,12 @@
             tempAllTrainer: tempAllTrainer, //temp feature,
             plotFilter: plotFilter,
             loadPlotData: loadPlotData,
-
             showCommentFeedback: showCommentFeedback,
             isCommentFeedbackModalVisible: isCommentFeedbackModalVisible,
             closeCommentFeedbackModal: closeCommentFeedbackModal,
             commentFeedbacks: commentFeedbacks,
             loadcommentFeedbacks: loadcommentFeedbacks,
-            loadcommentFeedbacksCallback: loadcommentFeedbacksCallback,
+            loadCommentFeedbacksCallback: loadCommentFeedbacksCallback,
             isCommentCollapsed: isCommentCollapsed,
             toggleCollapsedPanel: toggleCollapsedPanel
     };
