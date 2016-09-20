@@ -3,54 +3,89 @@ using TrainingTracker.DAL.Interface;
 
 namespace TrainingTracker.BLL.Base
 {
+    /// <summary>
+    /// Bussiness base class
+    /// </summary>
     public class BussinessBase
     {
+        /// <summary>
+        /// Private session dal accessor
+        /// </summary>
+        private ISessionDal _sessionDalAccessor;
+
+        /// <summary>
+        /// public with only getter Sesion dal accessor
+        /// </summary>
         public ISessionDal SessionDataAccesor
         {
-            get
-            {
-                return new SessionDal();
-            }
+            get { return _sessionDalAccessor ?? (_sessionDalAccessor = new SessionDal()); }
         }
 
+        /// <summary>
+        /// Private skill dal accessor
+        /// </summary>
+        private ISkillDal _skillDalAccessor;
+
+        /// <summary>
+        /// public with only getter Skill dal accessor
+        /// </summary>
         public ISkillDal SkillDataAccesor
         {
-            get
-            {
-                return new SkillDal();
-            }
+            get { return _skillDalAccessor ?? (_skillDalAccessor = new SkillDal()); }            
         }
 
+        /// <summary>
+        /// Private user dal accessor
+        /// </summary>
+        private IUserDal _userDalAccessor;
+
+        /// <summary>
+        /// public with only getter User dal accessor
+        /// </summary>
         public IUserDal UserDataAccesor
         {
-            get
-            {
-                return new UserDal();
-            }
+            get { return  _userDalAccessor ?? ( _userDalAccessor =new UserDal()); }    
         }
 
+        /// <summary>
+        /// Private project dal accessor
+        /// </summary>
+        private IProjectDal _projectDalAccessor;
+
+        /// <summary>
+        /// public with only getter Project dal accessor
+        /// </summary>
         public IProjectDal ProjectDataAccesor
         {
-            get
-            {
-                return new ProjectDal();
-            }
+            get { return  _projectDalAccessor ?? ( _projectDalAccessor =new ProjectDal()); }  
         }
 
+
+        /// <summary>
+        /// Private feedback dal accessor
+        /// </summary>
+        private IFeedbackDal _feedbackDalAccessor;
+
+        /// <summary>
+        /// public with only getter Feedback dal accessor
+        /// </summary>
         public IFeedbackDal FeedbackDataAccesor
         {
-            get
-            {
-                return new FeedbackDal();
-            }
+            get { return  _feedbackDalAccessor ?? ( _feedbackDalAccessor = new FeedbackDal()); } 
         }
 
+
+        /// <summary>
+        /// Private question dal accessor
+        /// </summary>
+        private IQuestionDal _questionDalAccessor;
+
+        /// <summary>
+        /// public with only getter Question dal accessor
+        /// </summary>
         public IQuestionDal QuestionDataAccesor
         {
-            get
-            {
-                return new QuestionDal();
-            }
+            get { return  _questionDalAccessor ?? ( _questionDalAccessor = new QuestionDal()); } 
         }
     }
 }

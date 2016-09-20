@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-xs-4 no-left-margin no-right-margin" style="height: 313px;">
                     <h5>Attendees</h5>
-                    <div class="form-control" style="height: 100%">
+                    <div class="form-control" style="height: 100%;overflow-y: scroll;overflow-x: hidden;">
                         <div class="row"  data-bind="visible: my.sessionVm.currentUser.UserId == my.sessionVm.sessionDetails.Presenter() && moment(moment(my.sessionVm.sessionDetails.Date()).format('MM/DD/YYYY')).isSameOrAfter(moment(my.sessionVm.todayDate).format('MM/DD/YYYY'))">
                             <div class="col-xs-12">
                                 <span class="custom-checkbox">

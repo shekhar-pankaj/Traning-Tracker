@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TrainingTracker.Common.Entity;
 
 namespace TrainingTracker.DAL.Interface
@@ -15,6 +16,6 @@ namespace TrainingTracker.DAL.Interface
         /// <returns>boolean value of success event</returns>
         bool AddFeedback( Feedback feedbackData );
 
-        List<Feedback> GetUserFeedback(int userId, int count, int? feedbackId=null );
+        List<Feedback> GetUserFeedback(int userId, int count, int? feedbackId = null, DateTime? startAddedOn = null, DateTime? endAddedOn = null);
     }
 }
