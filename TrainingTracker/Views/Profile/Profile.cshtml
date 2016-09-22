@@ -2,10 +2,15 @@
     ViewBag.Title = "Profile";
 }
 
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link href="~/Content/DatePicker/bootstrap-datepicker3.css" rel="stylesheet" />
-<link href="~/Content/Timeline.css" rel="stylesheet" />
-<link href="~/StyleSheets/Profile.css" rel="stylesheet" />
+@section Styles
+{
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link href="~/Content/DatePicker/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/Timeline.css" rel="stylesheet" />
+    <link href="~/StyleSheets/Profile.css" rel="stylesheet" />
+    <link href="~/StyleSheets/FeedbackPlot.css" rel="stylesheet" />
+}
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
@@ -494,16 +499,11 @@
 
 @section Scripts
 {
-    <script src="~/Scripts/knockout-3.4.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
     <script src="~/Scripts/Chart.Scatter.min.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/typehead.js"></script>
-    <script src="~/Scripts/Custom/BindingHandlers.js"></script>
-    <script src="~/Scripts/Custom/App.js"></script>
-    <script src="~/Scripts/Custom/AjaxService.js"></script>
-    <script src="~/Scripts/Custom/UserService.js"></script>
     <script src="~/Scripts/Custom/UserProfile.js"></script>
     <script src="~/Scripts/Custom/FeedbackChart.js"></script>
     <script src="~/Scripts/wz_tooltip.js"></script>

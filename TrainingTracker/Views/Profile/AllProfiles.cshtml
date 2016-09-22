@@ -1,10 +1,15 @@
 ﻿@{
     ViewBag.Title = "AllProfiles";
 }
-<link href="~/StyleSheets/AllProfiles.css" rel="stylesheet" />
+
+@section Styles
+{
+    <link href="~/StyleSheets/AllProfiles.css" rel="stylesheet" />
+}
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-xs-12">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#">All Profiles</a></li>
             </ul>
@@ -12,7 +17,7 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-xs-12">
             <div class="panel-group">
                 <ul class="list-inline" data-bind="foreach: users()">
                     <li>
@@ -22,32 +27,29 @@
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-lg-4">
-                                            <img data-bind="attr: {src: PhotoUrl}"
-                                                 class="img-responsive img-circle profile-img">
+                                            <img data-bind="attr: {src: PhotoUrl}" class="img-responsive img-circle profile-img">
                                         </div>
                                         <div class="col-lg-8">
-                                            <div data-bind="text: FirstName"
-                                                 class="username"></div>
-                                            <div data-bind="text: Designation"
-                                                 class="designation"></div>
-                                            @*<div class="designation">FAST</div>*@
+                                            <div data-bind="text: FirstName"class="username"></div>
+                                            <div data-bind="text: Designation"class="designation"></div>
                                         </div>
                                     </div>
-                                    @*<div class="row">
-                                    FAST
-                                </div>*@
                                 </div>
                             </div>
                         </a>
                     </li>
                 </ul>
             </div>
-            </div>
         </div>
+    </div>
 </div>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/knockout-3.4.0.js"></script>
-<script src="~/Scripts/Custom/App.js"></script>
-<script src="~/Scripts/Custom/AjaxService.js"></script>
-<script src="~/Scripts/Custom/UserService.js"></script>
-<script src="~/Scripts/Custom/AllProfile.js"></script>
+
+@section Scripts
+{
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/Custom/App.js"></script>
+    <script src="~/Scripts/Custom/AjaxService.js"></script>
+    <script src="~/Scripts/Custom/UserService.js"></script>
+    <script src="~/Scripts/Custom/AllProfile.js"></script>
+}
