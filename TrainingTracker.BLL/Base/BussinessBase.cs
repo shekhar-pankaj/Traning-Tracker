@@ -87,5 +87,32 @@ namespace TrainingTracker.BLL.Base
         {
             get { return  _questionDalAccessor ?? ( _questionDalAccessor = new QuestionDal()); } 
         }
+		
+		
+        /// <summary>
+        /// Private release dal accessor
+        /// </summary>
+        private IReleaseDal _releaseDataAccesor;
+		
+		/// <summary>
+        /// public with only getter Release dal accessor
+        /// </summary>
+		public IReleaseDal ReleaseDataAccesor
+        {
+			get { return  _releaseDataAccesor ?? ( _releaseDataAccesor = new ReleaseDal()); } 
+        }
+
+		/// <summary>
+        /// Private notification dal accessor
+        /// </summary>
+        private INotificationDal _notificationDataAccesor;
+		
+		/// <summary>
+        /// public with only getter Notification dal accessor
+        /// </summary>
+        public INotificationDal NotificationDataAccesor
+        {
+          get { return  _notificationDataAccesor ?? ( _notificationDataAccesor = new NotificationDal()); } 
+        }
     }
 }

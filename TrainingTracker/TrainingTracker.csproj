@@ -117,9 +117,11 @@
     <Compile Include="Authorization\CustomAuthorize.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\ReleaseController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UnauthorizedController.cs" />
     <Compile Include="Global.asax.cs">
@@ -158,6 +160,8 @@
     <Content Include="Scripts\Custom\Login.js" />
     <Content Include="Scripts\Custom\Questions.js" />
     <Content Include="Scripts\Custom\QuestionsService.js" />
+    <Content Include="Scripts\Custom\Release.js" />
+    <Content Include="Scripts\Custom\ReleaseService.js" />
     <Content Include="Scripts\Custom\Unauthorized.js" />
     <Content Include="Scripts\Custom\UserProfile.js" />
     <Content Include="Scripts\Custom\UserService.js" />
@@ -184,6 +188,7 @@
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-precise-range.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -198,6 +203,7 @@
     <Content Include="StyleSheets\Login.css" />
     <Content Include="StyleSheets\Profile.css" />
     <Content Include="StyleSheets\Questions.css" />
+    <Content Include="StyleSheets\Release.css" />
     <Content Include="StyleSheets\Session.css" />
     <Content Include="StyleSheets\simple-sidebar.css" />
     <Content Include="Uploads\ProfilePicture\harshw.JPG" />
@@ -225,6 +231,7 @@
     <Content Include="Views\Shared\_FeedbackIllustration.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Unauthorized\UnauthorizedAccess.cshtml" />
+    <Content Include="Views\Release\Release.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

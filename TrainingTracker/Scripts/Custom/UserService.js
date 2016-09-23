@@ -42,6 +42,12 @@
         },
         getUserFeedbackForPlot :function(traineeId, startDate, endDate, arrayFeedbackType, trainer, callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetUserFeedbackOnFilterForPlot?traineeId=" + traineeId + "&startDate=" + startDate + "&endDate=" + endDate + "&trainerId=" + trainer + "&arrayFeedbackType=" + arrayFeedbackType, null, callback);
+        },
+		getNotification: function (callback) {
+            my.ajaxService.ajaxGetJson(my.rootUrl + "/Notification/GetNotification", null, callback);
+        },
+        updateNotification: function (notificationInfo, callback) {
+            my.ajaxService.ajaxPostJson(my.rootUrl + "/Notification/UpdateNotification", notificationInfo, callback);
         }
     };
 }(my));

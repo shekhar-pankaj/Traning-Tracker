@@ -36,8 +36,9 @@ namespace TrainingTracker.BLL
             {
                 feedback.Rating = 0;
             }
-
-            return FeedbackDataAccesor.AddFeedback(feedback);
+           
+            if (!FeedbackDataAccesor.AddFeedback(feedback)) return false;
+            return new NotificationBl().AddFeedbackNotification(feedback) ? true : false;
         }
     }
 }

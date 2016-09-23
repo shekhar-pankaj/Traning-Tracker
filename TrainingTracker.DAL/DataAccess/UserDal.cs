@@ -356,5 +356,40 @@ namespace TrainingTracker.DAL.DataAccess
                         break;
                 }
         }
+
+	    /// <summary>
+        /// Public method GetUserId returns list of user id as per the condition,
+        /// So specific notifications are added to specific user profile.
+        /// </summary>
+        /// <param name="notificationType">Contain notificationType as parameter.</param>
+        /// <returns>Returns user Ids as a list.</returns>
+        public List<int> GetUserId(Common.Enumeration.NotificationType notificationType, int addedFor)
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    if (notificationType == Common.Enumeration.NotificationType.FeedbackNotification)
+                    {
+                        return context.Users
+                                      .Where(x => x.UserId == addedFor || x.IsTrainer == true || x.IsManager == true)
+                                      .Select(x => x.UserId)
+                                      .ToList();
+                    }
+                    else if(notificationType == Common.Enumeration.NotificationType.ReleaseNotification)
+                    {
+                        return context.Users
+                                  .Select(x => x.UserId)
+                                  .ToList();
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return null;
+            }
+        }	
     }
 }

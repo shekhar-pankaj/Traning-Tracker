@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Release";
+}
+<link href="~/StyleSheets/Release.css" rel="stylesheet" />
+<link href="~/Content/DatePicker/bootstrap-datepicker3.css" rel="stylesheet" />
+<link href="~/StyleSheets/Session.css" rel="stylesheet" />
+<div class="container-fluid noPadding">
+    <div class="col-xs-12 release-header noPadding">
+        <h1>Release History</h1>
+    </div>
+    <div class="col-xs-12 noPadding">
+        <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:10px; float:right;"
+                data-bind="click:my.allReleaseVm.openReleaseDialogue">
+            Add New Release
+            <i class="glyphicon glyphicon-plus"></i>
+        </button>
+    </div>
+    <!-- Modal -->
+    <div class="col-xs-12 col-md-8 col-xs-offset-0 col-md-offset-2 noPadding " id="divNewRelease" style="display:none"
+         data-bind="visible:my.allReleaseVm.showModal, style:{display:my.allReleaseVm.showModal()?'block':'none'}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bind="click:my.allReleaseVm.closeReleaseDialogue">&times;</button>
+                    <h4 class="modal-title" data-bind="text:releaseCaption"></h4>
+                </div>
+                <div class="modal-body col-xs-12">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label>Title:</label>
+                            <input type="text" class="form-control"
+                                   data-bind="textInput:my.allReleaseVm.releaseDetails.ReleaseTitle, disable:my.allReleaseVm.isViewMode" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-xs-12">
+                            <label>Description:</label>
+                        </div>
+                        <div class="col-xs-12">
+                            <textarea rows="5" cols="15" class="form-control" typeof="text" 
+                                      data-bind="textInput:my.allReleaseVm.releaseDetails.Description, disable:my.allReleaseVm.isViewMode"
+                                      placeholder="Add comment here"></textarea>
+                        </div>
+                    </div>
+                    <div class="from-group">
+                        <div class="col-xs-12" data-bind="disable:my.allReleaseVm.isViewMode">
+                            <label>Publish this release:</label>
+                            <input type="checkbox" data-bind="checked: my.allReleaseVm.releaseDetails.IsPublished" />
+                        </div>
+                    </div>
+                    <div data-bind="visible:my.allReleaseVm.releaseDetails.IsPublished">
+                        <div class="col-xs-12">
+                             <label data-bind="text:my.allReleaseVm.selectCaption"></label>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="form-group nopadding-left nopadding-right">
+                                <input class="col-xs-3" type="radio" name="version" value="Major" data-bind="checked: selectedReleaseType, disable:my.allReleaseVm.isViewMode" />
+                                <label class="col-xs-9 nopadding-left">Major</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="form-group">
+                                <input class="col-xs-3" type="radio" name="version" value="Minor" data-bind="checked: selectedReleaseType, disable:my.allReleaseVm.isViewMode" />
+                                <label class="col-xs-9 nopadding-left">Minor</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="form-group">
+                                <input class="col-xs-3" type="radio" name="version" value="Patch" data-bind="checked: selectedReleaseType, disable:my.allReleaseVm.isViewMode " />
+                                <label class="col-xs-9 nopadding-left nopadding-right">Patch</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-12 col-md-4 allign-left">Version:</label>
+                                <div class="col-xs-12 col-md-8 nopadding-right" style="margin-top:-5px;">
+                                    <input class="form-control" type="text" data-bind="value:newVersion, visible: my.allReleaseVm.isVisibleNewVersion" disabled />
+                                    <input class="form-control" type="text" data-bind="value:my.allReleaseVm.currentVersion, visible: my.allReleaseVm.isViewMode" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <label>Release date:</label>
+                        </div>
+                        <div class="col-xs-12">
+                            <input type="text" class="form-control"
+                                   data-bind="value: moment(my.allReleaseVm.releaseDetails.ReleaseDate()).format('DD/MM/YYYY')" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-xs-12 col-md-6">
+                        <span class="error" style="color:red" data-bind="text: my.allReleaseVm.errorText"></span>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <button type="button" class="btn btn-primary btn-sm" data-bind="click:addRelease, visible: !my.allReleaseVm.releaseDetails.IsPublished()">Submit</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-bind="click: function(){ updateRelease()}, visible: my.allReleaseVm.releaseDetails.IsPublished()">Publish</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-bind="click:my.allReleaseVm.closeReleaseDialogue">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="release-table table-responsive table-bordered">
+            <table class="table table-striped" style="width:100%">
+                <thead style="text-align: center">
+                    <tr>
+                        <th>Version</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="visible: my.allReleaseVm.releases().length > 0,foreach: releases" style="text-align: center">
+                    <tr>
+                        <td data-label="Version" data-bind="text: Version"></td>
+                        <td data-label="Description" data-bind="text: Description"></td>
+
+                        <td data-label="Release date" data-bind="text: ReleaseDate"></td>
+                        <td>
+                            <button data-bind="visible: IsPublished, click: function(){ my.allReleaseVm.loadReleaseDetails(ReleaseId, 'View')}"
+                                    style="width:40%" type="button" class="form-control btn btn-info">
+                                View
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            </button>
+                            <button data-bind="visible: !IsPublished, click: function(){ my.allReleaseVm.loadReleaseDetails(ReleaseId, 'Edit')}"
+                                    style="width:40%" type="button" class="form-control btn btn-info">
+                                Edit
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{  
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>  
+    <script src="~/Scripts/Custom/ReleaseService.js"></script>
+    <script src="~/Scripts/Custom/Release.js"></script>   
+}

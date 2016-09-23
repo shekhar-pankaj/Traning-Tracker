@@ -7,8 +7,8 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/StyleSheets/Layout.css" rel="stylesheet" />
     <link href="~/StyleSheets/AddEditProfile.css" rel="stylesheet" />
-  
-    @RenderSection("Styles",false)
+
+    @RenderSection("Styles", false)
 </head>
 <body>
     <div id="loaderWrapper" data-bind="visible:true">
@@ -34,7 +34,7 @@
                 }
                 else
                 {
-                    <li class="menu-li"><a data-bind="attr: { href: my.meta.userProfileUrl() }">My Profile</a></li>
+                    <li class="menu-li"><a data-bind="attr: { href: my.meta.userProfileUrl }">My Profile</a></li>
                     <li class="menu-li"><a href="~/Session">Sessions</a></li>
                 }
                 @*<li class="menu-li"><a href="~/Profile/AddEditProfile">EditProfile</a></li>*@
@@ -48,6 +48,37 @@
                     </ul>
                 </div>*@
             <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown menu-li">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size:25px;">
+                        <span class="glyphicon glyphicon-bell" id="notification-icon"></span>
+                        <span class="badge badge-notify" data-bind="text: my.meta.noOfNotification, visible:my.meta.notifications().length > 0"></span>
+                    </a>
+
+                    <ul class="dropdown-menu scroll-style" style="padding:0 ; left:-18%;">
+                        <li style=""><a href="#">Notifications</a></li>
+                        <li data-bind="visible:my.meta.notifications().length == 0">No more Notifications</li>
+                        <!-- ko foreach: my.meta.notifications.slice(0).reverse() -->
+                        <li class="menu-li list-style" style="width:280px; position: relative;" data-bind="click:function(){my.meta.updateNotification(NotificationId, TypeOfNotification, Link);}">
+                            <a style="padding:0; display:block;" data-bind="attr:{href: Link, title: Description }">
+                                <div direction="left">
+                                    <div class="flote-left">
+                                        <img class="" style="width:50px;" data-bind="attr:{ src: '/Uploads/ProfilePicture/' + ProfilePictureName }" />
+                                    </div>
+                                    <div>
+                                        <p id="notificationDetail" style="margin:0 !important;">
+                                            <span class="font-weight-bold display-block" data-bind="text:Title"></span>
+                                            <span class="display-block" data-bind="text:Action" style="font-size:13px;"> </span>
+                                            <span class="font-weight-bold display-block" data-bind="text:AddedBy, visible: TypeOfNotification != 1 "></span>
+                                            <span data-bind="text:moment.preciseDiff(moment(AddedOn).format('YYYY-MM-DD HH:mm:ss'),moment(new Date()).format('YYYY-MM-DD HH:mm:ss') ) + ' ago'" style="font-size:13px;"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- /ko -->
+                    </ul>
+                </li>
                 <li class="dropdown menu-li">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img id="avatar"
@@ -67,10 +98,10 @@
                                             </a>
                                             @if (HttpContext.Current.User.IsInRole("Administrator") || HttpContext.Current.User.IsInRole("Manager") || HttpContext.Current.User.IsInRole("Trainer"))
                                             {
-                                                <a href="#" data-bind="click: my.addUserVm.openAllUsersProfile, visible:(my.meta.isAdministrator() || my.meta.isManager() )" type="button"
-                                                   class="btn btn-info btn-block">
-                                                    Manage User
-                                                </a>
+                                            <a href="#" data-bind="click: my.addUserVm.openAllUsersProfile, visible:(my.meta.isAdministrator() || my.meta.isManager() )" type="button"
+                                               class="btn btn-info btn-block">
+                                                Manage User
+                                            </a>
                                             }
                                             <a href="~/Login/SignOut"
                                                class="btn btn-danger btn-block">
@@ -83,6 +114,7 @@
                         </li>
                     </ul>
                 </li>
+
             </ul>
         </nav>
     </div>
@@ -96,14 +128,18 @@
             </div>
         </div>
     </div>
- <!--common js file-->
+    <!--common js file-->
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/knockout-3.4.0.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+
     <script src="~/Scripts/Custom/App.js"></script>
     <script src="~/Scripts/Custom/AjaxService.js"></script>
     <script src="~/Scripts/Custom/UserService.js"></script>
     <script src="~/Scripts/Custom/BindingHandlers.js"></script>
+    <script src="~/Scripts/moment-precise-range.js"></script>
+
     <!--common js file-->
     <script src="~/Scripts/Custom/Layout.js"></script>
     <script src="~/Scripts/Custom/AddEditProfile.js"></script>
