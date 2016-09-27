@@ -42,14 +42,17 @@
             {
                 my.sessionVm.sessions([]);
                 my.sessionVm.allAttendees([]);
+                
                 ko.utils.arrayForEach(sessionJson.SessionList, function(item) {                  
                     my.sessionVm.sessions.push(item);
                 });
                 
                 ko.utils.arrayForEach(sessionJson.AllAttendees, function (item)
                 {
-                    if (item.IsTrainee)
-                    my.sessionVm.allAttendees.push(item);
+                    if (item.IsTrainee && item.UserId != my.sessionVm.currentUser.UserId)
+                    {
+                        my.sessionVm.allAttendees.push(item);
+                    }                    
                 });
                 
                 if (!my.sessionVm.viewSessionLoaded && typeof(my.sessionVm.sessionId) != 'undefined') {

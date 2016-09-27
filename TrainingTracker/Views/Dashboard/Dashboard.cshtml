@@ -1,7 +1,12 @@
 ﻿@{
     ViewBag.Title = "Dashboard";
 }
+
+@section Styles
+{
 <link href="~/StyleSheets/Dashboard.css" rel="stylesheet" />
+}
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-8 no-left-margin ">
@@ -154,37 +159,11 @@
                                     </div>
                                     <div class="col-xs-5 spacer-top-bottom ">
                                         <span class="" data-bind="text:AddedBy.FullName"></span></div>
-                                </div> </div>
-                            @*  <div data-bind="if: my.dashboardVm.getFeedback('5', 'All', User.UserId) === false">
-                                No Data Available
-                            </div>*@
-                        </div>
-                        @* <div class="col-xs-2 no-left-margin no-right-margin">
-                            <div data-bind="if: my.dashboardVm.getFeedback('5', 'Skills', User.UserId) === true">
-                                <div data-bind="foreach: my.dashboardVm.feedback">
-                                    <span class="" data-bind="text: Skill.Name"></span>
-                                    <div
-                                        data-bind="css: {
-                                                            'rating-slow': Rating == 1,
-                                                            'rating-Average': Rating == 2,
-                                                            'rating-Fast': Rating == 3,
-                                                            'rating-Exceptional': Rating == 4
-                                                        }">
-                                        <!-- ko foreach: new Array(my.dashboardVm.feedback.Rating)  -->
-                                        <span class="glyphicon glyphicon-star"
-                                              style="display: inline-block;"></span><!-- /ko -->
-                                   
-                                    </div>
-                                
-                                </div>
-
+                                </div> 
                             </div>
-
-                        </div>*@
+                        </div>                       
                     </div>
-                
-                </div>
-                
+                </div>               
             </div>
         </div>
         <div class="col-xs-4 no-left-margin table-responsive"> 
@@ -222,12 +201,6 @@
 
 @section Scripts
 {
-    <script src="~/Scripts/knockout-3.4.0.js"></script>
-    <script src="~/Scripts/moment.min.js"></script>
-    <script src="~/Scripts/Custom/App.js"></script>
-    <script src="~/Scripts/Custom/AjaxService.js"></script>
-    <script src="~/Scripts/Custom/UserService.js"></script>
     <script src="~/Scripts/Custom/Dashboard.js"></script>
-    <script src="~/Scripts/Custom/BindingHandlers.js"></script>
     <script src="~/Scripts/wz_tooltip.js"></script>
 }

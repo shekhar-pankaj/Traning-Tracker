@@ -4,12 +4,94 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TrainingTrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TrainingTrackerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="TrainingTrackerModelStoreContainer">
+          <EntitySet Name="Comments" EntityType="TrainingTrackerModel.Store.Comments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Feedback" EntityType="TrainingTrackerModel.Store.Feedback" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FeedbackType" EntityType="TrainingTrackerModel.Store.FeedbackType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LearningSource" EntityType="TrainingTrackerModel.Store.LearningSource" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notification" EntityType="TrainingTrackerModel.Store.Notification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NotificationType" EntityType="TrainingTrackerModel.Store.NotificationType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Plans" EntityType="TrainingTrackerModel.Store.Plans" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PlanSkillMapping" EntityType="TrainingTrackerModel.Store.PlanSkillMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Project" EntityType="TrainingTrackerModel.Store.Project" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProjectPlanMapping" EntityType="TrainingTrackerModel.Store.ProjectPlanMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="QuestionLevelMapping" EntityType="TrainingTrackerModel.Store.QuestionLevelMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Questions" EntityType="TrainingTrackerModel.Store.Questions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Release" EntityType="TrainingTrackerModel.Store.Release" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Session" EntityType="TrainingTrackerModel.Store.Session" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Skills" EntityType="TrainingTrackerModel.Store.Skills" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="TrainingTrackerModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserNotificationMapping" EntityType="TrainingTrackerModel.Store.UserNotificationMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProjectMapping" EntityType="TrainingTrackerModel.Store.UserProjectMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserSessionMapping" EntityType="TrainingTrackerModel.Store.UserSessionMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserSkillMapping" EntityType="TrainingTrackerModel.Store.UserSkillMapping" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__UserNotif__Notif__47A6A41B" Association="TrainingTrackerModel.Store.FK__UserNotif__Notif__47A6A41B">
+            <End Role="Notification" EntitySet="Notification" />
+            <End Role="UserNotificationMapping" EntitySet="UserNotificationMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserNotif__UserI__489AC854" Association="TrainingTrackerModel.Store.FK__UserNotif__UserI__489AC854">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserNotificationMapping" EntitySet="UserNotificationMapping" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Feedback_AddedBy" Association="TrainingTrackerModel.Store.fk_Feedback_AddedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Feedback_AddedFor" Association="TrainingTrackerModel.Store.fk_Feedback_AddedFor">
+            <End Role="User" EntitySet="User" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Feedback_FeedbackType" Association="TrainingTrackerModel.Store.fk_Feedback_FeedbackType">
+            <End Role="FeedbackType" EntitySet="FeedbackType" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Notification_NotificationType" Association="TrainingTrackerModel.Store.fk_Notification_NotificationType">
+            <End Role="NotificationType" EntitySet="NotificationType" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Notification_User" Association="TrainingTrackerModel.Store.fk_Notification_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionLevelMapping_QuestionId" Association="TrainingTrackerModel.Store.FK_QuestionLevelMapping_QuestionId">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionLevelMapping" EntitySet="QuestionLevelMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_SkillId" Association="TrainingTrackerModel.Store.FK_Questions_SkillId">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_UserId" Association="TrainingTrackerModel.Store.FK_Questions_UserId">
+            <End Role="User" EntitySet="User" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Release_UserId" Association="TrainingTrackerModel.Store.FK_Release_UserId">
+            <End Role="User" EntitySet="User" />
+            <End Role="Release" EntitySet="Release" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Session_User" Association="TrainingTrackerModel.Store.fk_Session_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserSessionMapping_AddedBy" Association="TrainingTrackerModel.Store.fk_UserSessionMapping_AddedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserSessionMapping_Session" Association="TrainingTrackerModel.Store.fk_UserSessionMapping_Session">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserSessionMapping_User" Association="TrainingTrackerModel.Store.fk_UserSessionMapping_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Comments">
           <Key>
             <PropertyRef Name="CommentId" />
           </Key>
-          <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Comment" Type="varchar(max)" />
           <Property Name="AddedOn" Type="datetime" />
           <Property Name="AddedBy" Type="int" />
@@ -19,7 +101,7 @@
           <Key>
             <PropertyRef Name="FeedbackId" />
           </Key>
-          <Property Name="FeedbackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeedbackId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FeedbackText" Type="varchar(max)" />
           <Property Name="Title" Type="varchar" MaxLength="100" />
           <Property Name="FeedbackType" Type="int" />
@@ -36,7 +118,7 @@
           <Key>
             <PropertyRef Name="FeedbackTypeId" />
           </Key>
-          <Property Name="FeedbackTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeedbackTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Sequence" Type="int" />
         </EntityType>
@@ -44,7 +126,7 @@
           <Key>
             <PropertyRef Name="SourceId" />
           </Key>
-          <Property Name="SourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SkillId" Type="int" />
           <Property Name="Title" Type="varchar" MaxLength="200" />
           <Property Name="Description" Type="varchar(max)" />
@@ -53,11 +135,30 @@
           <Property Name="AddedOn" Type="datetime" />
           <Property Name="AddedBy" Type="int" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NotificationTitle" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Link" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="NotificationType" Type="int" Nullable="false" />
+          <Property Name="AddedBy" Type="int" Nullable="false" />
+          <Property Name="AddedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationType">
+          <Key>
+            <PropertyRef Name="NotificationTypeId" />
+          </Key>
+          <Property Name="NotificationTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TypeDescription" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Plans">
           <Key>
             <PropertyRef Name="PlanId" />
           </Key>
-          <Property Name="PlanId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlanId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="varchar" MaxLength="200" />
           <Property Name="Sequqence" Type="int" />
           <Property Name="AddedOn" Type="datetime" />
@@ -69,7 +170,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="PlanId" Type="int" />
           <Property Name="SkillId" Type="int" />
         </EntityType>
@@ -77,7 +178,7 @@
           <Key>
             <PropertyRef Name="ProjectId" />
           </Key>
-          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="varchar" MaxLength="200" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="CreatedBy" Type="int" />
@@ -97,7 +198,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="QuestionId" Type="int" Nullable="false" />
           <Property Name="Level" Type="smallint" Nullable="false" />
           <Property Name="ExperienceStartRange" Type="smallint" Nullable="false" />
@@ -107,18 +208,32 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="QuestionText" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionText" Type="varchar" Nullable="false" MaxLength="1000" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="SkillId" Type="int" Nullable="false" />
           <Property Name="AddedBy" Type="int" Nullable="false" />
           <Property Name="AddedDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Release">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+          </Key>
+          <Property Name="ReleaseId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Major" Type="int" Nullable="false" />
+          <Property Name="Minor" Type="int" Nullable="false" />
+          <Property Name="Patch" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsPublished" Type="bit" Nullable="false" />
+          <Property Name="ReleaseDate" Type="datetime" />
+          <Property Name="AddedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Session">
           <Key>
             <PropertyRef Name="SessionId" />
           </Key>
-          <Property Name="SessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="varchar" MaxLength="200" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Presenter" Type="int" />
@@ -129,7 +244,7 @@
           <Key>
             <PropertyRef Name="SkillId" />
           </Key>
-          <Property Name="SkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SkillId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
           <Property Name="Description" Type="varchar" MaxLength="500" />
           <Property Name="AddedOn" Type="date" />
@@ -139,7 +254,7 @@
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="varchar" MaxLength="100" />
           <Property Name="LastName" Type="varchar" MaxLength="100" />
           <Property Name="UserName" Type="varchar" MaxLength="50" />
@@ -155,11 +270,20 @@
           <Property Name="DateAddedToSystem" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="UserNotificationMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="Seen" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserProjectMapping">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="int" />
           <Property Name="ProjectId" Type="int" />
           <Property Name="StartedOn" Type="datetime" />
@@ -170,7 +294,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="int" />
           <Property Name="SessionId" Type="int" />
           <Property Name="AddedOn" Type="datetime" />
@@ -180,15 +304,39 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SkillId" Type="int" />
           <Property Name="UserId" Type="int" />
           <Property Name="AddedOn" Type="datetime" />
           <Property Name="AddedBy" Type="int" />
         </EntityType>
+        <Association Name="FK__UserNotif__Notif__47A6A41B">
+          <End Role="Notification" Type="TrainingTrackerModel.Store.Notification" Multiplicity="1" />
+          <End Role="UserNotificationMapping" Type="TrainingTrackerModel.Store.UserNotificationMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="NotificationId" />
+            </Principal>
+            <Dependent Role="UserNotificationMapping">
+              <PropertyRef Name="NotificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserNotif__UserI__489AC854">
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="1" />
+          <End Role="UserNotificationMapping" Type="TrainingTrackerModel.Store.UserNotificationMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserNotificationMapping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Feedback_AddedBy">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
+          <End Role="Feedback" Type="TrainingTrackerModel.Store.Feedback" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -199,8 +347,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Feedback_AddedFor">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
+          <End Role="Feedback" Type="TrainingTrackerModel.Store.Feedback" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -211,8 +359,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Feedback_FeedbackType">
-          <End Role="FeedbackType" Type="Self.FeedbackType" Multiplicity="0..1" />
-          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <End Role="FeedbackType" Type="TrainingTrackerModel.Store.FeedbackType" Multiplicity="0..1" />
+          <End Role="Feedback" Type="TrainingTrackerModel.Store.Feedback" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FeedbackType">
               <PropertyRef Name="FeedbackTypeId" />
@@ -222,9 +370,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Notification_NotificationType">
+          <End Role="NotificationType" Type="TrainingTrackerModel.Store.NotificationType" Multiplicity="1" />
+          <End Role="Notification" Type="TrainingTrackerModel.Store.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotificationType">
+              <PropertyRef Name="NotificationTypeId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="NotificationType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Notification_User">
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="1" />
+          <End Role="Notification" Type="TrainingTrackerModel.Store.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_QuestionLevelMapping_QuestionId">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
-          <End Role="QuestionLevelMapping" Type="Self.QuestionLevelMapping" Multiplicity="*" />
+          <End Role="Questions" Type="TrainingTrackerModel.Store.Questions" Multiplicity="1" />
+          <End Role="QuestionLevelMapping" Type="TrainingTrackerModel.Store.QuestionLevelMapping" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
               <PropertyRef Name="Id" />
@@ -235,8 +407,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questions_SkillId">
-          <End Role="Skills" Type="Self.Skills" Multiplicity="1" />
-          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <End Role="Skills" Type="TrainingTrackerModel.Store.Skills" Multiplicity="1" />
+          <End Role="Questions" Type="TrainingTrackerModel.Store.Questions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Skills">
               <PropertyRef Name="SkillId" />
@@ -247,8 +419,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questions_UserId">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="1" />
+          <End Role="Questions" Type="TrainingTrackerModel.Store.Questions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -258,9 +430,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Release_UserId">
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="1" />
+          <End Role="Release" Type="TrainingTrackerModel.Store.Release" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Release">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Session_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
+          <End Role="Session" Type="TrainingTrackerModel.Store.Session" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -271,8 +455,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_UserSessionMapping_AddedBy">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="UserSessionMapping" Type="Self.UserSessionMapping" Multiplicity="*" />
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
+          <End Role="UserSessionMapping" Type="TrainingTrackerModel.Store.UserSessionMapping" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -283,8 +467,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_UserSessionMapping_Session">
-          <End Role="Session" Type="Self.Session" Multiplicity="0..1" />
-          <End Role="UserSessionMapping" Type="Self.UserSessionMapping" Multiplicity="*" />
+          <End Role="Session" Type="TrainingTrackerModel.Store.Session" Multiplicity="0..1" />
+          <End Role="UserSessionMapping" Type="TrainingTrackerModel.Store.UserSessionMapping" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Session">
               <PropertyRef Name="SessionId" />
@@ -295,8 +479,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_UserSessionMapping_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="UserSessionMapping" Type="Self.UserSessionMapping" Multiplicity="*" />
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="0..1" />
+          <End Role="UserSessionMapping" Type="TrainingTrackerModel.Store.UserSessionMapping" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
@@ -306,64 +490,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TrainingTrackerModelStoreContainer">
-          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FeedbackType" EntityType="Self.FeedbackType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LearningSource" EntityType="Self.LearningSource" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Plans" EntityType="Self.Plans" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PlanSkillMapping" EntityType="Self.PlanSkillMapping" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProjectPlanMapping" EntityType="Self.ProjectPlanMapping" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="QuestionLevelMapping" EntityType="Self.QuestionLevelMapping" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserProjectMapping" EntityType="Self.UserProjectMapping" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserSessionMapping" EntityType="Self.UserSessionMapping" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserSkillMapping" EntityType="Self.UserSkillMapping" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="fk_Feedback_AddedBy" Association="Self.fk_Feedback_AddedBy">
-            <End Role="User" EntitySet="User" />
-            <End Role="Feedback" EntitySet="Feedback" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Feedback_AddedFor" Association="Self.fk_Feedback_AddedFor">
-            <End Role="User" EntitySet="User" />
-            <End Role="Feedback" EntitySet="Feedback" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Feedback_FeedbackType" Association="Self.fk_Feedback_FeedbackType">
-            <End Role="FeedbackType" EntitySet="FeedbackType" />
-            <End Role="Feedback" EntitySet="Feedback" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuestionLevelMapping_QuestionId" Association="Self.FK_QuestionLevelMapping_QuestionId">
-            <End Role="Questions" EntitySet="Questions" />
-            <End Role="QuestionLevelMapping" EntitySet="QuestionLevelMapping" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Questions_SkillId" Association="Self.FK_Questions_SkillId">
-            <End Role="Skills" EntitySet="Skills" />
-            <End Role="Questions" EntitySet="Questions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Questions_UserId" Association="Self.FK_Questions_UserId">
-            <End Role="User" EntitySet="User" />
-            <End Role="Questions" EntitySet="Questions" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Session_User" Association="Self.fk_Session_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Session" EntitySet="Session" />
-          </AssociationSet>
-          <AssociationSet Name="fk_UserSessionMapping_AddedBy" Association="Self.fk_UserSessionMapping_AddedBy">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
-          </AssociationSet>
-          <AssociationSet Name="fk_UserSessionMapping_Session" Association="Self.fk_UserSessionMapping_Session">
-            <End Role="Session" EntitySet="Session" />
-            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
-          </AssociationSet>
-          <AssociationSet Name="fk_UserSessionMapping_User" Association="Self.fk_UserSessionMapping_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -424,6 +550,30 @@
           <AssociationSet Name="FK_Questions_UserId" Association="TrainingTrackerModel.FK_Questions_UserId">
             <End Role="User" EntitySet="Users" />
             <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <EntitySet Name="Notifications" EntityType="TrainingTrackerModel.Notification" />
+          <EntitySet Name="NotificationTypes" EntityType="TrainingTrackerModel.NotificationType" />
+          <EntitySet Name="Releases" EntityType="TrainingTrackerModel.Release" />
+          <EntitySet Name="UserNotificationMappings" EntityType="TrainingTrackerModel.UserNotificationMapping" />
+          <AssociationSet Name="FK__UserNotif__Notif__47A6A41B" Association="TrainingTrackerModel.FK__UserNotif__Notif__47A6A41B">
+            <End Role="Notification" EntitySet="Notifications" />
+            <End Role="UserNotificationMapping" EntitySet="UserNotificationMappings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Notification_NotificationType" Association="TrainingTrackerModel.fk_Notification_NotificationType">
+            <End Role="NotificationType" EntitySet="NotificationTypes" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Notification_User" Association="TrainingTrackerModel.fk_Notification_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserNotif__UserI__489AC854" Association="TrainingTrackerModel.FK__UserNotif__UserI__489AC854">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserNotificationMapping" EntitySet="UserNotificationMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Release_UserId" Association="TrainingTrackerModel.FK_Release_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Release" EntitySet="Releases" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Comment">
@@ -567,6 +717,9 @@
           <NavigationProperty Name="UserSessionMappings" Relationship="TrainingTrackerModel.fk_UserSessionMapping_AddedBy" FromRole="User" ToRole="UserSessionMapping" />
           <NavigationProperty Name="UserSessionMappings1" Relationship="TrainingTrackerModel.fk_UserSessionMapping_User" FromRole="User" ToRole="UserSessionMapping" />
           <NavigationProperty Name="Questions" Relationship="TrainingTrackerModel.FK_Questions_UserId" FromRole="User" ToRole="Question" />
+          <NavigationProperty Name="Notifications" Relationship="TrainingTrackerModel.fk_Notification_User" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="UserNotificationMappings" Relationship="TrainingTrackerModel.FK__UserNotif__UserI__489AC854" FromRole="User" ToRole="UserNotificationMapping" />
+          <NavigationProperty Name="Releases" Relationship="TrainingTrackerModel.FK_Release_UserId" FromRole="User" ToRole="Release" />
         </EntityType>
         <EntityType Name="UserProjectMapping">
           <Key>
@@ -743,6 +896,115 @@
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="Question">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Type="Int32" Name="NotificationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NotificationTitle" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Link" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="NotificationType" Nullable="false" />
+          <Property Type="Int32" Name="AddedBy" Nullable="false" />
+          <Property Type="DateTime" Name="AddedOn" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserNotificationMappings" Relationship="TrainingTrackerModel.FK__UserNotif__Notif__47A6A41B" FromRole="Notification" ToRole="UserNotificationMapping" />
+          <NavigationProperty Name="NotificationType1" Relationship="TrainingTrackerModel.fk_Notification_NotificationType" FromRole="Notification" ToRole="NotificationType" />
+          <NavigationProperty Name="User" Relationship="TrainingTrackerModel.fk_Notification_User" FromRole="Notification" ToRole="User" />
+        </EntityType>
+        <EntityType Name="NotificationType">
+          <Key>
+            <PropertyRef Name="NotificationTypeId" />
+          </Key>
+          <Property Type="Int32" Name="NotificationTypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TypeDescription" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Notifications" Relationship="TrainingTrackerModel.fk_Notification_NotificationType" FromRole="NotificationType" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="Release">
+          <Key>
+            <PropertyRef Name="ReleaseId" />
+          </Key>
+          <Property Type="Int32" Name="ReleaseId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Major" Nullable="false" />
+          <Property Type="Int32" Name="Minor" Nullable="false" />
+          <Property Type="Int32" Name="Patch" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsPublished" Nullable="false" />
+          <Property Type="DateTime" Name="ReleaseDate" Precision="3" />
+          <Property Type="Int32" Name="AddedBy" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TrainingTrackerModel.FK_Release_UserId" FromRole="Release" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserNotificationMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="NotificationId" Nullable="false" />
+          <Property Type="Boolean" Name="Seen" Nullable="false" />
+          <NavigationProperty Name="Notification" Relationship="TrainingTrackerModel.FK__UserNotif__Notif__47A6A41B" FromRole="UserNotificationMapping" ToRole="Notification" />
+          <NavigationProperty Name="User" Relationship="TrainingTrackerModel.FK__UserNotif__UserI__489AC854" FromRole="UserNotificationMapping" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__UserNotif__Notif__47A6A41B">
+          <End Type="TrainingTrackerModel.Notification" Role="Notification" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.UserNotificationMapping" Role="UserNotificationMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="NotificationId" />
+            </Principal>
+            <Dependent Role="UserNotificationMapping">
+              <PropertyRef Name="NotificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Notification_NotificationType">
+          <End Type="TrainingTrackerModel.NotificationType" Role="NotificationType" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotificationType">
+              <PropertyRef Name="NotificationTypeId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="NotificationType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Notification_User">
+          <End Type="TrainingTrackerModel.User" Role="User" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserNotif__UserI__489AC854">
+          <End Type="TrainingTrackerModel.User" Role="User" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.UserNotificationMapping" Role="UserNotificationMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserNotificationMapping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Release_UserId">
+          <End Type="TrainingTrackerModel.User" Role="User" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.Release" Role="Release" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Release">
               <PropertyRef Name="AddedBy" />
             </Dependent>
           </ReferentialConstraint>
@@ -946,6 +1208,52 @@
                 <ScalarProperty Name="SkillId" ColumnName="SkillId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NotificationTitle" ColumnName="NotificationTitle" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationTypes">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.NotificationType">
+              <MappingFragment StoreEntitySet="NotificationType">
+                <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
+                <ScalarProperty Name="NotificationTypeId" ColumnName="NotificationTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Releases">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.Release">
+              <MappingFragment StoreEntitySet="Release">
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Patch" ColumnName="Patch" />
+                <ScalarProperty Name="Minor" ColumnName="Minor" />
+                <ScalarProperty Name="Major" ColumnName="Major" />
+                <ScalarProperty Name="ReleaseId" ColumnName="ReleaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserNotificationMappings">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.UserNotificationMapping">
+              <MappingFragment StoreEntitySet="UserNotificationMapping">
+                <ScalarProperty Name="Seen" ColumnName="Seen" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

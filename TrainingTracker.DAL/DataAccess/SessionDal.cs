@@ -52,7 +52,7 @@ namespace TrainingTracker.DAL.DataAccess
         /// </summary>
         /// <param name="objSession">User Id</param>
         /// <returns>List Of session</returns>
-        public bool AddEditSessions( Session objSession )
+        public int AddEditSessions( Session objSession )
         {
             var prms = new List<SqlParameter>
             {
@@ -67,15 +67,15 @@ namespace TrainingTracker.DAL.DataAccess
 
             try
             {
-                var rowsAffected = SqlUtility.ExecuteNonQuery(SPAddEditSession.NAME ,
+                return SqlUtility.ExecuteScalar(SPAddEditSession.NAME ,
                     CommandType.StoredProcedure ,
                     prms);
-                return (rowsAffected > 0);
+                
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
-                return false;
+                throw ex;
             }
         }
 

@@ -3,7 +3,7 @@
 
     var serviceBase = my.rootUrl,
         getServiceUrl = function (method) {
-            if (serviceBase == undefined) {
+            if (typeof(serviceBase) == 'undefined') {
                 serviceBase = "";
             }
             return serviceBase + method;
@@ -18,43 +18,54 @@
                 data: ko.toJSON(jsonIn),
                 dataType: "json",
                 contentType: "application/json",
-                success: function(json) {
+                success: function (json)
+                {
                     callback(json);
                     my.toggleLoader();
                 },
-                  error: my.toggleLoader()
-            
+                error: function() {
+                    my.toggleLoader();
+                }
+                    
             });
         },
          ajaxPostJson = function (method, jsonIn, callback) {
              $.ajax({
                  url: getServiceUrl(method),
                  type: "POST",
-                 data: ko.toJSON(jsonIn),
                  beforeSend: my.toggleLoader(true),
+                 data: ko.toJSON(jsonIn),
                  dataType: "json",
                  contentType: "application/json",
-                 success: function (json) {
+                 success: function (json)
+                 {
                      callback(json);
                      my.toggleLoader();
                  },
-                 error: my.toggleLoader()
+                 error: function ()
+                 {
+                     my.toggleLoader();
+                 }
              });
          },
         ajaxUploadImage = function (method, formData, callback) {
              $.ajax({
                  url: getServiceUrl(method),
                  type: "POST",
-                 data: formData,
                  beforeSend: my.toggleLoader(true),
+                 data: formData,
                  cache: false,
                  contentType: false,
                  processData: false,
-                 success: function (json) {
+                 success: function (json)
+                 {
                      callback(json);
                      my.toggleLoader();
                  },
-                 error: my.toggleLoader()
+                 error: function ()
+                 {
+                     my.toggleLoader();
+                 }
              });
          }
         ;

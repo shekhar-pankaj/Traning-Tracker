@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrainingTracker.Common.Entity;
+using TrainingTracker.Common.Enumeration;
 using TrainingTracker.Common.ViewModel;
 
 namespace TrainingTracker.DAL.Interface
@@ -26,7 +27,7 @@ namespace TrainingTracker.DAL.Interface
         /// <param name="userData">User data object.</param>
         /// <param name="userId">Out parameter created UserId.</param>
         /// <returns>True if added.</returns>
-        bool AddUser(User userData,out int userId);
+        bool AddUser(User userData, out int userId);
 
         /// <summary>
         /// Calls stored procedure which updates user.
@@ -61,5 +62,11 @@ namespace TrainingTracker.DAL.Interface
         /// <returns>instance Of List of UserData</returns>
         List<UserData> GetDashboardData();
 
+        /// <summary>
+        /// Get list of integer value as userId.
+        /// </summary>
+        /// <param name="typeOfNotification">Takes parametere as typeOfNotification and the user for which notification is added.</param>
+        /// <returns> Returns list of userid.</returns>
+        List<int> GetUserId(NotificationType typeOfNotification, int addedFor);
     }
 }

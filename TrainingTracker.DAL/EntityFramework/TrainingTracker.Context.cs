@@ -41,5 +41,9 @@ namespace TrainingTracker.DAL.EntityFramework
         public DbSet<UserSkillMapping> UserSkillMappings { get; set; }
         public DbSet<QuestionLevelMapping> QuestionLevelMappings { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<NotificationType> NotificationTypes { get; set; }
+        public DbSet<Release> Releases { get; set; }
+        public DbSet<UserNotificationMapping> UserNotificationMappings { get; set; }
     }
 }

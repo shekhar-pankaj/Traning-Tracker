@@ -4,8 +4,8 @@
 }*/
 
 .user-profile-img {
-    width: 200px;
-    height: 200px;
+       width: 10vw !important;
+    height: 23vh !important;
 }
 
 .imgDescription {
