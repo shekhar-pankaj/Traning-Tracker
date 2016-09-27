@@ -3,18 +3,20 @@
         var releases = ko.observableArray([]),
             showModal = ko.observable(false),
             isVisibleSubmitButton = ko.observable(true),
-            releaseCaption = ko.observable("New Release");
-        selectCaption = ko.observable("Select Version:");
-        isViewMode = ko.observable(false);
-        isVisibleNewVersion = ko.observable(true);
-        isVisiblePublishButton = ko.observable(false);
+            releaseCaption = ko.observable("New Release"),
+            releaseId = my.queryParams["releaseId"],
+            initialLoad = true,
+        selectCaption = ko.observable("Select Version:"),
+        isViewMode = ko.observable(false),
+        isVisibleNewVersion = ko.observable(true),
+        isVisiblePublishButton = ko.observable(false),
         existingRelease = {
             Major: 0,
             Minor: 0,
             Patch: 0
         },
         currentVersion = ko.observable("0.0.0"),
-    releaseDetails = {
+        releaseDetails = {
         ReleaseId: 0,
         Major: 0,
         Minor: 0,
@@ -24,7 +26,8 @@
         Description: ko.observable(""),
         ReleaseDate: ko.observable(new Date()),
         Version: ko.observable(""),
-    },
+        AddedBy: {FullName : ''}
+        },
     openReleaseDialogue = function () {
         selectedReleaseType("Patch");
         showModal(true);
@@ -42,8 +45,8 @@
         my.allReleaseVm.releases([]);
         ko.utils.arrayForEach(releaseList, function (item) {
             var version = getVersion(item);
-            item.Version = (version == "0.0.0") ? "Yet to be released" : version;
-            item.ReleaseDate = (item.ReleaseDate == null) ? "Not Published" : moment(item.ReleaseDate).format('DD/MM/YYYY');
+            item.Version = (version == "0.0.0") ? "--" : version;
+            item.ReleaseDate = (item.ReleaseDate == null) ? "N/A" : moment(item.ReleaseDate).format('DD/MM/YYYY');
             item.IsPublished = item.IsPublished;
             my.allReleaseVm.releases.push(item);
 
@@ -53,6 +56,10 @@
                 existingRelease.Patch = item.Patch;
             }
         });
+
+        if (!my.isNullorEmpty(releaseId) && releaseId > 0 && initialLoad) loadReleaseDetails(releaseId, 'EDIT');
+        releaseId = 0;
+        initialLoad = false;
     },
     getReleases = function () {
         my.releaseService.getAllRelease(my.allReleaseVm.getReleasesCallback);
@@ -120,9 +127,10 @@
         if (addStatus) {
             my.allReleaseVm.showModal(false);
             my.allReleaseVm.releaseDetails.Version(my.allReleaseVm.newVersion());
+            my.allReleaseVm.releaseDetails.AddedBy.FullName = my.meta.currentUser.FirstName + " " + my.meta.currentUser.LastName;
             if (!releaseDetails.IsPublished()) {
-                my.allReleaseVm.releaseDetails.Version("Yet to be released");
-                my.allReleaseVm.releaseDetails.ReleaseDate("Not Published");
+                my.allReleaseVm.releaseDetails.Version("--");
+                my.allReleaseVm.releaseDetails.ReleaseDate("N/A");
             }
             else {
                 my.allReleaseVm.releaseDetails.ReleaseDate(moment(releaseDetails.ReleaseDate()).format('DD/MM/YYYY'));
@@ -163,19 +171,22 @@
     },
     loadReleaseDetails = function (ReleaseId, action) {
         openReleaseDialogue();
-        my.allReleaseVm.releaseDetails.IsPublished(true);
+       // my.allReleaseVm.releaseDetails.IsPublished(true);
         var filteredRelease = ko.utils.arrayFilter(my.allReleaseVm.releases(), function (item) {
             return item.ReleaseId == ReleaseId;
         });
+        
         if (filteredRelease.length == 0) return;
+        
         my.allReleaseVm.releaseDetails.ReleaseTitle(filteredRelease[0].ReleaseTitle);
         my.allReleaseVm.releaseDetails.Description(filteredRelease[0].Description);
+        my.allReleaseVm.releaseDetails.ReleaseId = filteredRelease[0].ReleaseId;
         my.allReleaseVm.isVisibleSubmitButton(false);
 
         if (action.toUpperCase() === 'EDIT') {
             my.allReleaseVm.releaseCaption("Publish Release");
             isVisiblePublishButton(true);
-            my.allReleaseVm.releaseDetails.ReleaseId = filteredRelease[0].ReleaseId;
+            
         }
         else if (action.toUpperCase() === 'VIEW') {
             my.allReleaseVm.releaseCaption("View Release");

@@ -136,7 +136,7 @@ namespace TrainingTracker.Common.Utility
                         dbCommand.Parameters.Add(prm);
                     }
                     var returnId = dbCommand.ExecuteScalar();
-                    id = Convert.ToInt32(returnId);
+                     Int32.TryParse(returnId.ToString(),out id);
                 }
             }
 

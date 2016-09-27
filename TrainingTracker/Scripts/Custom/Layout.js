@@ -46,16 +46,25 @@
              },
         updateNotificationCallback = function (updateStatus) {
             if (!updateStatus) {
-                alert("Update notification failure");//To be changed in fiture Now for test
+                //alert("Update notification failure");//To be changed in future Now for test
             }
         },
         updateNotification = function (notificationId, type, link) {
             var notificationInfo = {
                 NotificationId: notificationId,
                 TypeOfNotification: type
-            }
-            window.location.href = link;
+            };           
             my.userService.updateNotification(notificationInfo, my.meta.updateNotificationCallback);
+            window.location.href = link;
+        },
+        markAllNotificationAsReadCallback = function (updateStatus)
+        {
+            if (updateStatus) {
+                my.meta.notifications([]);
+            }
+        },
+        markAllNotificationAsRead = function() {
+            my.userService.markAllNotificationAsRead(markAllNotificationAsReadCallback);
         };
 
         return {
@@ -68,13 +77,14 @@
             isManager: isManager,
             userProfileUrl: userProfileUrl,
             isTrainee: isTrainee,
-			getNotification: getNotification,
+            getNotification: getNotification,
             getNotificationCallback: getNotificationCallback,
             notifications: notifications,
             noOfNotification: noOfNotification,
             updateNotification: updateNotification,
-            updateNotificationCallback: updateNotificationCallback
-        };
+            updateNotificationCallback: updateNotificationCallback,
+            markAllNotificationAsRead: markAllNotificationAsRead
+    };
     }();
 
     my.meta.getCurrentUser();

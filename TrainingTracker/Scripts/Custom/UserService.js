@@ -48,6 +48,9 @@
         },
         updateNotification: function (notificationInfo, callback) {
             my.ajaxService.ajaxPostJson(my.rootUrl + "/Notification/UpdateNotification", notificationInfo, callback);
+        },
+        markAllNotificationAsRead :function(callback) {
+            my.ajaxService.ajaxPostJson(my.rootUrl + "/Notification/markAllNotificationAsRead",null,  callback);
         }
     };
 }(my));

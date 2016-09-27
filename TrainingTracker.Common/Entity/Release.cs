@@ -53,5 +53,15 @@ namespace TrainingTracker.Common.Entity
         /// Get and set SortOrder
         /// </summary>
         public int SortOrder { get; set; }
+
+        /// <summary>
+        /// Gets and Sets AddedBy
+        /// </summary>
+        public User AddedBy { get; set; }
+
+        /// <summary>
+        /// Gets and Sets AddedBy
+        /// </summary>
+        public bool IsNew { get; set; }
     }
 }

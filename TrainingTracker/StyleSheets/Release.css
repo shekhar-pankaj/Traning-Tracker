@@ -18,23 +18,27 @@
     margin-top:-1%;
 }
 #divNewRelease {
-    position: absolute;
-    top: 10%;
+        position: fixed;
+    /* top: 10%; */
+    margin: auto;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 100%;
-    z-index: 1999;
+    height: 100vh;
+    width: 100vw;
+    z-index: 10000;
 }
 
 th {
-    background: #c5c5c5;
+    background: #fff;
+    border-bottom: 1px solid #fff !important;
 }
 
 table {
     border-collapse: collapse;
     border: 1px solid #cdcdcd;
-    font: normal 20px arial;
+    font-size:  20px ;
+    font-weight: 300;
     width: 100%;
 }
 
@@ -43,7 +47,13 @@ td, th {
     padding: 2px;
 }
 
+.padding-top {
+    padding-top: 10px;
+}
 
+.modal-footer button.btn {
+        padding: 10px 20px 10px 20px;
+}
 
 @media only screen and (max-width: 760px),(min-devise-width: 768px) and (max-device-width: 1024px) {
     /*----2-----*/
@@ -118,12 +128,15 @@ td, th {
     font-size: 20px;
 }
 
-.release-table table td {
-    font-size: 15px;  
-}
-.release-table table  th:nth-child(4) {
+.release-table table  th:nth-child(5),.release-table table  td:nth-child(5) {
     background-color: #fff;
+        
 }
+
+.release-table table  tr,.release-table table  td,.release-table table {
+    border: 1px solid #fff;
+}
+
 
 .release-panel {
     border: 1px solid #dddddd;
@@ -132,4 +145,13 @@ td, th {
 .edit-release {
 margin-top:10px;
 padding-left:0;
+}
+
+#modelWrapper {
+        width: 99vw;
+    height: 100vh;
+    position: fixed;
+    background: #ccc;
+    opacity: 0.5;
+    overflow: hidden;
 }

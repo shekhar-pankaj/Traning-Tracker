@@ -21,8 +21,8 @@ namespace TrainingTracker.DAL.Interface
         /// Adds new Release.
         /// </summary>
         /// <param name="release">Release object</param>
-        /// <returns>returns boolean value</returns>
-        bool AddRelease(Release release);
+        /// <returns>returns release Id</returns>
+        int AddRelease(Release release);
 
         /// <summary>
         /// Update release

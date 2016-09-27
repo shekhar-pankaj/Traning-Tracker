@@ -1,4 +1,5 @@
-﻿using TrainingTracker.BLL.Base;
+﻿using System;
+using TrainingTracker.BLL.Base;
 using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.ViewModel;
 
@@ -16,7 +17,18 @@ namespace TrainingTracker.BLL
         /// <returns>boolean resutt of event's success</returns>
         public bool AddEditSessions(Session objSession)
         {
-            return SessionDataAccesor.AddEditSessions(objSession);
+            objSession.IsNeW = objSession.Id == 0;
+
+            try
+            {
+                objSession.Id = SessionDataAccesor.AddEditSessions(objSession);
+                return (new NotificationBl().AddSessionNotification(objSession));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
 
         /// <summary>

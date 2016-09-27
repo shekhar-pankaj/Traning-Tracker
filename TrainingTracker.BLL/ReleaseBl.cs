@@ -33,9 +33,20 @@ namespace TrainingTracker.BLL
         /// and if the IsPublished field is false then it depends only on Release entry .</returns>
         public bool AddRelease(Release release, int userId)
         {
-            if (!ReleaseDataAccesor.AddRelease(release)) return false;
+            release.AddedBy = new User { UserId = userId };
 
-            return release.IsPublished ? new NotificationBl().AddReleaseNotification(release, userId) : true;
+            try
+            {
+                int releaseId = ReleaseDataAccesor.AddRelease(release);
+
+                release.ReleaseId = releaseId;
+                release.IsNew = release.ReleaseId > 0;
+                return new NotificationBl().AddReleaseNotification(release , userId);
+            }
+            catch (Exception)
+            {
+                return false;
+            }            
         }
 
         /// <summary>
@@ -46,7 +57,7 @@ namespace TrainingTracker.BLL
         /// <returns></returns>
         public bool UpdateRelease(Release release, int userId)
         {
-            return release.IsPublished ? (ReleaseDataAccesor.UpdateRelease(release) && new NotificationBl().AddReleaseNotification(release, userId)) : ReleaseDataAccesor.UpdateRelease(release);
+            return  (ReleaseDataAccesor.UpdateRelease(release) && new NotificationBl().AddReleaseNotification(release, userId));
         }
     }
 }

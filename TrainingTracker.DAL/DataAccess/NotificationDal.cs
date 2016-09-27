@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using TrainingTracker.Common.Utility;
 using TrainingTracker.DAL.EntityFramework;
 using TrainingTracker.DAL.Interface;
@@ -86,9 +87,9 @@ namespace TrainingTracker.DAL.DataAccess
                                 AddedOn = x.Notification.AddedOn,
                                 UserDetails = new Common.Entity.User
                                 {
-                                    FirstName = x.User.FirstName,
-                                    LastName = x.User.LastName,
-                                    ProfilePictureName = x.User.ProfilePictureName
+                                    FirstName = x.Notification.User.FirstName ,
+                                    LastName = x.Notification.User.LastName ,
+                                    ProfilePictureName = x.Notification.User.ProfilePictureName
                                 }
                             }).ToList();                
                 }
@@ -128,6 +129,27 @@ namespace TrainingTracker.DAL.DataAccess
             }
         }
 
-       
+        /// <summary>
+        /// Clear All the pending Notification  for user
+        /// </summary>
+        /// <param name="userId">passed userid</param>
+        /// <returns>success flag </returns>
+        public bool MarkAllNotificationAsRead(int userId)
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                   context.UserNotificationMappings.Where(u=>u.UserId==userId && !u.Seen).ToList().ForEach(x => x.Seen = true);
+                   context.SaveChanges();
+                   return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return false;
+            }           
+        }
     }
 }

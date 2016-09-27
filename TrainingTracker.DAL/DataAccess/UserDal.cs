@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -362,6 +363,7 @@ namespace TrainingTracker.DAL.DataAccess
         /// So specific notifications are added to specific user profile.
         /// </summary>
         /// <param name="notificationType">Contain notificationType as parameter.</param>
+        /// <param name="addedFor">Contain notificationType as parameter.</param>
         /// <returns>Returns user Ids as a list.</returns>
         public List<int> GetUserId(Common.Enumeration.NotificationType notificationType, int addedFor)
         {
@@ -369,18 +371,25 @@ namespace TrainingTracker.DAL.DataAccess
             {
                 using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
-                    if (notificationType == Common.Enumeration.NotificationType.FeedbackNotification)
+                    switch (notificationType)
                     {
-                        return context.Users
-                                      .Where(x => x.UserId == addedFor || x.IsTrainer == true || x.IsManager == true)
-                                      .Select(x => x.UserId)
-                                      .ToList();
-                    }
-                    else if(notificationType == Common.Enumeration.NotificationType.ReleaseNotification)
-                    {
-                        return context.Users
-                                  .Select(x => x.UserId)
-                                  .ToList();
+                        case Common.Enumeration.NotificationType.CodeReviewFeedbackNotification:
+                        case Common.Enumeration.NotificationType.AssignmentFeedbackNotification:
+                        case Common.Enumeration.NotificationType.SkillFeedbackNotification:
+                        case Common.Enumeration.NotificationType.CommentFeedbackNotification:
+                        case Common.Enumeration.NotificationType.WeeklyFeedbackNotification:
+                            return context.Users
+                                .Where(x => x.UserId == addedFor || x.IsTrainer == true || x.IsManager == true)
+                                .Select(x => x.UserId)
+                                .ToList();
+                        case Common.Enumeration.NotificationType.NewReleaseNotification:
+                        case Common.Enumeration.NotificationType.NewFeatureRequestNotification :
+                        case Common.Enumeration.NotificationType.FeatureModifiedNotification:
+                            return context.Users.Where(x => x.UserId != addedFor).Select(x => x.UserId).ToList();
+                        case Common.Enumeration.NotificationType.NewSessionNotification:
+                        case Common.Enumeration.NotificationType.SessionUpdatedNotification:
+                            return context.Users.Where(x => x.IsManager == true || x.IsTrainer == true).Select(x => x.UserId).ToList();
+
                     }
                     return null;
                 }

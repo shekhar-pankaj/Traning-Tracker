@@ -41,7 +41,7 @@ namespace TrainingTracker.Controllers
         [HttpPost]
         public ActionResult AddRelease(Release release)
         {
-            return Json(new ReleaseBl().AddRelease(release, new UserBl().GetUserByUserName(User.Identity.Name).UserId));
+            return Json(new ReleaseBl().AddRelease(release , new UserBl().GetUserByUserName(User.Identity.Name).UserId));
         }
 
         /// <summary>

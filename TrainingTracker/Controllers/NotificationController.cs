@@ -34,5 +34,16 @@ namespace TrainingTracker.Controllers
         {
             return Json(new NotificationBl().UpdateNotification(new UserBl().GetUserByUserName(User.Identity.Name).UserId, notification));
         }
+
+        /// <summary>
+        ///Action method for  Update All Notification for user
+        /// </summary>
+        /// <param name="notification">Notification object</param>
+        /// <returns> Return a boolean value as a JSON object.</returns>
+        [HttpPost]
+        public ActionResult MarkAllNotificationAsRead()
+        {
+            return Json(new NotificationBl().MarkAllNotificationAsRead(new UserBl().GetUserByUserName(User.Identity.Name).UserId));
+        }
     }
 }

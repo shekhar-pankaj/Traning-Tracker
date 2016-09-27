@@ -7,16 +7,19 @@
 **************************************************************************************************/
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TrainingTracker.BLL.Base;
 using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Enumeration;
+using FeedbackType = TrainingTracker.Common.Enumeration.FeedbackType;
 
 namespace TrainingTracker.BLL
 {
     public class NotificationBl : BussinessBase
     {
-        public string releaseLink = "/Release";
+        public string releaseLink = "/Release?releaseId={0}";
         public string feedbackLink = "/Profile/UserProfile?userId={0}";
+        public const string SessionLink = "/Session?sessionId={0}";
         public string releaseDescription = "New release, Version:";
         public string feedbackDescription = "New comment on";
 
@@ -54,13 +57,36 @@ namespace TrainingTracker.BLL
         /// <returns>Returns true if Notification is added successfully else false.</returns>
         public bool AddReleaseNotification(Release release, int userId)
         {
+            NotificationType notificationType;
+            string featureText;
+
+            if ( !release.IsPublished)
+            {
+                if (release.IsNew)
+                {
+                    notificationType = NotificationType.NewFeatureRequestNotification;
+                    featureText = "New Feature";
+                }
+                else
+                {
+                    notificationType = NotificationType.FeatureModifiedNotification;
+                    featureText = "Feature Details Updated";
+                }
+               
+            }
+            else 
+            {
+                notificationType = NotificationType.NewReleaseNotification;
+                featureText = "New Release";
+            }
+          
             var notification = new Notification
             {
                 Description = releaseDescription + release.Major + "." + release.Minor + "." + release.Patch,
-                Link = releaseLink,
-                TypeOfNotification = NotificationType.ReleaseNotification,
+                Link = string.Format(releaseLink,release.ReleaseId),
+                TypeOfNotification = notificationType,
                 AddedBy = userId,
-                Title = "New Release",
+                Title = featureText ,
                 AddedOn = release.ReleaseDate ?? DateTime.Now,
             };
             return AddNotification(notification, UserDataAccesor.GetUserId(notification.TypeOfNotification, userId));
@@ -84,16 +110,91 @@ namespace TrainingTracker.BLL
         /// <returns>Returns a boolean value as feedback notification is added successfully or not.</returns>
         public bool AddFeedbackNotification(Feedback feedback)
         {
+            NotificationType notificationType;
+            string notificationText = string.Empty;
+
+            switch ((FeedbackType)feedback.FeedbackType.FeedbackTypeId)
+            {
+                case FeedbackType.Weekly:
+                {
+                    notificationType = NotificationType.WeeklyFeedbackNotification;
+                    notificationText = "New Weekly Feedback";
+                    break;
+                }
+                case FeedbackType.Comment:
+                {
+                    notificationType = NotificationType.CommentFeedbackNotification;
+                    notificationText = "New Comment";
+                    break;
+                }
+                case FeedbackType.Skill:
+                {
+                    notificationType = NotificationType.SkillFeedbackNotification;
+                    notificationText = "New Skill";
+                    break;
+                }
+                case FeedbackType.Assignment:
+                {
+                    notificationType = NotificationType.AssignmentFeedbackNotification;
+                    notificationText = "New Assignment Feedback";
+                    break;
+                }
+                case FeedbackType.CodeReview:
+                {
+                    notificationType = NotificationType.CodeReviewFeedbackNotification;
+                    notificationText = "New CR Feedback";
+                    break;
+                }
+                default:
+                {
+                    return false;
+                }
+            }
+
+            var user = UserDataAccesor.GetUserById(feedback.AddedFor.UserId);
+
             var notification = new Notification
             {
-                Description = feedbackDescription + feedback.Title,
+                Description = user.FirstName  + " " + user.LastName    ,
                 Link = string.Format(feedbackLink, feedback.AddedFor.UserId),
-                TypeOfNotification = NotificationType.FeedbackNotification,
+                TypeOfNotification = notificationType ,
                 AddedBy = feedback.AddedBy.UserId,
-                Title = "New Feedback",
-                AddedOn =DateTime.Now,
+                Title = notificationText ,
+                AddedOn = DateTime.Now,
             };
             return AddNotification(notification, UserDataAccesor.GetUserId(notification.TypeOfNotification, feedback.AddedFor.UserId));
+        }
+
+        /// <summary>
+        ///  Add notification for user on Session
+        /// </summary>
+        /// <returns></returns>
+        internal bool AddSessionNotification(Session session)
+        {
+            
+            var notification = new Notification
+            {
+                Description = "New Session Added" ,
+                Link = string.Format(SessionLink , session.Id) ,
+                TypeOfNotification = session.IsNeW ? NotificationType.NewSessionNotification: NotificationType.SessionUpdatedNotification ,
+                AddedBy = session.Presenter ,
+                Title = session.IsNeW ? "New Session Added" : "Session Details Updated" ,
+                AddedOn = DateTime.Now ,
+            };
+
+            List<int> userIdList = UserDataAccesor.GetUserId(notification.TypeOfNotification, session.Presenter);
+            userIdList.AddRange(session.Attendee.Select(int.Parse).ToList());
+            return AddNotification(notification , userIdList);
+        }
+
+        /// <summary>
+        /// Mark All notification as read for given UserId
+        /// </summary>
+        /// <param name="userId">user Id</param>
+        /// <returns>flag for success Event</returns>
+        public bool MarkAllNotificationAsRead(int userId)
+        {
+            return NotificationDataAccesor.MarkAllNotificationAsRead(userId);
         }
     }
 }

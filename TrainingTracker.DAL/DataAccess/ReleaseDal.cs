@@ -8,6 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
+using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Utility;
 using TrainingTracker.DAL.EntityFramework;
 using TrainingTracker.DAL.Interface;
@@ -37,7 +39,12 @@ namespace TrainingTracker.DAL.DataAccess
                                               Description = x.Description,
                                               ReleaseDate = x.ReleaseDate,
                                               IsPublished = x.IsPublished,
-                                              SortOrder = (x.Major == 0 && x.Minor == 0 && x.Patch == 0) ? 0 : 1
+                                              SortOrder = (x.Major == 0 && x.Minor == 0 && x.Patch == 0) ? 0 : 1,
+                                              AddedBy = new  Common.Entity.User
+                                                             {
+                                                                 UserId = x.AddedBy,
+                                                                 FullName = x.User.FirstName + " " + x.User.LastName
+                                                             }
                                           })
                      .OrderBy(x => x.SortOrder)
                      .ThenByDescending(x => x.Major)
@@ -59,7 +66,7 @@ namespace TrainingTracker.DAL.DataAccess
         /// </summary>
         /// <param name="release">Release class object</param>
         /// <returns>Return true if a release is added successfully else false.</returns>
-        public bool AddRelease(Common.Entity.Release release)
+        public int AddRelease(Common.Entity.Release release)
         {
             try
             {
@@ -73,18 +80,19 @@ namespace TrainingTracker.DAL.DataAccess
                         Title = release.ReleaseTitle,
                         Description = release.Description,
                         IsPublished = release.IsPublished,
-                        ReleaseDate = release.ReleaseDate
+                        ReleaseDate = release.ReleaseDate,
+                        AddedBy = release.AddedBy.UserId
                     };
 
                     context.Releases.Add(releaseDetail);
                     context.SaveChanges();
-                    return true;
+                    return releaseDetail.ReleaseId;
                 }
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
-                return false;
+                return 0;
             }
         }
 

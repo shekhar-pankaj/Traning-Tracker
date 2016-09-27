@@ -27,6 +27,13 @@ namespace TrainingTracker.DAL.Interface
         /// <returns></returns>
         bool UpdateNotification(int userId, Notification notification);
 
-       
+        /// <summary>
+        /// update All Notification as read
+        /// </summary>
+        /// <param name="userId">userid</param>
+        /// <returns>sucess event for flag</returns>
+        bool MarkAllNotificationAsRead(int userId);
+
+
     }
 }

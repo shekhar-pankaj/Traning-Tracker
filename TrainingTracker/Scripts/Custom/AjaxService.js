@@ -14,24 +14,37 @@
             $.ajax({
                 url: getServiceUrl(method),
                 type: "GET",
+                beforeSend: my.toggleLoader(true),
                 data: ko.toJSON(jsonIn),
                 dataType: "json",
                 contentType: "application/json",
-                success: function(json) {
-                    callback(json);               
+                success: function (json)
+                {
+                    callback(json);
+                    my.toggleLoader();
+                },
+                error: function() {
+                    my.toggleLoader();
                 }
+                    
             });
         },
          ajaxPostJson = function (method, jsonIn, callback) {
              $.ajax({
                  url: getServiceUrl(method),
                  type: "POST",
+                 beforeSend: my.toggleLoader(true),
                  data: ko.toJSON(jsonIn),
                  dataType: "json",
                  contentType: "application/json",
                  success: function (json)
-                 {                   
-                     callback(json);                
+                 {
+                     callback(json);
+                     my.toggleLoader();
+                 },
+                 error: function ()
+                 {
+                     my.toggleLoader();
                  }
              });
          },
@@ -39,12 +52,19 @@
              $.ajax({
                  url: getServiceUrl(method),
                  type: "POST",
+                 beforeSend: my.toggleLoader(true),
                  data: formData,
                  cache: false,
                  contentType: false,
                  processData: false,
-                 success: function (json) {
+                 success: function (json)
+                 {
                      callback(json);
+                     my.toggleLoader();
+                 },
+                 error: function ()
+                 {
+                     my.toggleLoader();
                  }
              });
          }
