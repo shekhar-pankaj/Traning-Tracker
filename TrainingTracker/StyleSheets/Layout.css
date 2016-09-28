@@ -456,7 +456,7 @@ a {
 
 #notificationContainer {
     background-color: #fff;
-    border: 1px solid rgba(100, 100, 100, .4);
+    border: 1px solid #4fc3f7;
     -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
     overflow: visible;
     position: absolute;
@@ -501,12 +501,17 @@ a {
 }
 
 #notificationFooter {
-    background-color: #e9eaed;
+    background-color: #4fc3f7;
+    color: #fff;
     text-align: center;
     font-weight: bold;
     padding: 8px;
     font-size: 12px;
     border-top: 1px solid #dddddd;
+}
+
+#notificationFooter a {
+      color: #fff !important;
 }
 
 #notification_count {
@@ -574,7 +579,7 @@ div#notificationsBody  ul li {
 }
  
 div#notificationsBody  ul li:hover {
-  background: #eee;
+  background:#eee;
   cursor: pointer;
 }
 ul.pop-over-list {
@@ -614,4 +619,10 @@ ul.pop-over-list.danger a:hover
 
 hr {
     margin: 0;
+}
+
+.linear-transition {
+    transition-property: all;
+    transition-duration: 2s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }

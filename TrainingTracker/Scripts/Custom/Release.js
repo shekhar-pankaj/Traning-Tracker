@@ -30,6 +30,8 @@
         },
     openReleaseDialogue = function () {
         selectedReleaseType("Patch");
+        resetReleaseDialogue();
+        isVisiblePublishButton(true);
         showModal(true);
     },
     closeReleaseDialogue = function () {
@@ -41,7 +43,12 @@
         return item.Major + '.' + item.Minor + '.' + item.Patch;
     },
     errorText = ko.observable(""),
-    getReleasesCallback = function (releaseList) {
+    getReleasesCallback = function (releaseList)
+    {
+        existingRelease.Major = 0;
+        existingRelease.Minor = 0;
+        existingRelease.Patch = 0;
+        
         my.allReleaseVm.releases([]);
         ko.utils.arrayForEach(releaseList, function (item) {
             var version = getVersion(item);
@@ -57,7 +64,7 @@
             }
         });
 
-        if (!my.isNullorEmpty(releaseId) && releaseId > 0 && initialLoad) loadReleaseDetails(releaseId, 'EDIT');
+        if (!my.isNullorEmpty(releaseId) && releaseId > 0 && initialLoad) loadReleaseDetails(releaseId);
         releaseId = 0;
         initialLoad = false;
     },
@@ -110,37 +117,31 @@
     }),
     addRelease = function () {
         if (!my.allReleaseVm.validateReleaseData()) return;
+        
         if (!releaseDetails.IsPublished()) {
             releaseDetails.ReleaseDate(null);
             releaseDetails.Major = 0;
             releaseDetails.Minor = 0;
             releaseDetails.Patch = 0;
         }
+        
         if (my.allReleaseVm.releaseDetails.ReleaseId != 0) {
             my.releaseService.UpdateRelease(my.allReleaseVm.releaseDetails, my.allReleaseVm.updateReleaseCallback);
-            resetReleaseDialogue();
+           // resetReleaseDialogue();
             return;
         }
         my.releaseService.addRelease(my.allReleaseVm.releaseDetails, my.allReleaseVm.addReleaseCallback);
     },
     addReleaseCallback = function (addStatus) {
-        if (addStatus) {
+        if (addStatus)
+        {
             my.allReleaseVm.showModal(false);
-            my.allReleaseVm.releaseDetails.Version(my.allReleaseVm.newVersion());
-            my.allReleaseVm.releaseDetails.AddedBy.FullName = my.meta.currentUser.FirstName + " " + my.meta.currentUser.LastName;
-            if (!releaseDetails.IsPublished()) {
-                my.allReleaseVm.releaseDetails.Version("--");
-                my.allReleaseVm.releaseDetails.ReleaseDate("N/A");
-            }
-            else {
-                my.allReleaseVm.releaseDetails.ReleaseDate(moment(releaseDetails.ReleaseDate()).format('DD/MM/YYYY'));
-            }
-            my.allReleaseVm.releases.unshift(ko.toJS(my.allReleaseVm.releaseDetails));
+            getReleases();           
             resetReleaseDialogue();
 
-            if (releaseDetails.IsPublished()) { my.meta.getNotification(); }
-
-        } else {
+        }
+        else
+        {
             alert("Add Release Failure");
         }
     },
@@ -150,6 +151,7 @@
         my.allReleaseVm.releaseDetails.Description("");
         my.allReleaseVm.releaseDetails.IsPublished(false);
         my.allReleaseVm.releaseDetails.ReleaseDate(new Date());
+        my.allReleaseVm.releaseDetails.ReleaseId = 0;
         my.allReleaseVm.errorText("");
         isViewMode(false);
         isVisibleNewVersion(true);
@@ -182,21 +184,35 @@
         my.allReleaseVm.releaseDetails.Description(filteredRelease[0].Description);
         my.allReleaseVm.releaseDetails.ReleaseId = filteredRelease[0].ReleaseId;
         my.allReleaseVm.isVisibleSubmitButton(false);
+        
+        if (typeof(action) == 'undefined') {
+            action = filteredRelease[0].IsPublished ? 'VIEW' : 'EDIT';
+        }
 
         if (action.toUpperCase() === 'EDIT') {
             my.allReleaseVm.releaseCaption("Publish Release");
             isVisiblePublishButton(true);
             
         }
-        else if (action.toUpperCase() === 'VIEW') {
+        else if (action.toUpperCase() === 'VIEW')
+        {
             my.allReleaseVm.releaseCaption("View Release");
             my.allReleaseVm.selectCaption("Selected Version:");
             my.allReleaseVm.isViewMode(true);
             isVisibleNewVersion(false);
-            my.allReleaseVm.releaseDetails.ReleaseDate(filteredRelease[0].ReleaseDate);
+            my.allReleaseVm.releaseDetails.ReleaseDate(moment(filteredRelease[0].ReleaseDate,"DD/MM/YYYY"));
             my.allReleaseVm.currentVersion(getVersion(filteredRelease[0]));
         }
-
+        
+        if (filteredRelease[0].IsPublished) {
+            my.allReleaseVm.releaseDetails.IsPublished(true);
+            isVisiblePublishButton(false);
+        }
+        else
+        {
+            my.allReleaseVm.releaseDetails.IsPublished(false);
+            isVisiblePublishButton(true);
+        }
     },
     updateReleaseCallback = function (updateStatus) {
         my.allReleaseVm.showModal(false);
@@ -213,7 +229,7 @@
 
         if (my.allReleaseVm.releaseDetails.ReleaseId == 0) {
             my.releaseService.addRelease(my.allReleaseVm.releaseDetails, my.allReleaseVm.addReleaseCallback);
-            resetReleaseDialogue();
+            //resetReleaseDialogue();
             return;
         }
 

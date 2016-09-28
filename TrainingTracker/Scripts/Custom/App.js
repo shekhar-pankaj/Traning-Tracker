@@ -32,6 +32,67 @@ $(document).ready(function () {
             $('div#loaderWrapper').fadeIn('slow');
         }
     };
+    
+    my.calculateLastMonday = function ()
+    {
+        var addendum = 0;
+        switch (moment().day())
+        {
+            case 0:
+                addendum = -6;
+                break;
+            case 1:
+                addendum = -7;
+                break;
+            case 2:
+                addendum = -8;
+                break;
+            case 3:
+                addendum = -9;
+                break;
+            case 4:
+                addendum = -10;
+                break;
+
+            case 6:
+                addendum = -5;
+                break;
+            default:
+                addendum = -4;
+                break;
+        }
+        return moment().add(addendum, 'days').format('MM/DD/YYYY');
+    },
+            my.calculateLastFriday = function ()
+            {
+                var addendum = 0;
+                switch (moment().day())
+                {
+                    case 0:
+                        addendum = -2;
+                        break;
+                    case 1:
+                        addendum = -3;
+                        break;
+                    case 2:
+                        addendum = -4;
+                        break;
+                    case 3:
+                        addendum = -5;
+                        break;
+                    case 4:
+                        addendum = -6;
+                        break;
+
+                    case 6:
+                        addendum = -1;
+                        break;
+                    default:
+                        addendum = 0;
+                        break;
+                }
+                return moment().add(addendum, 'days').format('MM/DD/YYYY');
+            },
    
 
     my.queryParams = (function (a) {
