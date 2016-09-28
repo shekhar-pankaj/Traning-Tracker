@@ -65,7 +65,7 @@ namespace TrainingTracker.BLL
                 if (release.IsNew)
                 {
                     notificationType = NotificationType.NewFeatureRequestNotification;
-                    featureText = "New Feature";
+                    featureText = "New Feature/Bug Request";
                 }
                 else
                 {

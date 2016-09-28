@@ -39,8 +39,8 @@ namespace TrainingTracker.BLL
             {
                 int releaseId = ReleaseDataAccesor.AddRelease(release);
 
+                release.IsNew = release.ReleaseId == 0;
                 release.ReleaseId = releaseId;
-                release.IsNew = release.ReleaseId > 0;
                 return new NotificationBl().AddReleaseNotification(release , userId);
             }
             catch (Exception)
