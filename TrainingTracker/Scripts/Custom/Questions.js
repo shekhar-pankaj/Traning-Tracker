@@ -165,7 +165,7 @@
             $.each(response.Categories, function (arrayId, item) {
                 my.questionVm.questionsVm.Categories.push(item);
             });
-            ko.applyBindings(my.questionVm);
+            
         },
         getQuestionsVm = function () {
             my.questionsService.getQuestionsVm(getQuesionsVmCallback);
@@ -207,5 +207,6 @@
         };
     }();
     $('[data-toggle="tooltip"]').tooltip();
+    ko.applyBindings(my.questionVm);
     my.questionVm.getQuestionsVm();
 });

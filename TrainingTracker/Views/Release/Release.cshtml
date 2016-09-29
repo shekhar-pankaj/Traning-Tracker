@@ -105,7 +105,12 @@
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <button type="button"  class="btn btn-primary btn-sm" data-bind="click: addRelease, visible: !my.allReleaseVm.releaseDetails.IsPublished() ">Submit</button>
-                        <button type="button" class="btn btn-primary btn-sm" data-bind="click: function () { updateRelease() }, visible:( my.allReleaseVm.isVisiblePublishButton() && my.allReleaseVm.releaseDetails.IsPublished())">Publish</button>
+                        
+                         @if (HttpContext.Current.User.IsInRole("Administrator") || HttpContext.Current.User.IsInRole("Manager"))
+                         {
+                            <button type="button" class="btn btn-primary btn-sm" data-bind="click: function () { updateRelease() }, visible:( my.allReleaseVm.isVisiblePublishButton() && my.allReleaseVm.releaseDetails.IsPublished())">Publish</button>
+                         }
+
                         <button type="button" class="btn btn-primary btn-sm" data-bind="click:my.allReleaseVm.closeReleaseDialogue">Close</button>
                     </div>
                 </div>
@@ -133,12 +138,12 @@
                         <td data-label="Added By" data-bind="text: AddedBy.FullName"></td>
                         <td>
                             <button data-bind="visible: IsPublished , click: function(){ my.allReleaseVm.loadReleaseDetails(ReleaseId, 'View')}"
-                                    style="width:40%" type="button" class="form-control btn btn-info">
+                                    style="width:60%" type="button" class="form-control btn btn-info">
                                 View
                                 <i class="glyphicon glyphicon-eye-open"></i>
                             </button>
                             <button data-bind="visible: !IsPublished, click: function(){ my.allReleaseVm.loadReleaseDetails(ReleaseId, 'Edit')}"
-                                    style="width:40%" type="button" class="form-control btn btn-info">
+                                    style="width:60%" type="button" class="form-control btn btn-info">
                                 Edit
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </button>

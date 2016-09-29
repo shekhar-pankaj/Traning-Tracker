@@ -64,7 +64,7 @@
                                                 <a href="#" style="padding:0; display:block;" >
                                                     <div>
                                                         <div class="col-xs-2 image" style="margin: 0;">
-                                                            <img src="/Uploads/ProfilePicture/system_notification.jpg" class="avatar" style="height: 60px;margin: 0;display: block;width: 60px;padding: 0;"  />
+                                                            <img src="~/Uploads/ProfilePicture/system_notification.jpg" class="avatar" style="height: 60px;margin: 0;display: block;width: 60px;padding: 0;"  />
                                                         </div>
                                                         <div class="col-xs-10" style="margin: 0">
                                                             <p id="notificationDetail" style="margin:0 !important;">
@@ -115,11 +115,11 @@
                         <li style=""><a href="#">Notifications</a></li>
                         <li data-bind="visible: my.meta.notifications().length == 0">No more Notifications</li>
                         <!-- ko foreach: my.meta.notifications.slice(0).reverse() -->
-                        <li class="menu-li list-style" style="width:280px; position: relative;" data-bind="click: function () { my.meta.updateNotification(NotificationId, TypeOfNotification, Link); }">
-                            <a style="padding:0; display:block;" data-bind="attr: { href: Link, title: Description }">
+                        <li class="menu-li list-style" style="width:280px; position: relative;" data-bind="click: function () { my.meta.updateNotification(NotificationId, TypeOfNotification, my.rootUrl + Link); }">
+                            <a style="padding:0; display:block;" data-bind="attr: { href: my.rootUrl + Link, title: Description }">
                                 <div direction="left">
                                     <div class="flote-left">
-                                        <img class="" style="width:50px;" data-bind="attr: { src: '/Uploads/ProfilePicture/' + ProfilePictureName }" />
+                                        <img class="" style="width:50px;" data-bind="attr: { src: my.rootUrl + '~/Uploads/ProfilePicture/' + ProfilePictureName }" />
                                     </div>
                                     <div>
                                         <p id="notificationDetail" style="margin:0 !important;">
