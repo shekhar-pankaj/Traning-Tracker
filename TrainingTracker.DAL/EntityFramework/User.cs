@@ -22,6 +22,9 @@ namespace TrainingTracker.DAL.EntityFramework
             this.UserSessionMappings = new HashSet<UserSessionMapping>();
             this.UserSessionMappings1 = new HashSet<UserSessionMapping>();
             this.Questions = new HashSet<Question>();
+            this.Notifications = new HashSet<Notification>();
+            this.UserNotificationMappings = new HashSet<UserNotificationMapping>();
+            this.Releases = new HashSet<Release>();
         }
     
         public int UserId { get; set; }
@@ -46,5 +49,8 @@ namespace TrainingTracker.DAL.EntityFramework
         public virtual ICollection<UserSessionMapping> UserSessionMappings { get; set; }
         public virtual ICollection<UserSessionMapping> UserSessionMappings1 { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ICollection<UserNotificationMapping> UserNotificationMappings { get; set; }
+        public virtual ICollection<Release> Releases { get; set; }
     }
 }

@@ -2,10 +2,14 @@
     ViewBag.Title = "Index";
 }
 
-@*<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">*@
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<link href="~/StyleSheets/Questions.css" rel="stylesheet" />
-<link href="~/StyleSheets/CustomButtons.css" rel="stylesheet" />
+@section Styles
+{
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="~/StyleSheets/Questions.css" rel="stylesheet" />
+    <link href="~/StyleSheets/CustomButtons.css" rel="stylesheet" />
+}
+
+
 <div id="divQuestionWrapper" class="container-fluid" style="display: none" data-bind="visible: true">
     <div class="row no-gutter">
         <div class="col-lg-2  category-pane">
@@ -190,5 +194,9 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/Custom/QuestionsService.js"></script>
-<script src="~/Scripts/Custom/Questions.js"></script>
+
+@section Scripts
+{
+    <script src="~/Scripts/Custom/QuestionsService.js"></script>
+    <script src="~/Scripts/Custom/Questions.js"></script>
+}

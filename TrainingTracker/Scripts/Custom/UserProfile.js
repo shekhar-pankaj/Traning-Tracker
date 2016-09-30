@@ -8,6 +8,8 @@
             tempAllTrainer = ko.observable(), // remove this once temporary feature use end
             recentCodeReviewFeedback = ko.observable(),
             recentWeeklyFeedback = ko.observable(),
+            commentFeedbacks = ko.observableArray([]),
+            isCommentFeedbackModalVisible = ko.observable(false),
             controls = {
                 skillOption: ko.observable("1"),
                 assignmentOption: ko.observable(1),
@@ -37,8 +39,8 @@
                 AddedFor: '',
                 AddedBy: '',
                 AddedOn:ko.observable(),
-                StartDate: ko.observable(),
-                EndDate: ko.observable()
+                StartDate: ko.observable(my.calculateLastMonday()),
+                EndDate: ko.observable(my.calculateLastFriday())
             },
             setRating = function(rating) {
                 my.profileVm.feedbackPost.Rating(rating);
@@ -152,9 +154,37 @@
                     } else {
                         my.profileVm.feedbackPost.AddedBy = { UserId: my.profileVm.filter.tempAddedBy().UserId };
                     }
-                   
-                    my.profileVm.feedbackPost.Skill = selectedSkill;
-                    my.userService.addUserFeedback(my.profileVm.feedbackPost, my.profileVm.addFeedbackCallback);
+
+                    var convertedObject = ko.toJS(my.profileVm.feedbackPost);
+                    
+                    switch (convertedObject.FeedbackType.FeedbackTypeId)
+                    {
+                        case 1:
+                            convertedObject.Skill = 0;
+                            convertedObject.StartDate = null;
+                            convertedObject.EndDate = null;
+                            convertedObject.Rating = 0;
+                            break;
+                            
+                        case 2:
+                            convertedObject.Skill = selectedSkill();
+                            convertedObject.StartDate = null;
+                            convertedObject.EndDate = null;
+                            break;
+                            
+                        case 3:
+                        case 4:
+                            convertedObject.Skill = 0;
+                            convertedObject.StartDate = null;
+                            convertedObject.EndDate = null;
+                            break;
+                        case 5:
+                            convertedObject.Skill = 0;
+                            break;
+                          
+                    }
+                    
+                    my.userService.addUserFeedback(convertedObject, my.profileVm.addFeedbackCallback);
                 }
             },
             currentUser = {},
@@ -183,16 +213,15 @@
                     return item.Rating == type;
                 });
                 return feedbackFilteredOnType.length;
-            },
-             isCommentFeedbackModalVisible = ko.observable(false),
+            },            
         showCommentFeedback = function () {
+            closeCommentFeedbackModal();
             my.profileVm.loadcommentFeedbacks();
             isCommentFeedbackModalVisible(true);
         },
         closeCommentFeedbackModal = function () {
             isCommentFeedbackModalVisible(false);
         },
-        commentFeedbacks = ko.observableArray([]),
         loadcommentFeedbacks = function () {
             my.userService.getFeedbackonAppliedFilter(100, 1, my.profileVm.userId, my.profileVm.feedbackPost.StartDate(), my.profileVm.feedbackPost.EndDate(), my.profileVm.loadCommentFeedbacksCallback);
         },
@@ -204,7 +233,7 @@
                 my.profileVm.commentFeedbacks.push(item);
             });
         },
-        isCommentCollapsed = ko.observable(false),
+        isCommentCollapsed = ko.observable(false),        
         toggleCollapsedPanel = function () {
             my.profileVm.isCommentCollapsed(!my.profileVm.isCommentCollapsed());
         };

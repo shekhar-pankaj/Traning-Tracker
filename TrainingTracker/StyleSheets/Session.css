@@ -176,3 +176,22 @@
     margin-top: -5px;
     height: 34px;
 }
+
+#modelWrapper {
+        width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background: #ccc;
+    opacity: 0.5;
+    overflow: hidden;
+}
+
+#sessionModal {
+        margin: 0;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    right: 15px;
+    top: 0;
+    z-index: 1001;
+}

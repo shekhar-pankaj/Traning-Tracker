@@ -31,6 +31,15 @@
         <AssociationConnector Association="TrainingTrackerModel.FK_QuestionLevelMapping_QuestionId" />
         <AssociationConnector Association="TrainingTrackerModel.FK_Questions_SkillId" />
         <AssociationConnector Association="TrainingTrackerModel.FK_Questions_UserId" />
+        <EntityTypeShape EntityType="TrainingTrackerModel.Notification" Width="1.5" PointX="8.94882469668464" PointY="19.600231358595302" />
+        <EntityTypeShape EntityType="TrainingTrackerModel.NotificationType" Width="1.5" PointX="3.1555084228308443" PointY="15.869164712666144" />
+        <EntityTypeShape EntityType="TrainingTrackerModel.Release" Width="1.5" PointX="10.951794420812185" PointY="28.933861522438871" />
+        <EntityTypeShape EntityType="TrainingTrackerModel.UserNotificationMapping" Width="1.5" PointX="0.045390481150425266" PointY="16.871655695546259" />
+        <AssociationConnector Association="TrainingTrackerModel.FK__UserNotif__Notif__47A6A41B" />
+        <AssociationConnector Association="TrainingTrackerModel.fk_Notification_NotificationType" />
+        <AssociationConnector Association="TrainingTrackerModel.fk_Notification_User" />
+        <AssociationConnector Association="TrainingTrackerModel.FK__UserNotif__UserI__489AC854" />
+        <AssociationConnector Association="TrainingTrackerModel.FK_Release_UserId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -32,10 +32,6 @@ p {
     padding-bottom: 10px;
 }
 
-.comment-input-control {
-    resize: none;
-    /*width: 100%;*/
-}
 
 .comment-send {
     vertical-align: top;
@@ -306,6 +302,7 @@ p {
  }
 
  #divWeeklyComment {
+         top: 7vh;
      transition-property: all;
 	transition-duration: 2s;
 	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);

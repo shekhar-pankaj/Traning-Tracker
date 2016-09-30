@@ -196,6 +196,26 @@
            // if ($('#divFeedbackChart').css('display') == 'inline-block') $('#divFeedbackChart').css('display', 'none');
         }
     };
+    
+    ko.bindingHandlers.fadeVisible = {
+        init: function (element, valueAccessor)
+        {
+            var shouldDisplay = valueAccessor();
+            $(element).toggle(shouldDisplay);
+        },
+        update: function (element, valueAccessor)
+        {
+            // On update, fade in/out
+            var shouldDisplay = valueAccessor();
+            
+            if (shouldDisplay) {
+                $(element).fadeIn(600,"swing");
+            }              
+            else
+                $(element).fadeOut(300, "swing");
+            
+        }
+    };
 
     ko.bindingHandlers.chartData = {
         init: function (element, valueAccessor, allBindings, viewModel, bindingContext)

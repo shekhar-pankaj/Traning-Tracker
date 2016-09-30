@@ -42,14 +42,17 @@
             {
                 my.sessionVm.sessions([]);
                 my.sessionVm.allAttendees([]);
+                
                 ko.utils.arrayForEach(sessionJson.SessionList, function(item) {                  
                     my.sessionVm.sessions.push(item);
                 });
                 
                 ko.utils.arrayForEach(sessionJson.AllAttendees, function (item)
                 {
-                    if (item.IsTrainee)
-                    my.sessionVm.allAttendees.push(item);
+                    if (item.IsTrainee )
+                    {
+                        my.sessionVm.allAttendees.push(item);
+                    }                    
                 });
                 
                 if (!my.sessionVm.viewSessionLoaded && typeof(my.sessionVm.sessionId) != 'undefined') {
@@ -68,13 +71,13 @@
             sessions = ko.observableArray(),
             allAttendees = ko.observableArray(),
             addSession = function () {
-                if (!my.sessionVm.validateSessionData()) return;
+                if (!my.sessionVm.validateSessionData() || my.sessionVm.sessionDetails.Id() > 0) return;
                 my.sessionVm.sessionDetails.Presenter ( my.sessionVm.currentUser.UserId);
                 my.userService.addEditSession(my.sessionVm.sessionDetails, my.sessionVm.addEditSessionCallback);
             },
             editSession = function ()
             {
-                if (!my.sessionVm.validateSessionData()) return;
+                if (!my.sessionVm.validateSessionData() || my.sessionVm.sessionDetails.Presenter() != my.sessionVm.currentUser.UserId) return;
                 my.userService.addEditSession(my.sessionVm.sessionDetails, my.sessionVm.addEditSessionCallback);
             },
             

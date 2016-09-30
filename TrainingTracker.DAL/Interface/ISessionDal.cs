@@ -20,7 +20,7 @@ namespace TrainingTracker.DAL.Interface
         /// </summary>
         /// <param name="objSession">User Id</param>
         /// <returns>List Of session</returns>
-       bool AddEditSessions( Session objSession );
+       int AddEditSessions( Session objSession );
 
        /// <summary>
        /// Interface method to fetch Sessions on filters

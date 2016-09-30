@@ -6,7 +6,7 @@ namespace TrainingTracker.Common.Entity
     {
         public int ProjectId { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string ProjectDescription { get; set; }
         public int CreatedBy { get; set; }
         public string ProjectType { get; set; }
         public string ClientName { get; set; }
