@@ -17,11 +17,11 @@ namespace TrainingTracker.BLL
 {
     public class NotificationBl : BussinessBase
     {
-        public string releaseLink = "/Release?releaseId={0}";
-        public string feedbackLink = "/Profile/UserProfile?userId={0}";
-        public const string SessionLink = "/Session?sessionId={0}";
-        public string releaseDescription = "New release, Version:";
-        public string feedbackDescription = "New comment on";
+        private const string releaseLink = "/Release?releaseId={0}";
+        private const string feedbackLink = "/Profile/UserProfile?userId={0}";
+        private const string SessionLink = "/Session?sessionId={0}";
+        private const string releaseDescription = "New release, Version:";
+        private const string feedbackDescription = "New comment on";
 
        
 
@@ -31,7 +31,7 @@ namespace TrainingTracker.BLL
         /// <param name="notification">Notification class onject</param>
         /// <param name="userIds">List of userId</param>
         /// <returns>Returns true if Notification is added successfully else false.</returns>
-        public bool AddNotification(Notification notification, List<int> userIds)
+        internal bool AddNotification(Notification notification, List<int> userIds)
         {
             return NotificationDataAccesor.AddNotification(notification, userIds);
         }
@@ -55,7 +55,7 @@ namespace TrainingTracker.BLL
         /// <param name="release">Release object</param>
         /// <param name="userId">UseId</param>
         /// <returns>Returns true if Notification is added successfully else false.</returns>
-        public bool AddReleaseNotification(Release release, int userId)
+        internal bool AddReleaseNotification(Release release, int userId)
         {
             NotificationType notificationType;
             string featureText;
@@ -89,11 +89,11 @@ namespace TrainingTracker.BLL
                 Title = featureText ,
                 AddedOn = release.ReleaseDate ?? DateTime.Now,
             };
-            return AddNotification(notification, UserDataAccesor.GetUserId(notification.TypeOfNotification, userId));
+            return AddNotification(notification, UserDataAccesor.GetUserId(notification, userId));
         }
 
         /// <summary>
-        /// Get list of notification
+        /// Get list of notification.
         /// </summary>
         /// <param name="userId">UseId</param>
         /// <returns>Returns list of notification.</returns>
@@ -108,7 +108,7 @@ namespace TrainingTracker.BLL
         /// </summary>
         /// <param name="feedback">Contain Feedback object as parameter.</param>
         /// <returns>Returns a boolean value as feedback notification is added successfully or not.</returns>
-        public bool AddFeedbackNotification(Feedback feedback)
+        internal bool AddFeedbackNotification(Feedback feedback)
         {
             NotificationType notificationType;
             string notificationText = string.Empty;
@@ -162,13 +162,14 @@ namespace TrainingTracker.BLL
                 Title = notificationText ,
                 AddedOn = DateTime.Now,
             };
-            return AddNotification(notification, UserDataAccesor.GetUserId(notification.TypeOfNotification, feedback.AddedFor.UserId));
+            return AddNotification(notification, UserDataAccesor.GetUserId(notification, feedback.AddedFor.UserId));
         }
 
         /// <summary>
         ///  Add notification for user on Session
         /// </summary>
-        /// <returns></returns>
+        /// <param name="session">Contain Session object as parameter.</param>
+        /// <returns>Returns a boolean value as add session notification is added successfully or not.</returns>
         internal bool AddSessionNotification(Session session)
         {
             
@@ -182,7 +183,7 @@ namespace TrainingTracker.BLL
                 AddedOn = DateTime.Now ,
             };
 
-            List<int> userIdList = UserDataAccesor.GetUserId(notification.TypeOfNotification, session.Presenter);
+            List<int> userIdList = UserDataAccesor.GetUserId(notification, session.Presenter);
             userIdList.AddRange(session.Attendee.Select(int.Parse).ToList());
             return AddNotification(notification , userIdList);
         }

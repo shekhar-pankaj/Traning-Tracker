@@ -13,7 +13,9 @@
                 ko.utils.arrayForEach(userList, function (item) {
                     item.FullName = my.allProfileVm.fullName(item);
                     item.PhotoUrl = my.allProfileVm.photoUrl(item);
-                    my.allProfileVm.users.push(item);
+                    if (item.IsActive) {
+                        my.allProfileVm.users.push(item);
+                    }
                 });
                 ko.applyBindings(my.allProfileVm);
             },
@@ -37,5 +39,5 @@
     }();
 
     my.allProfileVm.getUsers();
-  //  ko.applyBindings(my.allProfileVm);
+    //  ko.applyBindings(my.allProfileVm);
 });
