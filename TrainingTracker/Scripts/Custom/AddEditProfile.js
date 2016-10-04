@@ -91,6 +91,8 @@
                     my.addUserVm.user.IsNewProfile(false);
                     my.addUserVm.user.enableChangePassword(false);
                     my.addUserVm.message("User saved successfully!");
+                    my.addUserVm.getUsers();
+                    window.location.reload();
                 }
                 else {
                     my.addUserVm.message("User saving unsuccessful!");

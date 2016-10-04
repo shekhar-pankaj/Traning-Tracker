@@ -83,6 +83,15 @@ namespace TrainingTracker.Controllers
             return Json(new UserBl().GetAllUsers(), JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// ActionMethod for GetActiveUsers
+        /// </summary>
+        /// <returns> Returns list of active user as json object.</returns>
+        [HttpGet]
+        public ActionResult GetActiveUsers()
+        {
+            return Json(new UserBl().GetActiveUsers(), JsonRequestBehavior.AllowGet);
+        }
 
         /// <summary>
         /// Action to return user profile View model

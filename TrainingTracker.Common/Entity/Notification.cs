@@ -47,6 +47,11 @@ namespace TrainingTracker.Common.Entity
         public DateTime AddedOn { get; set; }
 
         /// <summary>
+        /// Get and set AddedTo
+        /// </summary>
+        public string[] AddedTo { get; set; }
+
+        /// <summary>
         /// get and set Title
         /// </summary>
         [Required]

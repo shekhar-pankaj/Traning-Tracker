@@ -10,6 +10,9 @@
         getAllUsers: function (callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetAllUsers", null, callback);
         },
+         getActiveUsers: function (callback) {
+            my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetActiveUsers", null, callback);
+        },
         getUserProfileVm: function (userId, callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetUserProfileVm?userId=" + userId, null, callback);
         },

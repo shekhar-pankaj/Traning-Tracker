@@ -172,15 +172,16 @@ namespace TrainingTracker.BLL
         /// <returns>Returns a boolean value as add session notification is added successfully or not.</returns>
         internal bool AddSessionNotification(Session session)
         {
-            
+
             var notification = new Notification
             {
-                Description = "New Session Added" ,
-                Link = string.Format(SessionLink , session.Id) ,
-                TypeOfNotification = session.IsNeW ? NotificationType.NewSessionNotification: NotificationType.SessionUpdatedNotification ,
-                AddedBy = session.Presenter ,
-                Title = session.IsNeW ? "New Session Added" : "Session Details Updated" ,
-                AddedOn = DateTime.Now ,
+                Description = "New Session Added",
+                Link = string.Format(SessionLink, session.Id),
+                TypeOfNotification = session.IsNeW ? NotificationType.NewSessionNotification : NotificationType.SessionUpdatedNotification,
+                AddedBy = session.Presenter,
+                Title = session.IsNeW ? "New Session Added" : "Session Details Updated",
+                AddedOn = DateTime.Now,
+                AddedTo = session.Attendee
             };
 
             List<int> userIdList = UserDataAccesor.GetUserId(notification, session.Presenter);

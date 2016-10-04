@@ -13,17 +13,15 @@
                 ko.utils.arrayForEach(userList, function (item) {
                     item.FullName = my.allProfileVm.fullName(item);
                     item.PhotoUrl = my.allProfileVm.photoUrl(item);
-                    if (item.IsActive) {
-                        my.allProfileVm.users.push(item);
-                    }
+                    my.allProfileVm.users.push(item);
                 });
                 ko.applyBindings(my.allProfileVm);
             },
             getUsers = function () {
-                my.userService.getAllUsers(my.allProfileVm.getUsersCallback);
+                my.userService.getActiveUsers(my.allProfileVm.getUsersCallback);
             },
             displayUsers = users,
-            showTrainers = function () {//REVIEW THIS
+            showTrainers = function () {
                 displayUsers = ko.utils.arrayFilter(my.allProfileVm.users(), function (profile) {
                     return profile.IsTrainer == true;
                 });

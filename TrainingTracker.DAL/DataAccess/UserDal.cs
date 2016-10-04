@@ -71,8 +71,8 @@ namespace TrainingTracker.DAL.DataAccess
                                                             IsTrainee = userData.IsTrainee ,
                                                             IsManager = userData.IsManager ,
                                                             DateAddedToSystem = DateTime.Now,
-                                                            IsActive = true
-                                                        };
+                                                            IsActive = userData.IsActive,
+                    };
                     context.Users.Add(objUser);
                     context.SaveChanges();
                     userId = objUser.UserId;
@@ -114,7 +114,7 @@ namespace TrainingTracker.DAL.DataAccess
                     userContext.IsTrainer = userData.IsTrainer;
                     userContext.IsTrainee = userData.IsTrainee;
                     userContext.IsManager = userData.IsManager;
-
+                    userContext.IsActive = userData.IsActive;
                     if (!string.IsNullOrEmpty(userData.Password))
                     {
                         userContext.Password = userData.Password;
@@ -386,11 +386,17 @@ namespace TrainingTracker.DAL.DataAccess
                         case Common.Enumeration.NotificationType.NewReleaseNotification:
                         case Common.Enumeration.NotificationType.NewFeatureRequestNotification :
                         case Common.Enumeration.NotificationType.FeatureModifiedNotification:
-                            return context.Users.Where(x => x.UserId != addedFor && x.IsActive == true).Select(x => x.UserId).ToList();
+                            return context.Users.Where(x => x.UserId != notification.AddedBy && x.IsActive == true)
+                                                .Select(x => x.UserId)
+                                                .ToList();
                         case Common.Enumeration.NotificationType.NewSessionNotification:
                         case Common.Enumeration.NotificationType.SessionUpdatedNotification:
-                            return context.Users.Where(x => (x.IsManager == true || x.IsTrainer == true) && x.IsActive == true).Select(x => x.UserId).ToList();
-                    }
+                            var users =  context.Users.Where(x => (x.IsManager == true || x.IsTrainer == true) && (x.IsActive == true && x.UserId != notification.AddedBy))
+                                          .Select(x => x.UserId)
+                                          .ToList();
+                            var userIds = Array.ConvertAll(notification.AddedTo, int.Parse).ToList();
+                            return users.Union(userIds).ToList();
+                      }
                     return null;
                 }
             }
@@ -399,6 +405,44 @@ namespace TrainingTracker.DAL.DataAccess
                 LogUtility.ErrorRoutine(ex);
                 return null;
             }
-        }	
+        }
+
+        /// <summary>
+        /// Public method GetActiveUsers returns list of user which IsActive field is true.
+        /// </summary>
+        /// <returns></returns>
+        public List<User> GetActiveUsers()
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    return context.Users.Where(x => x.IsActive == true)
+                                        .Select(x => new User
+                                                    {
+                                                        UserId = x.UserId,
+                                                        FirstName = x.FirstName,
+                                                        LastName = x.LastName,
+                                                        FullName = x.FirstName + " " + x.LastName,
+                                                        UserName = x.UserName,
+                                                        Email = x.Email,
+                                                        Designation = x.Designation,
+                                                        ProfilePictureName = x.ProfilePictureName,
+                                                        IsFemale = x.IsFemale ?? false,
+                                                        IsAdministrator = x.IsAdministrator ?? false,
+                                                        IsTrainer = x.IsTrainer ?? false,
+                                                        IsTrainee = x.IsTrainee ?? false,
+                                                        IsManager = x.IsManager ?? false,
+                                                        IsActive = x.IsActive ?? false,
+                                                        DateAddedToSystem = x.DateAddedToSystem
+                                                    }).ToList();
+               }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return null;
+            }
+        }
     }
 }
