@@ -18,10 +18,10 @@
                 ko.applyBindings(my.allProfileVm);
             },
             getUsers = function () {
-                my.userService.getAllUsers(my.allProfileVm.getUsersCallback);
+                my.userService.getActiveUsers(my.allProfileVm.getUsersCallback);
             },
             displayUsers = users,
-            showTrainers = function () {//REVIEW THIS
+            showTrainers = function () {
                 displayUsers = ko.utils.arrayFilter(my.allProfileVm.users(), function (profile) {
                     return profile.IsTrainer == true;
                 });
@@ -37,5 +37,5 @@
     }();
 
     my.allProfileVm.getUsers();
-  //  ko.applyBindings(my.allProfileVm);
+    //  ko.applyBindings(my.allProfileVm);
 });

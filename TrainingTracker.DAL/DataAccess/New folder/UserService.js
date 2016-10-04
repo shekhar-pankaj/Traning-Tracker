@@ -10,9 +10,6 @@
         getAllUsers: function (callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetAllUsers", null, callback);
         },
-         getActiveUsers: function (callback) {
-            my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetActiveUsers", null, callback);
-        },
         getUserProfileVm: function (userId, callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetUserProfileVm?userId=" + userId, null, callback);
         },
@@ -53,19 +50,8 @@
         updateNotification: function (notificationInfo, callback) {
             my.ajaxService.ajaxPostJson(my.rootUrl + "/Notification/UpdateNotification", notificationInfo, callback);
         },
-        getFeedbackWithThreads: function (feedbackId,callback)
-        {
-            my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/GetFeedbackWithThreads?FeedbackId=" + feedbackId, null, callback);
-        },
-        getFeedbackThreads: function (feedbackId,callback)
-        {
-            my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/GetFeedbackThreads?FeedbackId=" + feedbackId, null, callback);
-        },
-        addNewThread : function(thread, callback) {
-            my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/AddNewThread" , thread, callback);
-        },
         markAllNotificationAsRead :function(callback) {
             my.ajaxService.ajaxPostJson(my.rootUrl + "/Notification/markAllNotificationAsRead",null,  callback);
-        },
+        }
     };
 }(my));

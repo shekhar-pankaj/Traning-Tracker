@@ -8,6 +8,7 @@
         <EntityContainer Name="TrainingTrackerModelStoreContainer">
           <EntitySet Name="Comments" EntityType="TrainingTrackerModel.Store.Comments" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Feedback" EntityType="TrainingTrackerModel.Store.Feedback" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FeedbackThread" EntityType="TrainingTrackerModel.Store.FeedbackThread" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="FeedbackType" EntityType="TrainingTrackerModel.Store.FeedbackType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LearningSource" EntityType="TrainingTrackerModel.Store.LearningSource" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Notification" EntityType="TrainingTrackerModel.Store.Notification" store:Type="Tables" Schema="dbo" />
@@ -46,6 +47,10 @@
             <End Role="FeedbackType" EntitySet="FeedbackType" />
             <End Role="Feedback" EntitySet="Feedback" />
           </AssociationSet>
+          <AssociationSet Name="FK_Feedback_Threads" Association="TrainingTrackerModel.Store.FK_Feedback_Threads">
+            <End Role="Feedback" EntitySet="Feedback" />
+            <End Role="FeedbackThread" EntitySet="FeedbackThread" />
+          </AssociationSet>
           <AssociationSet Name="fk_Notification_NotificationType" Association="TrainingTrackerModel.Store.fk_Notification_NotificationType">
             <End Role="NotificationType" EntitySet="NotificationType" />
             <End Role="Notification" EntitySet="Notification" />
@@ -73,6 +78,10 @@
           <AssociationSet Name="fk_Session_User" Association="TrainingTrackerModel.Store.fk_Session_User">
             <End Role="User" EntitySet="User" />
             <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Threads" Association="TrainingTrackerModel.Store.FK_User_Threads">
+            <End Role="User" EntitySet="User" />
+            <End Role="FeedbackThread" EntitySet="FeedbackThread" />
           </AssociationSet>
           <AssociationSet Name="fk_UserSessionMapping_AddedBy" Association="TrainingTrackerModel.Store.fk_UserSessionMapping_AddedBy">
             <End Role="User" EntitySet="User" />
@@ -113,6 +122,16 @@
           <Property Name="AddedOn" Type="datetime" />
           <Property Name="StartDate" Type="date" />
           <Property Name="EndDate" Type="date" />
+        </EntityType>
+        <EntityType Name="FeedbackThread">
+          <Key>
+            <PropertyRef Name="ThreadId" />
+          </Key>
+          <Property Name="ThreadId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Comments" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="FeedbackId" Type="int" Nullable="false" />
+          <Property Name="AddedBy" Type="int" Nullable="false" />
+          <Property Name="DateTimeInserted" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="FeedbackType">
           <Key>
@@ -370,6 +389,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Feedback_Threads">
+          <End Role="Feedback" Type="TrainingTrackerModel.Store.Feedback" Multiplicity="1" />
+          <End Role="FeedbackThread" Type="TrainingTrackerModel.Store.FeedbackThread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feedback">
+              <PropertyRef Name="FeedbackId" />
+            </Principal>
+            <Dependent Role="FeedbackThread">
+              <PropertyRef Name="FeedbackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Notification_NotificationType">
           <End Role="NotificationType" Type="TrainingTrackerModel.Store.NotificationType" Multiplicity="1" />
           <End Role="Notification" Type="TrainingTrackerModel.Store.Notification" Multiplicity="*" />
@@ -451,6 +482,18 @@
             </Principal>
             <Dependent Role="Session">
               <PropertyRef Name="Presenter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Threads">
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="1" />
+          <End Role="FeedbackThread" Type="TrainingTrackerModel.Store.FeedbackThread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="FeedbackThread">
+              <PropertyRef Name="AddedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -575,6 +618,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Release" EntitySet="Releases" />
           </AssociationSet>
+          <EntitySet Name="FeedbackThreads" EntityType="TrainingTrackerModel.FeedbackThread" />
+          <AssociationSet Name="FK_Feedback_Threads" Association="TrainingTrackerModel.FK_Feedback_Threads">
+            <End Role="Feedback" EntitySet="Feedbacks" />
+            <End Role="FeedbackThread" EntitySet="FeedbackThreads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Threads" Association="TrainingTrackerModel.FK_User_Threads">
+            <End Role="User" EntitySet="Users" />
+            <End Role="FeedbackThread" EntitySet="FeedbackThreads" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -605,6 +657,7 @@
           <NavigationProperty Name="User" Relationship="TrainingTrackerModel.fk_Feedback_AddedBy" FromRole="Feedback" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="TrainingTrackerModel.fk_Feedback_AddedFor" FromRole="Feedback" ToRole="User" />
           <NavigationProperty Name="FeedbackType1" Relationship="TrainingTrackerModel.fk_Feedback_FeedbackType" FromRole="Feedback" ToRole="FeedbackType" />
+          <NavigationProperty Name="FeedbackThreads" Relationship="TrainingTrackerModel.FK_Feedback_Threads" FromRole="Feedback" ToRole="FeedbackThread" />
         </EntityType>
         <EntityType Name="FeedbackType">
           <Key>
@@ -720,6 +773,7 @@
           <NavigationProperty Name="Notifications" Relationship="TrainingTrackerModel.fk_Notification_User" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="UserNotificationMappings" Relationship="TrainingTrackerModel.FK__UserNotif__UserI__489AC854" FromRole="User" ToRole="UserNotificationMapping" />
           <NavigationProperty Name="Releases" Relationship="TrainingTrackerModel.FK_Release_UserId" FromRole="User" ToRole="Release" />
+          <NavigationProperty Name="FeedbackThreads" Relationship="TrainingTrackerModel.FK_User_Threads" FromRole="User" ToRole="FeedbackThread" />
         </EntityType>
         <EntityType Name="UserProjectMapping">
           <Key>
@@ -1009,6 +1063,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FeedbackThread">
+          <Key>
+            <PropertyRef Name="ThreadId" />
+          </Key>
+          <Property Type="Int32" Name="ThreadId" Nullable="false" />
+          <Property Type="String" Name="Comments" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="FeedbackId" Nullable="false" />
+          <Property Type="Int32" Name="AddedBy" Nullable="false" />
+          <Property Type="DateTime" Name="DateTimeInserted" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Feedback" Relationship="TrainingTrackerModel.FK_Feedback_Threads" FromRole="FeedbackThread" ToRole="Feedback" />
+          <NavigationProperty Name="User" Relationship="TrainingTrackerModel.FK_User_Threads" FromRole="FeedbackThread" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Feedback_Threads">
+          <End Type="TrainingTrackerModel.Feedback" Role="Feedback" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.FeedbackThread" Role="FeedbackThread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feedback">
+              <PropertyRef Name="FeedbackId" />
+            </Principal>
+            <Dependent Role="FeedbackThread">
+              <PropertyRef Name="FeedbackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Threads">
+          <End Type="TrainingTrackerModel.User" Role="User" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.FeedbackThread" Role="FeedbackThread" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="FeedbackThread">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1255,6 +1345,17 @@
                 <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedbackThreads">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.FeedbackThread">
+              <MappingFragment StoreEntitySet="FeedbackThread">
+                <ScalarProperty Name="DateTimeInserted" ColumnName="DateTimeInserted" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

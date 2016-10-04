@@ -101,6 +101,15 @@ namespace TrainingTracker.BLL
         }
 
         /// <summary>
+        /// Function for getting list of active user.
+        /// </summary>
+        /// <returns>Returns list of active user.</returns>
+        public List<User> GetActiveUsers()
+        {
+            return UserDataAccesor.GetActiveUsers();
+        }
+
+        /// <summary>
         /// Fetches user Feedback based on filter
         /// </summary>
         /// <param name="userId">user id</param>
@@ -182,5 +191,6 @@ namespace TrainingTracker.BLL
             }
             return objfeedbackPlot;
         }
+
     }
 }

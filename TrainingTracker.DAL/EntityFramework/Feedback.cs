@@ -14,6 +14,11 @@ namespace TrainingTracker.DAL.EntityFramework
     
     public partial class Feedback
     {
+        public Feedback()
+        {
+            this.FeedbackThreads = new HashSet<FeedbackThread>();
+        }
+    
         public int FeedbackId { get; set; }
         public string FeedbackText { get; set; }
         public string Title { get; set; }
@@ -30,5 +35,6 @@ namespace TrainingTracker.DAL.EntityFramework
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual FeedbackType FeedbackType1 { get; set; }
+        public virtual ICollection<FeedbackThread> FeedbackThreads { get; set; }
     }
 }

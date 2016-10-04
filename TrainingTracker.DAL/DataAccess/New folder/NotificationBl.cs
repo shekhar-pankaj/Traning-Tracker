@@ -17,11 +17,11 @@ namespace TrainingTracker.BLL
 {
     public class NotificationBl : BussinessBase
     {
-        private const string ReleaseLink = "/Release?releaseId={0}";
-        private const string FeedbackLink = "/Profile/UserProfile?userId={0}&feedbackId={1}";
-        private const string SessionLink = "/Session?sessionId={0}";
-        private const string ReleaseDescription = "New release, Version:";
-        private const string feedbackDescription = "New comment on";
+        public string releaseLink = "/Release?releaseId={0}";
+        public string feedbackLink = "/Profile/UserProfile?userId={0}";
+        public const string SessionLink = "/Session?sessionId={0}";
+        public string releaseDescription = "New release, Version:";
+        public string feedbackDescription = "New comment on";
 
        
 
@@ -31,7 +31,7 @@ namespace TrainingTracker.BLL
         /// <param name="notification">Notification class onject</param>
         /// <param name="userIds">List of userId</param>
         /// <returns>Returns true if Notification is added successfully else false.</returns>
-        internal bool AddNotification(Notification notification, List<int> userIds)
+        public bool AddNotification(Notification notification, List<int> userIds)
         {
             return NotificationDataAccesor.AddNotification(notification, userIds);
         }
@@ -55,7 +55,7 @@ namespace TrainingTracker.BLL
         /// <param name="release">Release object</param>
         /// <param name="userId">UseId</param>
         /// <returns>Returns true if Notification is added successfully else false.</returns>
-        internal bool AddReleaseNotification(Release release, int userId)
+        public bool AddReleaseNotification(Release release, int userId)
         {
             NotificationType notificationType;
             string featureText;
@@ -82,18 +82,18 @@ namespace TrainingTracker.BLL
           
             var notification = new Notification
             {
-                Description = ReleaseDescription + release.Major + "." + release.Minor + "." + release.Patch,
-                Link = string.Format(ReleaseLink,release.ReleaseId),
+                Description = releaseDescription + release.Major + "." + release.Minor + "." + release.Patch,
+                Link = string.Format(releaseLink,release.ReleaseId),
                 TypeOfNotification = notificationType,
                 AddedBy = userId,
                 Title = featureText ,
                 AddedOn = release.ReleaseDate ?? DateTime.Now,
             };
-            return AddNotification(notification, UserDataAccesor.GetUserId(notification, userId));
+            return AddNotification(notification, UserDataAccesor.GetUserId(notification.TypeOfNotification, userId));
         }
 
         /// <summary>
-        /// Get list of notification.
+        /// Get list of notification
         /// </summary>
         /// <param name="userId">UseId</param>
         /// <returns>Returns list of notification.</returns>
@@ -108,7 +108,7 @@ namespace TrainingTracker.BLL
         /// </summary>
         /// <param name="feedback">Contain Feedback object as parameter.</param>
         /// <returns>Returns a boolean value as feedback notification is added successfully or not.</returns>
-        internal bool AddFeedbackNotification(Feedback feedback)
+        public bool AddFeedbackNotification(Feedback feedback)
         {
             NotificationType notificationType;
             string notificationText = string.Empty;
@@ -156,35 +156,33 @@ namespace TrainingTracker.BLL
             var notification = new Notification
             {
                 Description = user.FirstName  + " " + user.LastName    ,
-                Link = string.Format(FeedbackLink, feedback.AddedFor.UserId,feedback.FeedbackId),
+                Link = string.Format(feedbackLink, feedback.AddedFor.UserId),
                 TypeOfNotification = notificationType ,
                 AddedBy = feedback.AddedBy.UserId,
                 Title = notificationText ,
                 AddedOn = DateTime.Now,
             };
-            return AddNotification(notification, UserDataAccesor.GetUserId(notification, feedback.AddedFor.UserId));
+            return AddNotification(notification, UserDataAccesor.GetUserId(notification.TypeOfNotification, feedback.AddedFor.UserId));
         }
 
         /// <summary>
         ///  Add notification for user on Session
         /// </summary>
-        /// <param name="session">Contain Session object as parameter.</param>
-        /// <returns>Returns a boolean value as add session notification is added successfully or not.</returns>
+        /// <returns></returns>
         internal bool AddSessionNotification(Session session)
         {
-
+            
             var notification = new Notification
             {
-                Description = "New Session Added",
-                Link = string.Format(SessionLink, session.Id),
-                TypeOfNotification = session.IsNeW ? NotificationType.NewSessionNotification : NotificationType.SessionUpdatedNotification,
-                AddedBy = session.Presenter,
-                Title = session.IsNeW ? "New Session Added" : "Session Details Updated",
-                AddedOn = DateTime.Now,
-                AddedTo = session.Attendee
+                Description = "New Session Added" ,
+                Link = string.Format(SessionLink , session.Id) ,
+                TypeOfNotification = session.IsNeW ? NotificationType.NewSessionNotification: NotificationType.SessionUpdatedNotification ,
+                AddedBy = session.Presenter ,
+                Title = session.IsNeW ? "New Session Added" : "Session Details Updated" ,
+                AddedOn = DateTime.Now ,
             };
 
-            List<int> userIdList = UserDataAccesor.GetUserId(notification, session.Presenter);
+            List<int> userIdList = UserDataAccesor.GetUserId(notification.TypeOfNotification, session.Presenter);
             userIdList.AddRange(session.Attendee.Select(int.Parse).ToList());
             return AddNotification(notification , userIdList);
         }

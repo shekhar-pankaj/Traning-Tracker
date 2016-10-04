@@ -156,6 +156,7 @@
     <Content Include="Scripts\Custom\BindingHandlers.js" />
     <Content Include="Scripts\Custom\Dashboard.js" />
     <Content Include="Scripts\Custom\FeedbackChart.js" />
+    <Content Include="Scripts\Custom\FeedbackThread.js" />
     <Content Include="Scripts\Custom\Layout.js" />
     <Content Include="Scripts\Custom\Login.js" />
     <Content Include="Scripts\Custom\Questions.js" />
@@ -199,6 +200,7 @@
     <Content Include="StyleSheets\CustomButtons.css" />
     <Content Include="StyleSheets\Dashboard.css" />
     <Content Include="StyleSheets\FeedbackPlot.css" />
+    <Content Include="StyleSheets\FeedbackThread.css" />
     <Content Include="StyleSheets\Layout.css" />
     <Content Include="StyleSheets\Login.css" />
     <Content Include="StyleSheets\Profile.css" />
@@ -232,6 +234,7 @@
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Unauthorized\UnauthorizedAccess.cshtml" />
     <Content Include="Views\Release\Release.cshtml" />
+    <Content Include="Views\Shared\_FeedbackThread.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

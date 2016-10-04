@@ -1,4 +1,6 @@
-﻿using TrainingTracker.BLL.Base;
+﻿using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
+using TrainingTracker.BLL.Base;
 using TrainingTracker.Common.Entity;
 
 namespace TrainingTracker.BLL
@@ -36,9 +38,53 @@ namespace TrainingTracker.BLL
             {
                 feedback.Rating = 0;
             }
+
+            int feedbackId = FeedbackDataAccesor.AddFeedback(feedback);
            
-            if (!FeedbackDataAccesor.AddFeedback(feedback)) return false;
+            if (!(feedbackId>0)) return false;
+
+            feedback.FeedbackId = feedbackId;
+
             return new NotificationBl().AddFeedbackNotification(feedback) ;
+        }
+
+
+        /// <summary>
+        /// Fetches all feedback Threads
+        /// </summary>
+        /// <param name="feedbackId">feedbackId</param>
+        /// <param name="currentUser">current user</param>
+        public List<Threads> GetFeedbackThreads( int feedbackId , User currentUser)
+        {
+            int feedbackForUserId = FeedbackDataAccesor.GetTraineebyFeedbackId(feedbackId);
+
+            if (!(currentUser.IsAdministrator || currentUser.IsManager || currentUser.IsTrainer || currentUser.UserId == feedbackForUserId)) return null;
+
+            return FeedbackDataAccesor.GetFeedbackThreads(feedbackId);
+        }
+
+        /// <summary>
+        /// Fetches all feedback Threads
+        /// </summary>
+        /// <param name="feedbackId">feedbackId</param>
+        /// <param name="currentUser">current user </param>
+        public Feedback GetFeedbackWithThreads( int feedbackId , User currentUser)
+        {
+            int feedbackForUserId = FeedbackDataAccesor.GetTraineebyFeedbackId(feedbackId);
+
+            if (!(currentUser.IsAdministrator || currentUser.IsManager || currentUser.IsTrainer || currentUser.UserId==feedbackForUserId) ) return null;
+
+            return FeedbackDataAccesor.GetFeedbackWithThreads(feedbackId);
+        }
+
+        /// <summary>
+        /// Add New Thread to Feedback
+        /// </summary>
+        /// <param name="thread"></param>
+        /// <returns></returns>
+        public bool AddNewThread(Threads thread)
+        {
+            return FeedbackDataAccesor.AddNewThread(thread) && new NotificationBl().AddNewThreadNotification(thread);
         }
     }
 }
