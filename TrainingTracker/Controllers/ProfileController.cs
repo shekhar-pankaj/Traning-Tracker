@@ -155,5 +155,40 @@ namespace TrainingTracker.Controllers
         {
             return Json(new UserBl().GetUserFeedbackOnFilterForPlot(traineeId , startDate , endDate , arrayFeedbackType , trainerId) , JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// Action Method to fetch Feedback and its thread data.
+        /// </summary>
+        /// <param name="feedbackId">feedback Id</param>
+        /// <returns></returns>
+        public JsonResult GetFeedbackWithThreads(int feedbackId )
+        {
+            return Json(new FeedbackBl().GetFeedbackWithThreads(feedbackId , new UserBl().GetUserByUserName(User.Identity.Name)) , JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Action MEthod to fetch Feedback's threads
+        /// </summary>
+        /// <param name="feedbackId"></param>
+        /// <returns></returns>
+        public JsonResult GetFeedbackThreads(int feedbackId)
+        {
+            return Json(new FeedbackBl().GetFeedbackThreads(feedbackId , new UserBl().GetUserByUserName(User.Identity.Name)) , JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Action method to handle new thread add Request
+        /// </summary>
+        /// <param name="thread">instance of thread from UI</param>
+        /// <returns>Success event of threads</returns>
+        public JsonResult AddNewThread(Threads thread)
+        {
+            thread.AddedBy =new User
+                                    {
+                                      UserId   = new UserBl().GetUserByUserName(User.Identity.Name).UserId
+                                    };
+
+            return Json(new FeedbackBl().AddNewThread(thread) , JsonRequestBehavior.AllowGet);
+        }
     }
 }

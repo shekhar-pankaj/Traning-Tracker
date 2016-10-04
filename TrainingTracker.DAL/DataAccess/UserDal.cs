@@ -379,6 +379,7 @@ namespace TrainingTracker.DAL.DataAccess
                         case Common.Enumeration.NotificationType.SkillFeedbackNotification:
                         case Common.Enumeration.NotificationType.CommentFeedbackNotification:
                         case Common.Enumeration.NotificationType.WeeklyFeedbackNotification:
+                        case Common.Enumeration.NotificationType.NewNoteToFeedback:
                             return context.Users
                                 .Where(x => (x.UserId == addedFor || x.IsTrainer == true || x.IsManager == true) && (x.IsActive == true && x.UserId != notification.AddedBy))
                                 .Select(x => x.UserId)

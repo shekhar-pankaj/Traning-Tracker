@@ -17,10 +17,10 @@ namespace TrainingTracker.BLL
 {
     public class NotificationBl : BussinessBase
     {
-        private const string releaseLink = "/Release?releaseId={0}";
-        private const string feedbackLink = "/Profile/UserProfile?userId={0}";
+        private const string ReleaseLink = "/Release?releaseId={0}";
+        private const string FeedbackLink = "/Profile/UserProfile?userId={0}&feedbackId={1}";
         private const string SessionLink = "/Session?sessionId={0}";
-        private const string releaseDescription = "New release, Version:";
+        private const string ReleaseDescription = "New release, Version:";
         private const string feedbackDescription = "New comment on";
 
        
@@ -82,8 +82,8 @@ namespace TrainingTracker.BLL
           
             var notification = new Notification
             {
-                Description = releaseDescription + release.Major + "." + release.Minor + "." + release.Patch,
-                Link = string.Format(releaseLink,release.ReleaseId),
+                Description = ReleaseDescription + release.Major + "." + release.Minor + "." + release.Patch,
+                Link = string.Format(ReleaseLink,release.ReleaseId),
                 TypeOfNotification = notificationType,
                 AddedBy = userId,
                 Title = featureText ,
@@ -156,7 +156,7 @@ namespace TrainingTracker.BLL
             var notification = new Notification
             {
                 Description = user.FirstName  + " " + user.LastName    ,
-                Link = string.Format(feedbackLink, feedback.AddedFor.UserId),
+                Link = string.Format(FeedbackLink, feedback.AddedFor.UserId,feedback.FeedbackId),
                 TypeOfNotification = notificationType ,
                 AddedBy = feedback.AddedBy.UserId,
                 Title = notificationText ,

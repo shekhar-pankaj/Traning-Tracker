@@ -1,0 +1,79 @@
+﻿
+  #divFeedbackThread  #divThreadWrapper {
+    background: #000;
+    opacity: 0.5;
+    min-height: 100vh;
+}
+  #divFeedbackThread #divFeedbackContainer {
+      width: 80%;
+      position: absolute;
+      top: 0;
+      z-index: 10000;
+      margin-left : 10%;
+      margin-top: 5%;
+       transition-property: all;
+	transition-duration: 2s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  }
+
+#divFeedbackThread   {
+    margin: 0;
+    position: absolute;         
+    margin-left: -15px;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: 1001;
+    transition-property: all;
+	transition-duration: 2s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+#divCommentThreads img {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    margin-right: 15px;
+}
+#divCommentThreads > div {
+    background: #fff;
+    
+}
+
+#divCommentThreads .panel-white .row {
+        padding: 10px 20px 0 20px;
+}
+
+#divCommentThreads .panel-white {
+   padding: 10px 0 10px 0;  
+       border-radius: 4px;
+}
+
+#divCommentThreads .panel-white .row .col-xs-12 {
+    border-bottom: 1px solid #ccc;
+}
+
+#divCommentThreads .panel-white .row:last-child .col-xs-12{
+    border-bottom:none;
+}
+
+#divNewThread > .panel-white {
+    background-color: #fff;
+    padding: 6px;
+    border-radius: 4px;
+}
+   
+#divNewThread {
+    padding: 10px 0 10px 0;
+}
+
+#divCloseModalButton {
+    position: absolute;
+    top: 7%;
+    zoom: 3;
+    right: 9%;
+    z-index: 100000;
+    /* background: #ccc; */
+    border-radius: 71%;
+}
+    
