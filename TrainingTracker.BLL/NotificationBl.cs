@@ -198,5 +198,29 @@ namespace TrainingTracker.BLL
         {
             return NotificationDataAccesor.MarkAllNotificationAsRead(userId);
         }
+
+        /// <summary>
+        /// Add Notification for Thread
+        /// </summary>
+        /// <param name="thread"></param>
+        internal bool AddNewThreadNotification(Threads thread)
+        {
+
+            int userId = FeedbackDataAccesor.GetTraineebyFeedbackId(thread.FeedbackId);
+
+            if (userId == 0) return false;
+
+            var notification = new Notification
+            {
+                Description = "New Note Added To Feedback" ,
+                Link = string.Format(FeedbackLink , userId , thread.FeedbackId) ,
+                TypeOfNotification = NotificationType.NewNoteToFeedback ,
+                AddedBy = thread.AddedBy.UserId ,
+                Title = "New Note Added to Feedback" ,
+                AddedOn = DateTime.Now ,
+            };
+
+            return AddNotification(notification , UserDataAccesor.GetUserId(notification , userId));
+        }
     }
 }
