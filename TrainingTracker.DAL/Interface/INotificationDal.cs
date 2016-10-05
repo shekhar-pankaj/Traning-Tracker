@@ -8,8 +8,8 @@ namespace TrainingTracker.DAL.Interface
         /// <summary>
         /// Adds notification in Notification tables.
         /// </summary>
-        /// <param name="description"></param>
-        /// <param name="link"></param>
+        /// <param name="notification">Contain parameter as notification onject</param>
+        /// <param name="link">Contain parameter as link</param>
         /// <returns>bool</returns>
         bool AddNotification(Notification notification, List<int> userIds);
 
@@ -17,7 +17,7 @@ namespace TrainingTracker.DAL.Interface
         /// <summary>
         /// Returns list of unseen notification.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>list of nitification</returns>
         List<Notification> GetNotification(int userId);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace TrainingTracker.DAL.Interface
         bool UpdateNotification(int userId, Notification notification);
 
         /// <summary>
-        /// update All Notification as read
+        /// Update All Notification as read
         /// </summary>
         /// <param name="userId">userid</param>
         /// <returns>sucess event for flag</returns>

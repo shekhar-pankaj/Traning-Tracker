@@ -67,6 +67,12 @@ namespace TrainingTracker.DAL.Interface
         /// </summary>
         /// <param name="typeOfNotification">Takes parametere as typeOfNotification and the user for which notification is added.</param>
         /// <returns> Returns list of userid.</returns>
-        List<int> GetUserId(NotificationType typeOfNotification, int addedFor);
+        List<int> GetUserId(Notification notification, int addedFor);
+
+        /// <summary>
+        /// Gets list of active user.
+        /// </summary>
+        /// <returns>Returns list of active user.</returns>
+        List<User> GetActiveUsers();
     }
 }

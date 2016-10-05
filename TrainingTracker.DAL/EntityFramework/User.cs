@@ -25,6 +25,7 @@ namespace TrainingTracker.DAL.EntityFramework
             this.Notifications = new HashSet<Notification>();
             this.UserNotificationMappings = new HashSet<UserNotificationMapping>();
             this.Releases = new HashSet<Release>();
+            this.FeedbackThreads = new HashSet<FeedbackThread>();
         }
     
         public int UserId { get; set; }
@@ -52,5 +53,6 @@ namespace TrainingTracker.DAL.EntityFramework
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<UserNotificationMapping> UserNotificationMappings { get; set; }
         public virtual ICollection<Release> Releases { get; set; }
+        public virtual ICollection<FeedbackThread> FeedbackThreads { get; set; }
     }
 }

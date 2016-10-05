@@ -45,5 +45,6 @@ namespace TrainingTracker.DAL.EntityFramework
         public DbSet<NotificationType> NotificationTypes { get; set; }
         public DbSet<Release> Releases { get; set; }
         public DbSet<UserNotificationMapping> UserNotificationMappings { get; set; }
+        public DbSet<FeedbackThread> FeedbackThreads { get; set; }
     }
 }

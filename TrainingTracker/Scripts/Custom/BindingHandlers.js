@@ -237,6 +237,28 @@
         }
     };
 
+    ko.bindingHandlers.fullWindowHeight =
+    {
+        update: function(element, valueAccessor) {
+            // On update, fade in/out
+            var shouldDisplay = valueAccessor();
+
+            if (shouldDisplay) {                           
+                $(document).on("custom-resize",function() {
+                    $('html,body').css("height", $(document).height());
+                    $(element).css({ 'min-height': $(document).height(), 'height': $(document).height() });
+                });
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                return;
+            }
+            $(element).css({ 'min-height': 0, 'height': 0 });
+            $('html,body').css("height", "auto");
+            $(document).off('custom-resize');
+            return;
+
+        }
+    };
+
 /***** End of ko-chart.js *****/
 
 
@@ -263,7 +285,7 @@ $(document).ready(function () {
                     value(e.target.result);
                 }
                 reader.readAsText(element.files[0]);
-                element.files[0] = valueAccessor()
+                element.files[0] = valueAccessor();
                 //console.log(element.files[0]);
             });
         }

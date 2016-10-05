@@ -5,7 +5,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Utility;
+using TrainingTracker.DAL.EntityFramework;
 using TrainingTracker.DAL.Interface;
+using Feedback = TrainingTracker.Common.Entity.Feedback;
+using FeedbackType = TrainingTracker.Common.Entity.FeedbackType;
+using User = TrainingTracker.Common.Entity.User;
 
 namespace TrainingTracker.DAL.DataAccess
 {
@@ -17,9 +21,9 @@ namespace TrainingTracker.DAL.DataAccess
         /// <summary>
         /// Dal method to Add feedback
         /// </summary>
-        /// <param name="feedbackData"></param>
-        /// <returns></returns>
-        public bool AddFeedback(Feedback feedbackData)
+        /// <param name="feedbackData">feedback instance</param>
+        /// <returns>int of feedback</returns>
+        public int AddFeedback(Feedback feedbackData)
         {
             
             try
@@ -49,15 +53,16 @@ namespace TrainingTracker.DAL.DataAccess
                 SqlUtility.CreateParameter("@AddedOn", 
                 SqlDbType.DateTime,feedbackData.AddedOn==DateTime.MinValue? DateTime.Now:feedbackData.AddedOn)
             };
-                var rowsAffected = SqlUtility.ExecuteNonQuery(SPAddFeedback.NAME,
+                return SqlUtility.ExecuteScalar(SPAddFeedback.NAME,
                     CommandType.StoredProcedure, prms);
-                return (rowsAffected > 0);
+                
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
+                return 0;
             }
-            return false;
+            
         }
 
         /// <summary>
@@ -103,7 +108,8 @@ namespace TrainingTracker.DAL.DataAccess
                                            ProfilePictureName = row["AddedByUserImage"].ToString(),
                                        },
                                        StartDate = Convert.ToDateTime(row["StartDate"]),
-                                       EndDate = Convert.ToDateTime(row["EndDate"])
+                                       EndDate = Convert.ToDateTime(row["EndDate"]),
+                                       ThreadCount = Convert.ToInt32(row["ThreadCount"])
                                    });
             }
             catch (Exception ex)
@@ -111,6 +117,155 @@ namespace TrainingTracker.DAL.DataAccess
                 LogUtility.ErrorRoutine(ex);
             }
             return feedbacks;
+        }
+
+        /// <summary>
+        /// Fetch feedback's threads
+        /// </summary>
+        /// <param name="feedbackId">feedback Id</param>
+        /// <returns>List Of Threads</returns>
+        public List<Threads> GetFeedbackThreads( int feedbackId )
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    return context.FeedbackThreads
+                                  .Where(x => x.FeedbackId == feedbackId)
+                                  .Select(x => new Threads
+                                  {
+                                     ThreadId = x.ThreadId,
+                                     Comments = x.Comments,
+                                     AddedBy = new User
+                                                       {
+                                                           UserId    = x.User.UserId,
+                                                           FullName = x.User.FirstName + " " + x.User.LastName,
+                                                           ProfilePictureName = x.User.ProfilePictureName
+                                                       },
+                                    DateInserted = x.DateTimeInserted
+                                  })
+                                  .ToList();
+                }
+            }
+            catch(Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Fetch feedback with threads
+        /// </summary>
+        /// <param name="feedbackId">feedback Id</param>
+        /// <returns>Instance of Feedback</returns>
+        public Feedback GetFeedbackWithThreads( int feedbackId )
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    var feedback = context.Feedbacks
+                        .Where(x => x.FeedbackId == feedbackId)
+                        .Select(x => new Feedback
+                        {
+                            FeedbackId = x.FeedbackId,
+                            FeedbackText = x.FeedbackText,
+                            Title = x.Title,
+                            FeedbackType = new FeedbackType
+                            {
+                                FeedbackTypeId = x.FeedbackType1.FeedbackTypeId,
+                                Description = x.FeedbackType1.Description,
+                            },
+
+                            Rating = x.Rating ?? 0,
+                            AddedOn = x.AddedOn ?? new DateTime(),
+                            AddedBy = new User
+                            {
+                                UserId = x.User.UserId,
+                                FullName = x.User.FirstName + " " + x.User.LastName,
+                                ProfilePictureName = x.User.ProfilePictureName
+                            },
+                            StartDate = x.StartDate ?? new DateTime(),
+                            EndDate = x.EndDate ?? new DateTime(),
+                        }).FirstOrDefault();
+
+                    if (feedback == null) return null;
+
+                    feedback.Threads = context.FeedbackThreads.Where(x => x.FeedbackId == feedbackId)
+                                                             .Select(x => new Threads
+                                                                 {
+                                                                    ThreadId = x.ThreadId,
+                                                                    Comments = x.Comments,
+                                                                    AddedBy = new User
+                                                                                      {
+                                                                                          UserId    = x.User.UserId,
+                                                                                          FullName = x.User.FirstName + " " + x.User.LastName,
+                                                                                          ProfilePictureName = x.User.ProfilePictureName
+                                                                                      },
+                                                                   DateInserted = x.DateTimeInserted
+                                                                 }).ToList();
+                    return feedback;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Add New Thread to Feedback
+        /// </summary>
+        /// <param name="thread">instance of thread</param>
+        /// <returns>Succes event of flag</returns>
+        public bool AddNewThread(Threads thread)
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    context.FeedbackThreads.Add(new FeedbackThread
+                                                 {
+                                                     FeedbackId = thread.FeedbackId,
+                                                     Comments = thread.Comments,
+                                                     DateTimeInserted = DateTime.Now,
+                                                     AddedBy = thread.AddedBy.UserId,                                                    
+                                                 });
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Get Trainee User Id by Feedback Id
+        /// </summary>
+        /// <param name="feedbackId">feedbackId</param>
+        /// <returns>User Id</returns>
+        public int GetTraineebyFeedbackId(int feedbackId)
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    return context.Feedbacks.Where(x => x.FeedbackId == feedbackId)
+                            .Select(x => x.AddedFor)
+                            .FirstOrDefault() ?? 0;
+                }
+            }
+             catch (Exception ex)
+             {
+                 LogUtility.ErrorRoutine(ex);
+                 return 0;
+             }
         }
     }
 }

@@ -17,6 +17,9 @@ namespace TrainingTracker.Common.Entity
         public DateTime AddedOn { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string WeekForFeedbackPresent { get; set; } 
+        public string WeekForFeedbackPresent { get; set; }
+
+        public List<Threads> Threads { get; set; } 
+        public int ThreadCount { get; set; }
     }
 }

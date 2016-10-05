@@ -49,7 +49,7 @@
                 
                 ko.utils.arrayForEach(sessionJson.AllAttendees, function (item)
                 {
-                    if (item.IsTrainee )
+                    if (item.IsTrainee && item.IsActive)
                     {
                         my.sessionVm.allAttendees.push(item);
                     }                    

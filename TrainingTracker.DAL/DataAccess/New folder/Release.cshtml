@@ -4,7 +4,8 @@
 
 @section Styles
 {
-   @Styles.Render("~/bundles/ReleaseViewStyles")
+    <link href="~/Content/DatePicker/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="~/StyleSheets/Release.css" rel="stylesheet" />
 }
 
 <div class="container-fluid noPadding">
@@ -156,5 +157,7 @@
 
 @section Scripts
 {  
-     @Scripts.Render("~/bundles/ReleaseViewScripts")
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>  
+    <script src="~/Scripts/Custom/ReleaseService.js"></script>
+    <script src="~/Scripts/Custom/Release.js"></script>   
 }

@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     my.profileVm = function () {
         var userId = my.queryParams["userId"],
+            queryStringFeedbackId  = my.queryParams["feedbackId"],
             showTimeline = ko.observable(false),
             selectedSkill = ko.observable(),
             selectedProject = ko.observable(),
@@ -69,7 +70,12 @@
                 my.profileVm.plotFilter.TraineeId = jsonData.User.UserId;
                 my.profileVm.userVm = jsonData;
                 ko.applyBindings(my.profileVm);
-                my.profileVm.feedbackPost.Rating(0);  
+                my.profileVm.feedbackPost.Rating(0);
+
+                if (!my.isNullorEmpty(queryStringFeedbackId)) {
+                    loadFeedbackWithThread(queryStringFeedbackId);
+                }
+
             },
             loadPlotData=function() {                   
                 if (typeof(my.chartVm) !== 'undefined') {
@@ -141,7 +147,7 @@
                 my.profileVm.selectedSkill(0);
                 my.profileVm.feedbackPost.FeedbackType("Comment");
                 my.profileVm.feedbackPost.FeedbackText("");
-                location.reload();
+                window.location = $(location).attr('origin') + $(location).attr('pathname') + "?userId=" + userId;
             },
             addFeedback = function() {
                 my.profileVm.validationMessage("");
@@ -233,7 +239,21 @@
                 my.profileVm.commentFeedbacks.push(item);
             });
         },
-        isCommentCollapsed = ko.observable(false),        
+        isCommentCollapsed = ko.observable(false),
+        loadFeedbackWithThread = function(feedbackId) {
+            var filteredFeedback = ko.utils.arrayFilter(my.profileVm.userVm.Feedbacks(), function (item)
+            {
+                return item.FeedbackId == feedbackId;
+            });
+            
+            if (filteredFeedback.length > 0) {
+                my.feedbackThreadsVm.loadFeedbackDailog(feedbackId, filteredFeedback[0]);
+            }
+            else
+            {
+                my.feedbackThreadsVm.loadFeedbackDailog(feedbackId);
+            }
+        },
         toggleCollapsedPanel = function () {
             my.profileVm.isCommentCollapsed(!my.profileVm.isCommentCollapsed());
         };
@@ -275,7 +295,8 @@
             loadcommentFeedbacks: loadcommentFeedbacks,
             loadCommentFeedbacksCallback: loadCommentFeedbacksCallback,
             isCommentCollapsed: isCommentCollapsed,
-            toggleCollapsedPanel: toggleCollapsedPanel
+            toggleCollapsedPanel: toggleCollapsedPanel,
+            loadFeedbackWithThread: loadFeedbackWithThread
     };
     }();
 

@@ -53,6 +53,7 @@
     <Compile Include="Entity\Release.cs" />
     <Compile Include="Entity\Session.cs" />
     <Compile Include="Entity\Skill.cs" />
+    <Compile Include="Entity\Threads.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\UserNotification.cs" />
     <Compile Include="Enumerations\CommonEnumeration.cs" />

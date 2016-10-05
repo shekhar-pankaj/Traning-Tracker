@@ -40,6 +40,9 @@
         <AssociationConnector Association="TrainingTrackerModel.fk_Notification_User" />
         <AssociationConnector Association="TrainingTrackerModel.FK__UserNotif__UserI__489AC854" />
         <AssociationConnector Association="TrainingTrackerModel.FK_Release_UserId" />
+        <EntityTypeShape EntityType="TrainingTrackerModel.FeedbackThread" Width="1.5" PointX="0.94335760965168358" PointY="21.131924326127361" />
+        <AssociationConnector Association="TrainingTrackerModel.FK_Feedback_Threads" />
+        <AssociationConnector Association="TrainingTrackerModel.FK_User_Threads" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

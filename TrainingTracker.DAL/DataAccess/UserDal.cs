@@ -8,6 +8,7 @@ using TrainingTracker.Common.Utility;
 using TrainingTracker.Common.ViewModel;
 using TrainingTracker.DAL.EntityFramework;
 using TrainingTracker.DAL.Interface;
+using TrainingTracker.Common.Entity;
 using Feedback = TrainingTracker.Common.Entity.Feedback;
 using FeedbackType = TrainingTracker.Common.Entity.FeedbackType;
 using Skill = TrainingTracker.Common.Entity.Skill;
@@ -70,8 +71,8 @@ namespace TrainingTracker.DAL.DataAccess
                                                             IsTrainee = userData.IsTrainee ,
                                                             IsManager = userData.IsManager ,
                                                             DateAddedToSystem = DateTime.Now,
-                                                            IsActive = true
-                                                        };
+                                                            IsActive = userData.IsActive,
+                    };
                     context.Users.Add(objUser);
                     context.SaveChanges();
                     userId = objUser.UserId;
@@ -113,7 +114,7 @@ namespace TrainingTracker.DAL.DataAccess
                     userContext.IsTrainer = userData.IsTrainer;
                     userContext.IsTrainee = userData.IsTrainee;
                     userContext.IsManager = userData.IsManager;
-
+                    userContext.IsActive = userData.IsActive;
                     if (!string.IsNullOrEmpty(userData.Password))
                     {
                         userContext.Password = userData.Password;
@@ -264,7 +265,7 @@ namespace TrainingTracker.DAL.DataAccess
 
                 foreach (DataRow rows in dt.Rows)
                 {
-                    if (!users.Exists(x => x.User.UserId == Convert.ToInt32(rows["UserId"])))
+                    if (!users.Exists(x =>x.User.UserId == Convert.ToInt32(rows["UserId"])))
                     {
                         users.Add(new UserData
                         {
@@ -365,32 +366,38 @@ namespace TrainingTracker.DAL.DataAccess
         /// <param name="notificationType">Contain notificationType as parameter.</param>
         /// <param name="addedFor">Contain notificationType as parameter.</param>
         /// <returns>Returns user Ids as a list.</returns>
-        public List<int> GetUserId(Common.Enumeration.NotificationType notificationType, int addedFor)
+        public List<int> GetUserId(Common.Entity.Notification notification, int addedFor)
         {
             try
             {
                 using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
-                    switch (notificationType)
+                    switch (notification.TypeOfNotification)
                     {
                         case Common.Enumeration.NotificationType.CodeReviewFeedbackNotification:
                         case Common.Enumeration.NotificationType.AssignmentFeedbackNotification:
                         case Common.Enumeration.NotificationType.SkillFeedbackNotification:
                         case Common.Enumeration.NotificationType.CommentFeedbackNotification:
                         case Common.Enumeration.NotificationType.WeeklyFeedbackNotification:
+                        case Common.Enumeration.NotificationType.NewNoteToFeedback:
                             return context.Users
-                                .Where(x => x.UserId == addedFor || x.IsTrainer == true || x.IsManager == true)
+                                .Where(x => (x.UserId == addedFor || x.IsTrainer == true || x.IsManager == true) && (x.IsActive == true && x.UserId != notification.AddedBy))
                                 .Select(x => x.UserId)
                                 .ToList();
                         case Common.Enumeration.NotificationType.NewReleaseNotification:
                         case Common.Enumeration.NotificationType.NewFeatureRequestNotification :
                         case Common.Enumeration.NotificationType.FeatureModifiedNotification:
-                            return context.Users.Where(x => x.UserId != addedFor).Select(x => x.UserId).ToList();
+                            return context.Users.Where(x => x.UserId != notification.AddedBy && x.IsActive == true)
+                                                .Select(x => x.UserId)
+                                                .ToList();
                         case Common.Enumeration.NotificationType.NewSessionNotification:
                         case Common.Enumeration.NotificationType.SessionUpdatedNotification:
-                            return context.Users.Where(x => x.IsManager == true || x.IsTrainer == true).Select(x => x.UserId).ToList();
-
-                    }
+                            var users =  context.Users.Where(x => (x.IsManager == true || x.IsTrainer == true) && (x.IsActive == true && x.UserId != notification.AddedBy))
+                                          .Select(x => x.UserId)
+                                          .ToList();
+                            var userIds = Array.ConvertAll(notification.AddedTo, int.Parse).ToList();
+                            return users.Union(userIds).ToList();
+                      }
                     return null;
                 }
             }
@@ -399,6 +406,44 @@ namespace TrainingTracker.DAL.DataAccess
                 LogUtility.ErrorRoutine(ex);
                 return null;
             }
-        }	
+        }
+
+        /// <summary>
+        /// Public method GetActiveUsers returns list of user which IsActive field is true.
+        /// </summary>
+        /// <returns></returns>
+        public List<User> GetActiveUsers()
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    return context.Users.Where(x => x.IsActive == true)
+                                        .Select(x => new User
+                                                    {
+                                                        UserId = x.UserId,
+                                                        FirstName = x.FirstName,
+                                                        LastName = x.LastName,
+                                                        FullName = x.FirstName + " " + x.LastName,
+                                                        UserName = x.UserName,
+                                                        Email = x.Email,
+                                                        Designation = x.Designation,
+                                                        ProfilePictureName = x.ProfilePictureName,
+                                                        IsFemale = x.IsFemale ?? false,
+                                                        IsAdministrator = x.IsAdministrator ?? false,
+                                                        IsTrainer = x.IsTrainer ?? false,
+                                                        IsTrainee = x.IsTrainee ?? false,
+                                                        IsManager = x.IsManager ?? false,
+                                                        IsActive = x.IsActive ?? false,
+                                                        DateAddedToSystem = x.DateAddedToSystem
+                                                    }).ToList();
+               }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return null;
+            }
+        }
     }
 }

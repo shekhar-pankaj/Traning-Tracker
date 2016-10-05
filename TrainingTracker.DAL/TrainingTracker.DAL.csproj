@@ -60,6 +60,9 @@
     <Compile Include="EntityFramework\Feedback.cs">
       <DependentUpon>TrainingTracker.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\FeedbackThread.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\FeedbackType.cs">
       <DependentUpon>TrainingTracker.tt</DependentUpon>
     </Compile>

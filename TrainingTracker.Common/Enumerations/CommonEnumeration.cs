@@ -53,7 +53,12 @@
         /// <summary>
         /// Enum for Session Updated Notification
         /// </summary>
-        SessionUpdatedNotification = 10
+        SessionUpdatedNotification = 10,
+
+        /// <summary>
+        /// Enum For New note to feedback
+        /// </summary>
+        NewNoteToFeedback=11
     }
 
 
