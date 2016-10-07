@@ -203,6 +203,7 @@
             showAllUsersProfile = ko.observable(false),
             openAllUsersProfile = function () {
                 closeDialogue();
+                my.addUserVm.getUsers();
                 my.addUserVm.showDialog(true);
                 if (my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) {
                     my.addUserVm.showAllUsersProfile(true);
@@ -246,6 +247,5 @@
         else {
             my.addUserVm.uploadImage();
         }
-    });
-    my.addUserVm.getUsers();
+    });    
 });
