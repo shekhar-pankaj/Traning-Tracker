@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TrainingTracker.BLL.Base;
+using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.ViewModel;
 
 namespace TrainingTracker.BLL
@@ -10,12 +12,17 @@ namespace TrainingTracker.BLL
     /// </summary>
     public class DashboardBl:BussinessBase
     {
-
-        public DashboardVm GetDashboardData()
+        /// <summary>
+        /// Fetch Dashboard data by User
+        /// </summary>
+        /// <param name="user">Instance of logged in Team</param>
+        /// <returns></returns>
+        public DashboardVm GetDashboardData(User user)
         {
+            int? teamId = user.TeamId.HasValue ? user.TeamId.Value : (user.IsAdministrator ? 0 : new int?());
             var dashboardVm = new DashboardVm
             {
-                Trainees = UserDataAccesor.GetDashboardData(),
+                Trainees = teamId.HasValue ? UserDataAccesor.GetDashboardData(teamId.Value) : new List<UserData>() ,
                 UpcomingSessions = SessionDataAccesor.GetSessionOnFilter(100,1,"")
             };
 

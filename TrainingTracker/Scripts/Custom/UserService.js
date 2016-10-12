@@ -8,7 +8,7 @@
             my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/UpdateUser", user, callback);
         },
         getAllUsers: function (callback) {
-            my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetAllUsers", null, callback);
+            my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetManageProfileVm", null, callback);
         },
          getActiveUsers: function (callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetActiveUsers", null, callback);

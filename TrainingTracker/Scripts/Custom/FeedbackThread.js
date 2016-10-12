@@ -113,7 +113,7 @@
             my.feedbackThreadsVm.feedbackData.FeedbackText(feedback.FeedbackText);
 
            
-        };       
+        };
 
         var loadThreadData = function(thread) {
             my.feedbackThreadsVm.feedbackData.Threads(thread);
@@ -163,6 +163,5 @@
             threadData: threadData,
             addNewThread: addNewThread
         };
-    }();
-    
+    }();   
 });

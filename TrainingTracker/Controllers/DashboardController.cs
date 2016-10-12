@@ -21,17 +21,13 @@ namespace TrainingTracker.Controllers
             try
             {
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName].Value);
-
                 User currentUser = new JavaScriptSerializer().Deserialize<User>(authTicket.UserData);
 
                 if (HttpContext.User.IsInRole(UserRoles.Administrator) || HttpContext.User.IsInRole(UserRoles.Manager) || HttpContext.User.IsInRole(UserRoles.Trainer))
                 {
                     return View("Dashboard");
                 }
-                else
-                {
-                    return RedirectToAction("UserProfile", "Profile", new { userId = currentUser.UserId });
-                }
+                return RedirectToAction("UserProfile", "Profile", new { userId = currentUser.UserId });
             }
             catch
             {
@@ -42,7 +38,8 @@ namespace TrainingTracker.Controllers
         [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
         public ActionResult GetDashboardData()
         {
-            return Json(new DashboardBl().GetDashboardData(), JsonRequestBehavior.AllowGet);
+            User currentUser = new UserBl().GetUserByUserName(User.Identity.Name);
+            return Json(new DashboardBl().GetDashboardData(currentUser) , JsonRequestBehavior.AllowGet);
         }
 
        
