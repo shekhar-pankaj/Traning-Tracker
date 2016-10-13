@@ -114,5 +114,19 @@ namespace TrainingTracker.BLL.Base
         {
           get { return  _notificationDataAccesor ?? ( _notificationDataAccesor = new NotificationDal()); } 
         }
+
+
+        /// <summary>
+        /// Private notification dal accessor
+        /// </summary>
+        private ITeamDal _teamDataAccesor;
+
+        /// <summary>
+        /// public with only getter Notification dal accessor
+        /// </summary>
+        public ITeamDal TeamDataAccesor
+        {
+            get { return _teamDataAccesor ?? (_teamDataAccesor = new TeamDal()); }
+        }
     }
 }

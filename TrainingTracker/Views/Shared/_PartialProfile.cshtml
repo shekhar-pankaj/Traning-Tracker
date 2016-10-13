@@ -12,7 +12,7 @@
                 <div data-bind="visible: my.addUserVm.showAllUsersProfile(), css: { 'col-xs-12 col-md-4': my.addUserVm.showAllUsersProfile() }">
                     <div class="row" style="overflow-y: scroll; height:400px;">
                         <ul data-bind="foreach: my.addUserVm.lstUsers" class="list-group">
-                            <li class="list-group-item" data-bind="click: my.addUserVm.showProfile(my.addUserVm.lstUsers()[$index()])" style="cursor: pointer">
+                            <li class="list-group-item" data-bind="click:function(){ my.addUserVm.showProfile(my.addUserVm.lstUsers()[$index()])}" style="cursor: pointer">
                                 <a data-bind="text: FullName"
                                    href="#" type="button" class="btn btnProfile "></a>
                             </li>
@@ -137,6 +137,21 @@
                                         </label>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-xs-12" data-bind="visible: (my.meta.isAdministrator() || my.meta.isManager())">
+                                <div class="form-group">
+                                    <label class="col-md-4 ">Team Mapping</label>
+                                  <div class="col-xs-12 col-md-8" data-bind="enableChildren: ((my.meta.isAdministrator() || my.meta.isManager()) && (!my.addUserVm.user.IsReadOnly()))">
+                                      <select data-bind="options: my.addUserVm.lstTeams,
+                                                            optionsCaption: 'Select Team',
+                                                           optionsText: 'TeamName',
+                                                           optionsValue: 'TeamId',
+                                                           value: my.addUserVm.user.TeamId"
+                                                class="form-control">
+                                          
+                                        </select>                                  
+                                    </div>
+                                    </div>
                             </div>
                         }
                         <div class="col-xs-12" data-bind="visible: (!(my.addUserVm.user.IsReadOnly()) && !(my.addUserVm.user.IsNewProfile()))">
