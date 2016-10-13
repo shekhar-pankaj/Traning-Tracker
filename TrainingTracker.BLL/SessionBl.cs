@@ -8,7 +8,7 @@ namespace TrainingTracker.BLL
     /// <summary>
     /// Bussiness class for session
     /// </summary>
-    public class SessionBl:BussinessBase
+    public class SessionBl : BussinessBase
     {
         /// <summary>
         /// method to Add or edit session details
@@ -28,7 +28,7 @@ namespace TrainingTracker.BLL
             {
                 return false;
             }
-            
+
         }
 
         /// <summary>
@@ -38,9 +38,9 @@ namespace TrainingTracker.BLL
         /// <param name="sessionType">type of session All/Presented/Scheduled</param>
         /// <param name="searchKeyword">any keyword term</param>
         /// <returns>instance of session method</returns>
-        public SessionVm GetSessionOnFilter( int pageSize , int sessionType , string searchKeyword )
+        public SessionVm GetSessionOnFilter(int pageSize, int sessionType, string searchKeyword)
         {
-            SessionVm objSessionVm =new SessionVm
+            SessionVm objSessionVm = new SessionVm
             {
                 SessionList = SessionDataAccesor.GetSessionOnFilter(pageSize, sessionType, searchKeyword),
                 AllAttendees = UserDataAccesor.GetAllUsers()

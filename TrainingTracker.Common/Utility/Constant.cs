@@ -116,6 +116,7 @@
         public const string PARAM_ID = "@SessionId";
         public const string PARAM_ATTENDEES ="@AttendeeCsv";
         public const string TABLE_NAME = "Result";
+        public const string PARAM_VIDEOFILENAME = "@VideoFileName"; 
     }
 
     /// <summary>

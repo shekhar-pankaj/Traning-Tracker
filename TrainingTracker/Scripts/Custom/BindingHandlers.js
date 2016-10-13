@@ -332,20 +332,50 @@ $(document).ready(function () {
             if (!my.isNullorEmpty(options.ClickSticky)) {
                 config.ClickSticky = JSON.parse(options.ClickSticky);
             };
+            if (!my.isNullorEmpty(options.ClickClose)) {
+                config.ClickClose = JSON.parse(options.ClickClose);
+            };
+            if (!my.isNullorEmpty(options.Width)) {
+                config.Width = JSON.parse(options.Width);
+            };
             if (!my.isNullorEmpty(options.Above)) {
-                config.ClickSticky = JSON.parse(options.Above);
+                config.Above = JSON.parse(options.Above);
+            };
+            if (!my.isNullorEmpty(options.Padding)) {
+                config.Padding = JSON.parse(options.Padding);
             };
             ko.utils.registerEventHandler(element, "mouseover", function () {
                 if (options.HtmlTag === "true") {
                     TagToTip(options.HtmlId);
                 }
-                else { Tip(options.tittle); }
+                else { Tip(options.tittle, CLICKSTICKY, config.ClickSticky, CLICKCLOSE, config.ClickClose, WIDTH, config.Width, PADDING, config.Padding); }
             });
             ko.utils.registerEventHandler(element, "mouseout", function () {
                 UnTip();
             });
         }
     };
+
+    //ko.bindingHandlers.video = {
+    //    init: function (element, valueAccessor, allBindingsAccessor) {
+    //        var videoSources = ko.utils.unwrapObservable(valueAccessor()).videos,
+    //            playerId = allBindingsAccessor().playerId,
+    //            options = {controls: true, autoplay: true, preload: "auto" };
+
+    //        videojs(playerId, options, function () {
+    //            var video = this;
+    //            video.src(videoSources).load().play();
+    //        });
+    //    },
+
+    //    update: function (element, valueAccessor, allBindingsAccessor) {
+    //        var videoSources = ko.utils.unwrapObservable(valueAccessor()).videos,
+    //            playerId = allBindingsAccessor().playerId,
+    //            video = videojs(playerId);
+
+    //        video.pause().src(videoSources).load().play();
+    //    }
+    //};
 });
 
 
