@@ -1,6 +1,6 @@
 ﻿
 <div id="divFeedbackThread" class=" no-left-margin no-right-margin" data-bind=" visible: my.feedbackThreadsVm.viewSettings.showDailog()" style="display: none;">
-    <div id="divThreadWrapper" data-bind="fullWindowHeight: my.feedbackThreadsVm.viewSettings.showDailog(),click: my.feedbackThreadsVm.closeFeedbackDailog"></div>
+    <div id="divThreadWrapper"  data-bind="fullWindowHeight: my.feedbackThreadsVm.viewSettings.showDailog(),click: my.feedbackThreadsVm.closeFeedbackDailog"></div>
     <div id="divCloseModalButton" data-bind="click: my.feedbackThreadsVm.closeFeedbackDailog">
         <span><i class="glyphicon glyphicon-remove rating-slow "></i></span>
     </div>
@@ -67,9 +67,16 @@
          </div>
 
          <div id="divNewThread" >
+             
              <div class=" col-xs-12 no-left-margin no-right-margin panel-white  panel-shadow">
+                 <div class="pull-left" style="display: inline-block;width:56px;">
+                      <div class=" image">
+                     <img data-bind="attr: { src: my.rootUrl + '/Uploads/ProfilePicture/' + my.meta.currentUser.ProfilePictureName }"
+                          class="img-circle avatar" alt="user profile image">
+                    </div>
+                 </div>
                  <textarea data-bind="value: my.feedbackThreadsVm.threadData.Comments"
-                           class=" form-control col-xs-10"  rows="1" type="text" placeholder="Comment for the Feedback (500 characters Max)" maxlength="500" style="resize: none;width:80%">
+                           class=" form-control col-xs-8"  rows="1" type="text" placeholder="Comment for the Feedback (500 characters Max)" maxlength="500" style="resize: none;width:75%">
 
                  </textarea>
                  <button id="btnCommentSection" type="button" class="btn btn-info col-xs-2 pull-right" data-bind="click: function () { my.feedbackThreadsVm.addNewThread() }">Add New Note</button>

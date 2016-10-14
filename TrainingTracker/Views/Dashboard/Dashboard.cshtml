@@ -4,7 +4,7 @@
 
 @section Styles
 {
-<link href="~/StyleSheets/Dashboard.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/DashboardViewStyles")
 }
 
 <div class="container-fluid">
@@ -201,6 +201,5 @@
 
 @section Scripts
 {
-    <script src="~/Scripts/Custom/Dashboard.js"></script>
-    <script src="~/Scripts/wz_tooltip.js"></script>
+    @Scripts.Render("~/bundles/DashBoardViewScripts")
 }

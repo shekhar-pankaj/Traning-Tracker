@@ -59,6 +59,24 @@ namespace TrainingTracker
                 "~/Scripts/Custom/ReleaseService.js",
                 "~/Scripts/Custom/Release.js"
                 ));
+
+            bundles.Add(new ScriptBundle("~/bundles/DashBoardViewScripts").Include(
+               "~/Scripts/Custom/Dashboard.js" ,
+               "~/Scripts/wz_tooltip.js" 
+               ));
+
+            bundles.Add(new ScriptBundle("~/bundles/SessionViewScripts").Include(
+              "~/Scripts/bootstrap-datepicker.min.js" ,
+              "~/Scripts/Custom/AllSessions.js" ,
+              "~/Scripts/Custom/SessionService.js",
+              "~/Scripts/Custom/Video.js",
+              "~/Scripts/Video.js",
+              "~/Scripts/wz_tooltip.js"
+              ));
+
+            bundles.Add(new ScriptBundle("~/bundles/AllProfileViewScripts").Include(
+            "~/Scripts/Custom/AllProfile.js"
+            ));
             #endregion
 
             #region Styles
@@ -80,6 +98,21 @@ namespace TrainingTracker
                       "~/Content/DatePicker/bootstrap-datepicker3.css" ,
                       "~/StyleSheets/Release.css" 
                       ));
+
+            bundles.Add(new StyleBundle("~/bundles/DashboardViewStyles").Include(
+                "~/StyleSheets/Dashboard.css"
+                ));
+
+            bundles.Add(new StyleBundle("~/bundles/SessionViewStyles").Include(
+               "~/StyleSheets/Profile.css",
+               "~/Content/DatePicker/bootstrap-datepicker3.css",
+               "~/StyleSheets/Session.css",
+               "~/StyleSheets/Video-js.css"
+               ));
+
+            bundles.Add(new StyleBundle("~/bundles/AllProfileViewStyles").Include(
+             "~/StyleSheets/AllProfiles.css" 
+             ));
             #endregion
 
         }

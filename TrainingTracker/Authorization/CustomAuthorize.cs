@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using TrainingTracker.BLL;
 using TrainingTracker.Common.Constants;
 using TrainingTracker.Common.Entity;
 
@@ -56,8 +57,11 @@ namespace TrainingTracker.Authorize
                     GenericPrincipal userPrincipal =
                                      new GenericPrincipal(new GenericIdentity(authTicket.Name),currentUserRoles.ToArray());
 
-                    isAuthorized = ((string.IsNullOrEmpty(this.Roles)) || (this.Roles.Split(',').ToList().Any(x => userPrincipal.IsInRole(x))) || (currentUser.UserId.Equals(userIdRequested)));
 
+                    isAuthorized =  (string.IsNullOrEmpty(this.Roles)) || (this.Roles.Split(',').ToList().Any(userPrincipal.IsInRole));
+                    isAuthorized = isAuthorized && (userIdRequested <= 0 || (currentUser.UserId.Equals(userIdRequested) ||
+                                                                             ((currentUser.IsManager ||currentUser.IsTrainer) &&
+                                                                              new UserBl().GetUserByUserId(userIdRequested).TeamId == currentUser.TeamId)));
                     httpContext.User = userPrincipal;
 
                 }
@@ -85,17 +89,17 @@ namespace TrainingTracker.Authorize
                 }
                 if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
                 {
-                    filterContext.Result = new RedirectResult("~/Login/Login");
+                    filterContext.Result = new RedirectResult("~/Login/Login",true);
                     return;
                 }
                 if (filterContext.Result is HttpUnauthorizedResult)
                 {
-                    filterContext.Result = new RedirectResult("~/Unauthorized/UnauthorizedAccess");
+                    filterContext.Result = new RedirectResult("~/Unauthorized/UnauthorizedAccess",true);
                 }
             }
             catch
             {
-                filterContext.Result = new RedirectResult("~/Login/Login");
+                filterContext.Result = new RedirectResult("~/Login/Login",true);
                 return;
             }
         }

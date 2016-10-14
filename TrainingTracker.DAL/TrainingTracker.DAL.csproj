@@ -53,6 +53,7 @@
     <Compile Include="DataAccess\ReleaseDal.cs" />
     <Compile Include="DataAccess\SessionDal.cs" />
     <Compile Include="DataAccess\SkillDal.cs" />
+    <Compile Include="DataAccess\TeamDal.cs" />
     <Compile Include="DataAccess\UserDal.cs" />
     <Compile Include="EntityFramework\Comment.cs">
       <DependentUpon>TrainingTracker.tt</DependentUpon>
@@ -102,6 +103,9 @@
     <Compile Include="EntityFramework\Skill.cs">
       <DependentUpon>TrainingTracker.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Team.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\TrainingTracker.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -139,6 +143,7 @@
     <Compile Include="Interface\IReleaseDal.cs" />
     <Compile Include="Interface\ISessionDal.cs" />
     <Compile Include="Interface\ISkillDal.cs" />
+    <Compile Include="Interface\ITeamDal.cs" />
     <Compile Include="Interface\IUserDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

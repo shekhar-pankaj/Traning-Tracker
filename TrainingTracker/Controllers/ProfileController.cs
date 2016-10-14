@@ -13,7 +13,7 @@ namespace TrainingTracker.Controllers
     public class ProfileController : Controller
     {
         // GET: UserProfile?userId=
-        [CustomAuthorize(Roles = UserRoles.Administrator+","+UserRoles.Manager+","+UserRoles.Trainer)]
+        [CustomAuthorize(Roles = UserRoles.Administrator+","+UserRoles.Manager+","+UserRoles.Trainer+","+UserRoles.Trainee)]
         public ActionResult UserProfile(int userId)
         {
             return View("Profile");
@@ -72,25 +72,36 @@ namespace TrainingTracker.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
         public ActionResult AddFeedback(Feedback feedbackPost)
         {
             return Json(new FeedbackBl().AddFeedback(feedbackPost) ? "true" : "false");
         }
 
         [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
-        public ActionResult GetAllUsers()
+        public ActionResult GetManageProfileVm()
         {
-            return Json(new UserBl().GetAllUsers(), JsonRequestBehavior.AllowGet);
+            User currentUser = new UserBl().GetUserByUserName(User.Identity.Name);
+
+            return Json(new UserBl().GetManageProfileVm(currentUser) , JsonRequestBehavior.AllowGet);
         }
+
+        [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
+        public ActionResult GetAllUsersByTeam()
+        {
+            return Json(new UserBl().GetAllUsersByTeam(new UserBl().GetUserByUserName(User.Identity.Name)) , JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// ActionMethod for GetActiveUsers
         /// </summary>
         /// <returns> Returns list of active user as json object.</returns>
         [HttpGet]
+        [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
         public ActionResult GetActiveUsers()
         {
-            return Json(new UserBl().GetActiveUsers(), JsonRequestBehavior.AllowGet);
+            return Json(new UserBl().GetActiveUsers(new UserBl().GetUserByUserName(User.Identity.Name)) , JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -112,6 +123,7 @@ namespace TrainingTracker.Controllers
         /// <param name="startDate">start date range</param>
         /// <param name="endDate">end date range</param>
         /// <returns></returns>
+        [CustomAuthorize]
         public JsonResult GetUserFeedbackOnFilter(int pageSize, int feedbackId, int userId, DateTime? startDate = null, DateTime? endDate = null)
         {
             return Json(new UserBl().GetUserFeedbackOnFilter(userId , pageSize , feedbackId , startDate , endDate) , JsonRequestBehavior.AllowGet);
