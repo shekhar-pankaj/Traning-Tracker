@@ -184,7 +184,8 @@ namespace TrainingTracker.DAL.DataAccess
                             {
                                 UserId = x.User.UserId,
                                 FullName = x.User.FirstName + " " + x.User.LastName,
-                                ProfilePictureName = x.User.ProfilePictureName
+                                ProfilePictureName = x.User.ProfilePictureName,
+                                TeamId = x.User.TeamId
                             },
                             StartDate = x.StartDate ?? new DateTime(),
                             EndDate = x.EndDate ?? new DateTime(),

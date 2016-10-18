@@ -1,163 +1,156 @@
-﻿.post-heading table th
-{
+﻿.post-heading table th {
     text-align: center;
-    background-color: #46b8da;
-    border: 1px solid #fff;
-    padding: 10px 0 10px 0;
+    background-color: #50E8DD;
+    border: 1px solid #ebe4e4;
+    padding: 6px 0 6px 0;
     color: #fff;
     font-size: 14px;
 }
 
-.post-heading table th:nth-child(6)
+/*.post-heading table th:nth-child(6)
 {
     background-color: #fff;
+}*/
+.table-button {
 }
 
-.post-heading table th:nth-child(n+4), table th:nth-child(1), table td:nth-child(n+4), table td:nth-child(1)
-{
+.post-heading table td:nth-child(3) {
+    padding-left: 5px;
+    text-align: left;
+}
+
+.post-heading table th:nth-child(6), table th:nth-child(7), table th:nth-child(8), table td:nth-child(6), table td:nth-child(7), table td:nth-child(8) {
+    width: 4%;
+}
+
+.post-heading table th:nth-child(1), table td:nth-child(1) {
+    width: 16%;
+}
+
+.post-heading table th:nth-child(4), table th:nth-child(2), table td:nth-child(4), table td:nth-child(2) {
     width: 15%;
 }
 
-.post-heading table button
-{
-    width: 50% !important;
-    margin-left: 34%;
-    background-color: #CCC !important;
+.post-heading table button {
+    width: 38px !important;
+    margin-top: -2px;
+    height: 29px;
+    margin-left: 5%;
 }
 
-.post-heading table tbody tr:nth-child(odd)
-{
-    background-color: #CFFAF5;
+.post-heading table tbody tr:nth-child(odd) {
+    /*background-color: #CFFAF5;*/
 }
 
-.post-heading table tbody tr:nth-child(even)
-{
-    background-color: #E7DFF5;
+.post-heading table tbody tr:nth-child(even) {
+    /*background-color: #E7DFF5;*/
 }
 
-.post-heading table tbody tr td:nth-child(6)
-{
-    background-color: #FFF;
-}
-
-.post-heading table td
-{
+.post-heading table td {
     font-size: 12px;
     text-align: center;
-    border: 1px solid #fff;
-    padding: 10px 0 10px 0;
+    border: 1px solid #ebe4e4;
+    padding: 2px 0 2px 0;
 }
 
-.panel
-{
+.session-filter-padding {
+    padding: 10px;
+}
+
+.panel {
     overflow: auto;
 }
 
-.post .post-heading
-{
+.post .post-heading {
     height: 100%;
 }
 
-.error
-{
+.error {
     color: red;
 }
 
-.modal-content
-{
+.modal-content {
     overflow: auto;
 }
 
 
-.no-left-margin
-{
+.no-left-margin {
     margin-left: 0;
     padding-left: 0;
 }
 
-.no-right-margin
-{
+.no-right-margin {
     margin-right: 0;
     padding-right: 0;
 }
 
-#divAddEditSession.modal-dialog
-{
+#divAddEditSession.modal-dialog {
     width: 80% !important;
 }
 
-#divAddEditSession
-{
-    position: absolute;
-    left: 10%;
-    top: 16%;
+#divAddEditSession {
+    position: fixed;
+    margin-top: 0;
+    margin-left: 12%;
 }
 
 /*Custom checkbox*/
-.custom-checkbox
-{
+.custom-checkbox {
     position: relative;
     display: inline-block;
     float: left;
     padding-right: 5px;
 }
 
- .custom-checkbox > .box
- {
-     position: relative;
-     display: block;
-     width: 20px;
-     height: 20px;
-     border: 1px solid #838383;
-     background-color: #ffffff;
-     border-radius: 10px;
- }
+    .custom-checkbox > .box {
+        position: relative;
+        display: block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #838383;
+        background-color: #ffffff;
+        border-radius: 10px;
+    }
 
- .custom-checkbox > .box > .tick
- {
-     display: none;
-     width: 12px;
-     height: 12px;
-     border-radius: 6px;
-     position: absolute;
-     top: 3px;
-     box-shadow: inset 10px -7px 2px #838383;
-     left: 3px;
- }
+        .custom-checkbox > .box > .tick {
+            display: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            position: absolute;
+            top: 3px;
+            box-shadow: inset 10px -7px 2px #838383;
+            left: 3px;
+        }
 
- .custom-checkbox > input:checked + .box > .tick
- {
-     display: block;
- }
+    .custom-checkbox > input:checked + .box > .tick {
+        display: block;
+    }
 
- .custom-checkbox > input
- {
-     position: absolute;
-     outline: none;
-     top: 0;
-     padding: 0;
-     width: 16px;
-     height: 16px;
-     border: none;
-     margin: 0;
-     opacity: 0;
-     z-index: 1;
-     width: 50px;
- }
+    .custom-checkbox > input {
+        position: absolute;
+        outline: none;
+        top: 0;
+        padding: 0;
+        width: 16px;
+        height: 16px;
+        border: none;
+        margin: 0;
+        opacity: 0;
+        z-index: 1;
+        width: 50px;
+    }
 
- .custom-checkbox > input:active + .box
- {
-     border-color: #838383;
-     background-color: #ffffff;
- }
+        .custom-checkbox > input:active + .box {
+            border-color: #838383;
+            background-color: #ffffff;
+        }
 
-.label-for-checkbox
-{
+.label-for-checkbox {
     display: inline-block;
 }
 
-.contentSubSectionElements > div
-{
+.contentSubSectionElements > div {
     background: #f7fafc;
     border-top: #ccc 2px solid;
     border-radius: 5px;
@@ -166,19 +159,16 @@
     padding-right: 25px;
 }
 
-.make-checkbox-label-in-align
-{
+.make-checkbox-label-in-align {
     margin-top: -4px;
 }
 
-.feedback-button
-{
-    margin-top: -5px;
+.feedback-button {
     height: 34px;
 }
 
 #modelWrapper {
-        width: 100vw;
+    width: 100vw;
     height: 100vh;
     position: fixed;
     background: #ccc;
@@ -187,11 +177,23 @@
 }
 
 #sessionModal {
-        margin: 0;
+    margin: 0;
     position: absolute;
     height: 100vh;
     width: 100vw;
     right: 15px;
     top: 0;
     z-index: 1001;
+}
+
+.vjs-volume-menu-button .vjs-menu-content {
+    transform: rotate(-90deg);
+    margin-bottom: 35px !important;
+}
+
+div#WzTtDiV{
+    padding:0 !important;
+}
+div#WzBoDy{
+    width:auto !important;
 }

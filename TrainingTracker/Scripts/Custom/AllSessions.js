@@ -14,7 +14,9 @@
                 Attendee: ko.observableArray(),
                 VideoFileName: ko.observable("")
             },
-            FileData = ko.observable(""),
+            fileData= ko.observable({
+                dataURL: ko.observable("")
+            }),
             sessionSettings = {
                 isNewSession: ko.observable(true),
                 sessionHeader: ko.observable("Add New Session"),
@@ -47,7 +49,8 @@
                     my.sessionVm.sessions.push(item);
                 });
 
-                ko.utils.arrayForEach(sessionJson.AllAttendees, function (item) {
+                ko.utils.arrayForEach(sessionJson.AllAttendees, function (item)
+                {
                     if (item.IsTrainee && item.IsActive) {
                         my.sessionVm.allAttendees.push(item);
                     }
@@ -152,6 +155,7 @@
                 my.sessionVm.sessionSettings.isNewSession(false);
                 my.sessionVm.sessionDetails.Attendee([]);
                 my.sessionVm.sessionDetails.VideoFileName(filteredSession[0].VideoFileName);
+                
                 ko.utils.arrayForEach(filteredSession[0].SessionAttendees, function (item) {
                     my.sessionVm.sessionDetails.Attendee.push(item.UserId.toString());
                 });
@@ -163,7 +167,6 @@
                 else {
                     my.sessionVm.sessionSettings.allSelectedText("Check to select all");
                     my.sessionVm.sessionSettings.allSelected(false);
-
                 }
 
                 var isEditable = (my.sessionVm.sessionDetails.Presenter() === my.sessionVm.currentUser.UserId) && (moment(moment(my.sessionVm.sessionDetails.Date()).format('MM/DD/YYYY')).isSameOrAfter(moment(my.sessionVm.todayDate).format('MM/DD/YYYY')));
@@ -179,21 +182,26 @@
                 my.sessionVm.showDialog(true);
             },
             uploadVideoCallback = function (jsonData) {
-                if (!my.isNullorEmpty(jsonData)) {
+
+                if (!my.isNullorEmpty(jsonData))
+                {
                     my.sessionVm.sessionDetails.VideoFileName(jsonData);
                     editSession();
                 }
-                my.toggleLoader();
+                my.sessionVm.fileData().clear();
             },
 
-            uploadVideo = function () {
-                my.toggleLoader(true);
+            uploadVideo = function ()
+            {
+                if (my.sessionVm.sessionSettings.isNewSession()) return;
+                
                 var formData = new FormData($('form')[0]);
                 my.sessionService.uploadVideo(formData, my.sessionVm.uploadVideoCallback);
             },
+            
             loadSessionVideo = function (videoFileName) {
                 var myPlayer = videojs("my-video");
-                var fileName = "/Uploads/SessionVideo/" + videoFileName;
+                var fileName = my.rootUrl + "/Uploads/SessionVideo/" + videoFileName;
                 myPlayer.pause().src(fileName).load().play();
             };
 
@@ -225,11 +233,13 @@
             uploadVideo: uploadVideo,
             uploadVideoCallback: uploadVideoCallback,
             loadSessionVideo: loadSessionVideo,
-            FileData: FileData
+            fileData:fileData
         };
     }();
-
-    my.sessionVm.FileData.subscribe(function () {
+    
+    my.sessionVm.fileData().dataURL.subscribe(function (dataURL)
+    {
+        if (my.isNullorEmpty(my.sessionVm.fileData().dataURL())) return;
         my.sessionVm.uploadVideo();
     });
 

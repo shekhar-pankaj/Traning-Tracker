@@ -136,11 +136,11 @@
                     <!-- ko if: !(my.sessionVm.sessionSettings.isNewSession() || my.sessionVm.sessionSettings.isEditable()) -->
                     <input type="text" class="form-control" data-bind="value: my.sessionVm.sessionDetails.Date" readonly="readonly" />
                     <!-- /ko -->
-                    <form enctype="multipart/form-data" data-bind="visible: my.sessionVm.sessionDetails.Presenter() == my.sessionVm.currentUser.UserId">
+                    <form enctype="multipart/form-data" data-bind="visible: ((my.sessionVm.sessionDetails.Presenter() == my.sessionVm.currentUser.UserId) && !my.sessionVm.sessionSettings.isNewSession())">
                         <label class="form-control" style="margin-top:2%;width:35%;color:floralwhite; background-color:blue;display: inline-block;">
                             <span class="glyphicon glyphicon-film"></span>
                             Upload Session Video
-                            <input type="file" name="file" data-bind="fileSrc: my.sessionVm.FileData, name: file"
+                            <input type="file" name="file" data-bind="fileInput: fileData"
                                    class="hidden" accept="video/mp4,video/x-m4v,video/*" />
                         </label>
                         <span data-bind='visible: my.sessionVm.sessionDetails.VideoFileName() != ""'>Associate video for this session was uploaded</span>

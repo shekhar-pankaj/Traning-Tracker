@@ -34,6 +34,7 @@ namespace TrainingTracker.Authorize
                     User currentUser = new JavaScriptSerializer().Deserialize<User>(authTicket.UserData);
                     
                     var userIdRequested = httpContext.Request.Params["userId"] != null ? Convert.ToInt16(httpContext.Request.Params["userId"]) : 0;
+                    var requestedFeedbackId = httpContext.Request.Params["feedbackId"] != null ? Convert.ToInt16(httpContext.Request.Params["feedbackId"]) : 0;
 
                     List<string> currentUserRoles = new List<string>();
 
@@ -62,15 +63,15 @@ namespace TrainingTracker.Authorize
                     isAuthorized = isAuthorized && (userIdRequested <= 0 || (currentUser.UserId.Equals(userIdRequested) ||
                                                                              ((currentUser.IsManager ||currentUser.IsTrainer) &&
                                                                               new UserBl().GetUserByUserId(userIdRequested).TeamId == currentUser.TeamId)));
-                    httpContext.User = userPrincipal;
 
+                    isAuthorized = isAuthorized && (requestedFeedbackId <= 0 || new FeedbackBl().AuthorizeCurrentUserForFeedback(requestedFeedbackId,currentUser));
+                    httpContext.User = userPrincipal;
                 }
             }
             catch
             {
                 isAuthorized = false;
             }
-
             return isAuthorized;
         }
         /// <summary>

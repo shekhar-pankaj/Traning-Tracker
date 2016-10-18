@@ -86,5 +86,16 @@ namespace TrainingTracker.BLL
         {
             return FeedbackDataAccesor.AddNewThread(thread) && new NotificationBl().AddNewThreadNotification(thread);
         }
+
+        /// <summary>
+        /// authorize Current user for team's Feedback
+        /// </summary>
+        /// <param name="feedbackId">feedback Id</param>
+        /// <param name="currentUser">Current User</param>
+        /// <returns>Success flag</returns>
+        public bool AuthorizeCurrentUserForFeedback(int feedbackId, User currentUser)
+        {
+            return  (currentUser.IsAdministrator && !currentUser.TeamId.HasValue) || FeedbackDataAccesor.GetFeedbackWithThreads(feedbackId).AddedBy.TeamId == currentUser.TeamId ;
+        }
     }
 }

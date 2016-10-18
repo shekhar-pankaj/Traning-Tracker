@@ -13,7 +13,7 @@ namespace TrainingTracker.Controllers
     /// <summary>
     /// Controller class for session
     /// </summary>
-    [CustomAuthorizeAttribute]
+    [CustomAuthorize]
     public class SessionController:Controller
     {
         /// <summary>
@@ -32,7 +32,6 @@ namespace TrainingTracker.Controllers
         public ActionResult GetUserFeedbackOnFilter( int pageSize , int seminarType , string searchKeyword = "" )
         {
             return Json(new SessionBl().GetSessionOnFilter(pageSize , seminarType , searchKeyword) , JsonRequestBehavior.AllowGet);
-
         }
 
         /// <summary>
