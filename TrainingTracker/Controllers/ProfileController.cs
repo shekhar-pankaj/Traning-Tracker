@@ -6,6 +6,7 @@ using TrainingTracker.Authorize;
 using TrainingTracker.BLL;
 using TrainingTracker.Common.Constants;
 using TrainingTracker.Common.Entity;
+using TrainingTracker.Common.Utility;
 
 namespace TrainingTracker.Controllers
 {
@@ -142,13 +143,21 @@ namespace TrainingTracker.Controllers
                     Guid gId;
                     gId = Guid.NewGuid();
                     strFileName = gId.ToString().Trim() + ".jpg";
+
+                    bool folderExists = Directory.Exists(Server.MapPath("~/Uploads/ProfilePicture/"));
+
+                    if (!folderExists)
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Uploads/ProfilePicture/"));
+                    }
                     var path = Path.Combine(Server.MapPath("~/Uploads/ProfilePicture/"), strFileName);
                     file.SaveAs(path);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                LogUtility.ErrorRoutine(ex);
+                return null;
             }
             return Json(strFileName);
         }

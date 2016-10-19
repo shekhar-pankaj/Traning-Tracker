@@ -6,12 +6,84 @@
     color: #fff;
     font-size: 14px;
 }
+    .post-heading table th:nth-child(6),table th:nth-child(5), table td:nth-child(6), table td:nth-child(5) {
+        width: 6%;
+    }
+    .icon-pencil,.icon-eye,.icon-video{
+         margin:-5%;
+    }
+.download-slide-icon {
+    cursor: pointer;
+    color: blue;
+    font-size:15px;
+    margin-top:5px;
+}
+#sessionModal{
+     display: none;
+}
+.button-apply-filter{
+    width:60%;
+}
+.button-add-session{
+    width:65%;
+}
+.div-attendee-section {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.div-attendee{
+    height:313px;
+}
+.div-video-modal{
+    width:55%;
+}
+.table-style
+ {
+    width: 100%;
+}
+.presented-session-status{
+    color:green;
+    font-size:15px;
+    margin-top:5px;
+}
+.scheduled-session-status{
+    color:blue;
+    font-size:15px;
+    margin-top:5px;
+}
+.thead-style{
+    text-align: center;
+}
+.label-session-filter {
+    display: inline-block;
+}
 
-/*.post-heading table th:nth-child(6)
-{
-    background-color: #fff;
-}*/
-.table-button {
+.filter-session-count {
+    display: inline-block;
+    width: 35%;
+}
+.filter-session-type{
+    display:inline-block;
+    width:58%;
+}
+.lable-upload {
+    cursor: pointer;
+    margin-top: 2%;
+    width: 45%;
+    color: floralwhite;
+    background-color: blue;
+    display: inline-block;
+}
+
+.upload-message {
+    font-style: oblique;
+    font-size: x-small;
+    display: block;
+}
+
+.upload-status {
+    color: green;
 }
 
 .post-heading table td:nth-child(3) {
@@ -19,7 +91,7 @@
     text-align: left;
 }
 
-.post-heading table th:nth-child(6), table th:nth-child(7), table th:nth-child(8), table td:nth-child(6), table td:nth-child(7), table td:nth-child(8) {
+.post-heading table table th:nth-child(7), table th:nth-child(8), table td:nth-child(7), table td:nth-child(8) {
     width: 4%;
 }
 
@@ -191,9 +263,10 @@
     margin-bottom: 35px !important;
 }
 
-div#WzTtDiV{
-    padding:0 !important;
+div#WzTtDiV {
+    padding: 0 !important;
 }
-div#WzBoDy{
-    width:auto !important;
+
+div#WzBoDy {
+    width: auto !important;
 }

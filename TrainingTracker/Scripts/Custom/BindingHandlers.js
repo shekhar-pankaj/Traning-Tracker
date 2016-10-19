@@ -11,13 +11,11 @@ ko.bindingHandlers.datepicker = {
         if (typeof dateFormat == 'undefined') {
             dateFormat = 'mm/dd/yyyy';
         }
-        
-        if (typeof (endDate) === 'undefined')
-        {
+
+        if (typeof (endDate) === 'undefined') {
             endDate = null;
         }
-        if (typeof (startDate) === 'undefined')
-        {
+        if (typeof (startDate) === 'undefined') {
             startDate = null;
         }
 
@@ -34,7 +32,7 @@ ko.bindingHandlers.datepicker = {
             //showOn: "both",
             todayHighlight: true,
             endDate: endDate,
-            startDate:startDate
+            startDate: startDate
         };
 
         if (typeof valueAccessor() === 'object') {
@@ -50,240 +48,214 @@ ko.bindingHandlers.datepicker = {
 
 };
 
-    ko.bindingHandlers.barClick = {
-        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
-        {
-            if (!allBindings.has('chartData'))
-            {
-                throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
-                return;
-            }
-            var chartType = allBindings.get('chartType');
-            if (chartType !== 'Bar')
-            {
-                throw Error('barClick can only be used with chartType Bar');
-                return;
-            }
-        },
-        update: function (element, valueAccesor, allBindings, viewModel, bindingContext) { }
-    };
-    ko.bindingHandlers.lineClick = {
-        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
-        {
-            if (!allBindings.has('chartData'))
-            {
-                throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
-                return;
-            }
-            var chartType = allBindings.get('chartType');
-            if (chartType !== 'Line')
-            {
-                throw Error('lineClick can only be used with chartType Line');
-                return;
-            }
-        },
-        update: function (element, valueAccesor, allBindings, viewModel, bindingContext) { }
-    };
-    ko.bindingHandlers.segmentClick = {
-        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
-        {
-            if (!allBindings.has('chartData'))
-            {
-                throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
-                return;
-            }
-            var chartType = allBindings.get('chartType');
-            if (chartType !== 'Pie' && chartType !== 'Doughnut')
-            {
-                throw Error('segmentClick can only be used with chartType Pie or Donut');
-                return;
-            }
-        },
-        update: function (element, valueAccesor, allBindings, viewModel, bindingContext) { }
-    };
-    ko.bindingHandlers.chartType = {
-        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
-        {
-            if (!allBindings.has('chartData'))
-            {
-                throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
-            }
-        },
-        update: function (element, valueAccessor, allBindings, viewModel, bindingContext)
-        {
-            var ctx = element.getContext('2d'),
-                type = ko.unwrap(valueAccessor()),
-                data = ko.unwrap(allBindings.get('chartData')),
-                options = ko.unwrap(allBindings.get('chartOptions')) || {},
-            	segmentClick = ko.unwrap(allBindings.get('segmentClick')),
-                barClick = ko.unwrap(allBindings.get('barClick')),
-                lineClick = ko.unwrap(allBindings.get('lineClick'));
-
-            // NB: Fix for newer knockout (see https://gist.github.com/jmhdez/4987b053e817d65d7c68)
-			if (this.chart) {
-				this.chart.destroy();
-				delete this.chart;
-			}
-			if (ctx.canvas.chart) {
-			    ctx.canvas.chart.destroy();
-			    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-			}
-
-			if ($('#divFeedbackChart').css('display') == 'none') return;
-            
-			//this.chart = new Chart(ctx)[type](data, options);
-			//*/
-
-            if (data == null) return;
-
-            //ko.utils.domNodeDisposal.addDisposeCallback(element,
-
-            //function ()
-            //{
-            //    $(element).chart.destroy();
-            //    delete $(element).chart;
-            //});
-            
-            var newChart;
-
-            if (type == 'Line') {
-                newChart = new Chart(ctx).Scatter(data, options);
-            } else {
-                 newChart = new Chart(ctx)[type](data, options);
-            }
-            newChart.clear();
-            var $element = $(element)[0];
-            $element.chart = newChart;
-            //* End of fix
-
-            //* Remove existing click binding
-            if ($element.click)
-            {
-                $element.removeEventListener('click', $element.click);
-                delete ($element.click);
-            }
-            //* Add segment click binding
-            switch (type)
-            {
-                case "Pie":
-                case "Doughnut":
-                    if (segmentClick)
-                    {
-                        $element.click = function (evt)
-                        {
-                            var activePoints = newChart.getSegmentsAtEvent(evt);
-                            segmentClick(activePoints[0], newChart);
-                        };
-                    }
-                    break;
-                case "Bar":
-                    if (barClick)
-                    {
-                        $element.click = function (evt)
-                        {
-                            barClick(newChart.getBarsAtEvent(evt), newChart);
-                        };
-                    }
-                    break;
-                case "Line":
-                    if (lineClick)
-                    {
-                        $element.click = function (evt) { lineClick(newChart.getPointsAtEvent(evt), newChart); };
-                    }
-                    break;
-                default:
-                    break;
-            }
-            $element.addEventListener('click', $element.click);
-           // if ($('#divFeedbackChart').css('display') == 'inline-block') $('#divFeedbackChart').css('display', 'none');
-        }
-    };
-    
-    ko.bindingHandlers.fadeVisible = {
-        init: function (element, valueAccessor)
-        {
-            var shouldDisplay = valueAccessor();
-            $(element).toggle(shouldDisplay);
-        },
-        update: function (element, valueAccessor)
-        {
-            // On update, fade in/out
-            var shouldDisplay = valueAccessor();
-            
-            if (shouldDisplay) {
-                $(element).fadeIn(600,"swing");
-            }              
-            else
-                $(element).fadeOut(300, "swing");
-            
-        }
-    };
-
-    ko.bindingHandlers.chartData = {
-        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
-        {
-            if (!allBindings.has('chartType'))
-            {
-                throw Error('chartData must be used in conjunction with chartType and (optionally) chartOptions');
-            }
-        }
-    };
-
-    ko.bindingHandlers.chartOptions = {
-        init: function (element, valueAccessor, allBindings, viewModel, bindingContext)
-        {
-            if (!allBindings.has('chartData') || !allBindings.has('chartType'))
-            {
-                throw Error('chartOptions must be used in conjunction with chartType and chartData');
-            }
-        }
-    };
-
-    ko.bindingHandlers.fullWindowHeight =
-    {
-        update: function(element, valueAccessor) {
-            // On update, fade in/out
-            var shouldDisplay = valueAccessor();
-
-            if (shouldDisplay) {                           
-                $(document).on("custom-resize",function() {
-                    $('html,body').css("height", $(document).height());
-                    $(element).css({ 'min-height': $(document).height(), 'height': $(document).height() });
-                });
-                $("html, body").animate({ scrollTop: 0 }, "slow");
-                return;
-            }
-            $(element).css({ 'min-height': 0, 'height': 0 });
-            $('html,body').css("height", "auto");
-            $(document).off('custom-resize');
+ko.bindingHandlers.barClick = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        if (!allBindings.has('chartData')) {
+            throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
             return;
-
         }
-    };
+        var chartType = allBindings.get('chartType');
+        if (chartType !== 'Bar') {
+            throw Error('barClick can only be used with chartType Bar');
+            return;
+        }
+    },
+    update: function (element, valueAccesor, allBindings, viewModel, bindingContext) { }
+};
+ko.bindingHandlers.lineClick = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        if (!allBindings.has('chartData')) {
+            throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
+            return;
+        }
+        var chartType = allBindings.get('chartType');
+        if (chartType !== 'Line') {
+            throw Error('lineClick can only be used with chartType Line');
+            return;
+        }
+    },
+    update: function (element, valueAccesor, allBindings, viewModel, bindingContext) { }
+};
+ko.bindingHandlers.segmentClick = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        if (!allBindings.has('chartData')) {
+            throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
+            return;
+        }
+        var chartType = allBindings.get('chartType');
+        if (chartType !== 'Pie' && chartType !== 'Doughnut') {
+            throw Error('segmentClick can only be used with chartType Pie or Donut');
+            return;
+        }
+    },
+    update: function (element, valueAccesor, allBindings, viewModel, bindingContext) { }
+};
+ko.bindingHandlers.chartType = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        if (!allBindings.has('chartData')) {
+            throw Error('chartType must be used in conjunction with chartData and (optionally) chartOptions');
+        }
+    },
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var ctx = element.getContext('2d'),
+            type = ko.unwrap(valueAccessor()),
+            data = ko.unwrap(allBindings.get('chartData')),
+            options = ko.unwrap(allBindings.get('chartOptions')) || {},
+            segmentClick = ko.unwrap(allBindings.get('segmentClick')),
+            barClick = ko.unwrap(allBindings.get('barClick')),
+            lineClick = ko.unwrap(allBindings.get('lineClick'));
+
+        // NB: Fix for newer knockout (see https://gist.github.com/jmhdez/4987b053e817d65d7c68)
+        if (this.chart) {
+            this.chart.destroy();
+            delete this.chart;
+        }
+        if (ctx.canvas.chart) {
+            ctx.canvas.chart.destroy();
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        }
+
+        if ($('#divFeedbackChart').css('display') == 'none') return;
+
+        //this.chart = new Chart(ctx)[type](data, options);
+        //*/
+
+        if (data == null) return;
+
+        //ko.utils.domNodeDisposal.addDisposeCallback(element,
+
+        //function ()
+        //{
+        //    $(element).chart.destroy();
+        //    delete $(element).chart;
+        //});
+
+        var newChart;
+
+        if (type == 'Line') {
+            newChart = new Chart(ctx).Scatter(data, options);
+        } else {
+            newChart = new Chart(ctx)[type](data, options);
+        }
+        newChart.clear();
+        var $element = $(element)[0];
+        $element.chart = newChart;
+        //* End of fix
+
+        //* Remove existing click binding
+        if ($element.click) {
+            $element.removeEventListener('click', $element.click);
+            delete ($element.click);
+        }
+        //* Add segment click binding
+        switch (type) {
+            case "Pie":
+            case "Doughnut":
+                if (segmentClick) {
+                    $element.click = function (evt) {
+                        var activePoints = newChart.getSegmentsAtEvent(evt);
+                        segmentClick(activePoints[0], newChart);
+                    };
+                }
+                break;
+            case "Bar":
+                if (barClick) {
+                    $element.click = function (evt) {
+                        barClick(newChart.getBarsAtEvent(evt), newChart);
+                    };
+                }
+                break;
+            case "Line":
+                if (lineClick) {
+                    $element.click = function (evt) { lineClick(newChart.getPointsAtEvent(evt), newChart); };
+                }
+                break;
+            default:
+                break;
+        }
+        $element.addEventListener('click', $element.click);
+        // if ($('#divFeedbackChart').css('display') == 'inline-block') $('#divFeedbackChart').css('display', 'none');
+    }
+};
+
+ko.bindingHandlers.fadeVisible = {
+    init: function (element, valueAccessor) {
+        var shouldDisplay = valueAccessor();
+        $(element).toggle(shouldDisplay);
+    },
+    update: function (element, valueAccessor) {
+        // On update, fade in/out
+        var shouldDisplay = valueAccessor();
+
+        if (shouldDisplay) {
+            $(element).fadeIn(600, "swing");
+        }
+        else
+            $(element).fadeOut(300, "swing");
+
+    }
+};
+
+ko.bindingHandlers.chartData = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        if (!allBindings.has('chartType')) {
+            throw Error('chartData must be used in conjunction with chartType and (optionally) chartOptions');
+        }
+    }
+};
+
+ko.bindingHandlers.chartOptions = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        if (!allBindings.has('chartData') || !allBindings.has('chartType')) {
+            throw Error('chartOptions must be used in conjunction with chartType and chartData');
+        }
+    }
+};
+
+ko.bindingHandlers.fullWindowHeight =
+{
+    update: function (element, valueAccessor) {
+        // On update, fade in/out
+        var shouldDisplay = valueAccessor();
+
+        if (shouldDisplay) {
+            $(document).on("custom-resize", function () {
+                $('html,body').css("height", $(document).height());
+                $(element).css({ 'min-height': $(document).height(), 'height': $(document).height() });
+            });
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            return;
+        }
+        $(element).css({ 'min-height': 0, 'height': 0 });
+        $('html,body').css("height", "auto");
+        $(document).off('custom-resize');
+        return;
+
+    }
+};
 
 /***** End of ko-chart.js *****/
 
 
-/*Added for image file upload*/
+/*Added for file upload*/
 
 $(document).ready(function () {
     ko.bindingHandlers.fileSrc = {
+
         update: function (element, valueAccessor) {
-              ko.utils.registerEventHandler(element, "change", function () {
+            ko.utils.registerEventHandler(element, "change", function () {
                 var reader = new FileReader();
-                
+
                 reader.onloadstart = function () {
                     my.toggleLoader(true);
                 };
-                
-                reader.onload = function (e)
-                {
+
+                reader.onload = function (e) {
                     var value = valueAccessor();
                     value(e.target.result);
                 };
-                
-                reader.onloadend = function ()
-                {
+
+                reader.onloadend = function () {
                     my.toggleLoader(false);
                 };
 
@@ -291,7 +263,7 @@ $(document).ready(function () {
             });
         }
     };
-    
+
     //Added for enable and disable all the child elements
     ko.bindingHandlers.enableChildren = {
         init: function (elem, valueAccessor) {
@@ -324,7 +296,6 @@ $(document).ready(function () {
             ko.utils.arrayForEach(elem.getElementsByTagName('a'), function (i) {
                 i.disabled = !enabled;
             });
-
         }
     };
     ko.bindingHandlers.wzTooltip = {
@@ -479,7 +450,7 @@ $(document).ready(function () {
                         my.toggleLoader(true);
                     };
 
-                   reader.onloadend = function ()
+                    reader.onloadend = function ()
                     {
                         my.toggleLoader(false);
                     };
@@ -511,7 +482,6 @@ $(document).ready(function () {
                             }
                         }
                     };
-
                     reader[method](file);
                 });
             }

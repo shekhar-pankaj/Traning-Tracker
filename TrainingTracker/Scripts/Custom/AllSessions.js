@@ -12,11 +12,16 @@
                 Date: ko.observable(""),
                 Presenter: ko.observable(0),
                 Attendee: ko.observableArray(),
-                VideoFileName: ko.observable("")
+                VideoFileName: ko.observable(""),
+                SlideName: ko.observable("")
             },
-            fileData= ko.observable({
+            sessionVideo = ko.observable({
                 dataURL: ko.observable("")
             }),
+            sessionSlide = ko.observable({
+                dataURL: ko.observable("")
+            }),
+
             sessionSettings = {
                 isNewSession: ko.observable(true),
                 sessionHeader: ko.observable("Add New Session"),
@@ -48,9 +53,8 @@
                 ko.utils.arrayForEach(sessionJson.SessionList, function (item) {
                     my.sessionVm.sessions.push(item);
                 });
+                ko.utils.arrayForEach(sessionJson.AllAttendees, function (item) {
 
-                ko.utils.arrayForEach(sessionJson.AllAttendees, function (item)
-                {
                     if (item.IsTrainee && item.IsActive) {
                         my.sessionVm.allAttendees.push(item);
                     }
@@ -155,7 +159,7 @@
                 my.sessionVm.sessionSettings.isNewSession(false);
                 my.sessionVm.sessionDetails.Attendee([]);
                 my.sessionVm.sessionDetails.VideoFileName(filteredSession[0].VideoFileName);
-                
+                my.sessionVm.sessionDetails.SlideName(filteredSession[0].SlideName);
                 ko.utils.arrayForEach(filteredSession[0].SessionAttendees, function (item) {
                     my.sessionVm.sessionDetails.Attendee.push(item.UserId.toString());
                 });
@@ -188,24 +192,41 @@
                     my.sessionVm.sessionDetails.VideoFileName(jsonData);
                     editSession();
                 }
-                my.sessionVm.fileData().clear();
+                my.sessionVm.sessionVideo().clear();
             },
-
-            uploadVideo = function ()
-            {
+            uploadVideo = function (newValue) {
                 if (my.sessionVm.sessionSettings.isNewSession()) return;
-                
-                var formData = new FormData($('form')[0]);
+
+                var formData = new FormData($('#videoUploadForm')[0]);
                 my.sessionService.uploadVideo(formData, my.sessionVm.uploadVideoCallback);
             },
-            
+            uploadSlide = function () {
+                if (my.sessionVm.sessionSettings.isNewSession()) return;
+
+                var formData = new FormData($('#slideUploadForm')[0]);
+                my.sessionService.uploadSlide(formData, my.sessionVm.uploadSlideCallback);
+            },
+            uploadSlideCallback = function (jsonData) {
+
+                if (!my.isNullorEmpty(jsonData)) {
+                    my.sessionVm.sessionDetails.SlideName(jsonData);
+                    editSession();
+                }
+                my.sessionVm.sessionSlide().clear();
+            },
             loadSessionVideo = function (videoFileName) {
                 var myPlayer = videojs("my-video");
                 var fileName = my.rootUrl + "/Uploads/SessionVideo/" + videoFileName;
                 myPlayer.pause().src(fileName).load().play();
+            },
+            downloadSessionSlide = function (sessionSlideName) {
+                if (!my.isNullorEmpty(sessionSlideName)) {
+                    window.location.assign(my.rootUrl + "/Uploads/SessionSlide/" + sessionSlideName);
+                }
             };
 
         return {
+            //fileData: fileData,
             currentUser: currentUser,
             getCurrentUser: getCurrentUser,
             getCurrentUserCallback: getCurrentUserCallback,
@@ -233,18 +254,27 @@
             uploadVideo: uploadVideo,
             uploadVideoCallback: uploadVideoCallback,
             loadSessionVideo: loadSessionVideo,
-            fileData:fileData
+            sessionVideo: sessionVideo,
+            sessionSlide: sessionSlide,
+            uploadSlide: uploadSlide,
+            uploadSlideCallback: uploadSlideCallback,
+            downloadSessionSlide: downloadSessionSlide,
         };
     }();
-    
-    my.sessionVm.fileData().dataURL.subscribe(function (dataURL)
-    {
-        if (my.isNullorEmpty(my.sessionVm.fileData().dataURL())) return;
+
+    my.sessionVm.sessionVideo().dataURL.subscribe(function (dataURL) {
+        if (my.isNullorEmpty(my.sessionVm.sessionVideo().dataURL())) return;
+
         my.sessionVm.uploadVideo();
     });
 
-    my.sessionVm.getCurrentUser();
+    my.sessionVm.sessionSlide().dataURL.subscribe(function (dataURL) {
+       
+       if (my.isNullorEmpty(my.sessionVm.sessionSlide().dataURL())) return;
+        my.sessionVm.uploadSlide()
+    });
 
+    my.sessionVm.getCurrentUser();
     ko.applyBindings(my.sessionVm);
 });
 

@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+//using System.IO.Directory.CreateDirectory;
 using TrainingTracker.Authorize;
 using TrainingTracker.BLL;
 using TrainingTracker.Common.Entity;
@@ -14,7 +15,7 @@ namespace TrainingTracker.Controllers
     /// Controller class for session
     /// </summary>
     [CustomAuthorize]
-    public class SessionController:Controller
+    public class SessionController : Controller
     {
         /// <summary>
         /// Action method for Index
@@ -29,9 +30,9 @@ namespace TrainingTracker.Controllers
         /// Get Sessions for user on filter
         /// </summary>
         /// <returns>Json result</returns>
-        public ActionResult GetUserFeedbackOnFilter( int pageSize , int seminarType , string searchKeyword = "" )
+        public ActionResult GetUserFeedbackOnFilter(int pageSize, int seminarType, string searchKeyword = "")
         {
-            return Json(new SessionBl().GetSessionOnFilter(pageSize , seminarType , searchKeyword , new UserBl().GetUserByUserName(User.Identity.Name)) , JsonRequestBehavior.AllowGet);
+            return Json(new SessionBl().GetSessionOnFilter(pageSize, seminarType, searchKeyword, new UserBl().GetUserByUserName(User.Identity.Name)), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace TrainingTracker.Controllers
         /// <returns>Json result</returns>
         public ActionResult AddEditSession(Session sessionDetails)
         {
-            return Json(new SessionBl().AddEditSessions(sessionDetails) , JsonRequestBehavior.AllowGet);
+            return Json(new SessionBl().AddEditSessions(sessionDetails), JsonRequestBehavior.AllowGet);
 
         }
 
@@ -49,7 +50,8 @@ namespace TrainingTracker.Controllers
         /// </summary>
         /// <param name="fileName">Contain parameter fileName as HttpPostedFileBase object</param>
         /// <returns>Return filename as JSON object.</returns>
-        [HttpPost]
+        /// [HttpPost]
+        /// 
         public ActionResult UploadVideo(HttpPostedFileBase fileName)
         {
             HttpPostedFileBase file = Request.Files["file"];
@@ -61,17 +63,62 @@ namespace TrainingTracker.Controllers
                     Guid gId;
                     gId = Guid.NewGuid();
                     strFileName = gId.ToString().Trim() + ".mp4";
-                    var path = Path.Combine(Server.MapPath("~/Uploads/SessionVideo/"), strFileName);
+                    bool folderExists = Directory.Exists(Server.MapPath("~/Uploads/SessionVideo/"));
+
+                    if (!folderExists)
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Uploads/SessionVideo/"));
+                    }
+
+                    string path = Path.Combine(Server.MapPath("~/Uploads/SessionVideo/"), strFileName);
                     file.SaveAs(path);
+                    return Json(strFileName);
                 }
+                return null;
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
                 return null;
             }
-            return Json(strFileName);
+        }
 
+
+        /// <summary>
+        /// Action method for upload session slide.
+        /// </summary>
+        /// <param name="fileName">Contain parameter fileName as HttpPostedFileBase object</param>
+        /// <returns>Return filename as JSON object.</returns>
+        [HttpPost]
+        public ActionResult UploadSlide(HttpPostedFileBase fileName)
+        {
+            HttpPostedFileBase file = Request.Files["file"];
+            string strSlideName = string.Empty;
+
+            try
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    Guid gId;
+                    gId = Guid.NewGuid();
+                    strSlideName = gId.ToString().Trim() + ".ppt";
+                    bool folderExists = Directory.Exists(Server.MapPath("~/Uploads/SessionSlide/"));
+
+                    if (!folderExists)
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Uploads/SessionSlide/"));
+                    }
+                    string path = Path.Combine(Server.MapPath("~/Uploads/SessionSlide/"), strSlideName);
+                    file.SaveAs(path);
+                    return Json(strSlideName);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return null;
+            }
         }
     }
 }

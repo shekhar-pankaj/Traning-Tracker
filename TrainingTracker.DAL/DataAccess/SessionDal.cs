@@ -119,6 +119,7 @@ namespace TrainingTracker.DAL.DataAccess
                             PresenterFullName = row["PresenterFullName"].ToString(),
                             Presenter = Convert.ToInt32(row["Presenter"]),
                             VideoFileName = row["VideoFileName"].ToString(),
+                            SlideName = row["SlideName"].ToString(),
                             SessionAttendees = new List<Common.Entity.User>()
                         });
                     }
@@ -160,7 +161,14 @@ namespace TrainingTracker.DAL.DataAccess
                 {
                     var sessionContext = context.Sessions.FirstOrDefault(s => s.SessionId == session.Id);
                     if (sessionContext == null) return false;
-                    sessionContext.VideoFileName = session.VideoFileName;
+                    if (session.VideoFileName != null)
+                    {
+                        sessionContext.VideoFileName = session.VideoFileName;
+                    }
+                    if (session.SlideName != null)
+                    {
+                        sessionContext.SlideName = session.SlideName;
+                    }
                     context.SaveChanges();
                     return true;
                 }
