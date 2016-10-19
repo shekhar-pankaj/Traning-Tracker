@@ -31,7 +31,7 @@ namespace TrainingTracker.Controllers
         /// <returns>Json result</returns>
         public ActionResult GetUserFeedbackOnFilter( int pageSize , int seminarType , string searchKeyword = "" )
         {
-            return Json(new SessionBl().GetSessionOnFilter(pageSize , seminarType , searchKeyword) , JsonRequestBehavior.AllowGet);
+            return Json(new SessionBl().GetSessionOnFilter(pageSize , seminarType , searchKeyword , new UserBl().GetUserByUserName(User.Identity.Name)) , JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>

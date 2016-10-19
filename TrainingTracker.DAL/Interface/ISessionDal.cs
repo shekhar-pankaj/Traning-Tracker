@@ -28,7 +28,8 @@ namespace TrainingTracker.DAL.Interface
        /// <param name="pageSize">record count to be returned</param>
        /// <param name="sessionType">session type</param>
        /// <param name="searchKeyword">search keyword</param>
+       /// <param name="teamId">teamId</param>
        /// <returns>List of session </returns>
-       List<Session> GetSessionOnFilter(int pageSize ,int sessionType ,string searchKeyword); 
+       List<Session> GetSessionOnFilter(int pageSize ,int sessionType ,string searchKeyword,int teamId); 
     }
 }

@@ -51,7 +51,7 @@ namespace TrainingTracker.BLL
         /// <returns>List of User</returns>
         public List<User> GetAllUsersByTeam( User currentUser )
         {
-            if (currentUser.IsAdministrator) return UserDataAccesor.GetAllUsers();
+            if (currentUser.IsAdministrator && !currentUser.TeamId.HasValue) return UserDataAccesor.GetAllUsers();
 
             return currentUser.TeamId.HasValue
                               ? UserDataAccesor.GetAllUsersForTeam(currentUser.TeamId.Value)

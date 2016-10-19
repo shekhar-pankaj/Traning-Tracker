@@ -24,8 +24,7 @@ namespace TrainingTracker.DAL.DataAccess
         /// <param name="feedbackData">feedback instance</param>
         /// <returns>int of feedback</returns>
         public int AddFeedback(Feedback feedbackData)
-        {
-            
+        {            
             try
             {
                 var prms = new List<SqlParameter>

@@ -87,8 +87,9 @@ namespace TrainingTracker.DAL.DataAccess
         /// <param name="pageSize">record count</param>
         /// <param name="sessionType">type of session</param>
         /// <param name="searchKeyword">search keyword</param>
+        /// <param name="teamId">team Id</param>
         /// <returns>List of session</returns>
-        public List<Common.Entity.Session> GetSessionOnFilter(int pageSize, int sessionType, string searchKeyword)
+        public List<Common.Entity.Session> GetSessionOnFilter(int pageSize, int sessionType, string searchKeyword,int teamId)
         {
             List<Common.Entity.Session> sessions = new List<Common.Entity.Session>();
             var prms = new List<SqlParameter>
@@ -96,6 +97,7 @@ namespace TrainingTracker.DAL.DataAccess
                 SqlUtility.CreateParameter(SPGetSessionsOnFilter.PARAM_KEYWORD, SqlDbType.NVarChar, searchKeyword),
                 SqlUtility.CreateParameter(SPGetSessionsOnFilter.PARAM_PAGESIZE, SqlDbType.Int, pageSize),
                 SqlUtility.CreateParameter(SPGetSessionsOnFilter.PARAM_SESSIONTYPE, SqlDbType.Int, sessionType),
+                SqlUtility.CreateParameter(SPGetSessionsOnFilter.PARAM_TEAM, SqlDbType.Int, teamId),
 
             };
             try

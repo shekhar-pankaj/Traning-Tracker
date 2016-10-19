@@ -23,7 +23,7 @@ namespace TrainingTracker.BLL
             var dashboardVm = new DashboardVm
             {
                 Trainees = teamId.HasValue ? UserDataAccesor.GetDashboardData(teamId.Value) : new List<UserData>() ,
-                UpcomingSessions = SessionDataAccesor.GetSessionOnFilter(100,1,"")
+                UpcomingSessions = SessionDataAccesor.GetSessionOnFilter(100 , 1 , "" , teamId??0)
             };
 
 
