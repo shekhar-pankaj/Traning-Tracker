@@ -129,7 +129,7 @@ namespace TrainingTracker.BLL
         /// <returns>Returns list of active user.</returns>
         public List<User> GetActiveUsers( User currentUser )
         {
-            if (currentUser.IsAdministrator) return UserDataAccesor.GetActiveUsers();
+            if (currentUser.IsAdministrator && !currentUser.TeamId.HasValue) return UserDataAccesor.GetActiveUsers();
 
             return currentUser.TeamId.HasValue
                               ? UserDataAccesor.GetActiveUsersByTeam(currentUser.TeamId.Value)

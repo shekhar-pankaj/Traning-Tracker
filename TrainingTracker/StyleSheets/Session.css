@@ -9,14 +9,17 @@
     .post-heading table th:nth-child(6),table th:nth-child(5), table td:nth-child(6), table td:nth-child(5) {
         width: 6%;
     }
+    table td:nth-child(6)> div, table td:nth-child(7) > div, table td:nth-child(8) > div
+    {
+        margin-top: 2px;
+    }
+       
     .icon-pencil,.icon-eye,.icon-video{
          margin:-5%;
     }
 .download-slide-icon {
-    cursor: pointer;
-    color: blue;
+    cursor: pointer;  
     font-size:15px;
-    margin-top:5px;
 }
 #sessionModal{
      display: none;

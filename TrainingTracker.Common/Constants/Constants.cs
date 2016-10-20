@@ -33,4 +33,36 @@ namespace TrainingTracker.Common.Constants
         /// </summary>
         public const string Trainer = "Trainer";
     }
+
+    /// <summary>
+    /// Contains Session Assets Virtual paths
+    /// </summary>
+    public static class SessionAssets
+    {
+        /// <summary>
+        /// Session's Virtual path For Slides
+        /// </summary>
+        public const string SlidePath = "~/Uploads/SessionSlide/";
+
+        /// <summary>
+        /// Session's Virtual path For Videos
+        /// </summary>
+        public const string VideoPath = "~/Uploads/SessionVideo/";
+    }
+
+    /// <summary>
+    /// Contains App used Extensions
+    /// </summary>
+    public static class FileExtensions
+    {
+        /// <summary>
+        /// Extension for Mp4
+        /// </summary>
+        public const string Mp4 = ".mp4";
+
+        /// <summary>
+        /// Extensions for Ppt
+        /// </summary>
+        public const string Ppt = ".ppt";
+    }
 }

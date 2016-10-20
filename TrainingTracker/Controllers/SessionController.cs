@@ -6,6 +6,7 @@ using System.Web.Mvc;
 //using System.IO.Directory.CreateDirectory;
 using TrainingTracker.Authorize;
 using TrainingTracker.BLL;
+using TrainingTracker.Common.Constants;
 using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Utility;
 
@@ -42,7 +43,6 @@ namespace TrainingTracker.Controllers
         public ActionResult AddEditSession(Session sessionDetails)
         {
             return Json(new SessionBl().AddEditSessions(sessionDetails), JsonRequestBehavior.AllowGet);
-
         }
 
         /// <summary>
@@ -55,32 +55,28 @@ namespace TrainingTracker.Controllers
         public ActionResult UploadVideo(HttpPostedFileBase fileName)
         {
             HttpPostedFileBase file = Request.Files["file"];
-            string strFileName = string.Empty;
+           
             try
             {
                 if (file != null && file.ContentLength > 0)
                 {
-                    Guid gId;
-                    gId = Guid.NewGuid();
-                    strFileName = gId.ToString().Trim() + ".mp4";
-                    bool folderExists = Directory.Exists(Server.MapPath("~/Uploads/SessionVideo/"));
+                    Guid gId = Guid.NewGuid();
+                    string strFileName = gId.ToString().Trim() + FileExtensions.Mp4;
 
-                    if (!folderExists)
+                    if (!Directory.Exists(Server.MapPath(SessionAssets.VideoPath)))
                     {
-                        Directory.CreateDirectory(Server.MapPath("~/Uploads/SessionVideo/"));
+                        Directory.CreateDirectory(Server.MapPath(SessionAssets.VideoPath));
                     }
 
-                    string path = Path.Combine(Server.MapPath("~/Uploads/SessionVideo/"), strFileName);
-                    file.SaveAs(path);
+                    file.SaveAs(Path.Combine(Server.MapPath(SessionAssets.VideoPath) , strFileName));
                     return Json(strFileName);
-                }
-                return null;
+                }                
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
-                return null;
             }
+            return null;
         }
 
 
@@ -93,32 +89,29 @@ namespace TrainingTracker.Controllers
         public ActionResult UploadSlide(HttpPostedFileBase fileName)
         {
             HttpPostedFileBase file = Request.Files["file"];
-            string strSlideName = string.Empty;
-
+           
             try
             {
                 if (file != null && file.ContentLength > 0)
                 {
-                    Guid gId;
-                    gId = Guid.NewGuid();
-                    strSlideName = gId.ToString().Trim() + ".ppt";
-                    bool folderExists = Directory.Exists(Server.MapPath("~/Uploads/SessionSlide/"));
-
-                    if (!folderExists)
+                    Guid gId = Guid.NewGuid();
+                    string strSlideName = gId.ToString().Trim() + ".ppt";
+                  
+                    if (!Directory.Exists(Server.MapPath(SessionAssets.SlidePath)))
                     {
-                        Directory.CreateDirectory(Server.MapPath("~/Uploads/SessionSlide/"));
+                        Directory.CreateDirectory(Server.MapPath(SessionAssets.SlidePath));
                     }
-                    string path = Path.Combine(Server.MapPath("~/Uploads/SessionSlide/"), strSlideName);
-                    file.SaveAs(path);
+
+                    file.SaveAs(Path.Combine(Server.MapPath(SessionAssets.SlidePath) , strSlideName));
                     return Json(strSlideName);
                 }
-                return null;
+
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
-                return null;
             }
+            return null;
         }
     }
 }

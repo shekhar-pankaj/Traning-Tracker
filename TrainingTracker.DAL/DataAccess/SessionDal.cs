@@ -160,7 +160,9 @@ namespace TrainingTracker.DAL.DataAccess
                 using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
                     var sessionContext = context.Sessions.FirstOrDefault(s => s.SessionId == session.Id);
+
                     if (sessionContext == null) return false;
+
                     if (session.VideoFileName != null)
                     {
                         sessionContext.VideoFileName = session.VideoFileName;
