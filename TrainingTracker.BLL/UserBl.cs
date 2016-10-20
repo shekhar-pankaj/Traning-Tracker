@@ -51,7 +51,7 @@ namespace TrainingTracker.BLL
         /// <returns>List of User</returns>
         public List<User> GetAllUsersByTeam( User currentUser )
         {
-            if (currentUser.IsAdministrator) return UserDataAccesor.GetAllUsers();
+            if (currentUser.IsAdministrator && !currentUser.TeamId.HasValue) return UserDataAccesor.GetAllUsers();
 
             return currentUser.TeamId.HasValue
                               ? UserDataAccesor.GetAllUsersForTeam(currentUser.TeamId.Value)
@@ -129,7 +129,7 @@ namespace TrainingTracker.BLL
         /// <returns>Returns list of active user.</returns>
         public List<User> GetActiveUsers( User currentUser )
         {
-            if (currentUser.IsAdministrator) return UserDataAccesor.GetActiveUsers();
+            if (currentUser.IsAdministrator && !currentUser.TeamId.HasValue) return UserDataAccesor.GetActiveUsers();
 
             return currentUser.TeamId.HasValue
                               ? UserDataAccesor.GetActiveUsersByTeam(currentUser.TeamId.Value)

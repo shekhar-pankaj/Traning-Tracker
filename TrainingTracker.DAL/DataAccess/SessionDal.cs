@@ -87,8 +87,9 @@ namespace TrainingTracker.DAL.DataAccess
         /// <param name="pageSize">record count</param>
         /// <param name="sessionType">type of session</param>
         /// <param name="searchKeyword">search keyword</param>
+        /// <param name="teamId">team Id</param>
         /// <returns>List of session</returns>
-        public List<Common.Entity.Session> GetSessionOnFilter(int pageSize, int sessionType, string searchKeyword)
+        public List<Common.Entity.Session> GetSessionOnFilter(int pageSize, int sessionType, string searchKeyword,int teamId)
         {
             List<Common.Entity.Session> sessions = new List<Common.Entity.Session>();
             var prms = new List<SqlParameter>
@@ -96,6 +97,7 @@ namespace TrainingTracker.DAL.DataAccess
                 SqlUtility.CreateParameter(SPGetSessionsOnFilter.PARAM_KEYWORD, SqlDbType.NVarChar, searchKeyword),
                 SqlUtility.CreateParameter(SPGetSessionsOnFilter.PARAM_PAGESIZE, SqlDbType.Int, pageSize),
                 SqlUtility.CreateParameter(SPGetSessionsOnFilter.PARAM_SESSIONTYPE, SqlDbType.Int, sessionType),
+                SqlUtility.CreateParameter(SPGetSessionsOnFilter.PARAM_TEAM, SqlDbType.Int, teamId),
 
             };
             try
@@ -117,6 +119,7 @@ namespace TrainingTracker.DAL.DataAccess
                             PresenterFullName = row["PresenterFullName"].ToString(),
                             Presenter = Convert.ToInt32(row["Presenter"]),
                             VideoFileName = row["VideoFileName"].ToString(),
+                            SlideName = row["SlideName"].ToString(),
                             SessionAttendees = new List<Common.Entity.User>()
                         });
                     }
@@ -157,8 +160,17 @@ namespace TrainingTracker.DAL.DataAccess
                 using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
                     var sessionContext = context.Sessions.FirstOrDefault(s => s.SessionId == session.Id);
+
                     if (sessionContext == null) return false;
-                    sessionContext.VideoFileName = session.VideoFileName;
+
+                    if (session.VideoFileName != null)
+                    {
+                        sessionContext.VideoFileName = session.VideoFileName;
+                    }
+                    if (session.SlideName != null)
+                    {
+                        sessionContext.SlideName = session.SlideName;
+                    }
                     context.SaveChanges();
                     return true;
                 }

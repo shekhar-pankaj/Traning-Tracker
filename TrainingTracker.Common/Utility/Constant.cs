@@ -128,6 +128,7 @@
         public const string PARAM_PAGESIZE = "@PageSize";
         public const string PARAM_KEYWORD = "@KeyWord";
         public const string PARAM_SESSIONTYPE = "@SessionType";
+        public const string PARAM_TEAM = "@TeamId";
         public const string TABLE_NAME = "Result";
     }
 

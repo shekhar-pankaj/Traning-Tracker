@@ -4,8 +4,8 @@
         uploadVideo: function (videoFile, callback) {
             my.ajaxService.ajaxUploadImage("/Session/UploadVideo", videoFile, callback);
         },
-        updateVideoFileCallback: function(videoFileName, id, callback){
-            my.ajaxService.ajaxPostJson("/Session/UpdateVideoFile", videoFileName, callback);
-        },      
+        uploadSlide: function (presentationFile, callback) {
+            my.ajaxService.ajaxUploadImage("/Session/UploadSlide", presentationFile, callback);
+        },
     };
 }(my));

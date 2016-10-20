@@ -3,8 +3,10 @@ using System;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+//using System.IO.Directory.CreateDirectory;
 using TrainingTracker.Authorize;
 using TrainingTracker.BLL;
+using TrainingTracker.Common.Constants;
 using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Utility;
 
@@ -13,8 +15,8 @@ namespace TrainingTracker.Controllers
     /// <summary>
     /// Controller class for session
     /// </summary>
-    [CustomAuthorizeAttribute]
-    public class SessionController:Controller
+    [CustomAuthorize]
+    public class SessionController : Controller
     {
         /// <summary>
         /// Action method for Index
@@ -29,10 +31,9 @@ namespace TrainingTracker.Controllers
         /// Get Sessions for user on filter
         /// </summary>
         /// <returns>Json result</returns>
-        public ActionResult GetUserFeedbackOnFilter( int pageSize , int seminarType , string searchKeyword = "" )
+        public ActionResult GetUserFeedbackOnFilter(int pageSize, int seminarType, string searchKeyword = "")
         {
-            return Json(new SessionBl().GetSessionOnFilter(pageSize , seminarType , searchKeyword) , JsonRequestBehavior.AllowGet);
-
+            return Json(new SessionBl().GetSessionOnFilter(pageSize, seminarType, searchKeyword, new UserBl().GetUserByUserName(User.Identity.Name)), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -41,8 +42,7 @@ namespace TrainingTracker.Controllers
         /// <returns>Json result</returns>
         public ActionResult AddEditSession(Session sessionDetails)
         {
-            return Json(new SessionBl().AddEditSessions(sessionDetails) , JsonRequestBehavior.AllowGet);
-
+            return Json(new SessionBl().AddEditSessions(sessionDetails), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -50,29 +50,68 @@ namespace TrainingTracker.Controllers
         /// </summary>
         /// <param name="fileName">Contain parameter fileName as HttpPostedFileBase object</param>
         /// <returns>Return filename as JSON object.</returns>
-        [HttpPost]
+        /// [HttpPost]
+        /// 
         public ActionResult UploadVideo(HttpPostedFileBase fileName)
         {
             HttpPostedFileBase file = Request.Files["file"];
-            string strFileName = string.Empty;
+           
             try
             {
                 if (file != null && file.ContentLength > 0)
                 {
-                    Guid gId;
-                    gId = Guid.NewGuid();
-                    strFileName = gId.ToString().Trim() + ".mp4";
-                    var path = Path.Combine(Server.MapPath("~/Uploads/SessionVideo/"), strFileName);
-                    file.SaveAs(path);
-                }
+                    Guid gId = Guid.NewGuid();
+                    string strFileName = gId.ToString().Trim() + FileExtensions.Mp4;
+
+                    if (!Directory.Exists(Server.MapPath(SessionAssets.VideoPath)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath(SessionAssets.VideoPath));
+                    }
+
+                    file.SaveAs(Path.Combine(Server.MapPath(SessionAssets.VideoPath) , strFileName));
+                    return Json(strFileName);
+                }                
             }
             catch (Exception ex)
             {
                 LogUtility.ErrorRoutine(ex);
-                return null;
             }
-            return Json(strFileName);
+            return null;
+        }
 
+
+        /// <summary>
+        /// Action method for upload session slide.
+        /// </summary>
+        /// <param name="fileName">Contain parameter fileName as HttpPostedFileBase object</param>
+        /// <returns>Return filename as JSON object.</returns>
+        [HttpPost]
+        public ActionResult UploadSlide(HttpPostedFileBase fileName)
+        {
+            HttpPostedFileBase file = Request.Files["file"];
+           
+            try
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    Guid gId = Guid.NewGuid();
+                    string strSlideName = gId.ToString().Trim() + ".ppt";
+                  
+                    if (!Directory.Exists(Server.MapPath(SessionAssets.SlidePath)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath(SessionAssets.SlidePath));
+                    }
+
+                    file.SaveAs(Path.Combine(Server.MapPath(SessionAssets.SlidePath) , strSlideName));
+                    return Json(strSlideName);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+            }
+            return null;
         }
     }
 }

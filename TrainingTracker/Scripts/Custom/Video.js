@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-    var myPlayer = videojs("my-video");
+    var player = videojs("my-video");
     $("#btnStopVideo").click(function () {
-        myPlayer.pause().currentTime(0).trigger('loadstart');
+        player.pause().currentTime(0).trigger('loadstart');
     })
-    myPlayer.ControlBar = {
+    player.ControlBar = {
         children: {
             'volumeMenuButton': {
                 'volumeBar': {
