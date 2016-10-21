@@ -19,12 +19,12 @@
             IsFemale: ko.observable("false"),
             PhotoUrl: function () {
                 return my.rootUrl + "/Uploads/ProfilePicture/" + my.addUserVm.user.ProfilePictureName();
-
             },
             IsReadOnly: ko.observable(true),
             IsNewProfile: ko.observable(false),
             enableChangePassword: ko.observable(false),
             fileData: ko.observable(""),
+            TeamId :ko.observable()
         },
             currentUser = {
                 UserId: ko.observable(),
@@ -41,6 +41,7 @@
                 Password: ko.observable(""),
                 IsFemale: ko.observable(""),
                 IsActive: ko.observable(),
+                TeamId: ko.observable()                
             },
             getCurrentUserCallback = function (item) {
                 my.addUserVm.currentUser.UserId(item.UserId);
@@ -55,13 +56,15 @@
                 my.addUserVm.currentUser.IsManager(item.IsManager);
                 my.addUserVm.currentUser.ProfilePictureName(item.ProfilePictureName);
                 my.addUserVm.currentUser.Password("");
+                my.addUserVm.currentUser.TeamId(item.TeamId);
                 my.addUserVm.currentUser.IsFemale(item.IsFemale);
                 my.addUserVm.currentUser.IsActive(item.IsActive);
             },
             getCurrentUser = function () {
                 my.userService.getCurrentUser(my.addUserVm.getCurrentUserCallback);
             },
-            setUser = function (item) {
+            setUser = function (item)
+            {
                 my.addUserVm.user.UserId(item.UserId);
                 my.addUserVm.user.FirstName(item.FirstName);
                 my.addUserVm.user.LastName(item.LastName);
@@ -77,7 +80,7 @@
                 my.addUserVm.user.IsFemale(item.IsFemale);
                 my.addUserVm.user.IsActive(item.IsActive);
                 my.addUserVm.user.enableChangePassword(false);
-
+                my.addUserVm.user.TeamId(item.TeamId);
             },
             saveUserCallback = function (jsonData) {
                 if (jsonData.status) {
@@ -116,6 +119,10 @@
                 if (my.isNullorEmpty(my.addUserVm.user.Designation())) {
                     emptyFields.push("Designation");
                 }
+                if (!(my.addUserVm.user.IsAdministrator() && !my.addUserVm.user.IsTrainer() && !my.addUserVm.user.IsTrainee() && !my.addUserVm.user.IsManager()) && my.isNullorEmpty(my.addUserVm.user.TeamId()))
+                {
+                    emptyFields.push("Team");
+                }
                 if (!my.addUserVm.user.IsAdministrator() && !my.addUserVm.user.IsTrainer() && !my.addUserVm.user.IsTrainee() && !my.addUserVm.user.IsManager()) {
                     emptyFields.push("Role");
                 }
@@ -144,6 +151,7 @@
         resetUser = function () {
             my.reset(user);
             my.addUserVm.user.IsFemale(false);
+            my.addUserVm.user.TeamId(undefined);
             my.addUserVm.user.Designation("Sr. Software Engineer");
             my.addUserVm.user.ProfilePictureName("Dummy.jpg");
             my.addUserVm.user.IsReadOnly(true);
@@ -158,13 +166,25 @@
             fullName = function (item) {
                 return item.FirstName + " " + item.LastName;
             },
+            
             lstUsers = ko.observableArray([]),
-            getUsersCallback = function (userList) {
+            lstTeams = ko.observableArray([]),
+            
+            getUsersCallback = function (jsonData) {
+                var userList = jsonData.AllUser;
                 my.addUserVm.lstUsers([]),
+                my.addUserVm.lstTeams([]),
+                
                 ko.utils.arrayForEach(userList, function (item) {
                     item.FullName = my.addUserVm.fullName(item);
                     my.addUserVm.lstUsers.push(item);
                 });
+                
+                ko.utils.arrayForEach(jsonData.AllTeams, function (item)
+                {                   
+                    my.addUserVm.lstTeams.push(item);
+                });
+                my.addUserVm.setUser(my.meta.currentUser);
             },
 
             getUsers = function () {
@@ -203,6 +223,7 @@
             showAllUsersProfile = ko.observable(false),
             openAllUsersProfile = function () {
                 closeDialogue();
+                my.addUserVm.getUsers();
                 my.addUserVm.showDialog(true);
                 if (my.meta.currentUser.IsAdministrator || my.meta.currentUser.IsManager) {
                     my.addUserVm.showAllUsersProfile(true);
@@ -214,6 +235,7 @@
 
         return {
             lstUsers: lstUsers,
+            lstTeams:lstTeams,
             currentUser: currentUser,
             getCurrentUserCallback: getCurrentUserCallback,
             getCurrentUser: getCurrentUser,
@@ -246,6 +268,5 @@
         else {
             my.addUserVm.uploadImage();
         }
-    });
-    my.addUserVm.getUsers();
+    });    
 });

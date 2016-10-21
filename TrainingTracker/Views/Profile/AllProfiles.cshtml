@@ -4,7 +4,7 @@
 
 @section Styles
 {
-    <link href="~/StyleSheets/AllProfiles.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/AllProfileViewStyles")
 }
 
 <div class="container-fluid">
@@ -21,7 +21,7 @@
             <div class="panel-group">
                 <ul class="list-inline" data-bind="foreach: users()">
                     <li>
-                        <a data-bind="attr: {href: my.rootUrl + '/Profile/UserProfile?userId=' + UserId}">
+                        <a data-bind="attr: {href: my.rootUrl + 'Profile/UserProfile?userId=' + UserId}">
                             <div data-bind="css: { 'panel-success': IsTrainer, 'panel-info': IsTrainee, 'panel-danger': IsManager}"
                                  class="panel" style="width:250px">
                                 <div class="panel-heading">
@@ -46,5 +46,5 @@
 
 @section Scripts
 {
-    <script src="~/Scripts/Custom/AllProfile.js"></script>
+    @Scripts.Render("~/bundles/AllProfileViewScripts")
 }

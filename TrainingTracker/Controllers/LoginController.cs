@@ -96,6 +96,14 @@ namespace TrainingTracker.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
+            HttpCookie cookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (cookie != null)
+            {
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.SetCookie(cookie);
+            }
+            Session.Clear();
             return RedirectToAction("Index");
         }
     }

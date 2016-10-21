@@ -33,7 +33,8 @@
                
         var viewSettings=
         {
-            showDailog:ko.observable(false),
+            showDailog: ko.observable(false),
+            anyNewThreadAdded:false
         };
 
         var openFeedbackDailog = function () {
@@ -45,6 +46,11 @@
             resetFeedbackData();
             resetThreadData();
             my.feedbackThreadsVm.viewSettings.showDailog(false);
+            
+            if (typeof (my.profileVm) !== 'undefined' && viewSettings.anyNewThreadAdded)
+            {
+                my.profileVm.applyFilter();
+            }
             
         };
 
@@ -107,7 +113,7 @@
             my.feedbackThreadsVm.feedbackData.FeedbackText(feedback.FeedbackText);
 
            
-        };       
+        };
 
         var loadThreadData = function(thread) {
             my.feedbackThreadsVm.feedbackData.Threads(thread);
@@ -138,13 +144,14 @@
                 };                
                 my.feedbackThreadsVm.feedbackData.Threads.push(feedback);
                 my.feedbackThreadsVm.threadData.Comments("");
+                viewSettings.anyNewThreadAdded = true;
             }
            
         };
 
         var validateThreadDetails = function() {
 
-            return ( my.feedbackThreadsVm.threadData.FeedbackId() > 0 || !my.isNullorEmpty(my.feedbackThreadsVm.threadData.Comments()) || my.feedbackThreadsVm.threadData.Comments().length < 500 );
+            return ( my.feedbackThreadsVm.threadData.FeedbackId() > 0 && !my.isNullorEmpty(my.feedbackThreadsVm.threadData.Comments()) && my.feedbackThreadsVm.threadData.Comments().length < 500 );
         };
                
         return {            
@@ -156,6 +163,5 @@
             threadData: threadData,
             addNewThread: addNewThread
         };
-    }();
-    
+    }();   
 });

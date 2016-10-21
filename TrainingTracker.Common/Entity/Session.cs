@@ -14,7 +14,8 @@ namespace TrainingTracker.Common.Entity
         public string PresenterFullName { get; set; }
         public string[] Attendee { get; set; }
         public List<User> SessionAttendees { get; set; }
-
+        public string VideoFileName { get; set; }
+        public string SlideName { get; set; }
         public bool IsNeW{get; set;}
     }
 }

@@ -59,13 +59,14 @@ namespace TrainingTracker.DAL.Interface
         /// <summary>
         /// Get All Dashboard Data
         /// </summary>
+        /// <param name="teamId">Logged in user Team Id</param>
         /// <returns>instance Of List of UserData</returns>
-        List<UserData> GetDashboardData();
+        List<UserData> GetDashboardData(int teamId);
 
         /// <summary>
         /// Get list of integer value as userId.
         /// </summary>
-        /// <param name="typeOfNotification">Takes parametere as typeOfNotification and the user for which notification is added.</param>
+        /// <param name="notification">Takes parametere as typeOfNotification and the user for which notification is added.</param>
         /// <returns> Returns list of userid.</returns>
         List<int> GetUserId(Notification notification, int addedFor);
 
@@ -74,5 +75,18 @@ namespace TrainingTracker.DAL.Interface
         /// </summary>
         /// <returns>Returns list of active user.</returns>
         List<User> GetActiveUsers();
+
+        /// <summary>
+        /// Gets all Users by team.
+        /// </summary>
+        /// <param name="teamId">team Id</param>
+        /// <returns>List of all users.</returns>
+        List<User> GetAllUsersForTeam(int teamId);
+
+        /// <summary>
+        /// interface method GetActiveUsers by team 
+        /// </summary>
+        /// <returns>List of User</returns>
+        List<User> GetActiveUsersByTeam(int teamId);
     }
 }

@@ -3,6 +3,7 @@
     background: #000;
     opacity: 0.5;
     min-height: 100vh;
+      cursor: pointer;
 }
   #divFeedbackThread #divFeedbackContainer {
       width: 80%;
@@ -29,7 +30,7 @@
 	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
-#divCommentThreads img {
+#divCommentThreads img ,#divNewThread img{
     width: 36px;
     height: 36px;
     display: inline-block;
@@ -59,7 +60,7 @@
 
 #divNewThread > .panel-white {
     background-color: #fff;
-    padding: 6px;
+    padding: 6px 6px 6px 23px;
     border-radius: 4px;
 }
    
@@ -75,5 +76,6 @@
     z-index: 100000;
     /* background: #ccc; */
     border-radius: 71%;
+    cursor: pointer;
 }
     

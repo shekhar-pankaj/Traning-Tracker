@@ -116,6 +116,7 @@
         public const string PARAM_ID = "@SessionId";
         public const string PARAM_ATTENDEES ="@AttendeeCsv";
         public const string TABLE_NAME = "Result";
+        public const string PARAM_VIDEOFILENAME = "@VideoFileName"; 
     }
 
     /// <summary>
@@ -127,6 +128,7 @@
         public const string PARAM_PAGESIZE = "@PageSize";
         public const string PARAM_KEYWORD = "@KeyWord";
         public const string PARAM_SESSIONTYPE = "@SessionType";
+        public const string PARAM_TEAM = "@TeamId";
         public const string TABLE_NAME = "Result";
     }
 

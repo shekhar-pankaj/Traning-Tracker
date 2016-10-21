@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace TrainingTracker.DAL.DataAccess
             {
                 using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
-                    return context.Users.Any(x => x.UserName == userData.UserName && x.Password == userData.Password);
+                    return context.Users.Any(x => x.UserName == userData.UserName && x.Password == userData.Password && (x.IsAdministrator==true || x.TeamId.HasValue));
                 }
             }
             catch (Exception ex)
@@ -70,9 +71,11 @@ namespace TrainingTracker.DAL.DataAccess
                                                             IsTrainer = userData.IsTrainer ,
                                                             IsTrainee = userData.IsTrainee ,
                                                             IsManager = userData.IsManager ,
-                                                            DateAddedToSystem = DateTime.Now,
-                                                            IsActive = userData.IsActive,
-                    };
+                                                            DateAddedToSystem = DateTime.Now ,
+                                                            IsActive = userData.IsActive ,
+                                                            TeamId = userData.TeamId
+                                                        };
+
                     context.Users.Add(objUser);
                     context.SaveChanges();
                     userId = objUser.UserId;
@@ -119,6 +122,8 @@ namespace TrainingTracker.DAL.DataAccess
                     {
                         userContext.Password = userData.Password;
                     }
+                    userContext.TeamId = userData.TeamId;
+
 
                     context.SaveChanges();
                     return true;
@@ -146,18 +151,19 @@ namespace TrainingTracker.DAL.DataAccess
                                                         UserId = x.UserId ,
                                                         FirstName = x.FirstName ,
                                                         LastName = x.LastName ,
-                                                        FullName = x.FirstName + " " + x.LastName,
+                                                        FullName = x.FirstName + " " + x.LastName ,
                                                         UserName = x.UserName ,
                                                         Email = x.Email ,
                                                         Designation = x.Designation ,
                                                         ProfilePictureName = x.ProfilePictureName ,
-                                                        IsFemale = x.IsFemale??false ,
+                                                        IsFemale = x.IsFemale ?? false ,
                                                         IsAdministrator = x.IsAdministrator ?? false ,
                                                         IsTrainer = x.IsTrainer ?? false ,
                                                         IsTrainee = x.IsTrainee ?? false ,
                                                         IsManager = x.IsManager ?? false ,
-                                                        IsActive = x.IsActive ?? false,
-                                                        DateAddedToSystem = x.DateAddedToSystem                                                       
+                                                        IsActive = x.IsActive ?? false ,
+                                                        DateAddedToSystem = x.DateAddedToSystem ,
+                                                        TeamId = x.TeamId
                                                     }).ToList();
                 }
             }
@@ -181,22 +187,23 @@ namespace TrainingTracker.DAL.DataAccess
                 {
                     //No user can have same UserName, so used First in IQuerable clause intented to throw exception.
                     return context.Users.Where(x => x.UserName == userName)
-                                        .Select(x=> new User
+                                        .Select(x => new User
                                                 {
-                                                   UserId = x.UserId ,
-                                                   FirstName = x.FirstName ,
-                                                   LastName = x.LastName ,
-                                                   UserName = x.UserName ,
-                                                   Email = x.Email ,
-                                                   Designation = x.Designation ,
-                                                   ProfilePictureName = x.ProfilePictureName ,
-                                                   IsFemale = x.IsFemale ?? false ,
-                                                   IsAdministrator = x.IsAdministrator ?? false ,
-                                                   IsTrainer = x.IsTrainer ?? false ,
-                                                   IsTrainee = x.IsTrainee ?? false ,
-                                                   IsManager = x.IsManager ?? false ,
-                                                   IsActive = x.IsActive ?? false ,
-                                                   UserRating = 0 
+                                                    UserId = x.UserId ,
+                                                    FirstName = x.FirstName ,
+                                                    LastName = x.LastName ,
+                                                    UserName = x.UserName ,
+                                                    Email = x.Email ,
+                                                    Designation = x.Designation ,
+                                                    ProfilePictureName = x.ProfilePictureName ,
+                                                    IsFemale = x.IsFemale ?? false ,
+                                                    IsAdministrator = x.IsAdministrator ?? false ,
+                                                    IsTrainer = x.IsTrainer ?? false ,
+                                                    IsTrainee = x.IsTrainee ?? false ,
+                                                    IsManager = x.IsManager ?? false ,
+                                                    IsActive = x.IsActive ?? false ,
+                                                    UserRating = 0 ,
+                                                    TeamId = x.TeamId
                                                 }).First();
 
                 }
@@ -236,8 +243,9 @@ namespace TrainingTracker.DAL.DataAccess
                                             IsTrainee = x.IsTrainee ?? false ,
                                             IsManager = x.IsManager ?? false ,
                                             IsActive = x.IsActive ?? false ,
-                                            DateAddedToSystem = x.DateAddedToSystem ,   
-                                            UserRating = 0
+                                            DateAddedToSystem = x.DateAddedToSystem ,
+                                            UserRating = 0 ,
+                                            TeamId = x.TeamId
                                         }).First();
                 }
             }
@@ -252,37 +260,66 @@ namespace TrainingTracker.DAL.DataAccess
         /// Gets all Users.
         /// </summary>
         /// <returns>List of all users.</returns>
-        public List<UserData> GetDashboardData()
+        public List<UserData> GetDashboardData( int teamId )
         {
             var users = new List<UserData>();
-            //var objUserData = new UserData();
-
-            var prms = new List<SqlParameter>();
             try
             {
-                var dt = SqlUtility.ExecuteAndGetTable(SPGetDashboardData.NAME ,
-                    CommandType.StoredProcedure , SPGetDashboardData.TABLE_NAME , prms);
-
-                foreach (DataRow rows in dt.Rows)
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
-                    if (!users.Exists(x =>x.User.UserId == Convert.ToInt32(rows["UserId"])))
-                    {
-                        users.Add(new UserData
-                        {
-                            User = new User
-                            {
-                                UserId = Convert.ToInt32(rows["UserId"]),
-                                DateAddedToSystem = Convert.ToDateTime(rows["DateAddedToSystem"]),
-                                FullName = rows["FullName"].ToString() ,
-                            } ,
-                            RemainingFeedbacks = new List<Feedback>() ,
-                            WeeklyFeedback = new List<Feedback>() ,
-                            SkillsFeedback = new List<Feedback>()
-                        });
-                    }
-                    var objUserData = users.First(x => x.User.UserId == Convert.ToInt32(rows["UserId"]));
-                    AddFeedbacksToTheList(ref users , rows);
-                }
+                    return context.Users
+                                  .Where(x => (teamId == 0 || x.TeamId == teamId) && x.IsActive == true && x.IsTrainee == true)
+                                  .OrderBy(x => x.FirstName)
+                                  .Select(x => new 
+                                  {
+                                      User = new User
+                                                    {
+                                                        UserId = x.UserId ,
+                                                        DateAddedToSystem = x.DateAddedToSystem ,
+                                                        FullName = x.FirstName + " " + x.LastName ,
+                                                    } ,
+                                      Feedbacks = x.Feedbacks1.Where(z => z.FeedbackType == (int) Common.Enumeration.FeedbackType.Assignment || z.FeedbackType == (int) Common.Enumeration.FeedbackType.CodeReview || z.FeedbackType == (int) Common.Enumeration.FeedbackType.Weekly).OrderByDescending(r => r.FeedbackId)                                                    
+                                  })
+                                  .ToList()
+                                  .Select(t=>new UserData
+                                  {
+                                      User = t.User,
+                                      RemainingFeedbacks = t.Feedbacks
+                                                            .Where(z => z.FeedbackType == (int) Common.Enumeration.FeedbackType.Assignment || z.FeedbackType == (int) Common.Enumeration.FeedbackType.CodeReview || z.FeedbackType == (int) Common.Enumeration.FeedbackType.Weekly)
+                                                            .Select(z => new Feedback
+                                                                              {
+                                                                                  AddedBy = new User { FullName = z.User.FirstName + " " +z.User.LastName } ,
+                                                                                  AddedOn = z.AddedOn ?? DateTime.MinValue ,
+                                                                                  FeedbackType = new FeedbackType
+                                                                                  {
+                                                                                      Description = z.FeedbackType1.Description ,
+                                                                                      FeedbackTypeId =z.FeedbackType1.FeedbackTypeId
+                                                                                  } ,
+                                                                                  Skill = new Skill(),
+                                                                                  Title = z.Title ,
+                                                                                  Rating = z.Rating ?? 0 ,
+                                                                                  StartDate = z.StartDate ?? DateTime.MinValue ,
+                                                                                  EndDate = z.EndDate ?? DateTime.MinValue 
+                                                                              }).ToList(),
+                                      WeeklyFeedback = t.Feedbacks
+                                                        .Where(z => z.FeedbackType == (int) Common.Enumeration.FeedbackType.Weekly)
+                                                        .Select(z => new Feedback
+                                                        {
+                                                            AddedBy = new User { FullName = z.User.FirstName + " " + z.User.LastName } ,
+                                                            AddedOn = z.AddedOn ?? DateTime.MinValue ,
+                                                            FeedbackType = new FeedbackType
+                                                            {
+                                                                Description = z.FeedbackType1.Description ,
+                                                                FeedbackTypeId = z.FeedbackType1.FeedbackTypeId
+                                                            } ,
+                                                            Skill = new Skill() ,
+                                                            Title = z.Title ,
+                                                            Rating = z.Rating ?? 0 ,
+                                                            StartDate = z.StartDate ?? DateTime.MinValue ,
+                                                            EndDate = z.EndDate ?? DateTime.MinValue
+                                                        }).ToList()
+                                  }).ToList();
+                }               
             }
             catch (Exception ex)
             {
@@ -293,85 +330,21 @@ namespace TrainingTracker.DAL.DataAccess
         }
 
         /// <summary>
-        /// Private method to Add Feedbacks to the  List
-        /// </summary>
-        /// <param name="userData">reference to userData</param>
-        /// <param name="row">datarow</param>
-        private void AddFeedbacksToTheList( ref List<UserData> userData , DataRow row )
-        {
-            int skillId , feedbackType;
-            DateTime startDate , addedOn;
-            DateTime endDate;
-
-            DateTime.TryParse(Convert.ToString(row["StartDate"]) , out startDate);
-            DateTime.TryParse(Convert.ToString(row["EndDate"]) , out endDate);
-            DateTime.TryParse(Convert.ToString(row["AddedOn"]) , out addedOn);
-            Int32.TryParse(Convert.ToString(row["SkillId"]) , out skillId);
-            Int32.TryParse(Convert.ToString(row["FeedbackType"]) , out feedbackType);
-
-            if (feedbackType == 0) return;
-         
-                var feedback = new Feedback
-                {
-                    AddedBy = new User { FullName = Convert.ToString(row["AddedBy"]) } ,
-                    AddedOn = addedOn ,
-                    //						AddedBy	AddedOn		
-                    FeedbackType = new FeedbackType
-                    {
-                        Description = Convert.ToString(row["FeedbackText"]) ,
-                        FeedbackTypeId = Convert.ToInt32(row["FeedbackType"])
-                    } ,
-                    //Project = new Project{}
-                    Skill = new Skill
-                    {
-                        Name = (row["SkillName"]).ToString() ,
-                        SkillId = skillId
-                    } ,
-                    Title = Convert.ToString(row["Title"]) ,
-                    Rating = Convert.ToInt32(row["Rating"]) ,
-                    StartDate = startDate ,
-                    EndDate = endDate ,
-                };
-
-                int userId = Convert.ToInt32(row["UserId"]);
-
-                switch (Convert.ToInt32(row["FeedbackType"]))
-                {
-                    case 3:
-                    case 4:
-                        userData.First(x => x.User.UserId == userId)
-                                .RemainingFeedbacks
-                                .Add(feedback);
-                        break;
-                    case 2:
-                        if (!userData.First(x => x.User.UserId == Convert.ToInt32(row["UserId"]))
-                                 .SkillsFeedback.Any(x => x.Skill.Name.Equals((row["SkillName"]).ToString())))
-                            userData.First(x => x.User.UserId == Convert.ToInt32(row["UserId"]))
-                                    .SkillsFeedback
-                                    .Add(feedback);
-                        break;
-                    case 5:
-                        var objUSerData = userData.First(x => x.User.UserId == userId);
-
-                        objUSerData.WeeklyFeedback.Add(feedback);
-                        objUSerData.RemainingFeedbacks.Add(feedback);
-                        break;
-                }
-        }
-
-	    /// <summary>
         /// Public method GetUserId returns list of user id as per the condition,
         /// So specific notifications are added to specific user profile.
         /// </summary>
-        /// <param name="notificationType">Contain notificationType as parameter.</param>
+        /// <param name="notification">Contain notificationType as parameter.</param>
         /// <param name="addedFor">Contain notificationType as parameter.</param>
         /// <returns>Returns user Ids as a list.</returns>
-        public List<int> GetUserId(Common.Entity.Notification notification, int addedFor)
+        public List<int> GetUserId( Common.Entity.Notification notification , int addedFor )
         {
             try
             {
+                User currentUser = GetUserById(addedFor);
+
                 using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
+                    
                     switch (notification.TypeOfNotification)
                     {
                         case Common.Enumeration.NotificationType.CodeReviewFeedbackNotification:
@@ -381,23 +354,27 @@ namespace TrainingTracker.DAL.DataAccess
                         case Common.Enumeration.NotificationType.WeeklyFeedbackNotification:
                         case Common.Enumeration.NotificationType.NewNoteToFeedback:
                             return context.Users
-                                .Where(x => (x.UserId == addedFor || x.IsTrainer == true || x.IsManager == true) && (x.IsActive == true && x.UserId != notification.AddedBy))
+                                .Where(x => (x.UserId == addedFor || x.IsTrainer == true || x.IsManager == true) 
+                                        && (x.IsActive == true && x.UserId != notification.AddedBy) 
+                                        && (currentUser.TeamId.HasValue && x.TeamId == currentUser.TeamId))
                                 .Select(x => x.UserId)
                                 .ToList();
+
                         case Common.Enumeration.NotificationType.NewReleaseNotification:
-                        case Common.Enumeration.NotificationType.NewFeatureRequestNotification :
+                        case Common.Enumeration.NotificationType.NewFeatureRequestNotification:
                         case Common.Enumeration.NotificationType.FeatureModifiedNotification:
-                            return context.Users.Where(x => x.UserId != notification.AddedBy && x.IsActive == true)
+                            return context.Users.Where(x => x.UserId != notification.AddedBy && x.IsActive == true )
                                                 .Select(x => x.UserId)
                                                 .ToList();
+
                         case Common.Enumeration.NotificationType.NewSessionNotification:
                         case Common.Enumeration.NotificationType.SessionUpdatedNotification:
-                            var users =  context.Users.Where(x => (x.IsManager == true || x.IsTrainer == true) && (x.IsActive == true && x.UserId != notification.AddedBy))
+                            return context.Users.Where(x => (x.IsManager == true || x.IsTrainer == true) 
+                                                        && (x.IsActive == true && x.UserId != notification.AddedBy)
+                                                        && (currentUser.TeamId.HasValue && x.TeamId == currentUser.TeamId))
                                           .Select(x => x.UserId)
                                           .ToList();
-                            var userIds = Array.ConvertAll(notification.AddedTo, int.Parse).ToList();
-                            return users.Union(userIds).ToList();
-                      }
+                    }
                     return null;
                 }
             }
@@ -419,25 +396,114 @@ namespace TrainingTracker.DAL.DataAccess
                 using (TrainingTrackerEntities context = new TrainingTrackerEntities())
                 {
                     return context.Users.Where(x => x.IsActive == true)
+                                        .OrderByDescending(x => x.IsAdministrator == true)
+                                        .ThenByDescending(x => x.IsManager == true)
+                                        .ThenByDescending(x => x.IsTrainer == true)
+                                        .ThenByDescending(x => x.IsTrainee == true)
+                                        .ThenBy(x => x.FirstName)
                                         .Select(x => new User
                                                     {
-                                                        UserId = x.UserId,
-                                                        FirstName = x.FirstName,
-                                                        LastName = x.LastName,
-                                                        FullName = x.FirstName + " " + x.LastName,
-                                                        UserName = x.UserName,
-                                                        Email = x.Email,
-                                                        Designation = x.Designation,
-                                                        ProfilePictureName = x.ProfilePictureName,
-                                                        IsFemale = x.IsFemale ?? false,
-                                                        IsAdministrator = x.IsAdministrator ?? false,
-                                                        IsTrainer = x.IsTrainer ?? false,
-                                                        IsTrainee = x.IsTrainee ?? false,
-                                                        IsManager = x.IsManager ?? false,
-                                                        IsActive = x.IsActive ?? false,
-                                                        DateAddedToSystem = x.DateAddedToSystem
+                                                        UserId = x.UserId ,
+                                                        FirstName = x.FirstName ,
+                                                        LastName = x.LastName ,
+                                                        FullName = x.FirstName + " " + x.LastName ,
+                                                        UserName = x.UserName ,
+                                                        Email = x.Email ,
+                                                        Designation = x.Designation ,
+                                                        ProfilePictureName = x.ProfilePictureName ,
+                                                        IsFemale = x.IsFemale ?? false ,
+                                                        IsAdministrator = x.IsAdministrator ?? false ,
+                                                        IsTrainer = x.IsTrainer ?? false ,
+                                                        IsTrainee = x.IsTrainee ?? false ,
+                                                        IsManager = x.IsManager ?? false ,
+                                                        IsActive = x.IsActive ?? false ,
+                                                        DateAddedToSystem = x.DateAddedToSystem ,
+                                                        TeamId = x.TeamId
                                                     }).ToList();
-               }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Public method GetActiveUsers by team 
+        /// </summary>
+        /// <returns>List of User</returns>
+        public List<User> GetActiveUsersByTeam(int teamId)
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    return context.Users.Where(x => x.IsActive == true && x.TeamId==teamId)
+                                        .OrderByDescending(x => x.IsAdministrator == true)
+                                        .ThenByDescending(x => x.IsManager == true)
+                                        .ThenByDescending(x => x.IsTrainer == true)
+                                        .ThenByDescending(x => x.IsTrainee == true) 
+                                        .ThenBy(x => x.FirstName)
+                                        .Select(x => new User
+                                        {
+                                            UserId = x.UserId ,
+                                            FirstName = x.FirstName ,
+                                            LastName = x.LastName ,
+                                            FullName = x.FirstName + " " + x.LastName ,
+                                            UserName = x.UserName ,
+                                            Email = x.Email ,
+                                            Designation = x.Designation ,
+                                            ProfilePictureName = x.ProfilePictureName ,
+                                            IsFemale = x.IsFemale ?? false ,
+                                            IsAdministrator = x.IsAdministrator ?? false ,
+                                            IsTrainer = x.IsTrainer ?? false ,
+                                            IsTrainee = x.IsTrainee ?? false ,
+                                            IsManager = x.IsManager ?? false ,
+                                            IsActive = x.IsActive ?? false ,
+                                            DateAddedToSystem = x.DateAddedToSystem ,
+                                            TeamId = x.TeamId
+                                        }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.ErrorRoutine(ex);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get All User for the team
+        /// </summary>
+        /// <param name="teamId">team id</param>
+        /// <returns>List of User</returns>
+        public List<User> GetAllUsersForTeam( int teamId )
+        {
+            try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    return context.Users.Where(x => x.TeamId == teamId).Select(x => new User
+                    {
+                        UserId = x.UserId ,
+                        FirstName = x.FirstName ,
+                        LastName = x.LastName ,
+                        FullName = x.FirstName + " " + x.LastName ,
+                        UserName = x.UserName ,
+                        Email = x.Email ,
+                        Designation = x.Designation ,
+                        ProfilePictureName = x.ProfilePictureName ,
+                        IsFemale = x.IsFemale ?? false ,
+                        IsAdministrator = x.IsAdministrator ?? false ,
+                        IsTrainer = x.IsTrainer ?? false ,
+                        IsTrainee = x.IsTrainee ?? false ,
+                        IsManager = x.IsManager ?? false ,
+                        IsActive = x.IsActive ?? false ,
+                        DateAddedToSystem = x.DateAddedToSystem ,
+                        TeamId = teamId
+                    }).ToList();
+                }
             }
             catch (Exception ex)
             {
