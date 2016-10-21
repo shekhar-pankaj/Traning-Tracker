@@ -12,14 +12,14 @@
                 my.meta.isManager(user.IsManager);
                 my.meta.isAdministrator(user.IsAdministrator);
                 my.meta.isTrainee(user.IsTrainee);
-                my.meta.userProfileUrl(my.rootUrl + '/Profile/UserProfile?userId=' + user.UserId);
+                my.meta.userProfileUrl(my.rootUrl + 'Profile/UserProfile?userId=' + user.UserId);
                 my.meta.initializeNavbar();
                 my.meta.getNotification();
             },
 			  notifications = ko.observableArray([]),
 		      noOfNotification = ko.observable(),
             avatarUrl = function (item) {
-                return my.rootUrl + "/Uploads/ProfilePicture/" + item.ProfilePictureName;
+                return my.rootUrl + "Uploads/ProfilePicture/" + item.ProfilePictureName;
             },
             getCurrentUser = function () {
                 my.userService.getCurrentUser(my.meta.getCurrentUserCallback);

@@ -369,13 +369,11 @@ namespace TrainingTracker.DAL.DataAccess
 
                         case Common.Enumeration.NotificationType.NewSessionNotification:
                         case Common.Enumeration.NotificationType.SessionUpdatedNotification:
-                            var users = context.Users.Where(x => (x.IsManager == true || x.IsTrainer == true) 
+                            return context.Users.Where(x => (x.IsManager == true || x.IsTrainer == true) 
                                                         && (x.IsActive == true && x.UserId != notification.AddedBy)
                                                         && (currentUser.TeamId.HasValue && x.TeamId == currentUser.TeamId))
                                           .Select(x => x.UserId)
                                           .ToList();
-                            var userIds = Array.ConvertAll(notification.AddedTo , int.Parse).ToList();
-                            return users.Union(userIds).ToList();
                     }
                     return null;
                 }

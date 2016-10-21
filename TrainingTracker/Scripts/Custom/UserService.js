@@ -41,7 +41,7 @@
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Session/GetUserFeedbackOnFilter?pageSize=" + pageSize + "&seminarType=" + seminarType + "&searchKeyword=" + '', null, getSessionsOnFilterCallback);
         },
         uploadImage: function (imagefile, callback) {
-            my.ajaxService.ajaxUploadImage("/Profile/UploadImage", imagefile, callback);
+            my.ajaxService.ajaxUploadImage(my.rootUrl + "/Profile/UploadImage", imagefile, callback);
         },
         getUserFeedbackForPlot :function(traineeId, startDate, endDate, arrayFeedbackType, trainer, callback) {
             my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/GetUserFeedbackOnFilterForPlot?traineeId=" + traineeId + "&startDate=" + startDate + "&endDate=" + endDate + "&trainerId=" + trainer + "&arrayFeedbackType=" + arrayFeedbackType, null, callback);
