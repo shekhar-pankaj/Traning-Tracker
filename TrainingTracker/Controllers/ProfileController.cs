@@ -119,15 +119,15 @@ namespace TrainingTracker.Controllers
         /// Action method to handle xhr request for fetching filters based on filter  condition
         /// </summary>
         /// <param name="pageSize">no of records to return</param>
-        /// <param name="feedbackId">type of feedback</param>
+        /// <param name="feedbackType">type of feedback</param>
         /// <param name="userId">user if for feedback to be fetched</param>
         /// <param name="startDate">start date range</param>
         /// <param name="endDate">end date range</param>
         /// <returns></returns>
         [CustomAuthorize]
-        public JsonResult GetUserFeedbackOnFilter(int pageSize, int feedbackId, int userId, DateTime? startDate = null, DateTime? endDate = null)
+        public JsonResult GetUserFeedbackOnFilter(int pageSize, int feedbackType, int userId, DateTime? startDate = null, DateTime? endDate = null)
         {
-            return Json(new UserBl().GetUserFeedbackOnFilter(userId , pageSize , feedbackId , startDate , endDate) , JsonRequestBehavior.AllowGet);
+            return Json(new UserBl().GetUserFeedbackOnFilter(userId , pageSize , feedbackType , startDate , endDate) , JsonRequestBehavior.AllowGet);
         }
 
         //Added for Upload Image 

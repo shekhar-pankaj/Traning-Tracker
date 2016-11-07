@@ -85,10 +85,11 @@ namespace TrainingTracker.BLL
         /// <returns>instance of User vm</returns>
         public UserProfileVm GetUserProfileVm( int userId )
         {
+            User currentUser = UserDataAccesor.GetUserById(userId);
 
             return new UserProfileVm
             {
-                User = UserDataAccesor.GetUserById(userId) ,
+                User = currentUser ,
                 Skills = SkillDataAccesor.GetSkillsByUserId(userId) ,
                 AllSkills = SkillDataAccesor.GetAllSkillsForApp() ,
                 Sessions = SessionDataAccesor.GetSessionsByUserId(userId) ,
@@ -96,7 +97,7 @@ namespace TrainingTracker.BLL
                 Feedbacks = FeedbackDataAccesor.GetUserFeedback(userId , 5) ,
                 RecentCrFeedback = FeedbackDataAccesor.GetUserFeedback(userId , 1000 , 4) ,
                 RecentWeeklyFeedback = FeedbackDataAccesor.GetUserFeedback(userId , 1000 , 5) ,
-                AllTrainer = GetAllUsers().Where(x => x.IsTrainer || x.IsManager).ToList() ,
+                AllTrainer = GetAllUsersByTeam(currentUser).Where(x => x.IsTrainer || x.IsManager).ToList() ,
                 FeedbackTypes = new List<FeedbackType>
                 {
                     new FeedbackType
@@ -134,7 +135,6 @@ namespace TrainingTracker.BLL
             return currentUser.TeamId.HasValue
                               ? UserDataAccesor.GetActiveUsersByTeam(currentUser.TeamId.Value)
                               : new List<User>();          
-
         }
 
         /// <summary>
