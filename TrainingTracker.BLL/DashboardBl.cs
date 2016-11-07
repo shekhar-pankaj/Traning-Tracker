@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TrainingTracker.BLL.Base;
+using TrainingTracker.Common.Constants;
 using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.ViewModel;
 
@@ -23,7 +24,6 @@ namespace TrainingTracker.BLL
             var dashboardVm = new DashboardVm
             {
                 Trainees = teamId.HasValue ? UserDataAccesor.GetDashboardData(teamId.Value) : new List<UserData>() ,
-                UpcomingSessions = SessionDataAccesor.GetSessionOnFilter(100 , 1 , "" , teamId??0)
             };
 
 
@@ -37,6 +37,7 @@ namespace TrainingTracker.BLL
                 if ((trainee.User.DateAddedToSystem >= lastFriday))
                 {
                     isFeedbackAdded = true;
+                    trainee.IsCodeReviewAdded = true;
                 }
                 else
                 {
@@ -59,8 +60,13 @@ namespace TrainingTracker.BLL
                         }      
                     }
                 }
+
                 trainee.LastWeekFeedbackAdded = isFeedbackAdded;
                 trainee.WeeklyFeedback = trainee.WeeklyFeedback.Take(1).ToList();
+                trainee.IsCodeReviewAdded = trainee.RemainingFeedbacks.Where(x => x.FeedbackType.FeedbackTypeId == (int) Common.Enumeration.FeedbackType.CodeReview && x.AddedOn >= lastFriday.AddDays(-12))
+                                              .OrderByDescending(x => x.AddedOn)
+                                              .Take(1)
+                                              .Any();
                 trainee.RemainingFeedbacks = trainee.RemainingFeedbacks.OrderByDescending(x => x.AddedOn).Take(5).ToList();
             }
 

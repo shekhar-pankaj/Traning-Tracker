@@ -2,7 +2,6 @@
 
     my.dashboardVm = function () {
         var users = ko.observableArray([]),
-            sessions=ko.observableArray([]),
             photoUrl = function(item) {
                 return my.rootUrl + "/Uploads/ProfilePicture/" + item.ProfilePictureName;
             },
@@ -11,11 +10,7 @@
                     item.PhotoUrl = my.dashboardVm.photoUrl(item.User);
                     my.dashboardVm.users.push(item);
                 });
-
-                my.dashboardVm.sessions([]);
-                for (var i = userList.UpcomingSessions.length - 1; i >= userList.UpcomingSessions.length - 6 && i>=0; i--) {
-                    my.dashboardVm.sessions.push(userList.UpcomingSessions[i]);
-                }
+ 
                 ko.applyBindings(my.dashboardVm);
             },
             getDashboardVm = function() {
@@ -76,7 +71,6 @@
             photoUrl: photoUrl,
             feedback: feedback,
             getFeedback: getFeedback,
-            sessions: sessions,
             eachUserPendingFeedbackWeek: eachUserPendingFeedbackWeek,
             loadWeekForFeedbackNotPresent: loadWeekForFeedbackNotPresent
         };
