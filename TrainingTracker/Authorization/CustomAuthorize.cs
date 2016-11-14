@@ -61,8 +61,8 @@ namespace TrainingTracker.Authorize
 
                     isAuthorized =  (string.IsNullOrEmpty(this.Roles)) || (this.Roles.Split(',').ToList().Any(userPrincipal.IsInRole));
                     isAuthorized = isAuthorized && (userIdRequested <= 0 || (currentUser.UserId.Equals(userIdRequested) ||
-                                                                             ((currentUser.IsManager ||currentUser.IsTrainer) &&
-                                                                              new UserBl().GetUserByUserId(userIdRequested).TeamId == currentUser.TeamId)));
+                                                                             ((currentUser.IsManager || currentUser.IsTrainer) &&
+                                                                              new UserBl().GetUserByUserId(userIdRequested).TeamId == new UserBl().GetUserByUserId(currentUser.UserId).TeamId)));
 
                     isAuthorized = isAuthorized && (requestedFeedbackId <= 0 || new FeedbackBl().AuthorizeCurrentUserForFeedback(requestedFeedbackId,currentUser));
                     httpContext.User = userPrincipal;
@@ -90,17 +90,17 @@ namespace TrainingTracker.Authorize
                 }
                 if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
                 {
-                    filterContext.Result = new RedirectResult("~/Login/Login",true);
+                    filterContext.Result = new RedirectResult("~/Login/Login");
                     return;
                 }
                 if (filterContext.Result is HttpUnauthorizedResult)
                 {
-                    filterContext.Result = new RedirectResult("~/Unauthorized/UnauthorizedAccess",true);
+                    filterContext.Result = new RedirectResult("~/Unauthorized/UnauthorizedAccess");
                 }
             }
             catch
             {
-                filterContext.Result = new RedirectResult("~/Login/Login",true);
+                filterContext.Result = new RedirectResult("~/Login/Login");
                 return;
             }
         }
