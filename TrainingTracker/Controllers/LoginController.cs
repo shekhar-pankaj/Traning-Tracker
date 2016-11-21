@@ -57,8 +57,9 @@ namespace TrainingTracker.Controllers
                   false,
                   serializedUser,
                   "/");
+                Response.Cookies.Clear();
                 HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
-                Response.Cookies.Add(cookie);
+                Response.SetCookie(cookie);
                 return RedirectToAction("Index", "Dashboard");
             }
             ModelState.AddModelError("","Login Failed,Invalid Credentials");
@@ -74,15 +75,6 @@ namespace TrainingTracker.Controllers
             return RedirectToAction("Index" , "Dashboard");
         }
 
-        //public ActionResult AuthenticateLogin(string userName, string password)
-        //{
-        //    var userData = new LoginBl().AuthenticateUser(userName, password);
-        //    if (userData.IsValid)
-        //    {
-        //        FormsAuthentication.SetAuthCookie(userName, true);
-        //    }
-        //    return Json(userData, JsonRequestBehavior.AllowGet);
-        //}
 
         public ActionResult GetCurrentUser()
         {
@@ -101,7 +93,7 @@ namespace TrainingTracker.Controllers
             if (cookie != null)
             {
                 cookie.Expires = DateTime.Now.AddDays(-1);
-                Response.SetCookie(cookie);
+                Response.Cookies.Clear();
             }
             Session.Clear();
             return RedirectToAction("Index");

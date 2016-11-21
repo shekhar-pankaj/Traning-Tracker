@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TrainingTracker.Common.Entity;
 
 namespace TrainingTracker.Common.ViewModel
@@ -6,7 +7,7 @@ namespace TrainingTracker.Common.ViewModel
     public class DashboardVm
     {
         public List<UserData> Trainees { get; set; }
-        public List<Session> UpcomingSessions { get; set; }
+       // public List<Session> UpcomingSessions { get; set; }
     }
 
     public class UserData
@@ -37,6 +38,16 @@ namespace TrainingTracker.Common.ViewModel
         /// List of weeks where feedback is not added for user.
         /// </summary>
         public List<string> WeekForFeedbackNotPresent { get; set; }
+
+         /// <summary>
+        /// Gets and sets last Code Review Date
+        /// </summary>
+        public DateTime LastCodeReviewDate { get; set; }
+
+        /// <summary>
+        /// Gets and Sets code review set or not
+        /// </summary>
+        public bool IsCodeReviewAdded { get; set; }
 
     }
 }
