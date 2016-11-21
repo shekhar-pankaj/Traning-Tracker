@@ -30,7 +30,7 @@ namespace TrainingTracker.DAL.DataAccess
                 var prms = new List<SqlParameter>
             {
                 SqlUtility.CreateParameter(SPAddFeedback.PARAM_FEEDBACK_TEXT, 
-                SqlDbType.VarChar,feedbackData.FeedbackText),
+                SqlDbType.VarChar,feedbackData.FeedbackText.Trim()),
                 SqlUtility.CreateParameter(SPAddFeedback.PARAM_TITLE, 
                 SqlDbType.VarChar,feedbackData.Title),
                 SqlUtility.CreateParameter(SPAddFeedback.PARAM_FEEDBACK_TYPE, 

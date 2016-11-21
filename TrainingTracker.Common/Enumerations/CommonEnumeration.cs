@@ -93,4 +93,30 @@
         Weekly=5
     }
 
+    /// <summary>
+    /// Enumeration type for survey's respons type
+    /// </summary>
+    public enum ResponseType
+    {
+        /// <summary>
+        /// Response Type text
+        /// </summary>
+        Text = 1,
+
+        /// <summary>
+        /// Response Type Dropdown
+        /// </summary>
+        Select = 2,
+
+        /// <summary>
+        /// Response Type Radio button
+        /// </summary>
+        Radio = 3,
+
+        /// <summary>
+        /// Response Type Checkbox
+        /// </summary>
+        Checkbox =4
+
+    }
 }

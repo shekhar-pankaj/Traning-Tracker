@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using TrainingTracker.BLL;
 using TrainingTracker.Common.Constants;
@@ -42,7 +39,5 @@ namespace TrainingTracker.Controllers
             User currentUser = new UserBl().GetUserByUserName(User.Identity.Name);
             return Json(new DashboardBl().GetDashboardData(currentUser) , JsonRequestBehavior.AllowGet);
         }
-
-
     }
 }

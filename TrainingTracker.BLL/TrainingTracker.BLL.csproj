@@ -48,6 +48,7 @@
     <Compile Include="QuestionBl.cs" />
     <Compile Include="ReleaseBl.cs" />
     <Compile Include="SessionBl.cs" />
+    <Compile Include="SurveyBl.cs" />
     <Compile Include="UserBl.cs" />
   </ItemGroup>
   <ItemGroup>

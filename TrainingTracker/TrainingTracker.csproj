@@ -145,6 +145,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\autosize.js" />
     <Content Include="Scripts\Chart.bundle.min.js" />
     <Content Include="Scripts\Chart.Core.min.js" />
     <Content Include="Scripts\Chart.Scatter.min.js" />
@@ -184,6 +185,7 @@
     <Content Include="Scripts\jquery.barrating.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.barrating.min.js" />
+    <Content Include="Scripts\jquery.steps.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -210,6 +212,7 @@
     <Content Include="StyleSheets\Release.css" />
     <Content Include="StyleSheets\Session.css" />
     <Content Include="StyleSheets\simple-sidebar.css" />
+    <Content Include="StyleSheets\SurveyWizard.css" />
     <Content Include="Uploads\ProfilePicture\harshw.JPG" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     my.profileVm = function () {
         var userId = my.queryParams["userId"],
-            queryStringFeedbackId  = my.queryParams["feedbackId"],
+            queryStringFeedbackId = my.queryParams["feedbackId"],
             showTimeline = ko.observable(false),
             selectedSkill = ko.observable(),
             selectedProject = ko.observable(),
@@ -10,7 +10,7 @@
             recentCodeReviewFeedback = ko.observable(),
             recentWeeklyFeedback = ko.observable(),
             commentFeedbacks = ko.observableArray([]),
-            isCommentFeedbackModalVisible = ko.observable(false),
+            isCommentFeedbackModalVisible = ko.observable(false),            
             controls = {
                 skillOption: ko.observable("1"),
                 assignmentOption: ko.observable(1),
@@ -21,15 +21,15 @@
                 StartDate: ko.observable(),
                 EndDate: ko.observable(moment(new Date()).format('MM/DD/YYYY')),
                 Trainer: ko.observable(),
-                FeedbackType: ko.observableArray(['3','4','5']),
+                FeedbackType: ko.observableArray(['3', '4', '5']),
                 TraineeId: 0
             },
             filter = {
                 filterFeedback: ko.observable(),
-                pageSize: ko.observableArray(['5', '10', '20','100']),
+                pageSize: ko.observableArray(['5', '10', '20', '100']),
                 selectedPageSize: ko.observable(),
                 tempAddedBy: ko.observable() // remove this once temproray feature use end
-             },
+            },
             feedbackPost = {
                 Title: ko.observable(),
                 FeedbackText: ko.observable(),
@@ -39,10 +39,12 @@
                 Rating: ko.observable(0),
                 AddedFor: '',
                 AddedBy: '',
-                AddedOn:ko.observable(),
+                AddedOn: ko.observable(),
                 StartDate: ko.observable(my.calculateLastMonday()),
                 EndDate: ko.observable(my.calculateLastFriday())
             },
+            surveyQuestion = ko.observableArray([]),
+            surveyResponse = [],
             setRating = function(rating) {
                 my.profileVm.feedbackPost.Rating(rating);
             },
@@ -90,8 +92,8 @@
                 
                 var validationMessageArray = [];
 
-                if (my.profileVm.feedbackPost.FeedbackText() == undefined ||
-                    my.profileVm.feedbackPost.FeedbackText() == "") {
+                if (my.profileVm.feedbackPost.FeedbackType().FeedbackTypeId != 5 && ( my.profileVm.feedbackPost.FeedbackText() == undefined ||
+                    my.profileVm.feedbackPost.FeedbackText() == "")) {
                     //   my.profileVm.validationMessage("You need to add feedback text.");
                     validationMessageArray.push(" add feedback text");
                     result = false;
@@ -254,6 +256,162 @@
                 my.feedbackThreadsVm.loadFeedbackDailog(feedbackId);
             }
         },
+        
+        initializeSurveyQuestion =function(surveyQuestionJson) {
+            surveyQuestion([]);
+            var questionArray = [];
+
+            var questionObject =
+            {
+                CategoryHeader: '',
+                QuestionText: '',
+                QuestionId: '',
+                Answer: [],
+                SelectedAnswer:[],
+                ResponseType: 0,
+                IsMandatory: false,
+                AdditionalNoteRequired:false
+            };
+
+            ko.utils.arrayForEach(surveyQuestionJson.SurveySubSections, function (sub)
+            {                              
+                ko.utils.arrayForEach(sub.Questions, function (question)
+                {
+                    var newObj = Object.create(questionObject);
+                    newObj.CategoryHeader = sub.Header;
+                    newObj.QuestionText = question.QuestionText.replace("[[[trainee]]]", my.profileVm.userVm.User.FirstName);
+                    newObj.QuestionId = question.SurveyQuestionId;
+                    newObj.ResponseType = question.ResponseTypeId;
+                    newObj.IsMandatory = question.IsMandatory;
+                    newObj.AdditionalNoteRequired = question.AdditionalNoteRequired;
+
+                    var arrayAnswer = [];
+                    ko.utils.arrayForEach(question.Answers, function (answer)
+                    {
+                        arrayAnswer.push({ AnswerId: answer.Id, AnswerText: answer.OptionText });
+                    });
+                    newObj.Answer = arrayAnswer;
+                    questionArray.push(newObj);
+                });              
+            });
+            surveyQuestion(questionArray); 
+           // console.log(surveyQuestion());
+        },
+            
+        wizardOnSubmit = function ()
+        {
+            if (my.profileVm.validatePost())
+            {
+                my.profileVm.feedbackPost.AddedFor = { UserId: my.profileVm.userId };
+
+                if (typeof (my.profileVm.filter.tempAddedBy()) == 'undefined')
+                {
+                    my.profileVm.feedbackPost.AddedBy = { UserId: my.profileVm.currentUser.UserId };
+                } else
+                {
+                    my.profileVm.feedbackPost.AddedBy = { UserId: my.profileVm.filter.tempAddedBy().UserId };
+                }
+
+                var convertedObject = ko.toJS(my.profileVm.feedbackPost);
+
+                switch (convertedObject.FeedbackType.FeedbackTypeId)
+                {
+                    
+                    case 5:
+                        convertedObject.Skill = 0;
+                        break;
+
+                }
+                
+                var objResponse =
+                 {
+                     AddedBy: my.meta.currentUser,
+                     AddedFor: my.profileVm.userVm.User,
+                     Response: surveyResponse,
+                     Feedback: convertedObject,
+                  };
+                my.userService.saveWeeklySurveyResponse(objResponse, my.profileVm.addFeedbackCallback);
+            }
+           
+        },
+            
+        wizardOnStepChanging = function (submittedAnswer, currentIndex)
+        {
+            try {
+                var array = ko.toJS(surveyQuestion());
+                var errorMsg = '';
+                
+                if (array[currentIndex].IsMandatory && array[currentIndex].Answer.length && !submittedAnswer.AnswerId.length)
+                {
+                    errorMsg += 'Choose some option';
+                }
+                
+                if (array[currentIndex].AdditionalNoteRequired && !submittedAnswer.AdditionalNotes)
+                {
+                    errorMsg += (errorMsg.length != 0 ? ', ' : '') + 'Add some explanation.';
+                }
+                
+                if (!my.isNullorEmpty(errorMsg.length))
+                {
+                  //  .
+
+                    var response =
+                    {
+                        QuestionId: 0,
+                        AnswerId: null,
+                        AdditionalNotes: ""
+                    };
+
+                    var instance = Object.create(response);
+
+                    instance.QuestionId = submittedAnswer.QuestionId;
+                    instance.AdditionalNotes = submittedAnswer.AdditionalNotes;
+                    
+                   
+                    ko.utils.arrayForEach(submittedAnswer.AnswerId, function (Id)
+                    {
+                        instance.AnswerId = Id;
+                        
+                        if (currentIndex + 1 <= surveyResponse.length)
+                        {
+                            surveyResponse = surveyResponse.filter(function(element) {
+                              return  element.QuestionId != instance.QuestionId;
+                            });
+                            
+                            surveyResponse.splice(currentIndex, 0, instance);
+                        }
+                        else
+                        {
+                            surveyResponse.push(instance);
+                        }
+                       
+                    });
+                    
+                    if (!submittedAnswer.AnswerId.length)
+                    {
+                        if (currentIndex + 1 <= surveyResponse.length) {
+                            surveyResponse.splice(currentIndex, 1);
+                            surveyResponse.splice(currentIndex, 0, instance);
+                        }
+                        else
+                        {
+                            surveyResponse.push(instance);                            
+                        }
+                    }
+                }
+                return errorMsg;
+            } 
+            catch(ex) {
+                
+            }
+            return "Wizard encounterd some issue ";
+        },
+        
+        wizardOnStepChanged = function (currentIndex)
+        {
+            if ((currentIndex+1) == surveyQuestion().length && !isCommentFeedbackModalVisible()) showCommentFeedback();
+        },
+
         toggleCollapsedPanel = function () {
             my.profileVm.isCommentCollapsed(!my.profileVm.isCommentCollapsed());
         };
@@ -296,12 +454,25 @@
             loadCommentFeedbacksCallback: loadCommentFeedbacksCallback,
             isCommentCollapsed: isCommentCollapsed,
             toggleCollapsedPanel: toggleCollapsedPanel,
-            loadFeedbackWithThread: loadFeedbackWithThread
+            loadFeedbackWithThread: loadFeedbackWithThread,
+            initializeSurveyQuestion: initializeSurveyQuestion,
+            surveyQuestion: surveyQuestion,
+            wizardOnStepChanging: wizardOnStepChanging,
+            wizardOnStepChanged: wizardOnStepChanged,
+            wizardOnSubmit: wizardOnSubmit
+                
     };
     }();
 
     my.profileVm.getCurrentUser();
     my.profileVm.getUser();
+    
+    my.profileVm.feedbackPost.FeedbackType.subscribe(function ()
+    {
+        if (my.profileVm.feedbackPost.FeedbackType().FeedbackTypeId == 5) {
+            my.userService.fetchSurveyQuestionForTeam(my.profileVm.initializeSurveyQuestion);
+        }
+    }, null, "change");
 });
 
 

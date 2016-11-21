@@ -67,5 +67,13 @@
         markAllNotificationAsRead :function(callback) {
             my.ajaxService.ajaxPostJson(my.rootUrl + "/Notification/markAllNotificationAsRead",null,  callback);
         },
+        fetchSurveyQuestionForTeam:function(callback) {
+            my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/FetchWeeklySurveyQuestionForTeam", null, callback);
+        },
+        
+        saveWeeklySurveyResponse: function (surveyResponse, callback)
+        {
+            my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/SaveWeeklySurveyResponseForTrainee", surveyResponse, callback);
+        }
     };
 }(my));
