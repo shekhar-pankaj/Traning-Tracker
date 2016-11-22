@@ -113,6 +113,7 @@ D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker\bin\TrainingTracker
 D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker\obj\Debug\TrainingTracker.csprojResolveAssemblyReference.cache
 D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker\obj\Debug\TrainingTracker.dll
 D:\Projects\Training-Tracker\Traning-Tracker\TrainingTracker\obj\Debug\TrainingTracker.pdb
+D:\Projects\Traning-Tracker\TrainingTracker\obj\Debug\TrainingTracker.csprojResolveAssemblyReference.cache
 D:\Projects\Traning-Tracker\TrainingTracker\bin\TrainingTracker.dll
 D:\Projects\Traning-Tracker\TrainingTracker\bin\TrainingTracker.pdb
 D:\Projects\Traning-Tracker\TrainingTracker\bin\Antlr3.Runtime.dll
@@ -143,6 +144,5 @@ D:\Projects\Traning-Tracker\TrainingTracker\bin\Antlr3.Runtime.pdb
 D:\Projects\Traning-Tracker\TrainingTracker\bin\Newtonsoft.Json.xml
 D:\Projects\Traning-Tracker\TrainingTracker\bin\TrainingTracker.DAL.pdb
 D:\Projects\Traning-Tracker\TrainingTracker\bin\EntityFramework.xml
-D:\Projects\Traning-Tracker\TrainingTracker\obj\Debug\TrainingTracker.csprojResolveAssemblyReference.cache
 D:\Projects\Traning-Tracker\TrainingTracker\obj\Debug\TrainingTracker.dll
 D:\Projects\Traning-Tracker\TrainingTracker\obj\Debug\TrainingTracker.pdb

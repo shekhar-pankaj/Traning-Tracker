@@ -53,6 +53,7 @@
     <Compile Include="DataAccess\ReleaseDal.cs" />
     <Compile Include="DataAccess\SessionDal.cs" />
     <Compile Include="DataAccess\SkillDal.cs" />
+    <Compile Include="DataAccess\SurveyDal.cs" />
     <Compile Include="DataAccess\TeamDal.cs" />
     <Compile Include="DataAccess\UserDal.cs" />
     <Compile Include="EntityFramework\Comment.cs">
@@ -103,6 +104,27 @@
     <Compile Include="EntityFramework\Skill.cs">
       <DependentUpon>TrainingTracker.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Survey.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SurveyAnswer.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SurveyCompletedMetaData.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SurveyQuestion.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SurveyQuestionResponseType.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SurveyResponse.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SurveySection.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\Team.cs">
       <DependentUpon>TrainingTracker.tt</DependentUpon>
     </Compile>
@@ -136,6 +158,9 @@
     <Compile Include="EntityFramework\UserSkillMapping.cs">
       <DependentUpon>TrainingTracker.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\WeeklyFeedbackSurveyMapping.cs">
+      <DependentUpon>TrainingTracker.tt</DependentUpon>
+    </Compile>
     <Compile Include="Interface\IFeedbackDal.cs" />
     <Compile Include="Interface\INotificationDal.cs" />
     <Compile Include="Interface\IProjectDal.cs" />
@@ -143,6 +168,7 @@
     <Compile Include="Interface\IReleaseDal.cs" />
     <Compile Include="Interface\ISessionDal.cs" />
     <Compile Include="Interface\ISkillDal.cs" />
+    <Compile Include="Interface\ISurveyDal.cs" />
     <Compile Include="Interface\ITeamDal.cs" />
     <Compile Include="Interface\IUserDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

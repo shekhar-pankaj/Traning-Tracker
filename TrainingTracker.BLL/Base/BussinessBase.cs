@@ -128,5 +128,18 @@ namespace TrainingTracker.BLL.Base
         {
             get { return _teamDataAccesor ?? (_teamDataAccesor = new TeamDal()); }
         }
+
+        /// <summary>
+        /// Private Survey dal accessor
+        /// </summary>
+        private ISurveyDal _surveyDataAccesor;
+
+        /// <summary>
+        /// public with only getter Survey dal accessor
+        /// </summary>
+        public ISurveyDal SurveyDataAccesor
+        {
+            get { return _surveyDataAccesor ?? (_surveyDataAccesor = new SurveyDal()); }
+        }
     }
 }

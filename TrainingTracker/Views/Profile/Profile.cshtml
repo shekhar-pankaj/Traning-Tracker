@@ -10,7 +10,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 no-right-margin no-left-margin">
             <div class="col-xs-12 col-md-3 ">
                 <div data-bind="css: { 'panel-success': userVm.User.IsTrainer, 'panel-info': userVm.User.IsTrainee, 'panel-danger': userVm.User.IsManager}"
                      class="panel">
@@ -232,8 +232,8 @@
                                             <label class="radio-inline"><input value="1" data-bind="checked: controls.skillOption" type="radio" name="optradio">Select existing</label>
                                             <label class="radio-inline"><input value="2" data-bind="checked: controls.skillOption" type="radio" name="optradio">Other</label>
                                             <select class="input-sm form-control" data-bind="visible: controls.skillOption() == 1, options: userVm.AllSkills,
-    optionsText: 'Name',
-    value: selectedSkill"></select>
+                                                                                                                                   optionsText: 'Name',
+                                                                                                                                   value: selectedSkill"></select>
                                             <input type="text"
                                                    data-bind="visible: controls.skillOption() == 2, value: feedbackPost.Title"
                                                    class="input-sm form-control"
@@ -245,35 +245,14 @@
                                                    data-bind="value: feedbackPost.Title"
                                                    class="input-sm form-control"
                                                    placeholder="enter assignment title" />
-                                            @*TO BE ENABLED AFTER ADD PROJECT IMPLEMENTATION*@
-                                            @*<label class="radio-inline"><input value="1" data-bind="checked: controls.assignmentOption" type="radio" name="optradio">Select existing</label>
-                                                                        <label class="radio-inline"><input value="2" data-bind="checked: controls.assignmentOption" type="radio" name="optradio">Other</label>
-                                                                        <select class="input-sm form-control" data-bind="visible: controls.assignmentOption() == 1, options: userVm.Projects,
-                                                optionsText: 'Title',
-                                                value: selectedProject">
-                                                                        </select>
-                                                                        <input type="text"
-                                                                               data-bind="visible: controls.assignmentOption() == 2, value: feedbackPost.Title"
-                                                                               class="input-sm form-control"
-                                                                               placeholder="Enter assignment title" />*@
+
                                         </div>
                                         <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 4 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
                                             <label>Project:</label>
                                             <input type="text"
                                                    data-bind="value: feedbackPost.Title"
                                                    class="input-sm form-control"
-                                                   placeholder="Enter project title" />
-                                            @*TO BE ENABLED AFTER ADD PROJECT IMPLEMENTATION*@
-                                            @*<label class="radio-inline"><input value="1" data-bind="checked: controls.crOption" type="radio" name="optradio">Select existing</label>
-                                                                        <label class="radio-inline"><input value="2" data-bind="checked: controls.crOption" type="radio" name="optradio">Other</label>
-                                                                        <select class="input-sm form-control" data-bind="visible: controls.crOption() == 1, options: userVm.Projects,
-                                                optionsText: 'Title',
-                                                value: selectedProject">
-                                                                        </select>
-                                                                        <input type="text"
-                                                                               data-bind="visible: controls.crOption() == 2, value: feedbackPost.Title"
-                                                                               class="input-sm form-control"
-                                                                               placeholder="Enter project title" />*@
+                                                   placeholder="Enter project title" />                                          
                                         </div>
                                         <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 5 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
                                             <label>Select date range:</label><span class="pull-right glyphicon glyphicon-comment" data-bind="visible:(feedbackPost.EndDate() && feedbackPost.StartDate()), click:showCommentFeedback, wzTooltip: { tittle: 'Display comments for selected date range.',HtmlTag:'false',ClickSticky	:'false',Above:'true'}" style="cursor:pointer; color:#31b0d5"></span>
@@ -310,17 +289,26 @@
                                             </button>
                                         </div>
                                     </div>
+
                                 </div>
-                                <div class="no-right-margin no-left-margin post-description comment-div">
-                                    <div class="col-xs-12 col-md-12 no-right-margin ">
-                                        <textarea data-bind="value: feedbackPost.FeedbackText"
-                                                  class="form-control comment-input-control" rows="3" type="text" placeholder="Enter feedback"></textarea>
+                                <div id="wizard" data-bind="visible:feedbackPost.FeedbackType().FeedbackTypeId == 5, wizardControl:my.profileVm.surveyQuestion(),
+                                                                                                                     animation:'slide',
+                                                                                                                     orientation:'vertical',
+                                                                                                                     wizardStepCallback:my.profileVm.wizardOnStepChanging,
+                                                                                                                     wizardOnStepChanged:my.profileVm.wizardOnStepChanged,
+                                                                                                                     wizardOnSubmit:wizardOnSubmit ">
+                                    @* Binding handler will fill this Question *@
+                                </div>
+                                <div class="no-right-margin no-left-margin post-description comment-div" >
+                                    <div class="col-xs-12 col-md-12 no-right-margin " data-bind="visible:feedbackPost.FeedbackType().FeedbackTypeId != 5">
+                                        <textarea data-bind="value: feedbackPost.FeedbackText,autoResizeTextArea:true"
+                                                  class="form-control comment-input-control" rows="3" type="text" placeholder="Enter feedback" style="max-height: 57vh;resize: vertical"></textarea>
                                     </div>
                                     <div class="col-xs-12 col-md-11 ">
                                         <label data-bind="text: validationMessage" class="validation-error"></label>
                                     </div>
 
-                                    <div class="comment-send col-xs-12 col-md-1 col-lg-1 no-left-margin no-right-margin">
+                                    <div class="comment-send col-xs-12 col-md-1 col-lg-1 no-left-margin no-right-margin" data-bind="visible:feedbackPost.FeedbackType().FeedbackTypeId != 5">
                                         <button data-bind="click: addFeedback" type="button" class="btn btn-info pull-right">Add <i class="glyphicon glyphicon-send"></i></button>
                                     </div>
                                     <div class="clearfix"></div>
@@ -336,15 +324,15 @@
                                 <div class="col-xs-12 col-md-2 feedback-input meta">
                                     <label class="">Feedback Type:</label>
                                     <select class=" input-sm form-control" data-bind="options: userVm.FeedbackTypes,
-    optionsText: 'Description',
-    value: filter.filterFeedback, optionsCaption: 'All'"></select>
+                                                                                      optionsText: 'Description',
+                                                                                      value: filter.filterFeedback, optionsCaption: 'All'"></select>
                                 </div>
                                 @*<div class="pull-left feedback-input meta">
 
                                     </div>*@
                                 <div class="col-xs-12 col-md-3 col-md-offset-5  feedback-input meta">
                                     <label style="visibility:hidden ">Apply Filter</label>
-                                    <button data-bind=" click :applyFilter " style="margin-top: -5px;height: 34px;" type="button" class="form-control btn btn-info  input-sm ">Apply Filter <i class="glyphicon glyphicon-filter"></i></button>
+                                    <button data-bind=" click :applyFilter " style="height: 34px;" type="button" class="form-control btn btn-info  input-sm ">Apply Filter <i class="glyphicon glyphicon-filter"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -379,13 +367,14 @@
                                         <h6 data-bind="visible: FeedbackType.FeedbackTypeId == 5, text: 'Feedback Week : ' + moment(StartDate).format('Do MMMM YYYY') + ' - ' + moment(EndDate).format('Do MMMM YYYY')" class="text-muted time"></h6>
                                     </div>
                                     <div class="pull-right" style="display: inline-block;">
-                                            <button type="button" class="form-control btn btn-info  input-sm " data-bind="click: function () { my.profileVm.loadFeedbackWithThread(FeedbackId) }">
-                                                <i class=" badge " style="color:red;font-style: normal;" data-bind="text: ThreadCount"></i> <span class=""> Add/View Notes </span>
-                                            </button>
-                                        </div>
+                                        <button type="button" class="form-control btn btn-info  input-sm " data-bind="click: function () { my.profileVm.loadFeedbackWithThread(FeedbackId) }">
+                                            <i class=" badge " style="color:red;font-style: normal;" data-bind="text: ThreadCount"></i> <span class=""> Add/View Notes </span>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="post-description">
-                                    <p data-bind="text: FeedbackText" style="white-space: pre-wrap;"></p>
+                                    <p data-bind="visible: FeedbackType.FeedbackTypeId != 5 ,text: FeedbackText" style="white-space: pre-wrap;"></p>
+                                    <p data-bind="visible: FeedbackType.FeedbackTypeId == 5 ,html: FeedbackText" style="white-space: pre-wrap;"></p>
                                 </div>
                             </div>
                         </div>
@@ -459,7 +448,9 @@
 
     </div>
 
-    <div id="divWeeklyComment" class="col-xs-12 col-md-3 modal" data-bind="style: { display: (my.profileVm.isCommentFeedbackModalVisible() && (!my.profileVm.isCommentCollapsed())) ? 'table' : 'none','top':'auto' }">
+
+
+    <div id="divWeeklyComment" class="col-xs-12 col-md-3 " data-bind="css:(my.profileVm.isCommentFeedbackModalVisible() && (!my.profileVm.isCommentCollapsed()))?'modal':'', style: { 'visibility': (my.profileVm.isCommentFeedbackModalVisible() && (!my.profileVm.isCommentCollapsed())) ? 'visible' : 'hidden','top':'auto','display':'block' }">
 
         <div class="modal-content col-xs-12  no-right-margin" style="max-height:94vh" >
             <div class="modal-header no-left-margin ">
@@ -499,6 +490,16 @@
 </div>
 
  @Html.Partial("_FeedbackThread")
+
+
+
+@*<script type="text/html" id="scriptFeedbackWizard">
+    
+  <div data-bind="foreach:">
+
+  </div>
+    
+</script>*@
 
 
 @section Scripts

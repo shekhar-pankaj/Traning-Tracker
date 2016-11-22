@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using TrainingTracker.Common.Entity;
 
 namespace TrainingTracker.Common.Utility
 {
@@ -39,6 +41,35 @@ namespace TrainingTracker.Common.Utility
                 endDate = endDate.AddDays(-7);
             }
             return allWeeksList;
+        }
+
+        public static string GenerateHtmlForFeedbackOnSurveyResponse(SurveyResponse response)
+        {
+            StringBuilder stringBuilder= new StringBuilder();
+
+            stringBuilder.Append("<div class='weekly-feedback'><code>");
+
+            foreach (var responseAnswers in response.Response)
+            {
+                stringBuilder.Append("<div class='feedback-zone'>");
+                stringBuilder.Append("<div class='feedback-question'><label>").Append(responseAnswers.QuestionText.Replace("[[[trainee]]]" , response.AddedFor.FirstName)).Append("</label></div>");
+
+                if (!string.IsNullOrEmpty(Convert.ToString(responseAnswers.AnswerText))) 
+                stringBuilder.Append("<div class='feedback-answer'><label> ").Append(responseAnswers.AnswerText).Append("</label></div>");
+
+                if (!string.IsNullOrEmpty(Convert.ToString(responseAnswers.AdditionalNotes)) && responseAnswers.AdditionalNotes.Trim().Length > 0) 
+                stringBuilder.Append("<div class='feedback-notes'><label><q>").Append(responseAnswers.AdditionalNotes.Trim().Replace("<script>" , "&lt;script&gt;").Replace("</script>" , "&lt;/script&gt;")).Append("</q></label></div>");
+
+                if (string.IsNullOrEmpty(Convert.ToString(responseAnswers.AdditionalNotes)) &&
+                    string.IsNullOrEmpty(responseAnswers.AnswerText))
+                {
+                    stringBuilder.Append("<div class='feedback-notes'><label class='danger'>").Append("Question Skipped").Append("</label></div>");
+                }
+                stringBuilder.Append("</div>");
+            }
+            stringBuilder.Append("</code></div>");
+
+            return stringBuilder.ToString();
         }
     }
 }

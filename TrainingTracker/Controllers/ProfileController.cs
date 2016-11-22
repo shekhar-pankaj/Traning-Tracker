@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using TrainingTracker.Authorize;
 using TrainingTracker.BLL;
@@ -210,6 +211,27 @@ namespace TrainingTracker.Controllers
                                     };
 
             return Json(new FeedbackBl().AddNewThread(thread) , JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Fetch weekly Survey Questions for the team
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
+        public JsonResult FetchWeeklySurveyQuestionForTeam()
+        {
+            return Json(new SurveyBl().FetchWeeklySurveyQuestionForTeam(new UserBl().GetUserByUserName(User.Identity.Name).TeamId??0) , JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Saves Response for the weekly feedback
+        /// </summary>
+        /// <param name="surveyResponse">instance of survey respons</param>
+        /// <returns>Json Result</returns>
+        public JsonResult SaveWeeklySurveyResponseForTrainee(SurveyResponse surveyResponse)
+        {
+            return Json(new SurveyBl().SaveWeeklySurveyResponseForTrainee(surveyResponse) , JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -53,6 +53,11 @@
     <Compile Include="Entity\Release.cs" />
     <Compile Include="Entity\Session.cs" />
     <Compile Include="Entity\Skill.cs" />
+    <Compile Include="Entity\Survey.cs" />
+    <Compile Include="Entity\SurveyAnswer.cs" />
+    <Compile Include="Entity\SurveyQuestion.cs" />
+    <Compile Include="Entity\SurveyResponse.cs" />
+    <Compile Include="Entity\SurveySection.cs" />
     <Compile Include="Entity\Team.cs" />
     <Compile Include="Entity\Threads.cs" />
     <Compile Include="Entity\User.cs" />
