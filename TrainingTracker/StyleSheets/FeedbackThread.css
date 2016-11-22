@@ -82,6 +82,7 @@
 
 #divFeedbackThread .weekly-feedback  code
 {
+     padding:0;
      color: black; 
      background-color: #fff; 
 }
@@ -94,13 +95,12 @@
 
 
 #divFeedbackThread .weekly-feedback code .feedback-question label {
-    font-style: italic;
-    font-size: 21px;
+    font-size: 17px;
 }
 
 #divFeedbackThread .weekly-feedback code .feedback-answer label {
-            margin-bottom: 0.5em;
-    font-size: 17px;
+          margin-bottom: 5px;
+    font-size: 14px;
     margin-left: 1%;
     color: green;
 }
@@ -110,11 +110,11 @@
 }
 
 #divFeedbackThread .weekly-feedback code .feedback-notes label {
-    margin-left: 3%;
-        margin-bottom: 10px;
-    padding: 10px;
+   margin-left: 3%;
+    margin-bottom: 5px;
+    padding: 5px 5px 5px 5px;
     background-color: #FFF8DC;
-    border-left: 2px solid #ffeb8e;
+    border-left: 3px solid #ffeb8e;
 }
 
 #divFeedbackThread .weekly-feedback code .feedback-notes label q {
