@@ -581,8 +581,9 @@ $(document).ready(function () {
                     stepAnswer.AdditionalNotes = $(additionalNotes)[0].value;
 
                     var errorMsg = options.wizardStepCallback(stepAnswer, currentIndex);
-
-                    options.wizardOnSubmit();
+                    errorMsg += options.wizardOnSubmit();
+                    $('#' + $(currentStep).find('#divWizardErrorMessage_' + stepAnswer.QuestionId)[0].id).find('label').text(errorMsg);
+                    return errorMsg.length == 0;
                 }
         });
 
@@ -596,7 +597,9 @@ $(document).ready(function () {
                     var content = '';
 
                     content += '<div id=' + data[key].QuestionId + '><div class="wizard-question">' + '<span id=""> ' + data[key].QuestionText + '</span><label class="danger" style="font-weight:    font-weight: bold;position: relative;top: -8px;bold;display:' + (data[key].IsMandatory == true ? 'inline-block' : 'none') + ';">' +
-                        '*</label></div>';
+                        '*</label>' +
+                       (!my.isNullorEmpty(data[key].HelpText) ? '<span class="glyphicon glyphicon-question-sign"  onmouseover="Tip(&quot;' + data[key].HelpText + '&quot;)" onmouseout="UnTip()"></span>' : '') +
+                        '</div>';
                     if (data[key].ResponseType == 4) {
                         content += '<div class="wizard-answer">';
                         $.each(data[key].Answer, function(answerKey, value) {
@@ -611,14 +614,18 @@ $(document).ready(function () {
 
                     content += '<div class="wizard-additional-note" >' +
                         '<label >Additional Notes</label><span class="danger" style="display:' + (data[key].AdditionalNoteRequired ? 'inline-block' : 'none') + '">*</span>' +
-                        '<textarea id="textareaQuestion_' + data[key].QuestionId + '" class="form-control comment-input-control" rows="3" type="text" placeholder="Enter notes"></textarea></div>';
+                        '<textarea id="textareaQuestion_' + data[key].QuestionId + '" class="form-control comment-input-control" rows="5" type="text" placeholder="Enter notes"></textarea></div>';
                     content += '<div id="divWizardErrorMessage_' + data[key].QuestionId + '"><label class="danger"></label></div>';
                     content += '</div>';
                     $(element).steps('add', {
                         title: title,
                         content: content
                     });
-                });                     
+                });
+
+                autosize.destroy($(element).find('textarea'));
+                autosize($(element).find('textarea'));
+
         }
     };
 });

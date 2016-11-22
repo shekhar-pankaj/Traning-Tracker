@@ -267,6 +267,7 @@
                 QuestionText: '',
                 QuestionId: '',
                 Answer: [],
+                HelpText:'',
                 SelectedAnswer:[],
                 ResponseType: 0,
                 IsMandatory: false,
@@ -282,6 +283,7 @@
                     newObj.QuestionText = question.QuestionText.replace("[[[trainee]]]", my.profileVm.userVm.User.FirstName);
                     newObj.QuestionId = question.SurveyQuestionId;
                     newObj.ResponseType = question.ResponseTypeId;
+                    newObj.HelpText = question.HelpText;
                     newObj.IsMandatory = question.IsMandatory;
                     newObj.AdditionalNoteRequired = question.AdditionalNoteRequired;
 
@@ -298,10 +300,38 @@
            // console.log(surveyQuestion());
         },
             
-        wizardOnSubmit = function ()
-        {
-            if (my.profileVm.validatePost())
-            {
+        wizardOnSubmit = function () {
+            var validationMessageArray = [];
+            var result = true;
+            
+              if (my.profileVm.feedbackPost.Rating() == undefined || my.profileVm.feedbackPost.Rating() == 0)
+                {
+                //  my.profileVm.validationMessage("You need to select a rating to add feedback.");
+                validationMessageArray.push("select a rating to add feedback");
+                result = false;
+                }
+               if (my.isNullorEmpty(my.profileVm.feedbackPost.StartDate()) && my.isNullorEmpty(my.profileVm.feedbackPost.EndDate()))
+                {
+                    validationMessageArray.push(" enter start date & end date ");
+                    result = false;
+                } else if (my.isNullorEmpty(my.profileVm.feedbackPost.StartDate()))
+                {
+                    validationMessageArray.push(" enter start date ");
+                    result = false;
+                } else if (my.isNullorEmpty(my.profileVm.feedbackPost.EndDate()))
+                {
+                    validationMessageArray.push(" enter end date ");
+                    result = false;
+                }
+
+                if (my.profileVm.feedbackPost.StartDate() > my.profileVm.feedbackPost.EndDate())
+                {
+                    validationMessageArray.push(" end date should be greater than start date ");
+                    result = false;
+                }
+
+              if (!result) return validationMessageArray.join(',');
+
                 my.profileVm.feedbackPost.AddedFor = { UserId: my.profileVm.userId };
 
                 if (typeof (my.profileVm.filter.tempAddedBy()) == 'undefined')
@@ -331,8 +361,7 @@
                      Feedback: convertedObject,
                   };
                 my.userService.saveWeeklySurveyResponse(objResponse, my.profileVm.addFeedbackCallback);
-            }
-           
+             return "";
         },
             
         wizardOnStepChanging = function (submittedAnswer, currentIndex)
@@ -469,7 +498,8 @@
     
     my.profileVm.feedbackPost.FeedbackType.subscribe(function ()
     {
-        if (my.profileVm.feedbackPost.FeedbackType().FeedbackTypeId == 5) {
+        if (my.profileVm.feedbackPost.FeedbackType().FeedbackTypeId == 5 && !my.profileVm.surveyQuestion().length)
+        {
             my.userService.fetchSurveyQuestionForTeam(my.profileVm.initializeSurveyQuestion);
         }
         else
