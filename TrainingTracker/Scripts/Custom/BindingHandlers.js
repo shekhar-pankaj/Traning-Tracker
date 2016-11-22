@@ -591,35 +591,34 @@ $(document).ready(function () {
         update: function (element, valueAccessor, allBindingsAccessor) {
             var data = valueAccessor();
 
-            $.each(data, function (key) {
-                var title = '<span class="wizard-header">' +  data[key].CategoryHeader + '</span><div class="arrow"></div>';
-                var content = '';
+                $.each(data, function(key) {
+                    var title = '<span class="wizard-header">' + data[key].CategoryHeader + '</span><div class="arrow"></div>';
+                    var content = '';
 
-                content += '<div id=' + data[key].QuestionId + '><div class="wizard-question">' + '<span id=""> ' + data[key].QuestionText + '</span><label class="danger" style="font-weight:    font-weight: bold;position: relative;top: -8px;bold;display:' + (data[key].IsMandatory == true ? 'inline-block' : 'none') + ';">' +
-                    '*</label></div>';
-                if (data[key].ResponseType == 4)
-                {
-                    content += '<div class="wizard-answer">';
-                    $.each(data[key].Answer, function (answerKey, value) {
-                        content += '<div><span class="custom-checkbox">' +
-                                     '<input type="radio" id="input_' + data[key].Answer[answerKey].AnswerId + '" name="Question_' + data[key].QuestionId + '"  />' +
-                                     '<span class="box"><span class="tick"></span></span> ' +
-                                   '</span>' +
-                                   '<label for="Question_' + data[key].QuestionId + '" class=" lblForCheckbox make-checkbox-label-in-align">' + data[key].Answer[answerKey].AnswerText + '</label></div>';
-                    });
+                    content += '<div id=' + data[key].QuestionId + '><div class="wizard-question">' + '<span id=""> ' + data[key].QuestionText + '</span><label class="danger" style="font-weight:    font-weight: bold;position: relative;top: -8px;bold;display:' + (data[key].IsMandatory == true ? 'inline-block' : 'none') + ';">' +
+                        '*</label></div>';
+                    if (data[key].ResponseType == 4) {
+                        content += '<div class="wizard-answer">';
+                        $.each(data[key].Answer, function(answerKey, value) {
+                            content += '<div><span class="custom-checkbox">' +
+                                '<input type="radio" id="input_' + data[key].Answer[answerKey].AnswerId + '" name="Question_' + data[key].QuestionId + '"  />' +
+                                '<span class="box"><span class="tick"></span></span> ' +
+                                '</span>' +
+                                '<label for="Question_' + data[key].QuestionId + '" class=" lblForCheckbox make-checkbox-label-in-align">' + data[key].Answer[answerKey].AnswerText + '</label></div>';
+                        });
+                        content += '</div>';
+                    }
+
+                    content += '<div class="wizard-additional-note" >' +
+                        '<label >Additional Notes</label><span class="danger" style="display:' + (data[key].AdditionalNoteRequired ? 'inline-block' : 'none') + '">*</span>' +
+                        '<textarea id="textareaQuestion_' + data[key].QuestionId + '" class="form-control comment-input-control" rows="3" type="text" placeholder="Enter notes"></textarea></div>';
+                    content += '<div id="divWizardErrorMessage_' + data[key].QuestionId + '"><label class="danger"></label></div>';
                     content += '</div>';
-                }
-               
-                content += '<div class="wizard-additional-note" >' +
-                                  '<label >Additional Notes</label><span class="danger" style="display:' + (data[key].AdditionalNoteRequired?'inline-block':'none' )+ '">*</span>'+
-                                  '<textarea id="textareaQuestion_' + data[key].QuestionId + '" class="form-control comment-input-control" rows="3" type="text" placeholder="Enter notes"></textarea></div>';
-                content += '<div id="divWizardErrorMessage_' + data[key].QuestionId + '"><label class="danger"></label></div>';
-                content += '</div>';
-                $(element).steps('add', {
-                    title: title,
-                    content: content
-                });
-            });           
+                    $(element).steps('add', {
+                        title: title,
+                        content: content
+                    });
+                });                     
         }
     };
 });

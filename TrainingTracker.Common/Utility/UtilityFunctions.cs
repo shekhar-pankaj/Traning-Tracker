@@ -63,7 +63,7 @@ namespace TrainingTracker.Common.Utility
                 if (string.IsNullOrEmpty(Convert.ToString(responseAnswers.AdditionalNotes)) &&
                     string.IsNullOrEmpty(responseAnswers.AnswerText))
                 {
-                    stringBuilder.Append("<div class='feedback-notes'><label><q>").Append("Question Skipped").Append("</q></label></div>");
+                    stringBuilder.Append("<div class='feedback-notes'><label class='danger'>").Append("Question Skipped").Append("</label></div>");
                 }
                 stringBuilder.Append("</div>");
             }

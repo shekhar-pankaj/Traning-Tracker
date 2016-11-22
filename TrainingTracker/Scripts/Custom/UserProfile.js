@@ -472,6 +472,13 @@
         if (my.profileVm.feedbackPost.FeedbackType().FeedbackTypeId == 5) {
             my.userService.fetchSurveyQuestionForTeam(my.profileVm.initializeSurveyQuestion);
         }
+        else
+        {
+            //if (typeof($("#wizard").steps) == "function") {
+            //    $("#wizard").steps('destroy');
+            //}
+        }
+        
     }, null, "change");
 });
 
