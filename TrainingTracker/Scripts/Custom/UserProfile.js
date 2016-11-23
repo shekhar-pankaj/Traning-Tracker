@@ -375,7 +375,7 @@
                     errorMsg += 'Choose some option';
                 }
                 
-                if (array[currentIndex].AdditionalNoteRequired && !submittedAnswer.AdditionalNotes)
+                if (array[currentIndex].AdditionalNoteRequired && submittedAnswer.AdditionalNotes.trim().length==0)
                 {
                     errorMsg += (errorMsg.length != 0 ? ', ' : '') + 'Add some explanation.';
                 }

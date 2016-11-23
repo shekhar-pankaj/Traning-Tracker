@@ -119,15 +119,9 @@
     margin-right: 15px;
 }
 
-#page-wrapper {
-    /*margin-top: 80px;*/
-    /*margin-left: 250px;*/
-}
-
 #userDetail {
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: 5px;
 }
 
 body {
@@ -135,8 +129,9 @@ body {
 }
 
 .profile-pic {
-    width: 30px;
-    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+
 }
 
 .menu-li {
@@ -419,9 +414,10 @@ a {
     position: static;
     display: inline-block;
     left: 5px;
+    margin-top: 16px;
     /* right: 50%; */
     /* margin-right: 221px; */
-    margin-top: 16px;
+   
 }
 
 
@@ -605,11 +601,13 @@ ul.pop-over-list a:hover
 {
     background-color: #298fca;
     color: #ffffff !important;
+    transition: all 0.2s ease;
 }
 
 ul.pop-over-list.danger a:hover 
 {
     background-color: maroon; 
+    transition: all 0.2s ease;
 }
 
 .navbar-right .dropdown-menu {
@@ -625,4 +623,80 @@ hr {
     transition-property: all;
     transition-duration: 2s;
     transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+#navPages li.dropdown:hover >ul.dropdown-menu {
+    display: inline-block;
+}
+
+ul.dropdown-menu.dropdown-menu-pop-over-list li:hover {
+    background-color: #298fca;
+    color: #FFF !important;
+    transition: all 0.2s ease;
+}
+
+
+ul.dropdown-menu.dropdown-menu-pop-over-list li:hover > a {
+    color: #FFF !important;
+    transition: all 0.2s ease;
+}
+.dropdown-menu-right
+{
+    left: 100%;
+        width: 120%;
+    position: absolute;
+    top: 0;
+}
+.dropdown-menu > li > a
+{
+    display: block;
+    padding: 3px 3px 3px 20px;
+}
+
+.dropdown-menu img {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.dropdown-menu-right a {
+    margin: 0;
+    padding: 5px !important;
+}
+.dropdown-menu-pop-over-list a 
+{
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+     display: block; 
+    font-weight: 700;
+     padding: 6px 10px !important; 
+    /* position: relative; */
+    /* margin: 0 -10px; */
+    text-decoration: none;
+    color: black ;
+}
+
+ul.dropdown-menu-pop-over-list a:hover 
+{    
+    background-color: #298fca;
+    color: #ffffff !important;
+    transition: all 0.2s ease;
+    
+}
+
+
+ul#navPages>li>a>label {
+    margin-bottom: 0;
+}
+
+ul#navPages>li>a {
+    top: 5px;
+}
+ul#navPages>li>a label {
+    font-weight: 300;
+}
+
+ul.dropdown-menu.dropdown-menu-pop-over-list {
+    padding: 0 0;
 }

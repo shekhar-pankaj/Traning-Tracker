@@ -502,7 +502,7 @@ namespace TrainingTracker.DAL.DataAccess
                         IsActive = x.IsActive ?? false ,
                         DateAddedToSystem = x.DateAddedToSystem ,
                         TeamId = teamId
-                    }).ToList();
+                    }).OrderBy(x=>x.UserName).ToList();
                 }
             }
             catch (Exception ex)
