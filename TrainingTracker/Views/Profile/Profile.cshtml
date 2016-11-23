@@ -212,7 +212,7 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="divFeedbackArea">
-                        @if (HttpContext.Current.User.IsInRole("Administrator") || HttpContext.Current.User.IsInRole("Manager") || HttpContext.Current.User.IsInRole("Trainer"))
+                        @if ( HttpContext.Current.User.IsInRole("Manager") || HttpContext.Current.User.IsInRole("Trainer"))
                         {
                             <div class="panel panel-white post panel-shadow" data-bind="visible: !my.profileVm.currentUser.IsTrainee">
                                 <div class="post-heading">
