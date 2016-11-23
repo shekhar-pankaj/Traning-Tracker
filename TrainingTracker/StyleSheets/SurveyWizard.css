@@ -173,26 +173,29 @@
 .wizard > .steps .current a:hover,
 .wizard > .steps .current a:active
 {
-    background: #f0ad4e;
+    background-color: #f0ad4e;
 
     color: #fff;
     cursor: default;
+     transition: all 1s ease;
 }
 
 .wizard > .steps .done a,
 .wizard > .steps .done a:hover,
 .wizard > .steps .done a:active
 {
-    background: #5cb85c;
+    background-color: #5cb85c;
     color: #fff;
+     transition: all 1s ease;
 }
 
 .wizard > .steps .error a,
 .wizard > .steps .error a:hover,
 .wizard > .steps .error a:active
 {
-    background: #ff3111;
+    background-color: #ff3111;
     color: #fff;
+     transition: all 0.5s ease;
 }
 
 .wizard > .content

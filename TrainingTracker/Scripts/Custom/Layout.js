@@ -2,6 +2,8 @@
 
     my.meta = function () {
         var currentUser = {},
+            allTrainee = ko.observableArray([]),
+            allMentor =ko.observableArray([]),
             currentNotificationId = my.queryParams["notificationId"],
             isAdministrator = ko.observable(false),
             isManager=ko.observable(false),
@@ -15,11 +17,13 @@
                 my.meta.userProfileUrl(my.rootUrl + 'Profile/UserProfile?userId=' + user.UserId);
                 my.meta.initializeNavbar();
                 my.meta.getNotification();
+                
+                if (!user.IsTrainee) my.meta.fetchAllUser();
             },
 			  notifications = ko.observableArray([]),
 		      noOfNotification = ko.observable(),
             avatarUrl = function (item) {
-                return my.rootUrl + "Uploads/ProfilePicture/" + item.ProfilePictureName;
+                return my.rootUrl + "/Uploads/ProfilePicture/" + item.ProfilePictureName;
             },
             getCurrentUser = function () {
                 my.userService.getCurrentUser(my.meta.getCurrentUserCallback);
@@ -82,6 +86,20 @@
                 my.meta.notifications([]);
             }
         },
+        fetchAllUser = function() {
+            my.userService.getAllUsers(fetchAllUserCallback);
+        },
+        fetchAllUserCallback =function(result) {
+            var trainee = [], trainer = [];
+            ko.utils.arrayForEach(result.AllUser, function(obj) {
+                if (obj.IsTrainee)
+                    trainee.push(obj);
+                else
+                    trainer.push(obj);
+            });
+            allTrainee(trainee);
+            allMentor(trainer);
+        },
         markAllNotificationAsRead = function() {
             my.userService.markAllNotificationAsRead(markAllNotificationAsReadCallback);
         };
@@ -103,10 +121,12 @@
             updateNotification: updateNotification,
             updateNotificationCallback: updateNotificationCallback,
             markAllNotificationAsRead: markAllNotificationAsRead,
+            allTrainee:allTrainee,
+            allMentor:allMentor,
+            fetchAllUser:fetchAllUser
             
     };
     }();
 
-    my.meta.getCurrentUser();   
-
+    my.meta.getCurrentUser();
 });
