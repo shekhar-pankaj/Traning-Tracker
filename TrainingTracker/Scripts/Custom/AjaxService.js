@@ -67,12 +67,24 @@
                      my.toggleLoader();
                  }
              });
-         }
-        ;
+        },
+        
+        ajaxPostDeffered = function (method, jsonIn, callback)
+        {
+            return $.ajax({
+                url: getServiceUrl(method),
+                type: "POST",
+                beforeSend: my.toggleLoader(true),
+                data: ko.toJSON(jsonIn),
+                dataType: "json",
+                contentType: "application/json"
+            });
+        };
         return {
             ajaxGetJson: ajaxGetJson,
             ajaxPostJson: ajaxPostJson,
-            ajaxUploadImage: ajaxUploadImage
+            ajaxUploadImage: ajaxUploadImage,
+            ajaxPostDeffered: ajaxPostDeffered
         };
     })();
 }(my));

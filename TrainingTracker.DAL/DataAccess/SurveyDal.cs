@@ -37,12 +37,14 @@ namespace TrainingTracker.DAL.DataAccess
                                                    Description = x.Survey.Description,
                                                    
                                                    SurveySubSections = x.Survey.SurveySections
+                                                                               .Where(yS=>yS.IsDeleted==false)
                                                                                .Select(y=>new SurveySection
                                                                                            {
                                                                                                Id = y.SurveySectionId,
                                                                                                Header = y.SectionHeader,
                                                                                                SortOrder = y.SortOrder,
                                                                                                Questions = y.SurveyQuestions
+                                                                                                            .Where(yQ=>yQ.IsDeleted==false)
                                                                                                             .Select(q => new Common.Entity.SurveyQuestion
                                                                                                             {
                                                                                                                 SurveyQuestionId = q.SurveyQuestionId,
@@ -53,6 +55,7 @@ namespace TrainingTracker.DAL.DataAccess
                                                                                                                 ResponseTypeId = q.ResponseTypeId,
                                                                                                                 SortOrder = q.SortOrder,
                                                                                                                 Answers = q.SurveyAnswers
+                                                                                                                           .Where(yA => yA.IsDeleted == false)
                                                                                                                            .Select(a=>new Common.Entity.SurveyAnswer
                                                                                                                            {
                                                                                                                                Id = a.SurveyAnswerId,

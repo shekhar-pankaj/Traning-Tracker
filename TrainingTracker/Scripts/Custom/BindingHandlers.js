@@ -514,6 +514,7 @@ $(document).ready(function () {
                 stepsOrientation: typeof(options.orientation) != 'undefined' ? options.orientation : 0,
                 transitionEffectSpeed: 300,
                 titleTemplate: ' <span class="number">#index#</span>',
+                enableFinishButton: true,
                 headerTag: 'div',
                 autoFocus: true,
                 labels:
@@ -522,67 +523,61 @@ $(document).ready(function () {
                 },
                 onStepChanging: function (event, currentIndex, newIndex)
                 {
-                    var currentStep = $($(element).find('.content .body')[currentIndex])[0].innerHTML;
-                    var answerObject =
+                    
+                    if ((currentIndex + 1) <= valueAccessor().length) {
+                        var currentStep = $($(element).find('.content .body')[currentIndex])[0].innerHTML;
+                        var answerObject =
+                        {
+                            QuestionId: 0,
+                            AnswerId: [],
+                            AdditionalNotes: ''
+                        };
+
+                        var stepAnswer = Object.create(answerObject);
+
+                        stepAnswer.QuestionId = $(currentStep).attr('id');
+                        stepAnswer.AnswerId = [];
+                        var answerinput = $(currentStep).find('.wizard-answer input');
+
+                        $.each(answerinput, function(key, value) {
+                            if ($('#' + $(answerinput)[key].id).is(':checked')) stepAnswer.AnswerId.push(answerinput[key].id.replace("input_", ""));
+                        });
+
+                        var additionalNotes = '#' + $(currentStep).find('.wizard-additional-note textarea')[0].id;
+
+                        stepAnswer.AdditionalNotes = $(additionalNotes)[0].value;
+
+                        var errorMsg = options.wizardStepCallback(stepAnswer, currentIndex);
+                        $('#' + $(currentStep).find('#divWizardErrorMessage_' + stepAnswer.QuestionId)[0].id).find('label').text(errorMsg);
+                        return errorMsg.length == 0;
+                    }
+                    else
                     {
-                        QuestionId: 0,
-                        AnswerId: [],
-                        AdditionalNotes: ''
-                    };
-
-                    var stepAnswer = Object.create(answerObject);
-                    
-                    stepAnswer.QuestionId = $(currentStep).attr('id');
-                    stepAnswer.AnswerId = [];
-                    var answerinput = $(currentStep).find('.wizard-answer input');
-                    
-                    $.each(answerinput, function (key, value)
-                    {
-                       if( $('#' + $(answerinput)[key].id).is(':checked')) stepAnswer.AnswerId.push(answerinput[key].id.replace("input_",""));
-                    });
-
-                    var additionalNotes = '#' + $(currentStep).find('.wizard-additional-note textarea')[0].id;
-
-                    stepAnswer.AdditionalNotes = $(additionalNotes)[0].value;
-                    
-                    var errorMsg = options.wizardStepCallback(stepAnswer, currentIndex);
-                    $('#' + $(currentStep).find('#divWizardErrorMessage_' + stepAnswer.QuestionId)[0].id).find('label').text(errorMsg);
-                    return errorMsg.length==0;
+                        return true;
+                    }
 
                 },
                 onStepChanged: function (event, currentIndex, priorIndex)
                 {
                     options.wizardOnStepChanged(currentIndex);
+                    
+                    if ((currentIndex + 1) > valueAccessor().length)
+                    {
+                        options.loadPreviewFunction(function(previewHtml) {
+                            var currentStep = $($(element).find('.content .body')[currentIndex])[0].id;
+                            $('#' + currentStep).find('#divWizardFeedbackPreview').html(previewHtml);
+                            my.toggleLoader(false);
+                        });
+                                              
+                    }
                 },
                 
                 onFinishing: function (event, currentIndex)
                 {
-                    var currentStep = $($(element).find('.content .body')[currentIndex])[0].innerHTML;
-                    var answerObject =
-                    {
-                        QuestionId: 0,
-                        AnswerId: [],
-                        AdditionalNotes: ''
-                    };
-
-                    var stepAnswer = Object.create(answerObject);
-
-                    stepAnswer.QuestionId = $(currentStep).attr('id');
-                    stepAnswer.AnswerId = [];
-                    var answerinput = $(currentStep).find('.wizard-answer input');
-
-                    $.each(answerinput, function (key, value)
-                    {
-                        if ($('#' + $(answerinput)[key].id).is(':checked')) stepAnswer.AnswerId.push(answerinput[key].id.replace("input_", ""));
-                    });
-
-                    var additionalNotes = '#' + $(currentStep).find('.wizard-additional-note textarea')[0].id;
-
-                    stepAnswer.AdditionalNotes = $(additionalNotes)[0].value;
-
-                    var errorMsg = options.wizardStepCallback(stepAnswer, currentIndex);
-                    errorMsg += options.wizardOnSubmit();
-                    $('#' + $(currentStep).find('#divWizardErrorMessage_' + stepAnswer.QuestionId)[0].id).find('label').text(errorMsg);
+                    var currentStep = $($(element).find('.content .body')[currentIndex])[0];
+                   
+                    var errorMsg =  options.wizardOnSubmit();
+                    $('#' + $(currentStep).find('#divWizardErrorMessage_Preview')[0].id).find('label').text(errorMsg);
                     return errorMsg.length == 0;
                 }
         });
@@ -592,7 +587,8 @@ $(document).ready(function () {
         update: function (element, valueAccessor, allBindingsAccessor) {
             var data = valueAccessor();
 
-                $.each(data, function(key) {
+            $.each(data, function (key)
+            {
                     var title = '<span class="wizard-header">' + data[key].CategoryHeader + '</span><div class="arrow"></div>';
                     var content = '';
 
@@ -607,7 +603,7 @@ $(document).ready(function () {
                                 '<input type="radio" id="input_' + data[key].Answer[answerKey].AnswerId + '" name="Question_' + data[key].QuestionId + '"  />' +
                                 '<span class="box"><span class="tick"></span></span> ' +
                                 '</span>' +
-                                '<label for="Question_' + data[key].QuestionId + '" class=" lblForCheckbox make-checkbox-label-in-align">' + data[key].Answer[answerKey].AnswerText + '</label></div>';
+                                '<label for="input_' + data[key].Answer[answerKey].AnswerId + '" class=" lblForCheckbox make-checkbox-label-in-align">' + data[key].Answer[answerKey].AnswerText + '</label></div>';
                         });
                         content += '</div>';
                     }
@@ -621,7 +617,16 @@ $(document).ready(function () {
                         title: title,
                         content: content
                     });
-                });
+            });
+            
+            if (data.length) {
+                $(element).steps('add',
+                    {
+                        title: '<span class="wizard-header">Preview</span><div class="arrow"></div>',
+                        content: '<div id="divWizardFeedbackPreview"></div><div id="divWizardErrorMessage_Preview"><label class="danger"></label></div>'
+                   });
+            }
+            
 
                 autosize.destroy($(element).find('textarea'));
                 autosize($(element).find('textarea'));

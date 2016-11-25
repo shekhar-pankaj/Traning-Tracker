@@ -222,9 +222,10 @@
                                     </div>
                                     <div class="feedback-input meta  col-xs-12 col-md-2 no-right-margin">
                                         <label>Feedback Type:</label>
-                                        <select class="input-sm form-control" data-bind="options: userVm.FeedbackTypes,
+                                        <select id="selFeedbackType" class="input-sm form-control" data-bind="options: userVm.FeedbackTypes,
                                                                                      optionsText: 'Description',
-                                                                                     value: feedbackPost.FeedbackType"></select>
+                                                                                     optionsValue:'FeedbackTypeId',
+                                                                                     value: feedbackPost.selectedOption"></select>
                                     </div>
                                     <div class="col-xs-12 col-md-4  no-right-margin no-left-margin">
                                         <div data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId == 2 " class=" col-xs-12 col-md-12 no-right-margin feedback-input meta">
@@ -296,7 +297,8 @@
                                                                                                                      orientation:'vertical',
                                                                                                                      wizardStepCallback:my.profileVm.wizardOnStepChanging,
                                                                                                                      wizardOnStepChanged:my.profileVm.wizardOnStepChanged,
-                                                                                                                     wizardOnSubmit:wizardOnSubmit ">
+                                                                                                                     wizardOnSubmit: wizardOnSubmit,
+                                                                                                                     loadPreviewFunction: loadFeedbackPreview ">
                                     @* Binding handler will fill this Question *@
                                 </div>
                                 <div class="no-right-margin no-left-margin post-description comment-div" data-bind="visible: feedbackPost.FeedbackType().FeedbackTypeId != 5" >

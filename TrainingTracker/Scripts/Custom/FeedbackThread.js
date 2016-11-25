@@ -91,7 +91,8 @@
         var loadFeedbackDailogCallback = function (feedback)
         {
             if (feedback == null || typeof (feedback) == 'undefined') closeFeedbackDailog();
-            
+
+            resetFeedbackData();
             loadFeedbackData(feedback);
             loadThreadData(feedback.Threads);
             

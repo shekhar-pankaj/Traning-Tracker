@@ -41,7 +41,8 @@
                 AddedBy: '',
                 AddedOn: ko.observable(),
                 StartDate: ko.observable(my.calculateLastMonday()),
-                EndDate: ko.observable(my.calculateLastFriday())
+                EndDate: ko.observable(my.calculateLastFriday()),
+                selectedOption : ko.observable()
             },
             surveyQuestion = ko.observableArray([]),
             surveyResponse = [],
@@ -71,7 +72,8 @@
                 my.profileVm.plotFilter.StartDate(moment(jsonData.User.DateAddedToSystem).format('MM/DD/YYYY'));
                 my.profileVm.plotFilter.TraineeId = jsonData.User.UserId;
                 my.profileVm.userVm = jsonData;
-                ko.applyBindings(my.profileVm);
+                my.profileVm.feedbackPost.FeedbackType(my.profileVm.userVm.FeedbackTypes[0]);
+                ko.applyBindings(my.profileVm);               
                 my.profileVm.feedbackPost.Rating(0);
 
                 if (!my.isNullorEmpty(queryStringFeedbackId)) {
@@ -257,7 +259,42 @@
             }
         },
         
-        initializeSurveyQuestion =function(surveyQuestionJson) {
+        initializeSurveyQuestion = function (surveyQuestionJson)
+        {
+            if (!surveyQuestionJson.IsCodeReviewedForTrainee) {
+                $.confirm({
+                    title: 'Missing Code Review Feedback!',
+                    content: 'Weekly survey automatically captures code review for the week, but no CR added for ' + my.profileVm.userVm.User.FirstName + '  in between ' + moment(my.profileVm.feedbackPost.StartDate()).format("dddd, MMMM Do YYYY") + ' and ' + moment(my.profileVm.feedbackPost.EndDate()).format("dddd, MMMM Do YYYY") +'.' + '</br><label>Do you want to add CR?</label>',
+                    columnClass : 'col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1' ,
+                    useBootstrap: true,
+                    buttons: {
+                        confirm:
+                        {
+                            text: 'Yes, Add CR',
+                            btnClass:'btn-primary btn-success',
+                            action: function() {
+                                my.profileVm.feedbackPost.selectedOption(4);
+                                return;
+                            }
+                        },
+                        cancel:
+                        {
+                            text: 'No, Continue with WF',
+                            btnClass: 'btn-primary btn-warning',
+                            action: function() {
+                                bindSurveyQuestion(surveyQuestionJson);
+                            }
+                        }
+                    }
+                });
+            } else {
+                bindSurveyQuestion(surveyQuestionJson);
+            }
+        },
+            
+        bindSurveyQuestion = function (surveyQuestionJson)
+        {
+
             surveyQuestion([]);
             var questionArray = [];
 
@@ -267,15 +304,15 @@
                 QuestionText: '',
                 QuestionId: '',
                 Answer: [],
-                HelpText:'',
-                SelectedAnswer:[],
+                HelpText: '',
+                SelectedAnswer: [],
                 ResponseType: 0,
                 IsMandatory: false,
-                AdditionalNoteRequired:false
+                AdditionalNoteRequired: false
             };
 
-            ko.utils.arrayForEach(surveyQuestionJson.SurveySubSections, function (sub)
-            {                              
+            ko.utils.arrayForEach(surveyQuestionJson.Survey.SurveySubSections, function (sub)
+            {
                 ko.utils.arrayForEach(sub.Questions, function (question)
                 {
                     var newObj = Object.create(questionObject);
@@ -294,10 +331,9 @@
                     });
                     newObj.Answer = arrayAnswer;
                     questionArray.push(newObj);
-                });              
+                });
             });
-            surveyQuestion(questionArray); 
-           // console.log(surveyQuestion());
+            surveyQuestion(questionArray);
         },
             
         wizardOnSubmit = function () {
@@ -438,9 +474,38 @@
         
         wizardOnStepChanged = function (currentIndex)
         {
-            if ((currentIndex+1) == surveyQuestion().length && !isCommentFeedbackModalVisible()) showCommentFeedback();
+            if ((currentIndex + 1) == surveyQuestion().length && !isCommentFeedbackModalVisible()) showCommentFeedback();
+           // if ((currentIndex + 1) > surveyQuestion().length) loadFeedbackPreview();
         },
+            
+        loadFeedbackPreview = function (callback)
+        {
+            var convertedObject = ko.toJS(my.profileVm.feedbackPost);
 
+            switch (convertedObject.FeedbackType.FeedbackTypeId)
+            {
+
+                case 5:
+                    convertedObject.Skill = 0;
+                    break;
+
+            }
+
+            var objResponse =
+             {
+                 AddedBy: my.meta.currentUser,
+                 AddedFor: my.profileVm.userVm.User,
+                 Response: surveyResponse,
+                 Feedback: convertedObject,
+             };
+
+             my.userService.fetchWeeklyFeedbackPreview(objResponse).done(function (response) {
+                 callback(response);
+            });
+             
+        },
+        
+            
         toggleCollapsedPanel = function () {
             my.profileVm.isCommentCollapsed(!my.profileVm.isCommentCollapsed());
         };
@@ -488,7 +553,8 @@
             surveyQuestion: surveyQuestion,
             wizardOnStepChanging: wizardOnStepChanging,
             wizardOnStepChanged: wizardOnStepChanged,
-            wizardOnSubmit: wizardOnSubmit
+            wizardOnSubmit: wizardOnSubmit,
+            loadFeedbackPreview: loadFeedbackPreview,
                 
     };
     }();
@@ -496,19 +562,22 @@
     my.profileVm.getCurrentUser();
     my.profileVm.getUser();
     
-    my.profileVm.feedbackPost.FeedbackType.subscribe(function ()
+    my.profileVm.feedbackPost.FeedbackType.subscribe(function (selected)
     {
         if (my.profileVm.feedbackPost.FeedbackType().FeedbackTypeId == 5 && !my.profileVm.surveyQuestion().length)
         {
-            my.userService.fetchSurveyQuestionForTeam(my.profileVm.initializeSurveyQuestion);
-        }
-        else
-        {
-            //if (typeof($("#wizard").steps) == "function") {
-            //    $("#wizard").steps('destroy');
-            //}
+            my.userService.fetchSurveyQuestionForTeam(my.profileVm.userVm.User.UserId, my.profileVm.feedbackPost.StartDate(), my.profileVm.feedbackPost.EndDate(), my.profileVm.initializeSurveyQuestion);
         }
         
+    }, null, "change");
+    
+    my.profileVm.feedbackPost.selectedOption.subscribe(function (selected) {
+
+        var array = ko.utils.arrayFilter(my.profileVm.userVm.FeedbackTypes, function (data) {
+            return data.FeedbackTypeId == selected;
+        });
+        
+        my.profileVm.feedbackPost.FeedbackType(array[0]);
     }, null, "change");
 });
 

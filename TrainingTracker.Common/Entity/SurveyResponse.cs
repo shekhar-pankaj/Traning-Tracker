@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 namespace TrainingTracker.Common.Entity
@@ -27,6 +28,12 @@ namespace TrainingTracker.Common.Entity
         /// Gets and Sets Feedback 
         /// </summary>
         public Feedback Feedback { get; set; }
+
+        /// <summary>
+        /// Gets And Sets Code review feedback for the week.
+        /// </summary>
+        public List<Feedback> CodeReviewForTheWeek { get; set; }
+
     }
 
     public class ResponseMapping
