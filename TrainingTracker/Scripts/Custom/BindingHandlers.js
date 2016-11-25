@@ -609,7 +609,7 @@ $(document).ready(function () {
                     }
 
                     content += '<div class="wizard-additional-note" >' +
-                        '<label >Additional Notes</label><span class="danger" style="display:' + (data[key].AdditionalNoteRequired ? 'inline-block' : 'none') + '">*</span>' +
+                        '<label >Additional Notes (2-3 lines max.)</label><span class="danger" style="display:' + (data[key].AdditionalNoteRequired ? 'inline-block' : 'none') + '">*</span>' +
                         '<textarea id="textareaQuestion_' + data[key].QuestionId + '" class="form-control comment-input-control" rows="5" type="text" placeholder="Enter notes"></textarea></div>';
                     content += '<div id="divWizardErrorMessage_' + data[key].QuestionId + '"><label class="danger"></label></div>';
                     content += '</div>';
