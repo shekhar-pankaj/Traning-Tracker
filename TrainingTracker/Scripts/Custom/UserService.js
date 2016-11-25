@@ -67,13 +67,18 @@
         markAllNotificationAsRead :function(callback) {
             my.ajaxService.ajaxPostJson(my.rootUrl + "/Notification/markAllNotificationAsRead",null,  callback);
         },
-        fetchSurveyQuestionForTeam:function(callback) {
-            my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/FetchWeeklySurveyQuestionForTeam", null, callback);
+        fetchSurveyQuestionForTeam: function (traineeId, startDate,endDate, callback)
+        {
+            my.ajaxService.ajaxGetJson(my.rootUrl + "/Profile/FetchWeeklySurveyQuestionForTeam?traineeId=" + traineeId + "&startDate=" + startDate + "&endDate=" + endDate, null, callback);
         },
         
-        saveWeeklySurveyResponse: function (surveyResponse, callback)
+        fetchWeeklyFeedbackPreview : function(surveyResponse) {
+            return my.ajaxService.ajaxPostDeffered(my.rootUrl + "/Profile/FetchWeeklyFeedbackPreview", surveyResponse);
+        },
+        
+        saveWeeklySurveyResponse: function (surveyResponse,callback)
         {
-            my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/SaveWeeklySurveyResponseForTrainee", surveyResponse, callback);
+             my.ajaxService.ajaxPostJson(my.rootUrl + "/Profile/SaveWeeklySurveyResponseForTrainee", surveyResponse, callback);
         }
     };
 }(my));

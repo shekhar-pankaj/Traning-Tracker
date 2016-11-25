@@ -215,13 +215,29 @@ namespace TrainingTracker.Controllers
 
         /// <summary>
         /// Fetch weekly Survey Questions for the team
-        /// </summary>
+        ///  </summary>
+        /// <param name="traineeId">trainee id</param>
+        /// <param name="startDate">start date</param>
+        /// <param name="endDate">end date</param>
         /// <returns></returns>
         [HttpGet]
         [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
-        public JsonResult FetchWeeklySurveyQuestionForTeam()
+        public JsonResult FetchWeeklySurveyQuestionForTeam(int traineeId,DateTime startDate,DateTime endDate)
         {
-            return Json(new SurveyBl().FetchWeeklySurveyQuestionForTeam(new UserBl().GetUserByUserName(User.Identity.Name).TeamId??0) , JsonRequestBehavior.AllowGet);
+            return Json(new SurveyBl().FetchWeeklySurveyQuestionForTeam(traineeId,
+                                                                        startDate,
+                                                                        endDate,
+                                                                        new UserBl().GetUserByUserName(User.Identity.Name).TeamId??0) , JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Fetch feedback Response preview
+        /// </summary>
+        /// <param name="surveyResponse">instance of survey respons</param>
+        /// <returns>Json Result</returns>
+        public JsonResult FetchWeeklyFeedbackPreview( SurveyResponse surveyResponse )
+        {
+            return Json(new SurveyBl().FetchWeeklyFeedbackPreview(surveyResponse) , JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>

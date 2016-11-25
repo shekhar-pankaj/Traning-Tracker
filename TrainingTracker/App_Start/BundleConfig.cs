@@ -46,6 +46,7 @@ namespace TrainingTracker
 
             bundles.Add(new ScriptBundle("~/bundles/ProfileViewScripts").Include(
               "~/Scripts/Chart.Scatter.min.js" ,
+               "~/Scripts/jquery-confirm.js" ,
                "~/Scripts/autosize.js" ,
               "~/Scripts/bootstrap-datepicker.min.js" ,
               "~/Scripts/jquery.steps.js" ,
@@ -91,6 +92,7 @@ namespace TrainingTracker
             bundles.Add(new StyleBundle("~/bundles/ProfileViewStyles").Include(
                       "~/Content/DatePicker/bootstrap-datepicker3.css" ,
                       "~/StyleSheets/SurveyWizard.css" ,
+                       "~/StyleSheets/jquery-confirm.css" ,
                       "~/Content/Timeline.css" ,
                       "~/StyleSheets/Profile.css",
                       "~/StyleSheets/FeedbackPlot.css",

@@ -67,6 +67,45 @@ namespace TrainingTracker.Common.Utility
                 }
                 stringBuilder.Append("</div>");
             }
+
+            stringBuilder.Append("<div id='divSurveyCodeReview' class='feedback-zone'><div class='feedback-question'><label>Code reviews for the week.</label></div><ul class='feedback-notes'>");
+
+            foreach (var cr in response.CodeReviewForTheWeek)
+            {
+                stringBuilder.Append("<li class='li-code-review'>");
+
+                string className = "";
+                switch (cr.Rating)
+                {
+                    case 1:
+                        className = "rating-slow";
+                        break;
+                    case 2:
+                         className = "rating-Average";
+                         break;
+                    case 3  :
+                         className = "rating-Fast";
+                         break;
+                    case 4:
+                        className = "rating-Exceptional";
+                        break;
+                }
+
+                stringBuilder.Append("<div style='display: inline-block;' class='title ' ><strong><a href='/Profile/UserProfile?userId="+cr.AddedBy.UserId+"'>"+cr.AddedBy.FullName+"</a>&nbsp;</strong></div>");
+                stringBuilder.Append("<div style='display: inline-block;' class='text-muted time ' > Added <span onclick='my.profileVm.loadFeedbackWithThread("+cr.FeedbackId+")'><a href='#" + cr.AddedBy.UserId + "'>Code Review Feedback</a></span></div>");               
+                stringBuilder.Append("<div style='display: inline-block; padding-left: 10px' class=' " + className + "'>");
+
+                for (var i = 0; i < cr.Rating; i++)
+                {
+                    stringBuilder.Append("<span class='glyphicon glyphicon-star' style='display: inline-block;'></span>");
+                }
+                 stringBuilder.Append("</div>");
+                 stringBuilder.Append("<div style='display: inline-block;' class='text-muted time'>&nbsp; on " + string.Format("{0:ddd, MMM dd yyyy, h:mm}" , cr.AddedOn) + "</div></li>");
+            }
+
+            if (response.CodeReviewForTheWeek.Count == 0) stringBuilder.Append("<li class='li-code-review'><div class=''><label class='danger'>No CR added in the week.</label></li>");
+
+            stringBuilder.Append("</ul></div>");
             stringBuilder.Append("</code></div>");
 
             return stringBuilder.ToString();

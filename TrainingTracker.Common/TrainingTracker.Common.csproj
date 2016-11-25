@@ -72,6 +72,7 @@
     <Compile Include="ViewModel\ManageProfileVm.cs" />
     <Compile Include="ViewModel\QuestionVm.cs" />
     <Compile Include="ViewModel\SessionVm.cs" />
+    <Compile Include="ViewModel\SurveyVm.cs" />
     <Compile Include="ViewModel\UserProfileVm.cs" />
   </ItemGroup>
   <ItemGroup />
