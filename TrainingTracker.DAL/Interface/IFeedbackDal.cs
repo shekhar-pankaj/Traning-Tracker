@@ -45,5 +45,24 @@ namespace TrainingTracker.DAL.Interface
         /// <param name="feedbackId">feedbackId</param>
         /// <returns>User Id</returns>
         int GetTraineebyFeedbackId(int feedbackId );
+
+        /// <summary>
+        /// Get Feedback AddedBy Trainers
+        /// </summary>
+        /// <param name="userId">Trainer Id</param>
+        /// <param name="count">page size</param>
+        /// <param name="skip">skip</param>
+        /// <param name="feedbackId">any specefic id</param>
+        /// <param name="startAddedOn">Date range start</param>
+        /// <param name="endAddedOn">Date Range End</param>
+        /// <returns>List Of feedback</returns>
+        List<Feedback> GetFeedbackAddedByUser( int userId , int? count=5 , int? skip=0, int? feedbackId = null , DateTime? startAddedOn = null , DateTime? endAddedOn = null );
+
+        /// <summary>
+        /// interface signature for fetching Trainor synopsis
+        /// </summary>
+        /// <param name="trainerId">trainer Id</param>
+        /// <returns>instances of Trainor synopsis</returns>
+        TrainerFeedbackSynopsis GetTrainorFeedbackSynopsis(int trainerId);
     }
 }

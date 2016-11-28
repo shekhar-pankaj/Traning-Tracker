@@ -29,11 +29,13 @@
                 <ul class="nav navbar-nav" id="navPages">
                     @if (HttpContext.Current.User.IsInRole("Administrator") || HttpContext.Current.User.IsInRole("Manager") || HttpContext.Current.User.IsInRole("Trainer"))
                     {
-                        <li class="menu-li"><a href="~/Dashboard"><label style="height:30px;">Dashboard</label></a></li>
+                        <li class="menu-li"><a href="~/Dashboard"><label style="height: 30px;">Dashboard</label></a></li>
+                    }
                         <li class="dropdown menu-li">
                             <a href="~/Profile/AllProfiles"><label style="height:30px;">All Profiles</label> <span class="glyphicon glyphicon-chevron-down" style="top: 2px;"></span></a>                           
                             <ul class="dropdown-menu dropdown-menu-pop-over-list">
-                                <li class="dropdown menu-li"><a href="#">Trainee<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                
+                            <li class="dropdown menu-li"><a href="#">Trainee<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
                                     <ul class="dropdown-menu dropdown-menu-right dropdown-menu-pop-over-list" data-bind="foreach:my.meta.allTrainee">
                                         <li class="menu-li">
                                             <a data-bind="attr: { href: my.rootUrl + '/Profile/UserProfile?userId=' + UserId }">
@@ -57,13 +59,14 @@
                                 </li>
                             </ul>
                         </li>
-
+                    @if (HttpContext.Current.User.IsInRole("Administrator") || HttpContext.Current.User.IsInRole("Manager") || HttpContext.Current.User.IsInRole("Trainer"))
+                    {
                         <li class="menu-li"><a href="~/Session"><label style="height:30px;">Sessions</label></a></li>
                         <li class="menu-li"><a href="~/Questions"><img class="profile-pic img" style="visibility: hidden"/><label style="">Questions</label></a></li>
                     }
                     else
                     {
-                        <li class="menu-li"><a data-bind="attr: { href: my.meta.userProfileUrl }"><label style="height:30px;">My Profile</label></a></li>
+                       @* <li class="menu-li"><a data-bind="attr: { href: my.meta.userProfileUrl }"><label style="height:30px;">My Profile</label></a></li>*@
                         <li class="menu-li"><a href="~/Session"><img style="visibility: hidden"/><label  style="height:30px;">Sessions</label></a></li>
                     }
                 </ul> 

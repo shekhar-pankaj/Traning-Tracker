@@ -651,6 +651,7 @@ ul.dropdown-menu.dropdown-menu-pop-over-list li:hover > a {
 {
     display: block;
     padding: 3px 3px 3px 20px;
+    white-space: normal;
 }
 
 .dropdown-menu img {

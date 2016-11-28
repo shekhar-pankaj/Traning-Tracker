@@ -94,7 +94,7 @@
     }
 
     /// <summary>
-    /// Enumeration type for survey's respons type
+    /// Enumeration type for survey's response type
     /// </summary>
     public enum ResponseType
     {
@@ -118,5 +118,31 @@
         /// </summary>
         Checkbox =4
 
+    }
+
+    /// <summary>
+    /// Enumeration typefor survey's
+    /// </summary>
+    public enum FeedbackRating
+    {
+        /// <summary>
+        /// Enum Type for Slow rating
+        /// </summary>
+        Slow = 1,
+
+        /// <summary>
+        /// Enum Type for Average rating
+        /// </summary>
+        Average = 2,
+
+        /// <summary>
+        /// Enum Type Fast rating 
+        /// </summary>
+        Fast = 3,
+
+        /// <summary>
+        /// Enum For Rajnikant Mode
+        /// </summary>
+        Exceptional = 4
     }
 }

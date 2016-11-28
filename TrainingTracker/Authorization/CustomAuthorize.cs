@@ -60,10 +60,9 @@ namespace TrainingTracker.Authorize
 
 
                     isAuthorized =  (string.IsNullOrEmpty(this.Roles)) || (this.Roles.Split(',').ToList().Any(userPrincipal.IsInRole));
-                    isAuthorized = isAuthorized && (userIdRequested <= 0 || (currentUser.UserId.Equals(userIdRequested) ||
-                                                                             ((currentUser.IsManager || currentUser.IsTrainer) &&
-                                                                              new UserBl().GetUserByUserId(userIdRequested).TeamId == new UserBl().GetUserByUserId(currentUser.UserId).TeamId)
-                                                                               || (currentUser.IsAdministrator && !new UserBl().GetUserByUserId(currentUser.UserId).TeamId.HasValue)));
+                    isAuthorized = isAuthorized && (userIdRequested <= 0 || (currentUser.UserId.Equals(userIdRequested) 
+                                                                         || (currentUser.IsAdministrator && !new UserBl().GetUserByUserId(currentUser.UserId).TeamId.HasValue)
+                                                                         || (new UserBl().GetUserByUserId(userIdRequested).TeamId == new UserBl().GetUserByUserId(currentUser.UserId).TeamId)));
 
                     isAuthorized = isAuthorized && (requestedFeedbackId <= 0 || new FeedbackBl().AuthorizeCurrentUserForFeedback(requestedFeedbackId,currentUser));
                     httpContext.User = userPrincipal;

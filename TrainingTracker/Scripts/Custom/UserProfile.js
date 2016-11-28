@@ -10,7 +10,8 @@
             recentCodeReviewFeedback = ko.observable(),
             recentWeeklyFeedback = ko.observable(),
             commentFeedbacks = ko.observableArray([]),
-            isCommentFeedbackModalVisible = ko.observable(false),            
+            isCommentFeedbackModalVisible = ko.observable(false),
+            trainorSynopsis = ko.observable(),
             controls = {
                 skillOption: ko.observable("1"),
                 assignmentOption: ko.observable(1),
@@ -68,6 +69,7 @@
                 jsonData.Feedbacks = ko.observableArray(jsonData.Feedbacks);
                 my.profileVm.recentCodeReviewFeedback(jsonData.RecentCrFeedback); 
                 my.profileVm.recentWeeklyFeedback(jsonData.RecentWeeklyFeedback);
+                my.profileVm.trainorSynopsis(jsonData.TrainorSynopsis);
                 my.profileVm.tempAllTrainer(jsonData.AllTrainer); // Temp Feature
                 my.profileVm.plotFilter.StartDate(moment(jsonData.User.DateAddedToSystem).format('MM/DD/YYYY'));
                 my.profileVm.plotFilter.TraineeId = jsonData.User.UserId;
@@ -250,7 +252,8 @@
                 return item.FeedbackId == feedbackId;
             });
             
-            if (filteredFeedback.length > 0) {
+            if (filteredFeedback.length > 0 && my.profileVm.userVm.User.IsTrainee)
+            {
                 my.feedbackThreadsVm.loadFeedbackDailog(feedbackId, filteredFeedback[0]);
             }
             else
@@ -555,6 +558,7 @@
             wizardOnStepChanged: wizardOnStepChanged,
             wizardOnSubmit: wizardOnSubmit,
             loadFeedbackPreview: loadFeedbackPreview,
+            trainorSynopsis: trainorSynopsis
                 
     };
     }();

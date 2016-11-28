@@ -31,8 +31,7 @@ namespace TrainingTracker.Controllers
         /// <summary>
         /// Shows all the profiles.
         /// </summary>
-        /// <returns></returns>
-        [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
+        /// <returns></returns>        
         public ActionResult AllProfiles()
         {
             return View("AllProfiles");
@@ -100,7 +99,6 @@ namespace TrainingTracker.Controllers
         /// </summary>
         /// <returns> Returns list of active user as json object.</returns>
         [HttpGet]
-        [CustomAuthorize(Roles = UserRoles.Administrator + "," + UserRoles.Manager + "," + UserRoles.Trainer)]
         public ActionResult GetActiveUsers()
         {
             return Json(new UserBl().GetActiveUsers(new UserBl().GetUserByUserName(User.Identity.Name)) , JsonRequestBehavior.AllowGet);

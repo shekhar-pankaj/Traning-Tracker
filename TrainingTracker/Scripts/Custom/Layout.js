@@ -18,7 +18,7 @@
                 my.meta.initializeNavbar();
                 my.meta.getNotification();
                 
-                if (!user.IsTrainee) my.meta.fetchAllUser();
+                my.meta.fetchAllUser();
             },
 			  notifications = ko.observableArray([]),
 		      noOfNotification = ko.observable(),
@@ -87,11 +87,11 @@
             }
         },
         fetchAllUser = function() {
-            my.userService.getAllUsers(fetchAllUserCallback);
+            my.userService.getActiveUsers(fetchAllUserCallback);
         },
         fetchAllUserCallback =function(result) {
             var trainee = [], trainer = [];
-            ko.utils.arrayForEach(result.AllUser, function(obj) {
+            ko.utils.arrayForEach(result, function(obj) {
                 if (obj.IsTrainee)
                     trainee.push(obj);
                 else
