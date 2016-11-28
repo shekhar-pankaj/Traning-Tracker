@@ -46,5 +46,14 @@ namespace TrainingTracker.DAL.EntityFramework
         public DbSet<Release> Releases { get; set; }
         public DbSet<UserNotificationMapping> UserNotificationMappings { get; set; }
         public DbSet<FeedbackThread> FeedbackThreads { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<SurveyAnswer> SurveyAnswers { get; set; }
+        public DbSet<SurveyCompletedMetaData> SurveyCompletedMetaDatas { get; set; }
+        public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
+        public DbSet<SurveyQuestionResponseType> SurveyQuestionResponseTypes { get; set; }
+        public DbSet<SurveyResponse> SurveyResponses { get; set; }
+        public DbSet<SurveySection> SurveySections { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<WeeklyFeedbackSurveyMapping> WeeklyFeedbackSurveyMappings { get; set; }
     }
 }

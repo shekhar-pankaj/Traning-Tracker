@@ -25,6 +25,8 @@ namespace TrainingTracker.DAL.EntityFramework
         public Nullable<int> Presenter { get; set; }
         public Nullable<System.DateTime> AddedOn { get; set; }
         public Nullable<System.DateTime> SessionDate { get; set; }
+        public string VideoFileName { get; set; }
+        public string SlideName { get; set; }
     
         public virtual User User { get; set; }
         public virtual ICollection<UserSessionMapping> UserSessionMappings { get; set; }
