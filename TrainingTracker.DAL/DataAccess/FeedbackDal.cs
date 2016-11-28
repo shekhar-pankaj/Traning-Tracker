@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using TrainingTracker.Common.Entity;
 using TrainingTracker.Common.Utility;
 using TrainingTracker.DAL.EntityFramework;
@@ -265,6 +266,95 @@ namespace TrainingTracker.DAL.DataAccess
              {
                  LogUtility.ErrorRoutine(ex);
                  return 0;
+             }
+        }
+
+        /// <summary>
+        /// Get Feedback AddedBy Trainers
+        /// </summary>
+        /// <param name="userId">Trainer Id</param>
+        /// <param name="count">page size</param>
+        /// <param name="skip">to skip</param>
+        /// <param name="feedbackId">any specefic id</param>
+        /// <param name="startAddedOn">Date range start</param>
+        /// <param name="endAddedOn">Date Range End</param>
+        /// <returns>List Of feedback</returns>
+        public List<Feedback> GetFeedbackAddedByUser(int userId, int? count = 5, int? skip=0, int? feedbackId = null,
+                                                     DateTime? startAddedOn = null, DateTime? endAddedOn = null)
+        {
+             try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    int[] allowedFeedback = {
+                                                 (int) Common.Enumeration.FeedbackType.Assignment,
+                                                 (int) Common.Enumeration.FeedbackType.CodeReview,
+                                                 (int) Common.Enumeration.FeedbackType.Weekly
+                                            };
+
+                    return context.Feedbacks.Where(x => x.AddedBy == userId && allowedFeedback.Contains(x.FeedbackType.Value))
+                                            .Select(x=> new Feedback
+                                             {
+                                                 FeedbackId = x.FeedbackId ,
+                                                 FeedbackText = x.FeedbackText ,
+                                                 Title = x.Title ,
+                                                 FeedbackType = new FeedbackType
+                                                 {
+                                                     FeedbackTypeId = x.FeedbackType1.FeedbackTypeId ,
+                                                     Description = x.FeedbackType1.Description ,
+                                                 } ,
+
+                                                 Rating =  0 ,
+                                                 AddedOn = x.AddedOn ?? new DateTime() ,
+                                                 AddedBy = new User
+                                                 {
+                                                     UserId = x.User1.UserId,
+                                                     FullName = x.User1.FirstName + " " + x.User1.LastName ,
+                                                     ProfilePictureName = x.User1.ProfilePictureName ,
+                                                     TeamId = x.User1.TeamId
+                                                 } ,
+                                                 StartDate = x.StartDate ?? new DateTime() ,
+                                                 EndDate = x.EndDate ?? new DateTime() ,
+                                             }).OrderByDescending(x => x.AddedOn).Skip(skip.Value).Take(count.Value).ToList();
+                }
+            }
+             catch (Exception ex)
+             {
+                 LogUtility.ErrorRoutine(ex);
+                 return null;
+             }
+        }
+
+        /// <summary>
+        /// fetches Trainor synopsis
+        /// </summary>
+        /// <param name="trainerId">trainer Id</param>
+        /// <returns>instances of Trainor synopsis</returns>
+        public TrainerFeedbackSynopsis GetTrainorFeedbackSynopsis(int trainerId)
+        {
+             try
+            {
+                using (TrainingTrackerEntities context = new TrainingTrackerEntities())
+                {
+                    IEnumerable<EntityFramework.Feedback> feedbacks = context.Feedbacks.Where(x => x.AddedBy == trainerId);                   
+
+                    return new TrainerFeedbackSynopsis
+                    {
+                        AssignmentFeedbackCount = feedbacks.Count(x=>x.FeedbackType == (int) Common.Enumeration.FeedbackType.Assignment),
+                        CodeReviewFeedbackCount = feedbacks.Count(x => x.FeedbackType == (int) Common.Enumeration.FeedbackType.CodeReview),
+                        WeeklyFeedbackCount = feedbacks.Count(x => x.FeedbackType == (int) Common.Enumeration.FeedbackType.Weekly),
+                        SessionFeedbackCount = context.Sessions.Count(x=>x.Presenter == trainerId),
+                        SlowFeedbackCount = feedbacks.Count(x=>x.Rating == (int) Common.Enumeration.FeedbackRating.Slow ),
+                        AverageFeedbackCount = feedbacks.Count(x => x.Rating == (int) Common.Enumeration.FeedbackRating.Average) ,
+                        FastFeedbackCount = feedbacks.Count(x => x.Rating == (int) Common.Enumeration.FeedbackRating.Fast) ,
+                        ExceptionalFeedbackCount = feedbacks.Count(x => x.Rating == (int) Common.Enumeration.FeedbackRating.Exceptional) ,
+                    };
+                }
+            }
+             catch (Exception ex)
+             {
+                 LogUtility.ErrorRoutine(ex);
+                 return null;
              }
         }
     }

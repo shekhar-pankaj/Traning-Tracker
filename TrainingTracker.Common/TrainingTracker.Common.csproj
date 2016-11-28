@@ -60,6 +60,7 @@
     <Compile Include="Entity\SurveySection.cs" />
     <Compile Include="Entity\Team.cs" />
     <Compile Include="Entity\Threads.cs" />
+    <Compile Include="Entity\TrainerFeedbackSynopsis.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\UserNotification.cs" />
     <Compile Include="Enumerations\CommonEnumeration.cs" />

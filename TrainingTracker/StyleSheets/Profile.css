@@ -410,3 +410,102 @@ p {
 #wizard .steps li.last  a span {
     display: none;
 }
+
+div#divReviewcollapasable .tab-wrap,div#divWeeklyReviewcollapasable .tab-wrap {
+           width: 100%;
+    display: inline-block;
+    min-height: 40px;   
+}
+
+div#divReviewcollapasable .tab-wrap > div,div#divWeeklyReviewcollapasable .tab-wrap > div {
+      width: 100%;
+}
+          
+div#divReviewcollapasable .tab-wrap>div:nth-child(2) span::after,div#divWeeklyReviewcollapasable .tab-wrap div:nth-child(2) >span::after,div#divWeeklyReviewcollapasable .tab-wrap:nth-child(1)>div:nth-child(1)>span::after {
+       /* height: 54px; */
+    width: 80%;
+    margin-left: 10%;
+    display: block;
+    /* background-color: red; */
+    content: "";
+    border-bottom: 2px solid;
+   
+    position: relative;
+    top: 100%;
+    
+}     
+div#divWeeklyReviewcollapasable .tab-wrap:nth-child(2)>div:nth-child(1)>span:nth-child(2)::before {
+    position: absolute;
+    content: "Exceptional"
+}
+
+div#divReviewcollapasable.panel-danger .tab-wrap>div:nth-child(2) span::after, div#divWeeklyReviewcollapasable.panel-danger .tab-wrap>div:nth-child(2)>span::after {
+    border-color: #ebccd1;
+}
+
+ div#divWeeklyReviewcollapasable.panel-info .tab-wrap:nth-child(1)>div:nth-child(1)>span::after{
+     border-color: #31708f;
+}
+
+div#divReviewcollapasable.panel-success .tab-wrap>div:nth-child(2) span::after, div#divWeeklyReviewcollapasable.panel-success .tab-wrap>div:nth-child(2)>span::after {
+    border-color: #d6e9c6;
+}
+div#divReviewcollapasable.panel-info .tab-wrap>div:nth-child(2) span::after, div#divWeeklyReviewcollapasable.panel-info .tab-wrap>div:nth-child(2)>span::after {
+    border-color: #bce8f1;
+}
+
+div#divWeeklyReviewcollapasable .panel-heading {
+    padding: 3px 10px 3px 10px;
+}
+
+ 
+    
+
+div#divReviewcollapasable .tab-wrap span,div#divWeeklyReviewcollapasable .tab-wrap>div> span {
+        display: inline-block;
+    width: 48%;
+    text-align: center;
+} 
+
+div#divReviewcollapasable .tab-wrap span.header-Tab,div#divWeeklyReviewcollapasable .tab-wrap span.header-Tab {
+  /*//  color: #fff;*/
+    font-size   : 10px;
+        font-size: 10px;
+    height: 100%;
+    vertical-align: middle;
+
+}
+
+div#divReviewcollapasable .tab-wrap >div:nth-child(2) span,div#divWeeklyReviewcollapasable .tab-wrap >div:nth-child(2) span {
+    font-family: 'Orbitron';
+        line-height: 1;
+    font-size: 30px;
+}
+
+div#divWeeklyReviewcollapasable .tab-wrap:nth-child(1) {
+    min-height: 20px;
+    color: #31708f;
+}
+div#divWeeklyReviewcollapasable .tab-wrap:nth-child(6) {
+    min-height: 20px;
+    color: #31708f;
+}
+
+div#divWeeklyReviewcollapasable .tab-wrap:nth-child(6) div:nth-child(2) > span  {
+    font-size: 14px !important;
+}
+
+div#divWeeklyReviewcollapasable .tab-wrap span.glyphicon {
+        position: relative;
+    top: 1px;
+    font-size: 18px !important;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings' !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+    

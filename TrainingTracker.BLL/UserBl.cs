@@ -90,38 +90,17 @@ namespace TrainingTracker.BLL
             return new UserProfileVm
             {
                 User = currentUser ,
-                Skills = SkillDataAccesor.GetSkillsByUserId(userId) ,
-                AllSkills = SkillDataAccesor.GetAllSkillsForApp() ,
-                Sessions = SessionDataAccesor.GetSessionsByUserId(userId) ,
-                Projects = ProjectDataAccesor.GetProjectsByUserId(userId) ,
-                Feedbacks = FeedbackDataAccesor.GetUserFeedback(userId , 5) ,
-                RecentCrFeedback = FeedbackDataAccesor.GetUserFeedback(userId , 1000 , 4) ,
-                RecentWeeklyFeedback = FeedbackDataAccesor.GetUserFeedback(userId , 1000 , 5) ,
-                AllTrainer = GetAllUsersByTeam(currentUser).Where(x => x.IsTrainer || x.IsManager).ToList() ,
-                FeedbackTypes = new List<FeedbackType>
-                {
-                    new FeedbackType
-                    {
-                        FeedbackTypeId =1, Description = "Comment"
-                    },
-                    new FeedbackType
-                    {
-                        FeedbackTypeId =2, Description = "Skill"
-                    },
-                    new FeedbackType
-                    {
-                        FeedbackTypeId =3, Description = "Assignment"
-                    },
-                    new FeedbackType
-                    {
-                        FeedbackTypeId =4, Description = "Code Review"
-                    },
-                    new FeedbackType
-                    {
-                        FeedbackTypeId =5, Description = "Weekly Feedback"
-                    }
-                }
-            };
+                Skills = currentUser.IsTrainee ? SkillDataAccesor.GetSkillsByUserId(userId) : new List<Skill>() ,
+                AllSkills = currentUser.IsTrainee ? SkillDataAccesor.GetAllSkillsForApp() : new List<Skill>(),
+                Sessions = currentUser.IsTrainee ? SessionDataAccesor.GetSessionsByUserId(userId) : new List<Session>() ,
+                Projects =  new List<Project>(),
+                Feedbacks = currentUser.IsTrainee ? FeedbackDataAccesor.GetUserFeedback(userId , 5) : FeedbackDataAccesor.GetFeedbackAddedByUser(userId),
+                RecentCrFeedback = currentUser.IsTrainee ? FeedbackDataAccesor.GetUserFeedback(userId , 1000 , 4) : new List<Feedback>() ,
+                RecentWeeklyFeedback = currentUser.IsTrainee ? FeedbackDataAccesor.GetUserFeedback(userId , 1000 , 5) : new List<Feedback>() ,
+                AllTrainer = currentUser.IsTrainee ? GetAllUsersByTeam(currentUser).Where(x => x.IsTrainer || x.IsManager).ToList() : new List<User>() ,
+                FeedbackTypes = Common.Utility.UtilityFunctions.GetSystemFeedbackTypes(),
+                TrainorSynopsis = currentUser.IsTrainer || currentUser.IsManager ? FeedbackDataAccesor.GetTrainorFeedbackSynopsis(currentUser.UserId) :new TrainerFeedbackSynopsis()
+            };            
         }
 
         /// <summary>
@@ -133,7 +112,7 @@ namespace TrainingTracker.BLL
             if (currentUser.IsAdministrator && !currentUser.TeamId.HasValue) return UserDataAccesor.GetActiveUsers();
 
             return currentUser.TeamId.HasValue
-                              ? UserDataAccesor.GetActiveUsersByTeam(currentUser.TeamId.Value)
+                              ? UserDataAccesor.GetActiveUsersByTeam(currentUser.TeamId.Value).Where(x => !currentUser.IsTrainee || !x.IsTrainee || x.UserId==currentUser.UserId ).ToList()
                               : new List<User>();          
         }
 

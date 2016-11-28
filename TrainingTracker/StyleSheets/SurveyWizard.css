@@ -138,10 +138,23 @@
     position: absolute;
     content: " ";
     width: 3px;
-    height: 95%;
+    height: inherit;
     background-color: #eeeeee;
     left: 30px;
     z-index: 1;
+    margin-left: -1.5px;
+}
+
+.wizard.vertical>.steps>ul:after {
+    top: 82%;
+    /* bottom: 0; */
+    position: absolute;
+    content: " ";
+    width: 3px;
+    height: 18%;
+    background-color: #fff;
+    left: 30px;
+    z-index: 2;
     margin-left: -1.5px;
 }
 

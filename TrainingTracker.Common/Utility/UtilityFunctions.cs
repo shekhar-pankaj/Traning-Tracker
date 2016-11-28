@@ -43,6 +43,11 @@ namespace TrainingTracker.Common.Utility
             return allWeeksList;
         }
 
+        /// <summary>
+        /// Generates Html for feedback On response
+        /// </summary>
+        /// <param name="response">Insance of survey response</param>
+        /// <returns>Html string</returns>
         public static string GenerateHtmlForFeedbackOnSurveyResponse(SurveyResponse response)
         {
             StringBuilder stringBuilder= new StringBuilder();
@@ -110,5 +115,38 @@ namespace TrainingTracker.Common.Utility
 
             return stringBuilder.ToString();
         }
+
+        public static List<FeedbackType> GetSystemFeedbackTypes()
+        {
+            return new List<FeedbackType>
+            {
+                new FeedbackType
+                {
+                    FeedbackTypeId = 1,
+                    Description = "Comment"
+                },
+                new FeedbackType
+                {
+                    FeedbackTypeId = 2,
+                    Description = "Skill"
+                },
+                new FeedbackType
+                {
+                    FeedbackTypeId = 3,
+                    Description = "Assignment"
+                },
+                new FeedbackType
+                {
+                    FeedbackTypeId = 4,
+                    Description = "Code Review"
+                },
+                new FeedbackType
+                {
+                    FeedbackTypeId = 5,
+                    Description = "Weekly Feedback"
+                }
+            };
+        }
+        
     }
 }

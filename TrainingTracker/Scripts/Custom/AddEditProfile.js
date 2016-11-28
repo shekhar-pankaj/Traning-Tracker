@@ -162,6 +162,8 @@
             resetUser();
             my.addUserVm.user.IsReadOnly(false);
             my.addUserVm.user.IsNewProfile(true);
+            my.addUserVm.user.TeamId(my.meta.currentUser.TeamId);
+            my.addUserVm.user.IsActive(true);
         }),
             fullName = function (item) {
                 return item.FirstName + " " + item.LastName;
