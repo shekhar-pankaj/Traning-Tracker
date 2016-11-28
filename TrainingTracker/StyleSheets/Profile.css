@@ -434,10 +434,6 @@ div#divReviewcollapasable .tab-wrap>div:nth-child(2) span::after,div#divWeeklyRe
     top: 100%;
     
 }     
-div#divWeeklyReviewcollapasable .tab-wrap:nth-child(2)>div:nth-child(1)>span:nth-child(2)::before {
-    position: absolute;
-    content: "Exceptional"
-}
 
 div#divReviewcollapasable.panel-danger .tab-wrap>div:nth-child(2) span::after, div#divWeeklyReviewcollapasable.panel-danger .tab-wrap>div:nth-child(2)>span::after {
     border-color: #ebccd1;

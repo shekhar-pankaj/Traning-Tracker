@@ -22,11 +22,20 @@
           <EntitySet Name="Release" EntityType="TrainingTrackerModel.Store.Release" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Session" EntityType="TrainingTrackerModel.Store.Session" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Skills" EntityType="TrainingTrackerModel.Store.Skills" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Survey" EntityType="TrainingTrackerModel.Store.Survey" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SurveyAnswer" EntityType="TrainingTrackerModel.Store.SurveyAnswer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SurveyCompletedMetaData" EntityType="TrainingTrackerModel.Store.SurveyCompletedMetaData" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SurveyQuestion" EntityType="TrainingTrackerModel.Store.SurveyQuestion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SurveyQuestionResponseType" EntityType="TrainingTrackerModel.Store.SurveyQuestionResponseType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SurveyResponse" EntityType="TrainingTrackerModel.Store.SurveyResponse" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SurveySection" EntityType="TrainingTrackerModel.Store.SurveySection" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Team" EntityType="TrainingTrackerModel.Store.Team" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="TrainingTrackerModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserNotificationMapping" EntityType="TrainingTrackerModel.Store.UserNotificationMapping" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProjectMapping" EntityType="TrainingTrackerModel.Store.UserProjectMapping" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserSessionMapping" EntityType="TrainingTrackerModel.Store.UserSessionMapping" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserSkillMapping" EntityType="TrainingTrackerModel.Store.UserSkillMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WeeklyFeedbackSurveyMapping" EntityType="TrainingTrackerModel.Store.WeeklyFeedbackSurveyMapping" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK__UserNotif__Notif__47A6A41B" Association="TrainingTrackerModel.Store.FK__UserNotif__Notif__47A6A41B">
             <End Role="Notification" EntitySet="Notification" />
             <End Role="UserNotificationMapping" EntitySet="UserNotificationMapping" />
@@ -79,9 +88,57 @@
             <End Role="User" EntitySet="User" />
             <End Role="Session" EntitySet="Session" />
           </AssociationSet>
+          <AssociationSet Name="FK_SurveyAnswer_SurveyQuestion" Association="TrainingTrackerModel.Store.FK_SurveyAnswer_SurveyQuestion">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
+            <End Role="SurveyAnswer" EntitySet="SurveyAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyCompletedMetaData_Survey" Association="TrainingTrackerModel.Store.FK_SurveyCompletedMetaData_Survey">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="SurveyCompletedMetaData" EntitySet="SurveyCompletedMetaData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyCompletedMetaData_SurveyUser" Association="TrainingTrackerModel.Store.FK_SurveyCompletedMetaData_SurveyUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="SurveyCompletedMetaData" EntitySet="SurveyCompletedMetaData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestion_SurveyQuestionResponseType" Association="TrainingTrackerModel.Store.FK_SurveyQuestion_SurveyQuestionResponseType">
+            <End Role="SurveyQuestionResponseType" EntitySet="SurveyQuestionResponseType" />
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestion_SurveySection" Association="TrainingTrackerModel.Store.FK_SurveyQuestion_SurveySection">
+            <End Role="SurveySection" EntitySet="SurveySection" />
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_SurveyAnswer" Association="TrainingTrackerModel.Store.FK_SurveyResponse_SurveyAnswer">
+            <End Role="SurveyAnswer" EntitySet="SurveyAnswer" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_SurveyCompletedMetaData" Association="TrainingTrackerModel.Store.FK_SurveyResponse_SurveyCompletedMetaData">
+            <End Role="SurveyCompletedMetaData" EntitySet="SurveyCompletedMetaData" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_SurveyQuestion" Association="TrainingTrackerModel.Store.FK_SurveyResponse_SurveyQuestion">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestion" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySection_Survey" Association="TrainingTrackerModel.Store.FK_SurveySection_Survey">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="SurveySection" EntitySet="SurveySection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Survey" Association="TrainingTrackerModel.Store.FK_Team_Survey">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_User_Team" Association="TrainingTrackerModel.Store.Fk_User_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_Threads" Association="TrainingTrackerModel.Store.FK_User_Threads">
             <End Role="User" EntitySet="User" />
             <End Role="FeedbackThread" EntitySet="FeedbackThread" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_UserId_TeamManager" Association="TrainingTrackerModel.Store.Fk_UserId_TeamManager">
+            <End Role="User" EntitySet="User" />
+            <End Role="Team" EntitySet="Team" />
           </AssociationSet>
           <AssociationSet Name="fk_UserSessionMapping_AddedBy" Association="TrainingTrackerModel.Store.fk_UserSessionMapping_AddedBy">
             <End Role="User" EntitySet="User" />
@@ -94,6 +151,14 @@
           <AssociationSet Name="fk_UserSessionMapping_User" Association="TrainingTrackerModel.Store.fk_UserSessionMapping_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserSessionMapping" EntitySet="UserSessionMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeeklyFeedbackSurveyMapping_Feedback" Association="TrainingTrackerModel.Store.FK_WeeklyFeedbackSurveyMapping_Feedback">
+            <End Role="Feedback" EntitySet="Feedback" />
+            <End Role="WeeklyFeedbackSurveyMapping" EntitySet="WeeklyFeedbackSurveyMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeeklyFeedbackSurveyMapping_SurveyCompletedMetaData" Association="TrainingTrackerModel.Store.FK_WeeklyFeedbackSurveyMapping_SurveyCompletedMetaData">
+            <End Role="SurveyCompletedMetaData" EntitySet="SurveyCompletedMetaData" />
+            <End Role="WeeklyFeedbackSurveyMapping" EntitySet="WeeklyFeedbackSurveyMapping" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Comments">
@@ -258,6 +323,8 @@
           <Property Name="Presenter" Type="int" />
           <Property Name="AddedOn" Type="date" />
           <Property Name="SessionDate" Type="date" />
+          <Property Name="VideoFileName" Type="nvarchar" MaxLength="200" />
+          <Property Name="SlideName" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Skills">
           <Key>
@@ -268,6 +335,90 @@
           <Property Name="Description" Type="varchar" MaxLength="500" />
           <Property Name="AddedOn" Type="date" />
           <Property Name="AddedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Survey">
+          <Key>
+            <PropertyRef Name="SurveyId" />
+          </Key>
+          <Property Name="SurveyId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsOpen" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveyAnswer">
+          <Key>
+            <PropertyRef Name="SurveyAnswerId" />
+          </Key>
+          <Property Name="SurveyAnswerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SurveyQuestionId" Type="int" Nullable="false" />
+          <Property Name="OptionText" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveyCompletedMetaData">
+          <Key>
+            <PropertyRef Name="SurveyCompletedMetaDataId" />
+          </Key>
+          <Property Name="SurveyCompletedMetaDataId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SurveyId" Type="int" Nullable="false" />
+          <Property Name="DateCompleted" Type="datetime" Nullable="false" />
+          <Property Name="SurveyTakenBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveyQuestion">
+          <Key>
+            <PropertyRef Name="SurveyQuestionId" />
+          </Key>
+          <Property Name="SurveyQuestionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SurveySectionId" Type="int" Nullable="false" />
+          <Property Name="QuestionText" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="HelpText" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsMandatory" Type="bit" Nullable="false" />
+          <Property Name="AdditionalNoteRequired" Type="bit" Nullable="false" />
+          <Property Name="ResponseTypeId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveyQuestionResponseType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SurveyResponse">
+          <Key>
+            <PropertyRef Name="SurveyResponse" />
+          </Key>
+          <Property Name="SurveyResponse" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SurveyQuestionId" Type="int" Nullable="false" />
+          <Property Name="SurveyAnswerId" Type="int" />
+          <Property Name="AdditionalNote" Type="nvarchar(max)" />
+          <Property Name="SurveyCompletedMetaDataId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveySection">
+          <Key>
+            <PropertyRef Name="SurveySectionId" />
+          </Key>
+          <Property Name="SurveySectionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SectionHeader" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="SurveyId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="TeamManager" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateInserted" Type="datetime" Nullable="false" />
+          <Property Name="WeeklySurveyId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -288,6 +439,7 @@
           <Property Name="IsManager" Type="bit" />
           <Property Name="DateAddedToSystem" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="TeamId" Type="int" />
         </EntityType>
         <EntityType Name="UserNotificationMapping">
           <Key>
@@ -328,6 +480,14 @@
           <Property Name="UserId" Type="int" />
           <Property Name="AddedOn" Type="datetime" />
           <Property Name="AddedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="WeeklyFeedbackSurveyMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FeedbackId" Type="int" Nullable="false" />
+          <Property Name="SurveyCompletedMetaDataId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__UserNotif__Notif__47A6A41B">
           <End Role="Notification" Type="TrainingTrackerModel.Store.Notification" Multiplicity="1" />
@@ -485,6 +645,138 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyAnswer_SurveyQuestion">
+          <End Role="SurveyQuestion" Type="TrainingTrackerModel.Store.SurveyQuestion" Multiplicity="1" />
+          <End Role="SurveyAnswer" Type="TrainingTrackerModel.Store.SurveyAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SurveyQuestionId" />
+            </Principal>
+            <Dependent Role="SurveyAnswer">
+              <PropertyRef Name="SurveyQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyCompletedMetaData_Survey">
+          <End Role="Survey" Type="TrainingTrackerModel.Store.Survey" Multiplicity="1" />
+          <End Role="SurveyCompletedMetaData" Type="TrainingTrackerModel.Store.SurveyCompletedMetaData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveyCompletedMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyCompletedMetaData_SurveyUser">
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="1" />
+          <End Role="SurveyCompletedMetaData" Type="TrainingTrackerModel.Store.SurveyCompletedMetaData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SurveyCompletedMetaData">
+              <PropertyRef Name="SurveyTakenBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestion_SurveyQuestionResponseType">
+          <End Role="SurveyQuestionResponseType" Type="TrainingTrackerModel.Store.SurveyQuestionResponseType" Multiplicity="1" />
+          <End Role="SurveyQuestion" Type="TrainingTrackerModel.Store.SurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestionResponseType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="SurveyQuestion">
+              <PropertyRef Name="ResponseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestion_SurveySection">
+          <End Role="SurveySection" Type="TrainingTrackerModel.Store.SurveySection" Multiplicity="1" />
+          <End Role="SurveyQuestion" Type="TrainingTrackerModel.Store.SurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySection">
+              <PropertyRef Name="SurveySectionId" />
+            </Principal>
+            <Dependent Role="SurveyQuestion">
+              <PropertyRef Name="SurveySectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyResponse_SurveyAnswer">
+          <End Role="SurveyAnswer" Type="TrainingTrackerModel.Store.SurveyAnswer" Multiplicity="0..1" />
+          <End Role="SurveyResponse" Type="TrainingTrackerModel.Store.SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyAnswer">
+              <PropertyRef Name="SurveyAnswerId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="SurveyAnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyResponse_SurveyCompletedMetaData">
+          <End Role="SurveyCompletedMetaData" Type="TrainingTrackerModel.Store.SurveyCompletedMetaData" Multiplicity="1" />
+          <End Role="SurveyResponse" Type="TrainingTrackerModel.Store.SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyCompletedMetaData">
+              <PropertyRef Name="SurveyCompletedMetaDataId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="SurveyCompletedMetaDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyResponse_SurveyQuestion">
+          <End Role="SurveyQuestion" Type="TrainingTrackerModel.Store.SurveyQuestion" Multiplicity="1" />
+          <End Role="SurveyResponse" Type="TrainingTrackerModel.Store.SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SurveyQuestionId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="SurveyQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySection_Survey">
+          <End Role="Survey" Type="TrainingTrackerModel.Store.Survey" Multiplicity="1" />
+          <End Role="SurveySection" Type="TrainingTrackerModel.Store.SurveySection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveySection">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Survey">
+          <End Role="Survey" Type="TrainingTrackerModel.Store.Survey" Multiplicity="1" />
+          <End Role="Team" Type="TrainingTrackerModel.Store.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="WeeklySurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_User_Team">
+          <End Role="Team" Type="TrainingTrackerModel.Store.Team" Multiplicity="0..1" />
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Threads">
           <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="1" />
           <End Role="FeedbackThread" Type="TrainingTrackerModel.Store.FeedbackThread" Multiplicity="*" />
@@ -494,6 +786,18 @@
             </Principal>
             <Dependent Role="FeedbackThread">
               <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_UserId_TeamManager">
+          <End Role="User" Type="TrainingTrackerModel.Store.User" Multiplicity="1" />
+          <End Role="Team" Type="TrainingTrackerModel.Store.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="TeamManager" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -530,6 +834,30 @@
             </Principal>
             <Dependent Role="UserSessionMapping">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WeeklyFeedbackSurveyMapping_Feedback">
+          <End Role="Feedback" Type="TrainingTrackerModel.Store.Feedback" Multiplicity="1" />
+          <End Role="WeeklyFeedbackSurveyMapping" Type="TrainingTrackerModel.Store.WeeklyFeedbackSurveyMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feedback">
+              <PropertyRef Name="FeedbackId" />
+            </Principal>
+            <Dependent Role="WeeklyFeedbackSurveyMapping">
+              <PropertyRef Name="FeedbackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WeeklyFeedbackSurveyMapping_SurveyCompletedMetaData">
+          <End Role="SurveyCompletedMetaData" Type="TrainingTrackerModel.Store.SurveyCompletedMetaData" Multiplicity="1" />
+          <End Role="WeeklyFeedbackSurveyMapping" Type="TrainingTrackerModel.Store.WeeklyFeedbackSurveyMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyCompletedMetaData">
+              <PropertyRef Name="SurveyCompletedMetaDataId" />
+            </Principal>
+            <Dependent Role="WeeklyFeedbackSurveyMapping">
+              <PropertyRef Name="SurveyCompletedMetaDataId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -627,6 +955,71 @@
             <End Role="User" EntitySet="Users" />
             <End Role="FeedbackThread" EntitySet="FeedbackThreads" />
           </AssociationSet>
+          <EntitySet Name="Surveys" EntityType="TrainingTrackerModel.Survey" />
+          <EntitySet Name="SurveyAnswers" EntityType="TrainingTrackerModel.SurveyAnswer" />
+          <EntitySet Name="SurveyCompletedMetaDatas" EntityType="TrainingTrackerModel.SurveyCompletedMetaData" />
+          <EntitySet Name="SurveyQuestions" EntityType="TrainingTrackerModel.SurveyQuestion" />
+          <EntitySet Name="SurveyQuestionResponseTypes" EntityType="TrainingTrackerModel.SurveyQuestionResponseType" />
+          <EntitySet Name="SurveyResponses" EntityType="TrainingTrackerModel.SurveyResponse" />
+          <EntitySet Name="SurveySections" EntityType="TrainingTrackerModel.SurveySection" />
+          <EntitySet Name="Teams" EntityType="TrainingTrackerModel.Team" />
+          <EntitySet Name="WeeklyFeedbackSurveyMappings" EntityType="TrainingTrackerModel.WeeklyFeedbackSurveyMapping" />
+          <AssociationSet Name="FK_WeeklyFeedbackSurveyMapping_Feedback" Association="TrainingTrackerModel.FK_WeeklyFeedbackSurveyMapping_Feedback">
+            <End Role="Feedback" EntitySet="Feedbacks" />
+            <End Role="WeeklyFeedbackSurveyMapping" EntitySet="WeeklyFeedbackSurveyMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyCompletedMetaData_Survey" Association="TrainingTrackerModel.FK_SurveyCompletedMetaData_Survey">
+            <End Role="Survey" EntitySet="Surveys" />
+            <End Role="SurveyCompletedMetaData" EntitySet="SurveyCompletedMetaDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveySection_Survey" Association="TrainingTrackerModel.FK_SurveySection_Survey">
+            <End Role="Survey" EntitySet="Surveys" />
+            <End Role="SurveySection" EntitySet="SurveySections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Survey" Association="TrainingTrackerModel.FK_Team_Survey">
+            <End Role="Survey" EntitySet="Surveys" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyAnswer_SurveyQuestion" Association="TrainingTrackerModel.FK_SurveyAnswer_SurveyQuestion">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
+            <End Role="SurveyAnswer" EntitySet="SurveyAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_SurveyAnswer" Association="TrainingTrackerModel.FK_SurveyResponse_SurveyAnswer">
+            <End Role="SurveyAnswer" EntitySet="SurveyAnswers" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyCompletedMetaData_SurveyUser" Association="TrainingTrackerModel.FK_SurveyCompletedMetaData_SurveyUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SurveyCompletedMetaData" EntitySet="SurveyCompletedMetaDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_SurveyCompletedMetaData" Association="TrainingTrackerModel.FK_SurveyResponse_SurveyCompletedMetaData">
+            <End Role="SurveyCompletedMetaData" EntitySet="SurveyCompletedMetaDatas" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WeeklyFeedbackSurveyMapping_SurveyCompletedMetaData" Association="TrainingTrackerModel.FK_WeeklyFeedbackSurveyMapping_SurveyCompletedMetaData">
+            <End Role="SurveyCompletedMetaData" EntitySet="SurveyCompletedMetaDatas" />
+            <End Role="WeeklyFeedbackSurveyMapping" EntitySet="WeeklyFeedbackSurveyMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestion_SurveyQuestionResponseType" Association="TrainingTrackerModel.FK_SurveyQuestion_SurveyQuestionResponseType">
+            <End Role="SurveyQuestionResponseType" EntitySet="SurveyQuestionResponseTypes" />
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyQuestion_SurveySection" Association="TrainingTrackerModel.FK_SurveyQuestion_SurveySection">
+            <End Role="SurveySection" EntitySet="SurveySections" />
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_SurveyQuestion" Association="TrainingTrackerModel.FK_SurveyResponse_SurveyQuestion">
+            <End Role="SurveyQuestion" EntitySet="SurveyQuestions" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponses" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_User_Team" Association="TrainingTrackerModel.Fk_User_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_UserId_TeamManager" Association="TrainingTrackerModel.Fk_UserId_TeamManager">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -658,6 +1051,7 @@
           <NavigationProperty Name="User1" Relationship="TrainingTrackerModel.fk_Feedback_AddedFor" FromRole="Feedback" ToRole="User" />
           <NavigationProperty Name="FeedbackType1" Relationship="TrainingTrackerModel.fk_Feedback_FeedbackType" FromRole="Feedback" ToRole="FeedbackType" />
           <NavigationProperty Name="FeedbackThreads" Relationship="TrainingTrackerModel.FK_Feedback_Threads" FromRole="Feedback" ToRole="FeedbackThread" />
+          <NavigationProperty Name="WeeklyFeedbackSurveyMappings" Relationship="TrainingTrackerModel.FK_WeeklyFeedbackSurveyMapping_Feedback" FromRole="Feedback" ToRole="WeeklyFeedbackSurveyMapping" />
         </EntityType>
         <EntityType Name="FeedbackType">
           <Key>
@@ -733,6 +1127,8 @@
           <Property Name="SessionDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="User" Relationship="TrainingTrackerModel.fk_Session_User" FromRole="Session" ToRole="User" />
           <NavigationProperty Name="UserSessionMappings" Relationship="TrainingTrackerModel.fk_UserSessionMapping_Session" FromRole="Session" ToRole="UserSessionMapping" />
+          <Property Type="String" Name="VideoFileName" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SlideName" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Skill">
           <Key>
@@ -774,6 +1170,10 @@
           <NavigationProperty Name="UserNotificationMappings" Relationship="TrainingTrackerModel.FK__UserNotif__UserI__489AC854" FromRole="User" ToRole="UserNotificationMapping" />
           <NavigationProperty Name="Releases" Relationship="TrainingTrackerModel.FK_Release_UserId" FromRole="User" ToRole="Release" />
           <NavigationProperty Name="FeedbackThreads" Relationship="TrainingTrackerModel.FK_User_Threads" FromRole="User" ToRole="FeedbackThread" />
+          <Property Type="Int32" Name="TeamId" />
+          <NavigationProperty Name="SurveyCompletedMetaDatas" Relationship="TrainingTrackerModel.FK_SurveyCompletedMetaData_SurveyUser" FromRole="User" ToRole="SurveyCompletedMetaData" />
+          <NavigationProperty Name="Team" Relationship="TrainingTrackerModel.Fk_User_Team" FromRole="User" ToRole="Team" />
+          <NavigationProperty Name="Teams" Relationship="TrainingTrackerModel.Fk_UserId_TeamManager" FromRole="User" ToRole="Team" />
         </EntityType>
         <EntityType Name="UserProjectMapping">
           <Key>
@@ -1099,6 +1499,290 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Survey">
+          <Key>
+            <PropertyRef Name="SurveyId" />
+          </Key>
+          <Property Type="Int32" Name="SurveyId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsOpen" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SurveyCompletedMetaDatas" Relationship="TrainingTrackerModel.FK_SurveyCompletedMetaData_Survey" FromRole="Survey" ToRole="SurveyCompletedMetaData" />
+          <NavigationProperty Name="SurveySections" Relationship="TrainingTrackerModel.FK_SurveySection_Survey" FromRole="Survey" ToRole="SurveySection" />
+          <NavigationProperty Name="Teams" Relationship="TrainingTrackerModel.FK_Team_Survey" FromRole="Survey" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="SurveyAnswer">
+          <Key>
+            <PropertyRef Name="SurveyAnswerId" />
+          </Key>
+          <Property Type="Int32" Name="SurveyAnswerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SurveyQuestionId" Nullable="false" />
+          <Property Type="String" Name="OptionText" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SurveyQuestion" Relationship="TrainingTrackerModel.FK_SurveyAnswer_SurveyQuestion" FromRole="SurveyAnswer" ToRole="SurveyQuestion" />
+          <NavigationProperty Name="SurveyResponses" Relationship="TrainingTrackerModel.FK_SurveyResponse_SurveyAnswer" FromRole="SurveyAnswer" ToRole="SurveyResponse" />
+        </EntityType>
+        <EntityType Name="SurveyCompletedMetaData">
+          <Key>
+            <PropertyRef Name="SurveyCompletedMetaDataId" />
+          </Key>
+          <Property Type="Int32" Name="SurveyCompletedMetaDataId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SurveyId" Nullable="false" />
+          <Property Type="DateTime" Name="DateCompleted" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="SurveyTakenBy" Nullable="false" />
+          <NavigationProperty Name="Survey" Relationship="TrainingTrackerModel.FK_SurveyCompletedMetaData_Survey" FromRole="SurveyCompletedMetaData" ToRole="Survey" />
+          <NavigationProperty Name="User" Relationship="TrainingTrackerModel.FK_SurveyCompletedMetaData_SurveyUser" FromRole="SurveyCompletedMetaData" ToRole="User" />
+          <NavigationProperty Name="SurveyResponses" Relationship="TrainingTrackerModel.FK_SurveyResponse_SurveyCompletedMetaData" FromRole="SurveyCompletedMetaData" ToRole="SurveyResponse" />
+          <NavigationProperty Name="WeeklyFeedbackSurveyMappings" Relationship="TrainingTrackerModel.FK_WeeklyFeedbackSurveyMapping_SurveyCompletedMetaData" FromRole="SurveyCompletedMetaData" ToRole="WeeklyFeedbackSurveyMapping" />
+        </EntityType>
+        <EntityType Name="SurveyQuestion">
+          <Key>
+            <PropertyRef Name="SurveyQuestionId" />
+          </Key>
+          <Property Type="Int32" Name="SurveyQuestionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SurveySectionId" Nullable="false" />
+          <Property Type="String" Name="QuestionText" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HelpText" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsMandatory" Nullable="false" />
+          <Property Type="Boolean" Name="AdditionalNoteRequired" Nullable="false" />
+          <Property Type="Int32" Name="ResponseTypeId" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SurveyAnswers" Relationship="TrainingTrackerModel.FK_SurveyAnswer_SurveyQuestion" FromRole="SurveyQuestion" ToRole="SurveyAnswer" />
+          <NavigationProperty Name="SurveyQuestionResponseType" Relationship="TrainingTrackerModel.FK_SurveyQuestion_SurveyQuestionResponseType" FromRole="SurveyQuestion" ToRole="SurveyQuestionResponseType" />
+          <NavigationProperty Name="SurveySection" Relationship="TrainingTrackerModel.FK_SurveyQuestion_SurveySection" FromRole="SurveyQuestion" ToRole="SurveySection" />
+          <NavigationProperty Name="SurveyResponses" Relationship="TrainingTrackerModel.FK_SurveyResponse_SurveyQuestion" FromRole="SurveyQuestion" ToRole="SurveyResponse" />
+        </EntityType>
+        <EntityType Name="SurveyQuestionResponseType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Type="Int32" Name="TypeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SurveyQuestions" Relationship="TrainingTrackerModel.FK_SurveyQuestion_SurveyQuestionResponseType" FromRole="SurveyQuestionResponseType" ToRole="SurveyQuestion" />
+        </EntityType>
+        <EntityType Name="SurveyResponse">
+          <Key>
+            <PropertyRef Name="SurveyResponse1" />
+          </Key>
+          <Property Type="Int32" Name="SurveyResponse1" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SurveyQuestionId" Nullable="false" />
+          <Property Type="Int32" Name="SurveyAnswerId" />
+          <Property Type="String" Name="AdditionalNote" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="SurveyCompletedMetaDataId" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SurveyAnswer" Relationship="TrainingTrackerModel.FK_SurveyResponse_SurveyAnswer" FromRole="SurveyResponse" ToRole="SurveyAnswer" />
+          <NavigationProperty Name="SurveyCompletedMetaData" Relationship="TrainingTrackerModel.FK_SurveyResponse_SurveyCompletedMetaData" FromRole="SurveyResponse" ToRole="SurveyCompletedMetaData" />
+          <NavigationProperty Name="SurveyQuestion" Relationship="TrainingTrackerModel.FK_SurveyResponse_SurveyQuestion" FromRole="SurveyResponse" ToRole="SurveyQuestion" />
+        </EntityType>
+        <EntityType Name="SurveySection">
+          <Key>
+            <PropertyRef Name="SurveySectionId" />
+          </Key>
+          <Property Type="Int32" Name="SurveySectionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SectionHeader" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="Int32" Name="SurveyId" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <NavigationProperty Name="Survey" Relationship="TrainingTrackerModel.FK_SurveySection_Survey" FromRole="SurveySection" ToRole="Survey" />
+          <NavigationProperty Name="SurveyQuestions" Relationship="TrainingTrackerModel.FK_SurveyQuestion_SurveySection" FromRole="SurveySection" ToRole="SurveyQuestion" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Type="Int32" Name="TeamId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="TeamManager" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="DateTime" Name="DateInserted" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="WeeklySurveyId" Nullable="false" />
+          <NavigationProperty Name="Survey" Relationship="TrainingTrackerModel.FK_Team_Survey" FromRole="Team" ToRole="Survey" />
+          <NavigationProperty Name="Users" Relationship="TrainingTrackerModel.Fk_User_Team" FromRole="Team" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="TrainingTrackerModel.Fk_UserId_TeamManager" FromRole="Team" ToRole="User" />
+        </EntityType>
+        <EntityType Name="WeeklyFeedbackSurveyMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="FeedbackId" Nullable="false" />
+          <Property Type="Int32" Name="SurveyCompletedMetaDataId" Nullable="false" />
+          <NavigationProperty Name="Feedback" Relationship="TrainingTrackerModel.FK_WeeklyFeedbackSurveyMapping_Feedback" FromRole="WeeklyFeedbackSurveyMapping" ToRole="Feedback" />
+          <NavigationProperty Name="SurveyCompletedMetaData" Relationship="TrainingTrackerModel.FK_WeeklyFeedbackSurveyMapping_SurveyCompletedMetaData" FromRole="WeeklyFeedbackSurveyMapping" ToRole="SurveyCompletedMetaData" />
+        </EntityType>
+        <Association Name="FK_WeeklyFeedbackSurveyMapping_Feedback">
+          <End Type="TrainingTrackerModel.Feedback" Role="Feedback" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.WeeklyFeedbackSurveyMapping" Role="WeeklyFeedbackSurveyMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feedback">
+              <PropertyRef Name="FeedbackId" />
+            </Principal>
+            <Dependent Role="WeeklyFeedbackSurveyMapping">
+              <PropertyRef Name="FeedbackId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyCompletedMetaData_Survey">
+          <End Type="TrainingTrackerModel.Survey" Role="Survey" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.SurveyCompletedMetaData" Role="SurveyCompletedMetaData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveyCompletedMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveySection_Survey">
+          <End Type="TrainingTrackerModel.Survey" Role="Survey" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.SurveySection" Role="SurveySection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveySection">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Survey">
+          <End Type="TrainingTrackerModel.Survey" Role="Survey" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.Team" Role="Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="WeeklySurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyAnswer_SurveyQuestion">
+          <End Type="TrainingTrackerModel.SurveyQuestion" Role="SurveyQuestion" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.SurveyAnswer" Role="SurveyAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SurveyQuestionId" />
+            </Principal>
+            <Dependent Role="SurveyAnswer">
+              <PropertyRef Name="SurveyQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyResponse_SurveyAnswer">
+          <End Type="TrainingTrackerModel.SurveyAnswer" Role="SurveyAnswer" Multiplicity="0..1" />
+          <End Type="TrainingTrackerModel.SurveyResponse" Role="SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyAnswer">
+              <PropertyRef Name="SurveyAnswerId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="SurveyAnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyCompletedMetaData_SurveyUser">
+          <End Type="TrainingTrackerModel.User" Role="User" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.SurveyCompletedMetaData" Role="SurveyCompletedMetaData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SurveyCompletedMetaData">
+              <PropertyRef Name="SurveyTakenBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyResponse_SurveyCompletedMetaData">
+          <End Type="TrainingTrackerModel.SurveyCompletedMetaData" Role="SurveyCompletedMetaData" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.SurveyResponse" Role="SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyCompletedMetaData">
+              <PropertyRef Name="SurveyCompletedMetaDataId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="SurveyCompletedMetaDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WeeklyFeedbackSurveyMapping_SurveyCompletedMetaData">
+          <End Type="TrainingTrackerModel.SurveyCompletedMetaData" Role="SurveyCompletedMetaData" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.WeeklyFeedbackSurveyMapping" Role="WeeklyFeedbackSurveyMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyCompletedMetaData">
+              <PropertyRef Name="SurveyCompletedMetaDataId" />
+            </Principal>
+            <Dependent Role="WeeklyFeedbackSurveyMapping">
+              <PropertyRef Name="SurveyCompletedMetaDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestion_SurveyQuestionResponseType">
+          <End Type="TrainingTrackerModel.SurveyQuestionResponseType" Role="SurveyQuestionResponseType" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.SurveyQuestion" Role="SurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestionResponseType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="SurveyQuestion">
+              <PropertyRef Name="ResponseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyQuestion_SurveySection">
+          <End Type="TrainingTrackerModel.SurveySection" Role="SurveySection" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.SurveyQuestion" Role="SurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveySection">
+              <PropertyRef Name="SurveySectionId" />
+            </Principal>
+            <Dependent Role="SurveyQuestion">
+              <PropertyRef Name="SurveySectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyResponse_SurveyQuestion">
+          <End Type="TrainingTrackerModel.SurveyQuestion" Role="SurveyQuestion" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.SurveyResponse" Role="SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyQuestion">
+              <PropertyRef Name="SurveyQuestionId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="SurveyQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_User_Team">
+          <End Type="TrainingTrackerModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="TrainingTrackerModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_UserId_TeamManager">
+          <End Type="TrainingTrackerModel.User" Role="User" Multiplicity="1" />
+          <End Type="TrainingTrackerModel.Team" Role="Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="TeamManager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1204,6 +1888,8 @@
           <EntitySetMapping Name="Sessions">
             <EntityTypeMapping TypeName="TrainingTrackerModel.Session">
               <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="SlideName" ColumnName="SlideName" />
+                <ScalarProperty Name="VideoFileName" ColumnName="VideoFileName" />
                 <ScalarProperty Name="SessionId" ColumnName="SessionId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1227,6 +1913,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TrainingTrackerModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1356,6 +2043,107 @@
                 <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="ThreadId" ColumnName="ThreadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Surveys">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.Survey">
+              <MappingFragment StoreEntitySet="Survey">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsOpen" ColumnName="IsOpen" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyAnswers">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.SurveyAnswer">
+              <MappingFragment StoreEntitySet="SurveyAnswer">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="OptionText" ColumnName="OptionText" />
+                <ScalarProperty Name="SurveyQuestionId" ColumnName="SurveyQuestionId" />
+                <ScalarProperty Name="SurveyAnswerId" ColumnName="SurveyAnswerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyCompletedMetaDatas">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.SurveyCompletedMetaData">
+              <MappingFragment StoreEntitySet="SurveyCompletedMetaData">
+                <ScalarProperty Name="SurveyTakenBy" ColumnName="SurveyTakenBy" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+                <ScalarProperty Name="SurveyCompletedMetaDataId" ColumnName="SurveyCompletedMetaDataId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyQuestions">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.SurveyQuestion">
+              <MappingFragment StoreEntitySet="SurveyQuestion">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ResponseTypeId" ColumnName="ResponseTypeId" />
+                <ScalarProperty Name="AdditionalNoteRequired" ColumnName="AdditionalNoteRequired" />
+                <ScalarProperty Name="IsMandatory" ColumnName="IsMandatory" />
+                <ScalarProperty Name="HelpText" ColumnName="HelpText" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="SurveySectionId" ColumnName="SurveySectionId" />
+                <ScalarProperty Name="SurveyQuestionId" ColumnName="SurveyQuestionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyQuestionResponseTypes">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.SurveyQuestionResponseType">
+              <MappingFragment StoreEntitySet="SurveyQuestionResponseType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyResponses">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.SurveyResponse">
+              <MappingFragment StoreEntitySet="SurveyResponse">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="SurveyCompletedMetaDataId" ColumnName="SurveyCompletedMetaDataId" />
+                <ScalarProperty Name="AdditionalNote" ColumnName="AdditionalNote" />
+                <ScalarProperty Name="SurveyAnswerId" ColumnName="SurveyAnswerId" />
+                <ScalarProperty Name="SurveyQuestionId" ColumnName="SurveyQuestionId" />
+                <ScalarProperty Name="SurveyResponse1" ColumnName="SurveyResponse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveySections">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.SurveySection">
+              <MappingFragment StoreEntitySet="SurveySection">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="SectionHeader" ColumnName="SectionHeader" />
+                <ScalarProperty Name="SurveySectionId" ColumnName="SurveySectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="WeeklySurveyId" ColumnName="WeeklySurveyId" />
+                <ScalarProperty Name="DateInserted" ColumnName="DateInserted" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="TeamManager" ColumnName="TeamManager" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeeklyFeedbackSurveyMappings">
+            <EntityTypeMapping TypeName="TrainingTrackerModel.WeeklyFeedbackSurveyMapping">
+              <MappingFragment StoreEntitySet="WeeklyFeedbackSurveyMapping">
+                <ScalarProperty Name="SurveyCompletedMetaDataId" ColumnName="SurveyCompletedMetaDataId" />
+                <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

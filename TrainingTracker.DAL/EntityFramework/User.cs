@@ -26,6 +26,8 @@ namespace TrainingTracker.DAL.EntityFramework
             this.UserNotificationMappings = new HashSet<UserNotificationMapping>();
             this.Releases = new HashSet<Release>();
             this.FeedbackThreads = new HashSet<FeedbackThread>();
+            this.SurveyCompletedMetaDatas = new HashSet<SurveyCompletedMetaData>();
+            this.Teams = new HashSet<Team>();
         }
     
         public int UserId { get; set; }
@@ -43,6 +45,7 @@ namespace TrainingTracker.DAL.EntityFramework
         public Nullable<bool> IsManager { get; set; }
         public Nullable<System.DateTime> DateAddedToSystem { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> TeamId { get; set; }
     
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<Feedback> Feedbacks1 { get; set; }
@@ -54,5 +57,8 @@ namespace TrainingTracker.DAL.EntityFramework
         public virtual ICollection<UserNotificationMapping> UserNotificationMappings { get; set; }
         public virtual ICollection<Release> Releases { get; set; }
         public virtual ICollection<FeedbackThread> FeedbackThreads { get; set; }
+        public virtual ICollection<SurveyCompletedMetaData> SurveyCompletedMetaDatas { get; set; }
+        public virtual Team Team { get; set; }
+        public virtual ICollection<Team> Teams { get; set; }
     }
 }
