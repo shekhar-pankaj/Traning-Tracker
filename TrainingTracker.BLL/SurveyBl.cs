@@ -25,13 +25,15 @@ namespace TrainingTracker.BLL
         /// <returns>Instance of survey id</returns>
         public SurveyVm FetchWeeklySurveyQuestionForTeam( int traineeId , DateTime startDate , DateTime endDate , int teamId )
         {
+            Feedback lastWeeklyFeedback = FeedbackDataAccesor.GetUserFeedback(traineeId , 1 , (int) Common.Enumeration.FeedbackType.Weekly)
+                                                              .FirstOrDefault();
             return new SurveyVm()
              {
                  Survey  =  SurveyDataAccesor.GetWeeklySurveySetForTeam(teamId),
                  IsCodeReviewedForTrainee = FeedbackDataAccesor.GetUserFeedback(traineeId , 
                                                                                 1000 , 
-                                                                                (int) Common.Enumeration.FeedbackType.CodeReview).Any(x => x.AddedOn.Date >= startDate.Date 
-                                                                                                                                         && x.EndDate.Date <= endDate.Date)
+                                                                                (int) Common.Enumeration.FeedbackType.CodeReview).Any(x => x.AddedOn.Date >= startDate.Date
+                                                                                                                                          && (lastWeeklyFeedback == null || x.AddedOn >= lastWeeklyFeedback.AddedOn))
              };
         }
 
@@ -48,11 +50,14 @@ namespace TrainingTracker.BLL
             try
             {
                 Survey survey = SurveyDataAccesor.GetWeeklySurveySetForTeam(response.AddedBy.TeamId.Value);
+                Feedback lastWeeklyFeedback = FeedbackDataAccesor.GetUserFeedback(response.AddedFor.UserId , 1 ,(int) Common.Enumeration.FeedbackType.Weekly)
+                                                                 .FirstOrDefault();
+
                 response.CodeReviewForTheWeek = FeedbackDataAccesor.GetUserFeedback(response.AddedFor.UserId,
                                                                                     1000,
                                                                                     (int) Common.Enumeration.FeedbackType.CodeReview)
                                                                     .Where(x => x.AddedOn.Date >=response.Feedback.StartDate
-                                                                                && x.EndDate.Date <= response.Feedback.EndDate)
+                                                                                && ( lastWeeklyFeedback == null || x.AddedOn >= lastWeeklyFeedback.AddedOn))
                                                                     .ToList();
 
                 response.Feedback.FeedbackText = GenerateHtmlforFeedback(response , survey);              
@@ -77,12 +82,15 @@ namespace TrainingTracker.BLL
             if (!response.AddedBy.TeamId.HasValue) return string.Empty;
 
             Survey survey = SurveyDataAccesor.GetWeeklySurveySetForTeam(response.AddedBy.TeamId.Value);
+            Feedback lastWeeklyFeedback = FeedbackDataAccesor.GetUserFeedback(response.AddedFor.UserId , 1 , (int) Common.Enumeration.FeedbackType.Weekly)
+                                                                .FirstOrDefault();
+
             response.CodeReviewForTheWeek = FeedbackDataAccesor.GetUserFeedback(response.AddedFor.UserId ,
-                                                                                   1000 ,
-                                                                                   (int) Common.Enumeration.FeedbackType.CodeReview)
-                                                                   .Where(x => x.AddedOn.Date >= response.Feedback.StartDate
-                                                                               && x.EndDate.Date <= response.Feedback.EndDate)
-                                                                   .ToList();
+                                                                                1000 ,
+                                                                                (int) Common.Enumeration.FeedbackType.CodeReview)
+                                                                .Where(x => x.AddedOn.Date >= response.Feedback.StartDate
+                                                                            && (lastWeeklyFeedback == null || x.AddedOn >= lastWeeklyFeedback.AddedOn))
+                                                                .ToList();
             return GenerateHtmlforFeedback(response , survey);
         }
 
